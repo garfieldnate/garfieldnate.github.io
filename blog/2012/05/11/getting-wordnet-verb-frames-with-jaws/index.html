@@ -1,0 +1,592 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Getting WordNet Verb Frames With JAWS - Garfield Nate</title>
+  <meta name="author" content="Nate Glenn">
+
+  
+  <meta name="description" content="I love using JAWS to access WordNet. It has a rather extensive API, runs quickly, and doesn&rsquo;t require too much configuration. All you have to &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://garfieldnate.github.io/blog/2012/05/11/getting-wordnet-verb-frames-with-jaws">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Garfield Nate" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+
+  <!-- Load jQuery from google for better caching; if that fails, load the local copy -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- For GitHub repo display; use with the githubrepo-octopress plugin -->
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+<!--script>
+  $.noConflict()
+</script-->
+
+<script src="/javascripts/libs/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+<script src="/javascripts/menu.min.js" type="text/javascript"></script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-26857949-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Garfield Nate</a></h1>
+  
+    <h2>Big Fat Hairy Programmer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:garfieldnate.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li>
+    <a href="/resume/resume-en.html">Resume</a>
+    <ul>
+        <il><a href="/resume/resume-en.html">English</a></il>
+        <il><a href="/resume/resume-ja.html">日本語</a></il>
+    </ul>
+  </li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Getting WordNet Verb Frames With JAWS</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-11T00:00:00+09:00" pubdate data-updated="true">May 11<sup>th</sup>, 2012</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I love using JAWS to access WordNet. It has a rather extensive API, runs quickly, and doesn&rsquo;t require too much configuration. All you have to do is<a href="http://lyle.smu.edu/~tspell/jaws/index.html"> download the Jaws binary jar</a> and <a href="http://wordnet.princeton.edu/wordnet/download/">WordNet</a>, and then specify to JAWS where the WordNet files are (I will demonstrate this later).</p>
+
+<p>One thing that did take a while to figure out was how to get verb frames from it. A verb frame is an indication of how the verb may be used. For example, the entry for the verb &ldquo;fax&rdquo; in WordNet contains the following frames:</p>
+
+<ul>
+<li><code>Somebody ----s something to somebody</code></li>
+<li><code>Somebody ----s somebody something</code></li>
+<li><code>Somebody ----s somebody</code></li>
+<li><code>Somebody ----s something</code></li>
+<li><code>Somebody ----s</code></li>
+</ul>
+
+
+<p>Let&rsquo;s look at the WordNet file to see how frames are specified. If you open data.verb, you will see that &ldquo;sun&rdquo; occurs twice. The frames are listed like so:</p>
+
+<pre><code>02112546 39 v 04 sun 0 insolate 0 solarize 0 solarise ... 01 + 08 00 | expose to the rays of the sun or affect by exposure to the sun
+
+00104147 29 v 02 sun 0 sunbathe ... 03 + 02 00 + 22 00 + 09 01 | expose one's body to the sun
+</code></pre>
+
+<p>The <code>01</code> and <code>03</code> indicate the number of verb frames, <code>08</code>, <code>02</code>, <code>22</code>, and <code>09</code> are frame numbers. The <code>00</code>&rsquo;s and <code>01</code> that follow the frame numbers indicate which words in the synset the numbers apply to. <code>00</code> means the frame is applicable to all members. The <code>01</code> in the second entry means that frame 9 is only for the word <code>sun</code>, and not for the second word, <code>sunbathe</code>.<br />There are two methods provided by JAWS to get frames. They are both contained in the <a href="http://lyle.smu.edu/~tspell/jaws/doc/edu/smu/tspell/wordnet/VerbSynset.html"><code>VerbSynset</code></a> class:</p>
+
+<figure class='code'><figcaption><span>Methods available in VerbSynset for retrieving verb frames</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  * Returns the sentence frames (if any) associated with this verb meaning.</span>
+</span><span class='line'><span class="cm">  * Sentence frames are examples of how the verb can be used / applied, and</span>
+</span><span class='line'><span class="cm">  * all the frames returned by this method apply to all word forms in the</span>
+</span><span class='line'><span class="cm">  * synset.</span>
+</span><span class='line'><span class="cm">  *</span>
+</span><span class='line'><span class="cm">  * @return Sentence frames associated with all word forms in this synset.</span>
+</span><span class='line'><span class="cm">  * @see</span>
+</span><span class='line'><span class="cm">  *         Format of Lexicographer Files (&quot;Verb Frames&quot;)</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'> <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getSentenceFrames</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'> <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  * Returns the sentence frames (if any) that are specific to a particular</span>
+</span><span class='line'><span class="cm">  * word form within this synset, where sentence frames are examples of</span>
+</span><span class='line'><span class="cm">  * how the word form can be used / applied.</span>
+</span><span class='line'><span class="cm">  *</span>
+</span><span class='line'><span class="cm">  * @param  wordForm Word form for which to return sentence frames.</span>
+</span><span class='line'><span class="cm">  * @return Sentence frames that are specific to the word form.</span>
+</span><span class='line'><span class="cm">  * @see</span>
+</span><span class='line'><span class="cm">  *         Format of Lexicographer Files (&quot;Verb Frames&quot;)</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'> <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getSentenceFrames</span><span class="o">(</span><span class="n">String</span> <span class="n">wordForm</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Keep in mind that the VerbSynset class is completely divorced from the actual orthographic representation of a word, since a synset may belong to several different words. The first method returns all of the frames that apply to every word in the synset, or to all of the frames marked with a 00 in the data.verb file as shown above. The second method returns only the frames which are marked as being specific to a single orthographic representation, specified by the one argument for the method. The return values are complementary and each is incomplete by itself. However, given only the synset offset or only the word to look up, JAWS is returning as much information as is possible. If you know both the synset number and the orthographic representation of a word you need frames for (and I don&rsquo;t see why you wouldn&rsquo;t), then the getWordFramesComplete method in the program below demonstrates how to get all of the available frames:</p>
+
+<figure class='code'><figcaption><span>Retrieve all available verb frames for a given orthography/synset combination</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">edu</span><span class="o">.</span><span class="na">byu</span><span class="o">.</span><span class="na">xnlsoar</span><span class="o">.</span><span class="na">test</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.Synset</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.SynsetType</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.VerbSynset</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.WordNetDatabase</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.impl.file.SampleFrameFactory</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.impl.file.SynsetFactory</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.impl.file.SynsetPointer</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DemoFrames</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'> <span class="kd">private</span> <span class="kd">static</span> <span class="n">WordNetDatabase</span> <span class="n">database</span><span class="o">;</span>
+</span><span class='line'> <span class="kd">private</span> <span class="kd">static</span> <span class="n">SynsetFactory</span> <span class="n">synsetFactory</span><span class="o">;</span>
+</span><span class='line'> <span class="c1">//initialize everything here</span>
+</span><span class='line'> <span class="kd">static</span><span class="o">{</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">&quot;wordnet.database.dir&quot;</span><span class="o">,</span> <span class="s">&quot;./lib/3.0/dict&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">database</span> <span class="o">=</span> <span class="n">WordNetDatabase</span><span class="o">.</span><span class="na">getFileInstance</span><span class="o">();</span>
+</span><span class='line'>  <span class="n">synsetFactory</span> <span class="o">=</span> <span class="n">SynsetFactory</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+</span><span class='line'> <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'> <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  *</span>
+</span><span class='line'><span class="cm">  * @param synsetOffset Synset number to look up frames for</span>
+</span><span class='line'><span class="cm">  * @return Array of frames for the synset; only returns frames</span>
+</span><span class='line'><span class="cm">  * which apply to every word in the synset</span>
+</span><span class='line'><span class="cm">  * frames</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="nf">getGeneralSynsetFrames</span><span class="o">(</span><span class="kt">int</span> <span class="n">synsetOffset</span><span class="o">){</span>
+</span><span class='line'>  <span class="n">SynsetPointer</span> <span class="n">sp</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">SynsetPointer</span><span class="o">(</span><span class="n">SynsetType</span><span class="o">.</span><span class="na">VERB</span><span class="o">,</span> <span class="n">synsetOffset</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">VerbSynset</span> <span class="n">vSynset</span> <span class="o">=</span> <span class="o">(</span><span class="n">VerbSynset</span><span class="o">)</span> <span class="n">synsetFactory</span><span class="o">.</span><span class="na">getSynset</span><span class="o">(</span><span class="n">sp</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">frames</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;();</span>
+</span><span class='line'>  <span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">vSynset</span><span class="o">.</span><span class="na">getSentenceFrames</span><span class="o">())</span>
+</span><span class='line'>   <span class="n">frames</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">frames</span><span class="o">;</span>
+</span><span class='line'> <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'> <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  *</span>
+</span><span class='line'><span class="cm">  * @param lemma Base form of the word you want to look up</span>
+</span><span class='line'><span class="cm">  * @return Array of frames for the lemma; only returns those</span>
+</span><span class='line'><span class="cm">  * that are specific to a particular word form within each synset.</span>
+</span><span class='line'><span class="cm">  * frames</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="nf">getWordFramesSpecific</span><span class="o">(</span><span class="n">String</span> <span class="n">lemma</span><span class="o">){</span>
+</span><span class='line'>  <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">frames</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;();</span>
+</span><span class='line'>  <span class="n">Synset</span><span class="o">[]</span> <span class="n">synsets</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getSynsets</span><span class="o">(</span><span class="n">lemma</span><span class="o">,</span><span class="n">SynsetType</span><span class="o">.</span><span class="na">VERB</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">for</span><span class="o">(</span><span class="n">Synset</span> <span class="n">synset</span> <span class="o">:</span> <span class="n">synsets</span><span class="o">){</span>
+</span><span class='line'>   <span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span> <span class="o">:</span> <span class="o">((</span><span class="n">VerbSynset</span><span class="o">)</span> <span class="n">synset</span><span class="o">).</span><span class="na">getSentenceFrames</span><span class="o">(</span><span class="n">lemma</span><span class="o">))</span>
+</span><span class='line'>    <span class="n">frames</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">frames</span><span class="o">;</span>
+</span><span class='line'> <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'> <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  * This one is more difficult to understand...</span>
+</span><span class='line'><span class="cm">  * @param lemma Base form of the word you want to look up</span>
+</span><span class='line'><span class="cm">  * @return Array of frames for the lemma; only returns those</span>
+</span><span class='line'><span class="cm">  * that match every word in each of the synsets that contain this word.</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="nf">getWordFramesGeneral</span><span class="o">(</span><span class="n">String</span> <span class="n">lemma</span><span class="o">){</span>
+</span><span class='line'>  <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">frames</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;();</span>
+</span><span class='line'>  <span class="n">Synset</span><span class="o">[]</span> <span class="n">synsets</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getSynsets</span><span class="o">(</span><span class="n">lemma</span><span class="o">,</span><span class="n">SynsetType</span><span class="o">.</span><span class="na">VERB</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">for</span><span class="o">(</span><span class="n">Synset</span> <span class="n">synset</span> <span class="o">:</span> <span class="n">synsets</span><span class="o">){</span>
+</span><span class='line'>   <span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span> <span class="o">:</span> <span class="o">((</span><span class="n">VerbSynset</span><span class="o">)</span> <span class="n">synset</span><span class="o">).</span><span class="na">getSentenceFrames</span><span class="o">())</span>
+</span><span class='line'>    <span class="n">frames</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">frames</span><span class="o">;</span>
+</span><span class='line'> <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'> <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  * This method is the best. It returns all possible frames</span>
+</span><span class='line'><span class="cm">  * given a synset number and the accompanying word.</span>
+</span><span class='line'><span class="cm">  * @param lemma Base form of the word you want to look up</span>
+</span><span class='line'><span class="cm">  * @param synsetOffset Synset number to look up frames for</span>
+</span><span class='line'><span class="cm">  * @return Array of frames for the synset; returns all frames</span>
+</span><span class='line'><span class="cm">  * for this word within this synset.</span>
+</span><span class='line'><span class="cm">  * frames</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="nf">getWordFramesComplete</span><span class="o">(</span><span class="n">String</span> <span class="n">lemma</span><span class="o">,</span> <span class="kt">int</span> <span class="n">synsetOffset</span><span class="o">){</span>
+</span><span class='line'>  <span class="n">SynsetPointer</span> <span class="n">sp</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">SynsetPointer</span><span class="o">(</span><span class="n">SynsetType</span><span class="o">.</span><span class="na">VERB</span><span class="o">,</span> <span class="n">synsetOffset</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">VerbSynset</span> <span class="n">vSynset</span> <span class="o">=</span> <span class="o">(</span><span class="n">VerbSynset</span><span class="o">)</span> <span class="n">synsetFactory</span><span class="o">.</span><span class="na">getSynset</span><span class="o">(</span><span class="n">sp</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">frames</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;();</span>
+</span><span class='line'>  <span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">vSynset</span><span class="o">.</span><span class="na">getSentenceFrames</span><span class="o">(</span><span class="n">lemma</span><span class="o">))</span>
+</span><span class='line'>   <span class="n">frames</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">vSynset</span><span class="o">.</span><span class="na">getSentenceFrames</span><span class="o">())</span>
+</span><span class='line'>   <span class="n">frames</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">frames</span><span class="o">;</span>
+</span><span class='line'> <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'> <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  * Prints out several different queries for the frames of &quot;fax&quot;</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">offset</span> <span class="o">=</span> <span class="mi">104147</span><span class="o">;</span><span class="c1">//the synset meaning &quot;expose one&#39;s body to the sun&quot;</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getGeneralSynsetFrames</span><span class="o">(</span><span class="n">offset</span><span class="o">));</span><span class="c1">//returns 2 frames</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getWordFramesSpecific</span><span class="o">(</span><span class="s">&quot;sun&quot;</span><span class="o">));</span><span class="c1">//returns 1 frame</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getWordFramesGeneral</span><span class="o">(</span><span class="s">&quot;sun&quot;</span><span class="o">));</span><span class="c1">//returns 3 frames</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getWordFramesComplete</span><span class="o">(</span><span class="s">&quot;sunbathe&quot;</span><span class="o">,</span><span class="n">offset</span><span class="o">));</span><span class="c1">//returns 2 frames</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getWordFramesComplete</span><span class="o">(</span><span class="s">&quot;sun&quot;</span><span class="o">,</span><span class="n">offset</span><span class="o">));</span><span class="c1">//returns 3 frames (different from before)</span>
+</span><span class='line'> <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>getWordFramesComplete</code> calls both of the available methods in JAWS, retrieving both frames that apply to all words in a synset and the frames that are specific to a single word in the synset.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Nate Glenn</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-11T00:00:00+09:00" pubdate data-updated="true">May 11<sup>th</sup>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/java-code/'>java code</a>, <a class='category' href='/blog/categories/jaws/'>jaws</a>, <a class='category' href='/blog/categories/wordnet/'>wordnet</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://garfieldnate.github.io/blog/2012/05/11/getting-wordnet-verb-frames-with-jaws/" data-via="garfieldnate" data-counturl="http://garfieldnate.github.io/blog/2012/05/11/getting-wordnet-verb-frames-with-jaws/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/12/30/review-development-of-language/" title="Previous Post: Review: The Development of Language Processing Strategies: A Cross-linguistic Study Between Japanese and English">&laquo; Review: The Development of Language Processing Strategies: A Cross-linguistic Study Between Japanese and English</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/06/29/graphing-grammar-parses-from-cmu-sphinx/" title="Next Post: Graphing grammar parses from CMU Sphinx 4">Graphing grammar parses from CMU Sphinx 4 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/01/06/my-new-toy-algomation/">My New Toy: Algomation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/11/09/the-oh-so-exotic-grocery-list/">The Oh So Exotic Grocery List</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/07/yotchare/">Yotchare!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/13/2-knuth-classics-are-freely-available/">Knuth Classics Are Freely Available</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/10/five-things-we-need-to-know-about-technological-change/">Five Things We Need to Know About Technological Change</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/garfieldnate?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Nate Glenn -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'garfieldnate';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://garfieldnate.github.io/blog/2012/05/11/getting-wordnet-verb-frames-with-jaws/';
+        var disqus_url = 'http://garfieldnate.github.io/blog/2012/05/11/getting-wordnet-verb-frames-with-jaws/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,667 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>String Allignment With Edit Operations - Garfield Nate</title>
+  <meta name="author" content="Nate Glenn">
+
+  
+  <meta name="description" content="A common way to measure the distance between two strings is using Levenshtein distance. Levenshtein distance is the minimum number of deletions, &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://garfieldnate.github.io/blog/2011/09/01/string-allignment-with-edit-operations">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Garfield Nate" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+
+  <!-- Load jQuery from google for better caching; if that fails, load the local copy -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- For GitHub repo display; use with the githubrepo-octopress plugin -->
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+<!--script>
+  $.noConflict()
+</script-->
+
+<script src="/javascripts/libs/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+<script src="/javascripts/menu.min.js" type="text/javascript"></script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-26857949-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Garfield Nate</a></h1>
+  
+    <h2>Big Fat Hairy Programmer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:garfieldnate.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li>
+    <a href="/resume/resume-en.html">Resume</a>
+    <ul>
+        <il><a href="/resume/resume-en.html">English</a></il>
+        <il><a href="/resume/resume-ja.html">日本語</a></il>
+    </ul>
+  </li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">String Allignment With Edit Operations</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-01T00:00:00+09:00" pubdate data-updated="true">Sep 1<sup>st</sup>, 2011</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>A common way to measure the distance between two strings is using Levenshtein distance. Levenshtein distance is the minimum number of deletions, insertions, and substitutions needed to transform one string into another. Finding the distance between two strings is useful in certain applications such as spell checking (a word processor will suggest dictionary words that are close to your misspelled word). See <a href="http://en.wikipedia.org/wiki/Levenshtein_distance">wikipedia</a> for more details and an example of Levenshtein distance calculation.</p>
+
+<p>Another related and also important operation is to find the minimum edit alignment; that is, once the minimum edit distance between the two strings is found, output the sequence of operations that can be used to change the one string into the other. For example, if we let C mean &ldquo;correct&rdquo;, S mean &ldquo;substitution&rdquo;, D mean &ldquo;deletion&rdquo; and I mean &ldquo;insertion&rdquo;, then the edit alignment between the characters in &ldquo;construction&rdquo; and &ldquo;distortions&rdquo; would be ISSCCISSCCCCD. Here is an explanation of the alignment:</p>
+
+<ul>
+<li>I: Insert a &ldquo;c&rdquo; &ndash;>cdistortions</li>
+<li>S: Substitute &ldquo;d&rdquo; for &ldquo;o&rdquo; &ndash;>coistortions</li>
+<li>S: Substitute &ldquo;i&rdquo; for &ldquo;n&rdquo; &ndash;> constortions</li>
+<li>CC: Leave the &ldquo;st&rdquo; alone</li>
+<li>I: Insert &ldquo;r&rdquo; &ndash;> constrortion</li>
+<li>S: Substitute &ldquo;u&rdquo; for &ldquo;o&rdquo; &ndash;> contrurtion</li>
+<li>S: Substitute &ldquo;c&rdquo; for &ldquo;r&rdquo; &ndash;> constructions</li>
+<li>CCCC: Leave &ldquo;tion&rdquo; alone</li>
+<li>D: delete &ldquo;s&rdquo; &ndash;> construction</li>
+</ul>
+
+
+<p> This sort of an allignment operation is commonly used in grading the output of machine translation and speech recognition systems, though the operations are done at the word level instead of the character level. When I needed a quick piece of code to do the alignment in my own application, though, there was none to be found on the internet! So I made my own and am posting it here. The logic for determining the proper string of edit operations is taken from a StackOverflow answer <a href="http://stackoverflow.com/questions/5849139/levenshtein-distance-inferring-the-edit-operations-from-the-matrix/5861206#5861206">here</a>. And now the code:</p>
+
+<figure class='code'><figcaption><span>align two strings via edit operations</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="cm">/**</span>
+</span><span class='line'><span class="cm">  * @return List of Operations representing allignment between list1 and</span>
+</span><span class='line'><span class="cm">  * list2. The allignment represents operations to change list2 into list1.</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span> <span class="nf">levenshteinAllignment</span><span class="o">(</span><span class="n">Object</span><span class="o">[]</span> <span class="n">list1</span><span class="o">,</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">list2</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kt">int</span><span class="o">[][]</span> <span class="n">distanceMatrix</span> <span class="o">=</span> <span class="n">getDistanceMatrix</span><span class="o">(</span><span class="n">list1</span><span class="o">,</span> <span class="n">list2</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">List</span> <span class="n">ops</span><span class="o">=</span> <span class="k">new</span> <span class="nf">ArrayList</span><span class="o">(</span>
+</span><span class='line'>              <span class="n">list1</span><span class="o">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="n">list2</span><span class="o">.</span><span class="na">length</span> <span class="o">?</span> <span class="n">list1</span><span class="o">.</span><span class="na">length</span> <span class="o">:</span> <span class="n">list2</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+</span><span class='line'>      <span class="c1">//think of distance chart as going from bottom left to top right;</span>
+</span><span class='line'>      <span class="c1">//current position coordinates; start at top right.</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="n">list1</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="n">list2</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+</span><span class='line'>      <span class="c1">//could have moved to current position from three others; store their scores here.</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">diag</span><span class="o">;</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">left</span><span class="o">;</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">below</span><span class="o">;</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">current</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">while</span> <span class="o">(</span><span class="n">row</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">col</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">diag</span> <span class="o">=</span> <span class="n">getVal</span><span class="o">(</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span><span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span><span class="n">distanceMatrix</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">left</span> <span class="o">=</span> <span class="n">getVal</span><span class="o">(</span><span class="n">row</span><span class="o">,</span><span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span><span class="n">distanceMatrix</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">below</span> <span class="o">=</span> <span class="n">getVal</span><span class="o">(</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span><span class="n">col</span><span class="o">,</span><span class="n">distanceMatrix</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">current</span> <span class="o">=</span> <span class="n">distanceMatrix</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//              if the value in the diagonal cell (going up+left) is smaller or equal to the</span>
+</span><span class='line'><span class="c1">//                 values found in the other two cells</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//              AND</span>
+</span><span class='line'><span class="c1">//                 if this is same or 1 minus the value of the current cell</span>
+</span><span class='line'>          <span class="k">if</span><span class="o">(</span><span class="n">diag</span> <span class="o">&lt;=</span> <span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">diag</span> <span class="o">&lt;=</span> <span class="n">below</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">diag</span> <span class="o">==</span> <span class="n">current</span> <span class="o">||</span> <span class="n">diag</span> <span class="o">==</span> <span class="n">current</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)){</span>
+</span><span class='line'><span class="c1">//                  then  &quot;take the diagonal cell&quot;</span>
+</span><span class='line'><span class="c1">//                if the value of the diagonal cell is one less than the current cell:</span>
+</span><span class='line'>              <span class="k">if</span><span class="o">(</span><span class="n">diag</span> <span class="o">==</span> <span class="n">current</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
+</span><span class='line'><span class="c1">//                   Add a SUBSTITUTION operation (from the letters corresponding to</span>
+</span><span class='line'><span class="c1">//                   the _current_ cell)</span>
+</span><span class='line'>                  <span class="n">ops</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nf">Operation</span><span class="o">(</span><span class="n">Operation</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">SUBSTITUTION</span><span class="o">,</span><span class="n">list1</span><span class="o">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="o">],</span><span class="n">list2</span><span class="o">[</span><span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="o">]));</span>
+</span><span class='line'>              <span class="k">else</span>
+</span><span class='line'><span class="c1">//                   otherwise: do not add an operation this was a no-operation.</span>
+</span><span class='line'>                  <span class="n">ops</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nf">Operation</span><span class="o">(</span><span class="n">Operation</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">CORRECT</span><span class="o">,</span><span class="n">list1</span><span class="o">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="o">]));</span>
+</span><span class='line'>              <span class="c1">//move diagonally</span>
+</span><span class='line'>              <span class="n">row</span><span class="o">--;</span>
+</span><span class='line'>              <span class="n">col</span><span class="o">--;</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'><span class="c1">//</span>
+</span><span class='line'><span class="c1">//           elseif the value in the cell to the left is smaller or equal to the value of</span>
+</span><span class='line'><span class="c1">//               the cell below current cell</span>
+</span><span class='line'><span class="c1">//           AND</span>
+</span><span class='line'><span class="c1">//           if this value is same or 1 minus the value of the current cell</span>
+</span><span class='line'>          <span class="k">else</span> <span class="nf">if</span><span class="o">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">below</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">left</span> <span class="o">==</span> <span class="n">current</span> <span class="o">||</span> <span class="n">left</span> <span class="o">==</span> <span class="n">current</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)){</span>
+</span><span class='line'><span class="c1">//               add an INSERTION of the cell to the left</span>
+</span><span class='line'>              <span class="n">ops</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nf">Operation</span><span class="o">(</span><span class="n">Operation</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">INSERTION</span><span class="o">,</span><span class="n">list2</span><span class="o">[</span><span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="o">]));</span>
+</span><span class='line'>              <span class="c1">//move left</span>
+</span><span class='line'>              <span class="n">col</span><span class="o">--;</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'><span class="c1">//           else</span>
+</span><span class='line'>          <span class="k">else</span><span class="o">{</span>
+</span><span class='line'><span class="c1">//              take the cell below, add</span>
+</span><span class='line'><span class="c1">//              Add a DELETION operation</span>
+</span><span class='line'>              <span class="n">ops</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nf">Operation</span><span class="o">(</span><span class="n">Operation</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">DELETION</span><span class="o">,</span><span class="n">list1</span><span class="o">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="o">]));</span>
+</span><span class='line'>              <span class="c1">//move down</span>
+</span><span class='line'>              <span class="n">row</span><span class="o">--;</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="n">Collections</span><span class="o">.</span><span class="na">reverse</span><span class="o">(</span><span class="n">ops</span><span class="o">);</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">ops</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getVal</span><span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">,</span> <span class="kt">int</span> <span class="n">col</span><span class="o">,</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">distanceMatrix</span><span class="o">){</span>
+</span><span class='line'>      <span class="k">if</span><span class="o">(</span><span class="n">row</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">row</span> <span class="o">&gt;</span> <span class="n">distanceMatrix</span><span class="o">.</span><span class="na">length</span><span class="o">)</span>
+</span><span class='line'>          <span class="k">return</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">if</span><span class="o">(</span><span class="n">col</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">col</span> <span class="o">&gt;</span> <span class="n">distanceMatrix</span><span class="o">.</span><span class="na">length</span><span class="o">)</span>
+</span><span class='line'>          <span class="k">return</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">else</span> <span class="k">return</span> <span class="n">distanceMatrix</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">];</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Operation</span><span class="o">{</span>
+</span><span class='line'>      <span class="kd">private</span> <span class="n">Type</span> <span class="n">type</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">private</span> <span class="n">Object</span> <span class="n">object1</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">private</span> <span class="n">Object</span> <span class="n">object2</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="kd">enum</span> <span class="n">Type</span><span class="o">{</span>
+</span><span class='line'>          <span class="n">CORRECT</span><span class="o">,</span><span class="n">SUBSTITUTION</span><span class="o">,</span><span class="n">DELETION</span><span class="o">,</span><span class="n">INSERTION</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="nf">Operation</span><span class="o">(</span><span class="n">Type</span> <span class="n">t</span><span class="o">,</span> <span class="n">Object</span> <span class="n">o1</span><span class="o">){</span>
+</span><span class='line'>          <span class="n">type</span> <span class="o">=</span> <span class="n">t</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">object1</span> <span class="o">=</span> <span class="n">o1</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">object2</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="nf">Operation</span><span class="o">(</span><span class="n">Type</span> <span class="n">t</span><span class="o">,</span> <span class="n">Object</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Object</span> <span class="n">o2</span><span class="o">){</span>
+</span><span class='line'>          <span class="n">type</span> <span class="o">=</span> <span class="n">t</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">object1</span> <span class="o">=</span> <span class="n">o1</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">object2</span> <span class="o">=</span> <span class="n">o2</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="nd">@Override</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">(){</span>
+</span><span class='line'>          <span class="k">if</span><span class="o">(</span><span class="n">type</span> <span class="o">==</span> <span class="n">Type</span><span class="o">.</span><span class="na">SUBSTITUTION</span><span class="o">)</span>
+</span><span class='line'>              <span class="k">return</span> <span class="s">&quot;Substitution: &quot;</span> <span class="o">+</span> <span class="n">object1</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot; -&gt; &quot;</span> <span class="o">+</span> <span class="n">object2</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+</span><span class='line'>          <span class="k">if</span><span class="o">(</span><span class="n">type</span> <span class="o">==</span> <span class="n">Type</span><span class="o">.</span><span class="na">CORRECT</span><span class="o">)</span>
+</span><span class='line'>              <span class="k">return</span> <span class="s">&quot;Correct:      &quot;</span> <span class="o">+</span> <span class="n">object1</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+</span><span class='line'>          <span class="k">if</span><span class="o">(</span><span class="n">type</span> <span class="o">==</span> <span class="n">Type</span><span class="o">.</span><span class="na">DELETION</span><span class="o">)</span>
+</span><span class='line'>              <span class="k">return</span> <span class="s">&quot;Deletion:     &quot;</span> <span class="o">+</span> <span class="n">object1</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+</span><span class='line'>          <span class="k">if</span><span class="o">(</span><span class="n">type</span> <span class="o">==</span> <span class="n">Type</span><span class="o">.</span><span class="na">INSERTION</span><span class="o">)</span>
+</span><span class='line'>              <span class="k">return</span> <span class="s">&quot;Insertion:    &quot;</span> <span class="o">+</span> <span class="n">object1</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+</span><span class='line'>          <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  *</span>
+</span><span class='line'><span class="cm">  * @param array of objects to compare</span>
+</span><span class='line'><span class="cm">  * @param array of objects to compare</span>
+</span><span class='line'><span class="cm">  * @return Levenshtein distance between arrays.</span>
+</span><span class='line'><span class="cm">  * This method uses the equals(Object o) method to compare the</span>
+</span><span class='line'><span class="cm">  * objects in the two arrays, returning the Levenshtein distance between them.</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">levenshteinDistance</span><span class="o">(</span><span class="n">Object</span><span class="o">[]</span> <span class="n">list1</span><span class="o">,</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">list2</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="kt">int</span><span class="o">[][]</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">getDistanceMatrix</span><span class="o">(</span><span class="n">list1</span><span class="o">,</span> <span class="n">list2</span><span class="o">);</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">distance</span><span class="o">[</span><span class="n">list1</span><span class="o">.</span><span class="na">length</span><span class="o">][</span><span class="n">list2</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  *</span>
+</span><span class='line'><span class="cm">  * @param list1</span>
+</span><span class='line'><span class="cm">  * @param list2</span>
+</span><span class='line'><span class="cm">  * @return A completely filled distance matrix; movement from [i-1][j]</span>
+</span><span class='line'><span class="cm">  *         represents insertion, from [i][j-1] represents deletion, and from</span>
+</span><span class='line'><span class="cm">  *         [i-1][j-1] represents substitution or no operation.</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[][]</span> <span class="nf">getDistanceMatrix</span><span class="o">(</span><span class="n">Object</span><span class="o">[]</span> <span class="n">list1</span><span class="o">,</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">list2</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kt">int</span><span class="o">[][]</span> <span class="n">distanceMatrix</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">list1</span><span class="o">.</span><span class="na">length</span> <span class="o">+</span> <span class="mi">1</span><span class="o">][</span><span class="n">list2</span><span class="o">.</span><span class="na">length</span> <span class="o">+</span> <span class="mi">1</span><span class="o">];</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">list1</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+</span><span class='line'>          <span class="n">distanceMatrix</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">list2</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span>
+</span><span class='line'>          <span class="n">distanceMatrix</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">list1</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+</span><span class='line'>          <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">list2</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span>
+</span><span class='line'>              <span class="n">distanceMatrix</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">minimum</span><span class="o">(</span><span class="n">distanceMatrix</span><span class="o">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span><span class="c1">// insertion</span>
+</span><span class='line'>                      <span class="n">distanceMatrix</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span><span class="c1">// deletion</span>
+</span><span class='line'>                      <span class="n">distanceMatrix</span><span class="o">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]</span><span class="c1">// substitution or correct</span>
+</span><span class='line'>                              <span class="o">+</span> <span class="o">((</span><span class="n">list1</span><span class="o">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="n">list2</span><span class="o">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]))</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="mi">1</span><span class="o">));</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">distanceMatrix</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  * Same as Math.min, but returns the minimum of three arguments instead of</span>
+</span><span class='line'><span class="cm">  * two.</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">minimum</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">,</span> <span class="kt">int</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">),</span> <span class="n">c</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For word level alignment, you can call it on Strings using the split function like so:</p>
+
+<figure class='code'><figcaption><span>example string alignment</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="k">for</span><span class="o">(</span><span class="n">Operation</span> <span class="n">o</span> <span class="o">:</span> <span class="n">levenshteinAllignment</span><span class="o">(</span>
+</span><span class='line'>          <span class="s">&quot;What My house gleams with the light of the moon and your face&quot;</span>
+</span><span class='line'>                  <span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&quot; &quot;</span><span class="o">),</span>
+</span><span class='line'>          <span class="s">&quot;Your house with the light of the the moon and my face&quot;</span>
+</span><span class='line'>                  <span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&quot; &quot;</span><span class="o">))</span>
+</span><span class='line'>      <span class="o">)</span>
+</span><span class='line'>          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And the output would be:</p>
+
+<pre><code>Deletion:     What
+Substitution: My -&gt; Your
+Correct:      house
+Deletion:     gleams
+Correct:      with
+Correct:      the
+Correct:      light
+Correct:      of
+Correct:      the
+Insertion:    the
+Correct:      moon
+Correct:      and
+Substitution: your -&gt; my
+Correct:      face
+</code></pre>
+
+<p>Feel free to use and edit this as you like. Many applications disregard the strings that are correct and only output the edit operations, and that should be an easy edit.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Nate Glenn</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-01T00:00:00+09:00" pubdate data-updated="true">Sep 1<sup>st</sup>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/alignment/'>alignment</a>, <a class='category' href='/blog/categories/java-code/'>java code</a>, <a class='category' href='/blog/categories/levenshtein/'>levenshtein</a>, <a class='category' href='/blog/categories/nlp/'>nlp</a>, <a class='category' href='/blog/categories/sequence/'>sequence</a>, <a class='category' href='/blog/categories/strings/'>strings</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://garfieldnate.github.io/blog/2011/09/01/string-allignment-with-edit-operations/" data-via="garfieldnate" data-counturl="http://garfieldnate.github.io/blog/2011/09/01/string-allignment-with-edit-operations/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/08/17/java-code-distributional-statistics-of/" title="Previous Post: Distributional Statistics of Log Values in Linear Domain">&laquo; Distributional Statistics of Log Values in Linear Domain</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/11/03/cs-240-web-crawler-at-byu/" title="Next Post: CS 240 Web Crawler at BYU">CS 240 Web Crawler at BYU &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/01/06/my-new-toy-algomation/">My New Toy: Algomation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/11/09/the-oh-so-exotic-grocery-list/">The Oh So Exotic Grocery List</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/07/yotchare/">Yotchare!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/13/2-knuth-classics-are-freely-available/">Knuth Classics Are Freely Available</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/10/five-things-we-need-to-know-about-technological-change/">Five Things We Need to Know About Technological Change</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/garfieldnate?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Nate Glenn -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'garfieldnate';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://garfieldnate.github.io/blog/2011/09/01/string-allignment-with-edit-operations/';
+        var disqus_url = 'http://garfieldnate.github.io/blog/2011/09/01/string-allignment-with-edit-operations/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

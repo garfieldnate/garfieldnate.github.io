@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Tools | Garfield Nate]]></title>
+  <link href="http://garfieldnate.github.io/blog/categories/tools/atom.xml" rel="self"/>
+  <link href="http://garfieldnate.github.io/"/>
+  <updated>2015-02-13T01:21:37+09:00</updated>
+  <id>http://garfieldnate.github.io/</id>
+  <author>
+    <name><![CDATA[Nate Glenn]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[List of Japanese NLP Tools]]></title>
+    <link href="http://garfieldnate.github.io/blog/2011/11/06/list-of-japanese-nlp-tools/"/>
+    <updated>2011-11-06T00:00:00+09:00</updated>
+    <id>http://garfieldnate.github.io/blog/2011/11/06/list-of-japanese-nlp-tools</id>
+    <content type="html"><![CDATA[<p>I haven&rsquo;t tried out all of these so I don&rsquo;t have comments for everything, but hopefully this list will come in useful for someone.</p>
+
+<h2>Morphological analyzers/tokenizers</h2>
+
+<ul>
+<li><a href="http://sourceforge.net/projects/itadaki/">Itadaki</a>: a Japanese processing module for OpenOffice. I&rsquo;ve done a tiny bit of work and issue documentation on a fork <a href="https://github.com/garfieldnate/itadaki">here</a>, and someone forked that to work with a Japanese/German dictionary <a href="https://github.com/wichmann/Itadaki">here</a>.</li>
+<li>GoSen: Uses <a href="http://java.net/projects/sen/">sen</a> as a base, and is part of Itadaki; a pure Java version of ChaSen. See my previous post on where to download it from.</li>
+<li><a href="http://mecab.sourceforge.net/">MeCab</a>: This page also contains a comparison of MeCab, ChaSen, JUMAN, and Kakasi.</li>
+<li><a href="http://chasen.naist.jp/hiki/ChaSen/?%C3%E3%E4%A5%A4%CE%C7%DB%C9%DB">ChaSen</a></li>
+<li><a href="http://nlp.ist.i.kyoto-u.ac.jp/EN/index.php?JUMAN">JUMAN</a></li>
+<li><a href="http://code.google.com/p/cabocha/">Cabocha</a>: Uses support vector machines for morphological and dependency structure analysis.</li>
+<li><a href="https://github.com/sile/gomoku">Gomoku</a></li>
+<li><a href="http://igo.sourceforge.jp/">Igo</a></li>
+<li><a href="https://github.com/atilika/kuromoji">Kuromoji</a>: Donated to Apache and used in Solr. Looks nice.</li>
+</ul>
+
+
+<h2>Corpora</h2>
+
+<ul>
+<li><a href="http://www.env.kitakyu-u.ac.jp/corpus/docs/index.html">Hypermedia Corpus</a></li>
+<li><a href="http://www.sfs.uni-tuebingen.de/en/tuebajs.shtml">TüBa-J/S</a>: Japanese treebank from universityu of Tübingen. Not as heavily annotated as I&rsquo;d hoped. You have to send them an agreement to download it, but it&rsquo;s free.</li>
+<li><a href="http://www.gsk.or.jp/catalog_e.html">GSK</a>: Not free, but very cheap.</li>
+<li><a href="http://www.ldc.upenn.edu/">LDC</a>: Expensive unless your institution is a member</li>
+</ul>
+
+
+<h2>Other lexical resources</h2>
+
+<ul>
+<li><a href="http://kakasi.namazu.org/">Kakasi</a>: Gives readings for kanji compounds.</li>
+<li><a href="http://nlpwww.nict.go.jp/wn-ja/index.en.html">WordNet</a>: Stil under development by NiCT. The sense numbers are cross-indexed with those in the English WordNet, so it could be useful for translation. Also, there are no verb frames like there are in English.</li>
+<li><a href="http://cl.it.okayama-u.ac.jp/rsc/data/index.html">LCS Database</a>: From Okayama University</li>
+<li><a href="http://jfn.st.hc.keio.ac.jp/index.html">Framenet</a>: Unfortunately you can only do online browsing.</li>
+<li><a href="http://tell.fll.purdue.edu/chakoshi/public.html">Chakoshi</a>: Online collocation search engine.</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

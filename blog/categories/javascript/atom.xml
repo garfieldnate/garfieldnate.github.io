@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Javascript | Garfield Nate]]></title>
+  <link href="http://garfieldnate.github.io/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://garfieldnate.github.io/"/>
+  <updated>2015-02-13T01:21:37+09:00</updated>
+  <id>http://garfieldnate.github.io/</id>
+  <author>
+    <name><![CDATA[Nate Glenn]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[My New Toy: Algomation]]></title>
+    <link href="http://garfieldnate.github.io/blog/2015/01/06/my-new-toy-algomation/"/>
+    <updated>2015-01-06T20:20:34+09:00</updated>
+    <id>http://garfieldnate.github.io/blog/2015/01/06/my-new-toy-algomation</id>
+    <content type="html"><![CDATA[<p>Lately I&rsquo;ve been losing sleep trying to understand an algorithm I read about in an <a href="http://www.inf.upol.cz/trnecka/fka/addintent.pdf">academic publication</a>. Part of the problem was that the <a href="https://en.wikipedia.org/wiki/Analogical_modeling">application</a> I was applying it to required a sort of reversal, which was confusing. But a bigger part of the problem was that I just couldn&rsquo;t &ldquo;see&rdquo; it. I&rsquo;d lay in bed, trying to imagine working with ping-pong balls on a string, or marbles on fishing line, or anything I could really get my &ldquo;mind&rsquo;s hands&rdquo; on.</p>
+
+<p>A few days ago I thought to myself, &ldquo;there has to be a better way; there has to be a tool to help me do this.&rdquo; In my life time I&rsquo;ve done very little visual work, all of it bad, and I know I can&rsquo;t be alone. But after taking Robert Sedgewick&rsquo;s <a href="https://www.coursera.org/course/algs4partI">algorithms</a> course and seeing all of the lovely visualizations from his lab, I knew there must be tools out there for visualizing algorithms, at least for educational use. Surprisingly, I didn&rsquo;t find too many quick ways to do this, but one recently created service fit the bill.</p>
+
+<p>It&rsquo;s called <a href="http://www.algomation.com/">Algomation</a>. Lots of algorithms are available just for viewing on the home page. Each algorithm gets a viewing window for whatever visualization is provided, and the user can rewind as needed. A handy info box on the side gives information on the current operation, variables, and even code location. The visualizations themselves look very nice.</p>
+
+<p>Once you&rsquo;re registered, you can create new algorithms or fork from others' creations. Here&rsquo;s mine:</p>
+
+<iframe allowfullscreen src="http://www.algomation.com/embeddedplayer?embedded=true&algorithm=54a68d7ea7f8e70200042664" width="900" height="556" seamless="seamless" frameborder="0" style="border:1px solid lightgray" scrolling="no"></iframe>
+
+
+<p>Granted, this is a little rough around the edges (and I have used the heck out of the feedback form); however, this is way better than imagining ping-pong balls on a string, and now I <em>really</em> understand how AddIntent works. The service is still young, and I have high hopes for this becoming an expansive library of algorithm visualizations.</p>
+
+<p>Here&rsquo;s my wishlist (in no particular order):</p>
+
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Rete_algorithm">RETE</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Analogical_modeling">Analogical Modeling</a>, and other machine learning algorithms</li>
+<li><a href="https://en.wikipedia.org/wiki/CYK_algorithm">CKY</a>, and other parsing algorithms</li>
+<li><a href="https://en.wikipedia.org/wiki/Formal_concept_analysis#Algorithms_for_generating_formal_concepts_and_constructing_concept_lattices">Close-by-One</a>, and other FCA algorithms</li>
+<li><a href="https://en.wikipedia.org/wiki/Cooley%E2%80%93Tukey_FFT_algorithm">Cooley-Tukey Fast Fourier Transform</a></li>
+</ul>
+
+
+<p>What&rsquo;s on your wishlist?</p>
+]]></content>
+  </entry>
+  
+</feed>

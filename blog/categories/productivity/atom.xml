@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Productivity | Garfield Nate]]></title>
+  <link href="http://garfieldnate.github.io/blog/categories/productivity/atom.xml" rel="self"/>
+  <link href="http://garfieldnate.github.io/"/>
+  <updated>2015-02-13T01:21:37+09:00</updated>
+  <id>http://garfieldnate.github.io/</id>
+  <author>
+    <name><![CDATA[Nate Glenn]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Running Perl With Sublime Text 2]]></title>
+    <link href="http://garfieldnate.github.io/blog/2013/04/07/running-perl-with-sublime-text-2/"/>
+    <updated>2013-04-07T00:00:00+09:00</updated>
+    <id>http://garfieldnate.github.io/blog/2013/04/07/running-perl-with-sublime-text-2</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been having fun trying out <a href="http://www.sublimetext.com/">Sublime Text</a>. It&rsquo;s pretty, fast, and extremely extensible.</p>
+
+<p>The first thing that I wanted was to be able to work well with Perl. I installed <a href="http://wbond.net/sublime_packages/package_control">Package Control</a>, followed by <a href="https://github.com/SublimeLinter/SublimeLinter">SublimeLinter</a>, which has the <a href="http://perlcritic.com/">perlcritic</a> command built in. Making this useful requires a little finagling; perlcritic is by no means a quick program (being a really thorough linter for a language which is complex to parse), and the defaults for SublimeLinter cause it run over and over again as you type. To fix this, I edited <code>Packages/SublimeLinter/SublimeLinter.sublime-settings</code> and changed the &ldquo;sublimelinter&rdquo; setting to false. Now, in order to lint the current file, I have to press <kbd>ctrl+alt+l</kbd>. (<strong>Update:</strong> I don&rsquo;t recommend this for Sublime Text 2 because of speed problems. See <a href="https://github.com/SublimeLinter/SublimeLinter/issues/408">this issue on Github</a>. ST3 should be fine, though.)</p>
+
+<p>Next, I wanted to be able to run my Perl scripts. Sublime has the <kbd>ctrl+b</kbd> shortcut for running a build for the current file. What the build actually does is specified in either a build file or the project file. To create a new build file for perl, go to Tools->Build System &ndash;> New Build System. The build file I&rsquo;ve seen on different sites for Perl looks like this:</p>
+
+<p>``` json Usual build file for Perl
+{</p>
+
+<pre><code>"cmd": ["perl", "$file"],
+"file_regex": ".* at (.*) line ([0-9]*)",
+"selector": "source.perl"
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Save this as perl.sublime-build. With this, whenever you are working on a Perl file and hit <kbd>ctrl+b</kbd>, the command &ldquo;perl -w your_file.pl&rdquo; will be run. This, however, was not good enough for me. Most of the time I am working on tests for a Perl module, so I have to run <code>perl -Ilib t/my_test_file.t</code>. I also want to be able to run individual tests as well as <a href="https://metacpan.org/module/OVID/Test-Harness-3.26/bin/prove"><code>prove</code></a> using shortcuts.</p>
+
+<p>To do this, we need to turn the module directory into a Sublime Text project. This is pretty simple. First, open the module directory in Sublime Text. Select Project->Save Project As, then choose the name of the project and save it in the top directory of the module. Paste the following simple contents into the project file:</p>
+
+<p><code>json Perl project file
+{
+ "folders":
+ [
+  {
+   "path": "."
+  }
+ ]
+}
+</code></p>
+
+<p>All this does is add the entire directory to the project. Next, we edit the Perl build file to reference the root of the project so we can add the top-level lib directory to our include path:</p>
+
+<p><code>perl Perl project build file
+{
+ "cmd": ["perl", "-Ilib", "$file"],
+ "working_dir": "$project_path",
+ "file_regex": ".* at (.) line ([0-9])",
+ "selector": "source.perl",
+}
+</code></p>
+
+<p>Great! Now we can run Perl on tests contained in module directories. This still works fine for standalone scripts, too.</p>
+
+<p>Now I&rsquo;d like to run my whole test suite using prove. By default, <kbd>ctrl+shift+b</kbd> runs a build variant with the name &ldquo;Run&rdquo;, so we&rsquo;ll just make a <code>prove</code> variant with that name. I&rsquo;d much rather give it a more descriptive name, but the Sublime shortcut requires this name. You can change the shortcut, but then you wouldn&rsquo;t be able to use the shortcut for other builds (other languages). It&rsquo;s all up to you. Here is the final build file:</p>
+
+<p>``` json Perl project build file with variants
+{
+ &ldquo;cmd&rdquo;: [&ldquo;perl&rdquo;, &ldquo;-Ilib&rdquo;, &ldquo;$file&rdquo;],
+ &ldquo;working_dir&rdquo;: &ldquo;$project_path&rdquo;,
+ &ldquo;file_regex&rdquo;: &ldquo;.* at (.) line ([0-9])&rdquo;,
+ &ldquo;selector&rdquo;: &ldquo;source.perl&rdquo;,
+ &ldquo;variants&rdquo;: [</p>
+
+<pre><code>    {
+</code></pre>
+
+<p>  &ldquo;cmd&rdquo;: [&ldquo;prove&rdquo;, &ldquo;-vlr&rdquo;, &ldquo;&mdash;merge&rdquo;],
+  &ldquo;working_dir&rdquo;: &ldquo;$project_path&rdquo;,</p>
+
+<pre><code>     "name": "Run",
+</code></pre>
+
+<p>  &ldquo;windows&rdquo;: {</p>
+
+<pre><code>             "cmd": ["prove.bat", "-vlr", "--merge"]
+         }
+    }
+]
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Note that I needed a Windows variant for <code>prove</code> since the Sublime editor doesn&rsquo;t work the same as cmd. You could, alternatively, add &lsquo;&ldquo;shell&rdquo;:true&rsquo; to use the system&rsquo;s command shell so you don&rsquo;t need a separate command for Windows.</p>
+
+<p>With this build file in place, I can now press ctrl+b to run any Perl script, with it&rsquo;s project lib directory in @INC, and <kbd>ctrl+shift+b</kbd> to run prove. Voila!</p>
+
+<p>Here are the final files:</p>
+
+<ul>
+<li><a href="https://sites.google.com/site/complingfiles/files/perl-module.sublime-project?attredirects=0&amp;d=1">project file</a> (put a copy in your project root folders)</li>
+<li><a href="https://sites.google.com/site/complingfiles/files/perl.sublime-build?attredirects=0&amp;d=1">Perl build file</a> (only one is needed per ST installation)</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

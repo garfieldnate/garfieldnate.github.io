@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Perl | Garfield Nate]]></title>
+  <link href="http://garfieldnate.github.io/blog/categories/perl/atom.xml" rel="self"/>
+  <link href="http://garfieldnate.github.io/"/>
+  <updated>2015-02-13T01:21:37+09:00</updated>
+  <id>http://garfieldnate.github.io/</id>
+  <author>
+    <name><![CDATA[Nate Glenn]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Code Reading: pl2bat.pl]]></title>
+    <link href="http://garfieldnate.github.io/blog/2014/07/14/code-reading-pl2bat-dot-pl/"/>
+    <updated>2014-07-14T15:42:07+09:00</updated>
+    <id>http://garfieldnate.github.io/blog/2014/07/14/code-reading-pl2bat-dot-pl</id>
+    <content type="html"><![CDATA[<p>When you install a Perl distribution from CPAN that comes with an executable script, Perl adds it to your path so it can be treated like any other command line program. On a <em>nix system, all that needs to be done for this to work is to set the script to be executable. Windows doesn&rsquo;t have executable script files with shebang lines like </em>nix, however, so Perl generates a batch file.</p>
+
+<p>Let&rsquo;s see how this works. First, let&rsquo;s pick a distribution that comes with an executable script. The <code>App::</code> namespace is a great place to look for that.</p>
+
+<pre><code>cpan App::Cleo
+...
+Running make install
+Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\lib\App\Cleo.pm
+Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo
+Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo.bat
+...
+</code></pre>
+
+<p>Hmm, cleo.bat. That&rsquo;s not in the <a href="https://metacpan.org/source/THALJEF/App-Cleo-0.004/bin">distribution</a>! Let&rsquo;s take a look:</p>
+
+<p>```bat Cleo.bat linenos:false
+@rem = &lsquo;&mdash;<em>-Perl-</em>&mdash;
+@echo off
+if &ldquo;%OS%&rdquo; == &ldquo;Windows_NT&rdquo; goto WinNT
+IF EXIST &ldquo;%~dp0perl.exe&rdquo; (
+&ldquo;%~dp0perl.exe&rdquo; -x -S &ldquo;%0&rdquo; %1 %2 %3 %4 %5 %6 %7 %8 %9
+) ELSE IF EXIST &ldquo;%~dp0....\bin\perl.exe&rdquo; (
+&ldquo;%~dp0....\bin\perl.exe&rdquo; -x -S &ldquo;%0&rdquo; %1 %2 %3 %4 %5 %6 %7 %8 %9
+) ELSE (
+perl -x -S &ldquo;%0&rdquo; %1 %2 %3 %4 %5 %6 %7 %8 %9
+)</p>
+
+<p>&hellip;</p>
+
+<h1>!/usr/bin/env perl</h1>
+
+<h1>line 29</h1>
+
+<p>use strict;
+use warnings;
+use App::Cleo;</p>
+
+<p>our $VERSION = 0.003;
+&hellip;
+```</p>
+
+<p>It seems to be a batch script with the entirety of cleo.pl pasted in the bottom. How does that work? Well first there&rsquo;s a little bit of logic to differentiate requirements on Windows NT versus other Windows systems, and some logic to deal with Perl being located in different places (relative to <code>%~dp0</code>, the directory containing the script). <code>%0</code> is the name of the script being run, and Perl is being invoked on it with different arguments. The other %number arguments are the script arguments, which are passed along to the script once again. So this is a batch script that passes itself to Perl? But what&rsquo;s Perl going to do with all of the batch garbage that comes before the actual Perl script?</p>
+
+<p>The magic here is in the <code>-x</code> switch. From <a href="http://perldoc.perl.org/perlrun.html">perlrun</a>:</p>
+
+<pre><code>tells Perl that the program is embedded in a larger chunk of unrelated text, such as in a mail message. Leading garbage will be discarded until the first line that starts with #! and contains the string "perl". Any meaningful switches on that line will be applied.
+</code></pre>
+
+<p>Ooh! That&rsquo;s an interesting feature. I wonder if anyone still uses it for emailed scripts.</p>
+
+<p>So the batch script calls Perl on itself, and Perl skips all of the batch syntax and goes straight to the shebang line (<code>#!/usr/bin/env perl</code>) and runs the original <a href="https://metacpan.org/source/THALJEF/App-Cleo-0.004/bin/cleo">cleo</a> Perl script.</p>
+
+<p>The mechanism used to create this is is <a href="https://metacpan.org/pod/distribution/perl/win32/bin/pl2bat.pl">pl2bat.pl</a>, and you&rsquo;ll find interesting history, motivation and gotchas in the documentation there. Thanks to pl2bat, CPAN author scripts are installed on Windows and added to the path. I can just open my cmd and type <code>cleo</code> to start the app.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[List Assignment in Scalar Context]]></title>
+    <link href="http://garfieldnate.github.io/blog/2014/01/11/list-assignment-in-scalar-context/"/>
+    <updated>2014-01-11T00:00:00+09:00</updated>
+    <id>http://garfieldnate.github.io/blog/2014/01/11/list-assignment-in-scalar-context</id>
+    <content type="html"><![CDATA[<p>(Cross-posted on <a href="http://blogs.perl.org/users/nate_glenn/2014/01/list-assignment-in-scalar-context.html">blogs.perl.org</a>)</p>
+
+<p>This week I received some special help <a href="http://stackoverflow.com/questions/21037846/why-does-the-goatse-operator-work/21069822">on SO</a> in understanding how the goatse operator works. I was very thankful for everyone&rsquo;s help. <a href="http://www.perlmonks.org/?node_id=790129">These</a> <a href="http://www.perlmonks.org/?node_id=527973">two</a> articles were also very helpful and I recommend reading them.</p>
+
+<p>Part of my confusion over the goatse operator was not knowing the difference between list and scalar assignment operators, which both are indicated via &lsquo;=&rsquo;. Further confusing is the fact that each can be used in either scalar or list context, so you can have list assignment in scalar context or scalar assignment in list context.</p>
+
+<p>The type of assignment is determined by what is being assigned to. As ikegami says, assignment to an aggregate is a list assignment, aggregate meaning an array, a hash, a parenthetical expression, or a my/our/local variable declared with parens.</p>
+
+<p>The context of an assignment operator will really only matter when you are storing or checking the return value. You can store the value of an assignment operator by using another asignment operator: <code>blah1 = blah2 = blah3</code>, where <code>blah1</code> is the value returned by assigning <code>blah3</code> to <code>blah2</code>. The value gets checked in other contexts too, like inside a control structure condition: <code>if(my $line = &lt;&gt;)</code>, etc. Here are examples for each combination of context and assignment operator:</p>
+
+<p>``` perl Example context/assignment combinations</p>
+
+<h1>scalar assignment in scalar context</h1>
+
+<p>$thing = ($foo = &lsquo;bar&rsquo;); # assignment returns $foo as lvalue
+say $thing; # bar</p>
+
+<h1>scalar assignment in list context</h1>
+
+<p>($thing) = ($foo = &lsquo;bar&rsquo;); #assignment returns ($foo), $foo is lvalue
+say $thing; # bar</p>
+
+<h1>list assignment in scalar context;</h1>
+
+<h1>assignment returns number of items in RHS of list assignment</h1>
+
+<p>$thing = (($foo, $bar) = qw(foo bar));
+say $thing; # 2
+$thing = (() = qw(foo bar))
+say $thing; # 2
+$thing = () = qw(foo bar);
+say $thing; # 2</p>
+
+<h1>list assignment in list context</h1>
+
+<h1>assignment returns LHS list as lvalues</h1>
+
+<p>($thing) = (($foo, $bar) = qw(foo bar));
+say $thing; # foo
+($thing) = (() = qw(foo bar));
+say $thing; # nothing ($thing is undef)
+```</p>
+
+<p>That third one is of course the goatse operator. By the way for the record I totally think it looks more like a Saturn, though my wife disagrees and everyone seems to call it goatse. Anyway, though generally list assignment in scalar context is the rarest one, there are other occurrences. Ysth mentions the <code>each</code> operator inside of a <code>while</code> loop:</p>
+
+<p><code>perl `each` operator in a `while` loop
+while(my ($key, $value) = each %hash)
+</code></p>
+
+<p>The aggregate on the left makes this list assignment, and <code>while</code> makes it scalar context. Once the hash is out of keys, <code>each</code> returns <code>()</code> so that the assignment operator returns <code>0</code>, finishing the <code>while</code> loop.</p>
+
+<p>I was pretty happy to finally understand this area I never quite understood I didn&rsquo;t understand (though someone might still point out I don&rsquo;t know what I&rsquo;m talking about, as seems to be common with this subject). Today, though, I thought of one more usage of list assignment in scalar context that is probably used erroneously fairly often: quick and dirty parameter checking:</p>
+
+<p><code>perl Incorrect quick and dirty parameter checking
+my ($input, $output) = @ARGV or die 'Usage: script &lt;input&gt; &lt;output&gt;';
+</code></p>
+
+<p>I always thought that the assignment would return $output, probably by analogy with comma expression assignment to a scalar (<code>$stuff = qw(foo bar)</code>). However, if the user fails to provide a second parameter, the error would not be caught. This assignment will return the number of elements in @ARGV, which could be <code>1</code> instead of the required <code>2</code>. So this use is only correct when unpacking <code>@_</code> or <code>@ARGV</code> and expecting exactly one variable:</p>
+
+<p><code>perl OK quick and dirty parameter checking
+my ($input) = @ARGV or die 'Usage: script &lt;input&gt;';
+</code></p>
+
+<p>This is probably obvious to Perl old-timers, but to me it was a revelation. And it doesn&rsquo;t look like I&rsquo;m the only one, either. Grepping CPAN for assignment of an array to a parenthetical with &lsquo;or&rsquo; after it turns up many mis-uses <a href="http://grep.cpan.me/?q=%5C%29%5Cs*%3D%5Cs*%40%5B%5E+%5Cr%5Cn%5D%2B%5Cs%2Bor">here</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Packaging XML::LibXML With PAR Packer on Windows]]></title>
+    <link href="http://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on/"/>
+    <updated>2013-08-27T00:00:00+09:00</updated>
+    <id>http://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on</id>
+    <content type="html"><![CDATA[<p>PAR Packer is an excellent utility for delivering your Perl scripts as standalone executables. A standalone executable is highly desired in, for example, a corporate environment where everyone needs a program you wrote but you can&rsquo;t expect anyone to learn how to run Perl programs.</p>
+
+<p>A recent requirement at $work was for a standalone executable. Originally, I was supposed to let my coworker work his magic (and his ActiveState PerlPacker license), but the client required an all-open-source solution. Thus I turned to PAR Packer and its <a href="https://metacpan.org/module/pp"><code>pp</code></a> utility.</p>
+
+<p>So far, the most difficult aspect of using pp is that it doesn&rsquo;t detect all dependencies. It requires the user to explicitly list many required DLL&rsquo;s. I needed to list DLL&rsquo;s for two libraries: <a href="https://metacpan.org/module/Wx">Wx</a> and <a href="https://metacpan.org/module/XML::LibXML"><code>XML::LibXML</code></a>.</p>
+
+<p>Creating Wx apps with pp is a solved problem: <code>wxpar</code>, bundled with <a href="https://metacpan.org/module/Wx::Perl::Packager"><code>Wx::Perl::Packager</code></a>, is a <code>pp</code> wrapper and adds all of the required Wx DLL&rsquo;s.</p>
+
+<p>Getting it to work with <code>XML::LibXML</code> required some trial and error. I would create the executable, move it to another computer without Perl or C, run it from the command line (clicking the file hid certain error messages), and write down the name of the library that was missing. It turned out that three DLL&rsquo;s needed to be explicitly added: <code>libxml2-2__.dll</code>, <code>libiconv-2__.dll</code> and <code>libz__.dll</code>. On my computer these were located in C:\strawberry\c\bin. So, the final command I used to build my application was thus:</p>
+
+<pre><code>wxpar -o MyApp.exe -I lib -l C:/strawberry/c/bin/libxml2-2__.dll -l C:/strawberry/c/bin/libiconv-2__.dll -l C:/strawberry/c/bin/libz__.dll MyApp.pl
+</code></pre>
+
+<p>Is there a simpler way to do this? What&rsquo;s with all the underscores? Comments and questions welcome below.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Extended Euclidian Algorithm in Perl]]></title>
+    <link href="http://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl/"/>
+    <updated>2013-04-15T00:00:00+09:00</updated>
+    <id>http://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl</id>
+    <content type="html"><![CDATA[<p>This week I learned about the extended Euclidian algorithm for finding a linear combination of two numbers that yields their GCD. For example, the GCD of 213 and 171 is 3, and -4<em>213 + 5</em>171 = 3. This algorithm is important in the <a href="http://en.wikipedia.org/wiki/RSA_(algorithm">RSA</a>) encryption scheme.</p>
+
+<p>I had quite a difficult time getting myself to fully understand how it works. I jumped between <a href="http://en.wikipedia.org/wiki/Extended_euclidean_algorithm">Wikipedia</a>, my <a href="http://www.amazon.com/Data-Structures-Problem-Solving-Using/dp/0321541405/ref=sr_1_1?ie=UTF8&amp;amp;qid=1365529203&amp;amp;sr=8-1&amp;amp;keywords=data+structures+and+problem+solving+using+java">data structures textbook</a> (don&rsquo;t buy it), a <a href="http://www.youtube.com/watch?v=twlo21D9LY0">YouTube video</a>, and this excellent <a href="http://public.csusm.edu/aitken_html/m422/Handout1.pdf">number theory class lecture</a>. The lecture is the best, though I think there may be a typographical error in the recursive formula.</p>
+
+<p>The basic idea uses recursion with an easy base step. We call <code>Euclid(a,b)</code> with <code>a ≥ b</code>:</p>
+
+<ul>
+<li>The base case is when b is 0. The GCD of x and 0 is always x, and the coefficients to produce a GCD of 0 are 1 and 0 (or anything else): 1*x + 0(or anything)*0 = x. So the base case returns (1,0)</li>
+<li>Any other step starts by recursively calling <code>Euclid(b, a mod b)</code>. We know that the GCD of a and b is the same as the GCD of b and a mod b (lemma 12 in the lecture). This recursive call is guaranteed to eventually get to the base case of b = 0.</li>
+<li>After finding the coefficients for producing the GCD from b and a mod b, we can calculate the ones for producing the GCD from a and b, because a mod b can be put in terms of a and b (see the code comments for the formulas).</li>
+</ul>
+
+
+<p>To really help myself understand the whole thing, I wrote a Perl script to illustrate it. I put in lots of comments as I worked my way through it.</p>
+
+<p>``` perl The extended Euclidian algorithm
+use strict;
+use strict;
+use warnings;
+use 5.010;</p>
+
+<h1>start with a >= b</h1>
+
+<p>my @nums = sort {$b &lt;=> $a} @ARGV;</p>
+
+<p>gcd(@nums);</p>
+
+<h1>input: two numbers (a,b) a >= b > 0</h1>
+
+<h1>output: the coefficients which which yield their GCD;</h1>
+
+<p>sub gcd {
+ my ($a, $b) = @_;</p>
+
+<p> #base case; the GCD of x and 0 always x;
+ #and the coefficients will always be 1 and 0 (or anything) because</p>
+
+<p> #1<em>x + 0</em>0 = x</p>
+
+<p>if($b == 0){
+  say &ldquo;GCD is $a&rdquo;;
+  say &ldquo;(a,b) = ($a,$b), coefficients = (1,0)&rdquo;;
+  say &ldquo;1x$a + 0x$b = $a&rdquo;;
+  return (1, 0);
+ }</p>
+
+<p> #otherwise, we evaluate u and v for k = ub + vr, where r is a mod b
+ #gcd(b, a%b) gives the same value
+ my $remainder = $a % $b;
+ my ($u, $v) = gcd($b, $remainder);
+ #now we can find k in terms of a and b because we know r in terms a and b
+ #r = a &ndash; bq, where q = the whole part of a/b
+ #k = ub + vr = ub + v(a &ndash; bq) = va + b(u-qv)
+ #so the coefficient on a is v, and the coefficient on b is 1-qv
+ my $x = $v;
+ my $q = int(($a/$b));
+ my $y = $u &ndash; $q<em>$x;
+ say &ldquo;(a,b) = ($a,$b), coefficients are ($x,$y)&rdquo;;
+ say &ldquo;${x}x$a + ${y}x$b = &rdquo; . ($x</em>$a + $y*$b);
+ return ($x, $y);
+}
+```</p>
+
+<p>Feel free to leave a comment if you think that something could be stated more clearly. I hope it helps anyone else trying to learn how the extended Euclidian algorithm works.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Running Perl With Sublime Text 2]]></title>
+    <link href="http://garfieldnate.github.io/blog/2013/04/07/running-perl-with-sublime-text-2/"/>
+    <updated>2013-04-07T00:00:00+09:00</updated>
+    <id>http://garfieldnate.github.io/blog/2013/04/07/running-perl-with-sublime-text-2</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been having fun trying out <a href="http://www.sublimetext.com/">Sublime Text</a>. It&rsquo;s pretty, fast, and extremely extensible.</p>
+
+<p>The first thing that I wanted was to be able to work well with Perl. I installed <a href="http://wbond.net/sublime_packages/package_control">Package Control</a>, followed by <a href="https://github.com/SublimeLinter/SublimeLinter">SublimeLinter</a>, which has the <a href="http://perlcritic.com/">perlcritic</a> command built in. Making this useful requires a little finagling; perlcritic is by no means a quick program (being a really thorough linter for a language which is complex to parse), and the defaults for SublimeLinter cause it run over and over again as you type. To fix this, I edited <code>Packages/SublimeLinter/SublimeLinter.sublime-settings</code> and changed the &ldquo;sublimelinter&rdquo; setting to false. Now, in order to lint the current file, I have to press <kbd>ctrl+alt+l</kbd>. (<strong>Update:</strong> I don&rsquo;t recommend this for Sublime Text 2 because of speed problems. See <a href="https://github.com/SublimeLinter/SublimeLinter/issues/408">this issue on Github</a>. ST3 should be fine, though.)</p>
+
+<p>Next, I wanted to be able to run my Perl scripts. Sublime has the <kbd>ctrl+b</kbd> shortcut for running a build for the current file. What the build actually does is specified in either a build file or the project file. To create a new build file for perl, go to Tools->Build System &ndash;> New Build System. The build file I&rsquo;ve seen on different sites for Perl looks like this:</p>
+
+<p>``` json Usual build file for Perl
+{</p>
+
+<pre><code>"cmd": ["perl", "$file"],
+"file_regex": ".* at (.*) line ([0-9]*)",
+"selector": "source.perl"
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Save this as perl.sublime-build. With this, whenever you are working on a Perl file and hit <kbd>ctrl+b</kbd>, the command &ldquo;perl -w your_file.pl&rdquo; will be run. This, however, was not good enough for me. Most of the time I am working on tests for a Perl module, so I have to run <code>perl -Ilib t/my_test_file.t</code>. I also want to be able to run individual tests as well as <a href="https://metacpan.org/module/OVID/Test-Harness-3.26/bin/prove"><code>prove</code></a> using shortcuts.</p>
+
+<p>To do this, we need to turn the module directory into a Sublime Text project. This is pretty simple. First, open the module directory in Sublime Text. Select Project->Save Project As, then choose the name of the project and save it in the top directory of the module. Paste the following simple contents into the project file:</p>
+
+<p><code>json Perl project file
+{
+ "folders":
+ [
+  {
+   "path": "."
+  }
+ ]
+}
+</code></p>
+
+<p>All this does is add the entire directory to the project. Next, we edit the Perl build file to reference the root of the project so we can add the top-level lib directory to our include path:</p>
+
+<p><code>perl Perl project build file
+{
+ "cmd": ["perl", "-Ilib", "$file"],
+ "working_dir": "$project_path",
+ "file_regex": ".* at (.) line ([0-9])",
+ "selector": "source.perl",
+}
+</code></p>
+
+<p>Great! Now we can run Perl on tests contained in module directories. This still works fine for standalone scripts, too.</p>
+
+<p>Now I&rsquo;d like to run my whole test suite using prove. By default, <kbd>ctrl+shift+b</kbd> runs a build variant with the name &ldquo;Run&rdquo;, so we&rsquo;ll just make a <code>prove</code> variant with that name. I&rsquo;d much rather give it a more descriptive name, but the Sublime shortcut requires this name. You can change the shortcut, but then you wouldn&rsquo;t be able to use the shortcut for other builds (other languages). It&rsquo;s all up to you. Here is the final build file:</p>
+
+<p>``` json Perl project build file with variants
+{
+ &ldquo;cmd&rdquo;: [&ldquo;perl&rdquo;, &ldquo;-Ilib&rdquo;, &ldquo;$file&rdquo;],
+ &ldquo;working_dir&rdquo;: &ldquo;$project_path&rdquo;,
+ &ldquo;file_regex&rdquo;: &ldquo;.* at (.) line ([0-9])&rdquo;,
+ &ldquo;selector&rdquo;: &ldquo;source.perl&rdquo;,
+ &ldquo;variants&rdquo;: [</p>
+
+<pre><code>    {
+</code></pre>
+
+<p>  &ldquo;cmd&rdquo;: [&ldquo;prove&rdquo;, &ldquo;-vlr&rdquo;, &ldquo;&mdash;merge&rdquo;],
+  &ldquo;working_dir&rdquo;: &ldquo;$project_path&rdquo;,</p>
+
+<pre><code>     "name": "Run",
+</code></pre>
+
+<p>  &ldquo;windows&rdquo;: {</p>
+
+<pre><code>             "cmd": ["prove.bat", "-vlr", "--merge"]
+         }
+    }
+]
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Note that I needed a Windows variant for <code>prove</code> since the Sublime editor doesn&rsquo;t work the same as cmd. You could, alternatively, add &lsquo;&ldquo;shell&rdquo;:true&rsquo; to use the system&rsquo;s command shell so you don&rsquo;t need a separate command for Windows.</p>
+
+<p>With this build file in place, I can now press ctrl+b to run any Perl script, with it&rsquo;s project lib directory in @INC, and <kbd>ctrl+shift+b</kbd> to run prove. Voila!</p>
+
+<p>Here are the final files:</p>
+
+<ul>
+<li><a href="https://sites.google.com/site/complingfiles/files/perl-module.sublime-project?attredirects=0&amp;d=1">project file</a> (put a copy in your project root folders)</li>
+<li><a href="https://sites.google.com/site/complingfiles/files/perl.sublime-build?attredirects=0&amp;d=1">Perl build file</a> (only one is needed per ST installation)</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

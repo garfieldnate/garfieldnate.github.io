@@ -1,0 +1,1391 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Garfield Nate</title>
+  <meta name="author" content="Nate Glenn">
+
+  
+  <meta name="description" content="&ldquo;Aiiiiyaaaa! Jacky! You did not install Ruuuubyyy. You need that to write your blog.&rdquo; &ldquo;I already install Ruby, uncle, but it still &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://garfieldnate.github.io/posts/2">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Garfield Nate" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+
+  <!-- Load jQuery from google for better caching; if that fails, load the local copy -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- For GitHub repo display; use with the githubrepo-octopress plugin -->
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+<!--script>
+  $.noConflict()
+</script-->
+
+<script src="/javascripts/libs/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+<script src="/javascripts/menu.min.js" type="text/javascript"></script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-26857949-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Garfield Nate</a></h1>
+  
+    <h2>Big Fat Hairy Programmer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:garfieldnate.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li>
+    <a href="/resume/resume-en.html">Resume</a>
+    <ul>
+        <il><a href="/resume/resume-en.html">English</a></il>
+        <il><a href="/resume/resume-ja.html">日本語</a></il>
+    </ul>
+  </li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/07/using-octopress-one-more-thing/">Using Octopress- One More Thing</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-07T06:46:39+09:00" pubdate data-updated="true">Jul 7<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/07/07/using-octopress-one-more-thing/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2014/07/07/using-octopress-one-more-thing/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>&ldquo;Aiiiiyaaaa! Jacky! You did not install Ruuuubyyy. You need that to write your blog.&rdquo;</p>
+
+<p>&ldquo;I already install Ruby, uncle, but it still does not work. <code>rake generate</code> creates empty HTML file! Look, it&rsquo;s broken!&rdquo;</p>
+
+<pre><code>&gt;rake generate
+Generating... C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/posix-spawn-0.3.8/lib/posix/spawn.rb:162: warning: cannot close fd before spawn
+'which' is not recognized as an internal or external command, operable program or batch file.
+</code></pre>
+
+<p>Swat!</p>
+
+<p>&ldquo;Ow! What was that for?&rdquo;</p>
+
+<p>&ldquo;These are not eeeeerroooorrs, just warnings! Your site is empty because you forgot to install Pyyyythoooon.&rdquo;</p>
+
+<p>&ldquo;What? Python? But you said Ruby!&rdquo;</p>
+
+<p>Swat! &ldquo;Ow!&rdquo;</p>
+
+<p>&ldquo;You need Ruby <em>and</em> Python to use coooode hiiiighliiiighting on your blooooog!&rdquo;</p>
+
+<p>&ldquo;What!? I have to install Ruby <em>and</em> Python?! But I don&rsquo;t use either of those!&rdquo;</p>
+
+<p>&ldquo;One mooooore thing.&rdquo; Swat!</p>
+
+<p>&ldquo;Ow! What was that for?!&rdquo;</p>
+
+<p><img src="/images/content_images/uncle_hits_jackie.gif" title="Swat!" alt="Uncle swats Jackie"></p>
+
+<p>&ldquo;For using Windooooows!&rdquo;</p>
+
+<hr />
+
+<p>So, if you tried using <a href="http://octopress.org/">Octopress</a>&rsquo;s neat <a href="http://octopress.org/docs/plugins/backtick-codeblock/">backtick codeblock syntax</a> to display code on your blog, but you don&rsquo;t have Python intsalled, you will get a mostly blank website as the Pygments plugin silently fails and messes up the whole <code>generate</code> process. The warnings can safely be ignored (and will hopefully be <a href="https://github.com/tmm1/pygments.rb/pull/90">eliminated</a> soon). I put in a <a href="https://github.com/tmm1/pygments.rb/issues/130">request</a> for a message of some kind so that the process wouldn&rsquo;t fail so silently.</p>
+
+<p>Good times. Those are all on Netflix, by the way.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/05/july-4-2014-internet-and-a-bike-ride/">July 4, 2014: Internet and a Bike Ride</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-05T11:08:46+09:00" pubdate data-updated="true">Jul 5<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/07/05/july-4-2014-internet-and-a-bike-ride/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2014/07/05/july-4-2014-internet-and-a-bike-ride/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Maybe I&rsquo;ll manage to keep a somewhat OK journal if I write it on my blog&hellip;</p>
+
+<p>Dear journal-that-everybody-can-read,</p>
+
+<p>Today we finally got internet in our apartment, which I may explain another time. A guy showed up at 9 o&#8217;clock sharp and installed it, after which I had to call the support center for help because their installation disk didn&rsquo;t work (because I have English Windows?). The internet is blazing fast, and now I can work on online classes without taking a trip to Erika&rsquo;s work.</p>
+
+<p>I needed to send a rental phone back to SoftBank, so I took a ride to the place in the main shopping street (商店街) that had a Kuro Neko sign outside. The shop is a recipient for packages, but mainly they sell hanko and religious items. I filled out the form and we talked for a while. I was looking for the translated version of Glenn as a hanko (small valley; 小谷) and she showed me the ones that her father carved. The light wood is coated with black ink before being carved and the dark wood with red, so that it is easy to see what shape has been carved. He must have carved thousands of hanko, but apparently his eyesight was still good in his 80&rsquo;s. She talked about wanting to learn English, and having English-speaking friends.</p>
+
+<p>Next I asked about the objects in her shop and she taught me about ihai (位牌), a Buddhist memorial tablet. When someone dies, the local priest(s) and family work together to make a posthumous name for the deceased. The name might have something about the person&rsquo;s hobby or work. The piece she showed me had &ldquo;ocean&rdquo; (海) because the man was a fisherman, and because the wife was so diligent about paying regular respects at the shrine she was able to get her husband a rather good name which included the character &ldquo;弘&rdquo;. The character is nice because it immediately brings to mind the name &ldquo;弘法大師&rdquo;, the founder of the Shingon Buddhist sect. The top of the tablet has a single Sanskrit character (अ) representing the Shingon sect inscribed on it. (Each sect has it&rsquo;s own bonji (梵字); the characters that go with each sect are given <a href="http://www.goihai.com/?mode=f7">here</a>). The back of the tablet contained the name of the deceased&rsquo;s original name and death date, in esoteric(ish) Buddhist style. The tablet is placed in the home&rsquo;s Buddhist altar (仏壇) for 50 years. The family meets on certain years to commemorate their death, and after the 50th year there is a final celebration and the name is inscribed in a special register book (帳面) instead. The ihai is burned ceremonially at the grave site, and the register that contains the names of many deceased relatives is kept in the altar ever after. She showed me the one for her family, and it had lots of names in it, some of them with old kana characters that haven&rsquo;t been used for a long time (specifically a <a href="https://en.wikipedia.org/wiki/Hentaigana">hentaigana</a> form for &ldquo;hana&rdquo; using the characters based on 者 and 奈). We exchanged names (笠原秀佳) and I told her I&rsquo;d bring back my wife as a possible study mate.</p>
+
+<p>Then I explored the town a little bit. There&rsquo;s a park on top of a hill on the edge of town, but the steps to the top are full of weeds. There&rsquo;s also a monument to someone, which I&rsquo;ll have to go back and read when I have my dictionary. I found 4-8 small temple/shrines along the mountainside, and one seemed to be abandoned and overgrown with weeds. On my way back an old lady stopped me to sell me some cucumbers (きゅうり)　she had just picked. Her skin was dark from working in the field, and she stuttered while she talked so she had to repeat some things for me. She gave me several handfuls of shiso leaves. &ldquo;You&rsquo;re married, right? Good! Have her cook these up for you.&rdquo; We exchanged names (石岡) before parting.</p>
+
+<p>Next I found a community center. They might only have activities for children and the elderly, but my interest was piqued because they have art, cooking, and several other categories. I picked up a copy of a city newsletter, and what I thought was a culturally interesting ad for consultation regarding being Ainu (mistreatment, racism, invasion of privacy), with a special guarantee that all communication would be completely secret. There was also a big sign outside with a list of foods that are unique to Kasaoka. I think I&rsquo;ll go on a treasure hunt to try all of them!</p>
+
+<p>Tonight Corey and Chun Mi picked up Bentley and me and we all went to Ooshima elementary (大島小学校) to play badminton. I think the Japanese players were all elementary school teachers. One of them has been playing badminton every Friday there for the last 20 years! It was my first time playing, so Bentley and Chun Mi helped me figure it out, and we formed teams to play until about 10:30. The gym was pretty warm and muggy, and so of course I was soaked.</p>
+
+<p>Whew. I&rsquo;m hungry!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/02/preparation-the-key-to-a-less-painful-windows-reinstall/">Preparation: The Key to a Less Painful Windows Reinstall</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-02T13:00:38+09:00" pubdate data-updated="true">Jul 2<sup>nd</sup>, 2014</time>
+        
+           | <a href="/blog/2014/07/02/preparation-the-key-to-a-less-painful-windows-reinstall/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2014/07/02/preparation-the-key-to-a-less-painful-windows-reinstall/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Recently I decided to work on an <a href="https://github.com/stepmania/stepmania/issues/196">easy ticket</a> in StepMania to get into the source code. It turned out that I (gasp!) actually needed to build the project on my computer, but of course I was missing required libraries: DirectX 9 and the DirectX SDK. No matter what I tried, neither of these would successfully install on my computer, and I decided that the only way to install it would be to reinstall Windows (which worked, but ugh!). Usually reinstalling Windows is a terrible process that can take days and leave you lost on your own computer, which is now missing all of your favorite programs and customizations. This time, I thought, I should make it as painless as possible.</p>
+
+<p>I should note that many Windows users can just pop in the restore disk they got from their computer manufacturer and be happy with the results. Users like myself, however, hate the extra programs and files that come from the manufacturer, opting instead for a vanilla install disk. If you&rsquo;re like me, then you&rsquo;ve also built up a library of programs and configurations over time, and reinstalling Windows threatens to destroy your precious setup.</p>
+
+<p>The key to a less painfull reinstall is preparation. The following will make your life a lot easier:</p>
+
+<h2>Use the Cloud</h2>
+
+<p>&ldquo;The cloud&rdquo;, of course, meaning some service that will store your files for you. I prefer not to have the entirety of my hard drive synched with an online service, so I cannot make recommendations there. But the most important files, my current coding projects, are all on GitHub, so I don&rsquo;t have to worry about losing them. When I do manual backups, I don&rsquo;t have to bother with local copies of GitHub projects. Some of my application settings are synched through DropBox, as well (see this tutorial to do it for Sublime Text), as well as many documents I feel are too important to have just one copy of.</p>
+
+<h2>Organize Your Files</h2>
+
+<p>If you&rsquo;re like me, you might try to stay organized but fail to do so completely. Reinstall time is a good opportunity to clean up unneeded files and to gather what&rsquo;s left into centralized directories. I keep archived work (school, projects, research, work) in a single place. This turned out to be a good opportunity to decide that several projects were done and should be archived. Make your files as clean as possible before reinstalling so that backup is as simple as possible.</p>
+
+<h2>Backup on a Hard Drive Partition</h2>
+
+<p>Reinstalling Windows only wipes out the C: drive, so if you have another partition (D: on my computer) this will be saved during reinstall. This is useful for backing up large amounts of data. It is much faster to move files between partitions than it is to move them between completely different drives. I recommend you make a large partition for keeping permanent files (archived work, pictures, videos) that you need ready access to but don&rsquo;t necessarily make constant use of. Ones you don&rsquo;t need ready access to can be stored on external drives and put away somewhere safe.</p>
+
+<p>Files that you do need constant access to are usually in My Documents, on the Desktop, or elswhere in the C: drive. Back up these files in your other partition and they will be easy to replace after the the reinstall.</p>
+
+<h2>Download Drivers Before Reinstalling</h2>
+
+<p>It is always so nice when your computer restarts with a brand new copy of Windows. Like a newborn, so clean and shiny and unsoiled by the world. But then, you realize that it is as also as helpless as a baby. The screen resolution is off, the sound doesn&rsquo;t work, the touchpad is jumpy, etc., etc. Navigating the internet without good drivers is a pain in the butt, so do yourself a favor and download and save all of the driver installers <em>before</em> you reinstall windows.</p>
+
+<h2>Find Chocolatey Package for Your Favorite Programs</h2>
+
+<p>Usually after reinstalling Windows you end up reinstalling all of your programs as you need them for the next several weeks or months. This is time-consuming and distracting. Chocolatey, a package manager for Windows, can do the tedious part for you. After you install Chocolatey, find the names of the packages containing the programs you like on the <a href="http://chocolatey.org/">web site</a>. Then instead of downloading and running an installer, simply type <code>cinst packageName</code> into your cmd and let Chocolatey do the boring part!</p>
+
+<p>For example, I know I will need Evernote again after the reinstall. Instead of installing it manually, I can type <code>cinst Evernote5</code> into my cmd and be done with it!</p>
+
+<p>Before you delete your Windows partition, look at all of the programs you have installed and decide which ones you actually want to reinstall later. That&rsquo;s right, I know you have 5 bajillion programs that you never use. Don&rsquo;t worry, me too. Save the names of Chocolatey packages you want and the names of other programs that don&rsquo;t have an available Chocolatey package into a single file. This will easily save you hours of work later.</p>
+
+<h2>Save Product Keys with ProduKey</h2>
+
+<p>ProduKey comes as a Chocolatey package. When run, it gives you the product keys used for both Windows and Microsoft Office. These can sometimes be hard to track down, and retrieving and saving them this way <em>before</em> reinstall will save time.</p>
+
+<h2>Create an Executable Master Plan</h2>
+
+<p>As if each Chocolatey command didn&rsquo;t cut out enough work, why not put all of the chocolatey install commands into a batch script and have them all run while we go eat lunch or something? A simple batch script will work fine:</p>
+
+<pre><code>cinst GoogleChrome
+cinst Evernote5
+cinst dropbox
+cinst adobereader
+</code></pre>
+
+<p>To make this file really useful, however, you should comment it with your complete reinstall plan. <code>rem</code> is how you do comments in batch scripts:</p>
+
+<pre><code>rem Windows post-installation setup
+rem You must download and install Chocolatey before running this: chocolatey.com
+rem Before reinstalling:
+rem   1. backup xyz directory
+rem   2. download and save drivers in external hard drive
+rem   3. save registration keys using ProduKey
+
+rem Fun Stuff
+cinst GoogleChrome
+cinst Evernote5
+cinst dropbox
+
+rem General Development
+cinst kdiff3
+cinst git
+cinst git-credential-winstore
+cinst sublimetext2
+
+rem Java Development
+cinst jdk8
+cinst eclipse-standard-kepler
+cinst ant
+cinst maven
+cinst gradle
+
+rem Configure Git
+git config --global user.name "Nathan Glenn"
+git config --global user.email "garfieldnate@gmail.com"
+
+echo "Now install KeyTweak by hand"
+</code></pre>
+
+<p>In the comments or echos you can record all of the programs that need to be installed manually, all of the settings you should copy or set manually, all of the files that you need to restore, etc. Usually trying to remember what your computer needs can take a lot of time and some stress (&ldquo;I swear I&rsquo;m forgetting something!&rdquo;), so saving a master plan is really a must.</p>
+
+<p>You can view or fork mine on <a href="https://github.com/garfieldnate/windows_home_setup">GitHub</a>.</p>
+
+<h2>Conclusion</h2>
+
+<p>This time around I had the least painful Windows reinstall ever. It still took some time, but I was able to cut out the guesswork and most of the manual installing. Taking a page out of the dev-ops book, an executable master plan really simplified the whole process. If you have lots of computers that need to be configured quickly and automatically, then take a look at BoxStarter.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/11/list-assignment-in-scalar-context/">List Assignment in Scalar Context</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-11T00:00:00+09:00" pubdate data-updated="true">Jan 11<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/01/11/list-assignment-in-scalar-context/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2014/01/11/list-assignment-in-scalar-context/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>(Cross-posted on <a href="http://blogs.perl.org/users/nate_glenn/2014/01/list-assignment-in-scalar-context.html">blogs.perl.org</a>)</p>
+
+<p>This week I received some special help <a href="http://stackoverflow.com/questions/21037846/why-does-the-goatse-operator-work/21069822">on SO</a> in understanding how the goatse operator works. I was very thankful for everyone&rsquo;s help. <a href="http://www.perlmonks.org/?node_id=790129">These</a> <a href="http://www.perlmonks.org/?node_id=527973">two</a> articles were also very helpful and I recommend reading them.</p>
+
+<p>Part of my confusion over the goatse operator was not knowing the difference between list and scalar assignment operators, which both are indicated via &lsquo;=&rsquo;. Further confusing is the fact that each can be used in either scalar or list context, so you can have list assignment in scalar context or scalar assignment in list context.</p>
+
+<p>The type of assignment is determined by what is being assigned to. As ikegami says, assignment to an aggregate is a list assignment, aggregate meaning an array, a hash, a parenthetical expression, or a my/our/local variable declared with parens.</p>
+
+<p>The context of an assignment operator will really only matter when you are storing or checking the return value. You can store the value of an assignment operator by using another asignment operator: <code>blah1 = blah2 = blah3</code>, where <code>blah1</code> is the value returned by assigning <code>blah3</code> to <code>blah2</code>. The value gets checked in other contexts too, like inside a control structure condition: <code>if(my $line = &lt;&gt;)</code>, etc. Here are examples for each combination of context and assignment operator:</p>
+
+<figure class='code'><figcaption><span>Example context/assignment combinations</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1"># scalar assignment in scalar context</span>
+</span><span class='line'><span class="nv">$thing</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$foo</span> <span class="o">=</span> <span class="s">&#39;bar&#39;</span><span class="p">);</span> <span class="c1"># assignment returns $foo as lvalue</span>
+</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># bar</span>
+</span><span class='line'><span class="c1"># scalar assignment in list context</span>
+</span><span class='line'><span class="p">(</span><span class="nv">$thing</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$foo</span> <span class="o">=</span> <span class="s">&#39;bar&#39;</span><span class="p">);</span> <span class="c1">#assignment returns ($foo), $foo is lvalue</span>
+</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># bar</span>
+</span><span class='line'><span class="c1"># list assignment in scalar context;</span>
+</span><span class='line'><span class="c1"># assignment returns number of items in RHS of list assignment</span>
+</span><span class='line'><span class="nv">$thing</span> <span class="o">=</span> <span class="p">((</span><span class="nv">$foo</span><span class="p">,</span> <span class="nv">$bar</span><span class="p">)</span> <span class="o">=</span> <span class="sx">qw(foo bar)</span><span class="p">);</span>
+</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># 2</span>
+</span><span class='line'><span class="nv">$thing</span> <span class="o">=</span> <span class="p">(()</span> <span class="o">=</span> <span class="sx">qw(foo bar)</span><span class="p">)</span>
+</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># 2</span>
+</span><span class='line'><span class="nv">$thing</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=</span> <span class="sx">qw(foo bar)</span><span class="p">;</span>
+</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># 2</span>
+</span><span class='line'><span class="c1"># list assignment in list context</span>
+</span><span class='line'><span class="c1"># assignment returns LHS list as lvalues</span>
+</span><span class='line'><span class="p">(</span><span class="nv">$thing</span><span class="p">)</span> <span class="o">=</span> <span class="p">((</span><span class="nv">$foo</span><span class="p">,</span> <span class="nv">$bar</span><span class="p">)</span> <span class="o">=</span> <span class="sx">qw(foo bar)</span><span class="p">);</span>
+</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># foo</span>
+</span><span class='line'><span class="p">(</span><span class="nv">$thing</span><span class="p">)</span> <span class="o">=</span> <span class="p">(()</span> <span class="o">=</span> <span class="sx">qw(foo bar)</span><span class="p">);</span>
+</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># nothing ($thing is undef)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That third one is of course the goatse operator. By the way for the record I totally think it looks more like a Saturn, though my wife disagrees and everyone seems to call it goatse. Anyway, though generally list assignment in scalar context is the rarest one, there are other occurrences. Ysth mentions the <code>each</code> operator inside of a <code>while</code> loop:</p>
+
+<figure class='code'><figcaption><span>`each` operator in a `while` loop</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">while</span><span class="p">(</span><span class="k">my</span> <span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nv">$value</span><span class="p">)</span> <span class="o">=</span> <span class="nb">each</span> <span class="nv">%hash</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The aggregate on the left makes this list assignment, and <code>while</code> makes it scalar context. Once the hash is out of keys, <code>each</code> returns <code>()</code> so that the assignment operator returns <code>0</code>, finishing the <code>while</code> loop.</p>
+
+<p>I was pretty happy to finally understand this area I never quite understood I didn&rsquo;t understand (though someone might still point out I don&rsquo;t know what I&rsquo;m talking about, as seems to be common with this subject). Today, though, I thought of one more usage of list assignment in scalar context that is probably used erroneously fairly often: quick and dirty parameter checking:</p>
+
+<figure class='code'><figcaption><span>Incorrect quick and dirty parameter checking</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">my</span> <span class="p">(</span><span class="nv">$input</span><span class="p">,</span> <span class="nv">$output</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@ARGV</span> <span class="ow">or</span> <span class="nb">die</span> <span class="s">&#39;Usage: script &lt;input&gt; &lt;output&gt;&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I always thought that the assignment would return $output, probably by analogy with comma expression assignment to a scalar (<code>$stuff = qw(foo bar)</code>). However, if the user fails to provide a second parameter, the error would not be caught. This assignment will return the number of elements in @ARGV, which could be <code>1</code> instead of the required <code>2</code>. So this use is only correct when unpacking <code>@_</code> or <code>@ARGV</code> and expecting exactly one variable:</p>
+
+<figure class='code'><figcaption><span>OK quick and dirty parameter checking</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">my</span> <span class="p">(</span><span class="nv">$input</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@ARGV</span> <span class="ow">or</span> <span class="nb">die</span> <span class="s">&#39;Usage: script &lt;input&gt;&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is probably obvious to Perl old-timers, but to me it was a revelation. And it doesn&rsquo;t look like I&rsquo;m the only one, either. Grepping CPAN for assignment of an array to a parenthetical with &lsquo;or&rsquo; after it turns up many mis-uses <a href="http://grep.cpan.me/?q=%5C%29%5Cs*%3D%5Cs*%40%5B%5E+%5Cr%5Cn%5D%2B%5Cs%2Bor">here</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on/">Packaging XML::LibXML With PAR Packer on Windows</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-27T00:00:00+09:00" pubdate data-updated="true">Aug 27<sup>th</sup>, 2013</time>
+        
+           | <a href="/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>PAR Packer is an excellent utility for delivering your Perl scripts as standalone executables. A standalone executable is highly desired in, for example, a corporate environment where everyone needs a program you wrote but you can&rsquo;t expect anyone to learn how to run Perl programs.</p>
+
+<p>A recent requirement at $work was for a standalone executable. Originally, I was supposed to let my coworker work his magic (and his ActiveState PerlPacker license), but the client required an all-open-source solution. Thus I turned to PAR Packer and its <a href="https://metacpan.org/module/pp"><code>pp</code></a> utility.</p>
+
+<p>So far, the most difficult aspect of using pp is that it doesn&rsquo;t detect all dependencies. It requires the user to explicitly list many required DLL&rsquo;s. I needed to list DLL&rsquo;s for two libraries: <a href="https://metacpan.org/module/Wx">Wx</a> and <a href="https://metacpan.org/module/XML::LibXML"><code>XML::LibXML</code></a>.</p>
+
+<p>Creating Wx apps with pp is a solved problem: <code>wxpar</code>, bundled with <a href="https://metacpan.org/module/Wx::Perl::Packager"><code>Wx::Perl::Packager</code></a>, is a <code>pp</code> wrapper and adds all of the required Wx DLL&rsquo;s.</p>
+
+<p>Getting it to work with <code>XML::LibXML</code> required some trial and error. I would create the executable, move it to another computer without Perl or C, run it from the command line (clicking the file hid certain error messages), and write down the name of the library that was missing. It turned out that three DLL&rsquo;s needed to be explicitly added: <code>libxml2-2__.dll</code>, <code>libiconv-2__.dll</code> and <code>libz__.dll</code>. On my computer these were located in C:\strawberry\c\bin. So, the final command I used to build my application was thus:</p>
+
+<pre><code>wxpar -o MyApp.exe -I lib -l C:/strawberry/c/bin/libxml2-2__.dll -l C:/strawberry/c/bin/libiconv-2__.dll -l C:/strawberry/c/bin/libz__.dll MyApp.pl
+</code></pre>
+
+<p>Is there a simpler way to do this? What&rsquo;s with all the underscores? Comments and questions welcome below.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl/">The Extended Euclidian Algorithm in Perl</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-15T00:00:00+09:00" pubdate data-updated="true">Apr 15<sup>th</sup>, 2013</time>
+        
+           | <a href="/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This week I learned about the extended Euclidian algorithm for finding a linear combination of two numbers that yields their GCD. For example, the GCD of 213 and 171 is 3, and -4<em>213 + 5</em>171 = 3. This algorithm is important in the <a href="http://en.wikipedia.org/wiki/RSA_(algorithm">RSA</a>) encryption scheme.</p>
+
+<p>I had quite a difficult time getting myself to fully understand how it works. I jumped between <a href="http://en.wikipedia.org/wiki/Extended_euclidean_algorithm">Wikipedia</a>, my <a href="http://www.amazon.com/Data-Structures-Problem-Solving-Using/dp/0321541405/ref=sr_1_1?ie=UTF8&amp;amp;qid=1365529203&amp;amp;sr=8-1&amp;amp;keywords=data+structures+and+problem+solving+using+java">data structures textbook</a> (don&rsquo;t buy it), a <a href="http://www.youtube.com/watch?v=twlo21D9LY0">YouTube video</a>, and this excellent <a href="http://public.csusm.edu/aitken_html/m422/Handout1.pdf">number theory class lecture</a>. The lecture is the best, though I think there may be a typographical error in the recursive formula.</p>
+
+<p>The basic idea uses recursion with an easy base step. We call <code>Euclid(a,b)</code> with <code>a ≥ b</code>:</p>
+
+<ul>
+<li>The base case is when b is 0. The GCD of x and 0 is always x, and the coefficients to produce a GCD of 0 are 1 and 0 (or anything else): 1*x + 0(or anything)*0 = x. So the base case returns (1,0)</li>
+<li>Any other step starts by recursively calling <code>Euclid(b, a mod b)</code>. We know that the GCD of a and b is the same as the GCD of b and a mod b (lemma 12 in the lecture). This recursive call is guaranteed to eventually get to the base case of b = 0.</li>
+<li>After finding the coefficients for producing the GCD from b and a mod b, we can calculate the ones for producing the GCD from a and b, because a mod b can be put in terms of a and b (see the code comments for the formulas).</li>
+</ul>
+
+
+<p>To really help myself understand the whole thing, I wrote a Perl script to illustrate it. I put in lots of comments as I worked my way through it.</p>
+
+<figure class='code'><figcaption><span>The extended Euclidian algorithm</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="mf">5.010</span><span class="p">;</span>
+</span><span class='line'><span class="c1">#start with a &gt;= b</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">@nums</span> <span class="o">=</span> <span class="nb">sort</span> <span class="p">{</span><span class="nv">$b</span> <span class="sr">&lt;=&gt;</span> <span class="nv">$a</span><span class="p">}</span> <span class="nv">@ARGV</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">gcd</span><span class="p">(</span><span class="nv">@nums</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#input: two numbers (a,b) a &gt;= b &gt; 0</span>
+</span><span class='line'><span class="c1">#output: the coefficients which which yield their GCD;</span>
+</span><span class='line'><span class="k">sub </span><span class="nf">gcd</span> <span class="p">{</span>
+</span><span class='line'> <span class="k">my</span> <span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="nv">$b</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'> <span class="c1">#base case; the GCD of x and 0 always x;</span>
+</span><span class='line'> <span class="c1">#and the coefficients will always be 1 and 0 (or anything) because</span>
+</span><span class='line'>
+</span><span class='line'> <span class="c1">#1*x + 0*0 = x</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span><span class="p">(</span><span class="nv">$b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+</span><span class='line'>  <span class="n">say</span> <span class="s">&quot;GCD is $a&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">say</span> <span class="s">&quot;(a,b) = ($a,$b), coefficients = (1,0)&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">say</span> <span class="s">&quot;1x$a + 0x$b = $a&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'> <span class="c1">#otherwise, we evaluate u and v for k = ub + vr, where r is a mod b</span>
+</span><span class='line'> <span class="c1">#gcd(b, a%b) gives the same value</span>
+</span><span class='line'> <span class="k">my</span> <span class="nv">$remainder</span> <span class="o">=</span> <span class="nv">$a</span> <span class="nv">%</span> <span class="err">$</span><span class="nv">b</span><span class="p">;</span>
+</span><span class='line'> <span class="k">my</span> <span class="p">(</span><span class="nv">$u</span><span class="p">,</span> <span class="nv">$v</span><span class="p">)</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">(</span><span class="nv">$b</span><span class="p">,</span> <span class="nv">$remainder</span><span class="p">);</span>
+</span><span class='line'> <span class="c1">#now we can find k in terms of a and b because we know r in terms a and b</span>
+</span><span class='line'> <span class="c1">#r = a - bq, where q = the whole part of a/b</span>
+</span><span class='line'> <span class="c1">#k = ub + vr = ub + v(a - bq) = va + b(u-qv)</span>
+</span><span class='line'> <span class="c1">#so the coefficient on a is v, and the coefficient on b is 1-qv</span>
+</span><span class='line'> <span class="k">my</span> <span class="nv">$x</span> <span class="o">=</span> <span class="nv">$v</span><span class="p">;</span>
+</span><span class='line'> <span class="k">my</span> <span class="nv">$q</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="nv">$a</span><span class="o">/</span><span class="nv">$b</span><span class="p">));</span>
+</span><span class='line'> <span class="k">my</span> <span class="nv">$y</span> <span class="o">=</span> <span class="nv">$u</span> <span class="o">-</span> <span class="nv">$q</span><span class="o">*</span><span class="nv">$x</span><span class="p">;</span>
+</span><span class='line'> <span class="n">say</span> <span class="s">&quot;(a,b) = ($a,$b), coefficients are ($x,$y)&quot;</span><span class="p">;</span>
+</span><span class='line'> <span class="n">say</span> <span class="s">&quot;${x}x$a + ${y}x$b = &quot;</span> <span class="o">.</span> <span class="p">(</span><span class="nv">$x</span><span class="o">*</span><span class="nv">$a</span> <span class="o">+</span> <span class="nv">$y</span><span class="o">*</span><span class="nv">$b</span><span class="p">);</span>
+</span><span class='line'> <span class="k">return</span> <span class="p">(</span><span class="nv">$x</span><span class="p">,</span> <span class="nv">$y</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Feel free to leave a comment if you think that something could be stated more clearly. I hope it helps anyone else trying to learn how the extended Euclidian algorithm works.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/07/running-perl-with-sublime-text-2/">Running Perl With Sublime Text 2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-07T00:00:00+09:00" pubdate data-updated="true">Apr 7<sup>th</sup>, 2013</time>
+        
+           | <a href="/blog/2013/04/07/running-perl-with-sublime-text-2/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2013/04/07/running-perl-with-sublime-text-2/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve been having fun trying out <a href="http://www.sublimetext.com/">Sublime Text</a>. It&rsquo;s pretty, fast, and extremely extensible.</p>
+
+<p>The first thing that I wanted was to be able to work well with Perl. I installed <a href="http://wbond.net/sublime_packages/package_control">Package Control</a>, followed by <a href="https://github.com/SublimeLinter/SublimeLinter">SublimeLinter</a>, which has the <a href="http://perlcritic.com/">perlcritic</a> command built in. Making this useful requires a little finagling; perlcritic is by no means a quick program (being a really thorough linter for a language which is complex to parse), and the defaults for SublimeLinter cause it run over and over again as you type. To fix this, I edited <code>Packages/SublimeLinter/SublimeLinter.sublime-settings</code> and changed the &ldquo;sublimelinter&rdquo; setting to false. Now, in order to lint the current file, I have to press <kbd>ctrl+alt+l</kbd>. (<strong>Update:</strong> I don&rsquo;t recommend this for Sublime Text 2 because of speed problems. See <a href="https://github.com/SublimeLinter/SublimeLinter/issues/408">this issue on Github</a>. ST3 should be fine, though.)</p>
+
+<p>Next, I wanted to be able to run my Perl scripts. Sublime has the <kbd>ctrl+b</kbd> shortcut for running a build for the current file. What the build actually does is specified in either a build file or the project file. To create a new build file for perl, go to Tools->Build System &ndash;> New Build System. The build file I&rsquo;ve seen on different sites for Perl looks like this:</p>
+
+<figure class='code'><figcaption><span>Usual build file for Perl</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="nt">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;perl&quot;</span><span class="p">,</span> <span class="s2">&quot;$file&quot;</span><span class="p">],</span>
+</span><span class='line'>    <span class="nt">&quot;file_regex&quot;</span><span class="p">:</span> <span class="s2">&quot;.* at (.*) line ([0-9]*)&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;selector&quot;</span><span class="p">:</span> <span class="s2">&quot;source.perl&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Save this as perl.sublime-build. With this, whenever you are working on a Perl file and hit <kbd>ctrl+b</kbd>, the command &ldquo;perl -w your_file.pl&rdquo; will be run. This, however, was not good enough for me. Most of the time I am working on tests for a Perl module, so I have to run <code>perl -Ilib t/my_test_file.t</code>. I also want to be able to run individual tests as well as <a href="https://metacpan.org/module/OVID/Test-Harness-3.26/bin/prove"><code>prove</code></a> using shortcuts.</p>
+
+<p>To do this, we need to turn the module directory into a Sublime Text project. This is pretty simple. First, open the module directory in Sublime Text. Select Project->Save Project As, then choose the name of the project and save it in the top directory of the module. Paste the following simple contents into the project file:</p>
+
+<figure class='code'><figcaption><span>Perl project file</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'> <span class="nt">&quot;folders&quot;</span><span class="p">:</span>
+</span><span class='line'> <span class="p">[</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>   <span class="nt">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;.&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'> <span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>All this does is add the entire directory to the project. Next, we edit the Perl build file to reference the root of the project so we can add the top-level lib directory to our include path:</p>
+
+<figure class='code'><figcaption><span>Perl project build file</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="p">{</span>
+</span><span class='line'> <span class="s">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;perl&quot;</span><span class="p">,</span> <span class="s">&quot;-Ilib&quot;</span><span class="p">,</span> <span class="s">&quot;$file&quot;</span><span class="p">],</span>
+</span><span class='line'> <span class="s">&quot;working_dir&quot;</span><span class="p">:</span> <span class="s">&quot;$project_path&quot;</span><span class="p">,</span>
+</span><span class='line'> <span class="s">&quot;file_regex&quot;</span><span class="p">:</span> <span class="s">&quot;.* at (.) line ([0-9])&quot;</span><span class="p">,</span>
+</span><span class='line'> <span class="s">&quot;selector&quot;</span><span class="p">:</span> <span class="s">&quot;source.perl&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Great! Now we can run Perl on tests contained in module directories. This still works fine for standalone scripts, too.</p>
+
+<p>Now I&rsquo;d like to run my whole test suite using prove. By default, <kbd>ctrl+shift+b</kbd> runs a build variant with the name &ldquo;Run&rdquo;, so we&rsquo;ll just make a <code>prove</code> variant with that name. I&rsquo;d much rather give it a more descriptive name, but the Sublime shortcut requires this name. You can change the shortcut, but then you wouldn&rsquo;t be able to use the shortcut for other builds (other languages). It&rsquo;s all up to you. Here is the final build file:</p>
+
+<figure class='code'><figcaption><span>Perl project build file with variants</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'> <span class="nt">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;perl&quot;</span><span class="p">,</span> <span class="s2">&quot;-Ilib&quot;</span><span class="p">,</span> <span class="s2">&quot;$file&quot;</span><span class="p">],</span>
+</span><span class='line'> <span class="nt">&quot;working_dir&quot;</span><span class="p">:</span> <span class="s2">&quot;$project_path&quot;</span><span class="p">,</span>
+</span><span class='line'> <span class="nt">&quot;file_regex&quot;</span><span class="p">:</span> <span class="s2">&quot;.* at (.) line ([0-9])&quot;</span><span class="p">,</span>
+</span><span class='line'> <span class="nt">&quot;selector&quot;</span><span class="p">:</span> <span class="s2">&quot;source.perl&quot;</span><span class="p">,</span>
+</span><span class='line'> <span class="nt">&quot;variants&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;prove&quot;</span><span class="p">,</span> <span class="s2">&quot;-vlr&quot;</span><span class="p">,</span> <span class="s2">&quot;--merge&quot;</span><span class="p">],</span>
+</span><span class='line'>  <span class="nt">&quot;working_dir&quot;</span><span class="p">:</span> <span class="s2">&quot;$project_path&quot;</span><span class="p">,</span>
+</span><span class='line'>         <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Run&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;windows&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>                 <span class="nt">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;prove.bat&quot;</span><span class="p">,</span> <span class="s2">&quot;-vlr&quot;</span><span class="p">,</span> <span class="s2">&quot;--merge&quot;</span><span class="p">]</span>
+</span><span class='line'>             <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that I needed a Windows variant for <code>prove</code> since the Sublime editor doesn&rsquo;t work the same as cmd. You could, alternatively, add &lsquo;&ldquo;shell&rdquo;:true&rsquo; to use the system&rsquo;s command shell so you don&rsquo;t need a separate command for Windows.</p>
+
+<p>With this build file in place, I can now press ctrl+b to run any Perl script, with it&rsquo;s project lib directory in @INC, and <kbd>ctrl+shift+b</kbd> to run prove. Voila!</p>
+
+<p>Here are the final files:</p>
+
+<ul>
+<li><a href="https://sites.google.com/site/complingfiles/files/perl-module.sublime-project?attredirects=0&amp;d=1">project file</a> (put a copy in your project root folders)</li>
+<li><a href="https://sites.google.com/site/complingfiles/files/perl.sublime-build?attredirects=0&amp;d=1">Perl build file</a> (only one is needed per ST installation)</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/02/03/managing-global-state-flip-flop-operator/">Managing Global State: The Flip-Flop Operator</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-03T00:00:00+09:00" pubdate data-updated="true">Feb 3<sup>rd</sup>, 2013</time>
+        
+           | <a href="/blog/2013/02/03/managing-global-state-flip-flop-operator/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2013/02/03/managing-global-state-flip-flop-operator/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Today I was faced with another mysterious failing test while writing a test suite for some legacy code. I knew it had to be a problem with persisting state because this particular test only failed when processing a particular data set with the same object which was just used to process another set.</p>
+
+<p>My first step to trying to fix this was to delete all of the values stored in the object during the processing procedure:</p>
+
+<figure class='code'><figcaption><span>First attempt: try deleting stuff</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">delete</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">stateDatum1</span><span class="p">};</span>
+</span><span class='line'><span class="nb">delete</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">stateDatum2</span><span class="p">};</span>
+</span><span class='line'><span class="c1">#etc....</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Nothing changed. I reduced the problematic code into a small example for this post. First, the module to be tested:</p>
+
+<figure class='code'><figcaption><span>Minimum breaking example with global flip-flop operator</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">package</span> <span class="nn">Demo::Bad::</span><span class="n">GlobalFlipFlop</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">autodie</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="mf">5.010</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">sub </span><span class="nf">new</span> <span class="p">{</span>
+</span><span class='line'> <span class="k">my</span> <span class="p">(</span><span class="nv">$class</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+</span><span class='line'> <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="p">{};</span>
+</span><span class='line'> <span class="nb">bless</span> <span class="nv">$self</span><span class="p">,</span> <span class="nv">$class</span><span class="p">;</span>
+</span><span class='line'> <span class="k">return</span> <span class="nv">$self</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#return true if parsing succeeded, false otherwise.</span>
+</span><span class='line'><span class="k">sub </span><span class="nf">parse</span> <span class="p">{</span>
+</span><span class='line'> <span class="k">my</span> <span class="p">(</span><span class="nv">$self</span><span class="p">,</span> <span class="nv">$file</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+</span><span class='line'> <span class="nb">open</span> <span class="k">my</span> <span class="nv">$file_in</span><span class="p">,</span> <span class="s">&#39;&lt;&#39;</span><span class="p">,</span> <span class="nv">$file</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'> <span class="k">my</span> <span class="nv">$started</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'> <span class="k">while</span><span class="p">(</span> <span class="sr">&lt;$file_in&gt;</span> <span class="p">){</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">#flip-flop</span>
+</span><span class='line'>  <span class="k">next</span> <span class="k">unless</span> <span class="sr">/^=startHere/i</span> <span class="o">..</span> <span class="mi">0</span><span class="p">;</span>    <span class="c1"># start processing</span>
+</span><span class='line'>  <span class="nv">$started</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">#continue doing something with file contents...</span>
+</span><span class='line'>  <span class="c1"># say &#39;hello:)&#39; if(/hello/);</span>
+</span><span class='line'>  <span class="c1"># say &#39;goodbye:(&#39; if(/goodbye/);</span>
+</span><span class='line'> <span class="p">}</span>
+</span><span class='line'> <span class="k">if</span><span class="p">(</span><span class="ow">not</span> <span class="nv">$started</span><span class="p">){</span>
+</span><span class='line'>  <span class="n">say</span> <span class="s">&quot;File not processed; missing &#39;=startHere&#39; line.&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span><span class="p">;</span>
+</span><span class='line'> <span class="p">}</span>
+</span><span class='line'> <span class="nb">close</span> <span class="nv">$file_in</span><span class="p">;</span>
+</span><span class='line'> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">1</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The main idea here is that we are processing some file and returning a boolean representing its validity. The only requirement of validity of the file is that a certain start token is found within it; everything before the start sequence is ignored. Here are valid and invalid example files:</p>
+
+<pre><code>#good_file.txt
+=startHere
+hello
+goodbye
+
+#bad_file.txt- doesn't contain a start sequence
+hello
+goodbye
+</code></pre>
+
+<p>Now, the test file:</p>
+
+<figure class='code'><figcaption><span>Test script</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">autodie</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Test::</span><span class="n">More</span> <span class="n">tests</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">File::</span><span class="n">Slurp</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Demo::Bad::</span><span class="n">GlobalFlipFlop</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">my</span> <span class="nv">$good_name</span> <span class="o">=</span> <span class="s">&#39;good_file.txt&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">$bad_file</span> <span class="o">=</span> <span class="s">&#39;bad_file.txt&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">my</span> <span class="nv">$demo</span> <span class="o">=</span> <span class="nn">Demo::Bad::</span><span class="n">GlobalFlipFlop</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">ok</span><span class="p">(</span> <span class="nv">$demo</span><span class="o">-&gt;</span><span class="n">parse</span><span class="p">(</span><span class="nv">$good_name</span><span class="p">)</span> <span class="p">);</span>
+</span><span class='line'><span class="n">ok</span><span class="p">(</span> <span class="ow">not</span> <span class="nv">$demo</span><span class="o">-&gt;</span><span class="n">parse</span><span class="p">(</span><span class="nv">$bad_file</span><span class="p">)</span> <span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The output of running this file:</p>
+
+<pre><code>&gt;perl test.pl
+1..2
+hello:)
+goodbye:(
+ok 1
+hello:)
+goodbye:(
+not ok 2
+#   Failed test at test.pl line 61.
+# Looks like you failed 1 test of 2.
+</code></pre>
+
+<p>Why did it fail the second test, which involves checking that an invalid file is considered invalid?</p>
+
+<p>The bug is in the line which matches the start token:</p>
+
+<figure class='code'><figcaption><span>Buggy line</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">next</span> <span class="k">unless</span> <span class="sr">/^=startHere/i</span> <span class="o">..</span> <span class="mi">0</span><span class="p">;</span> <span class="c1"># start processing</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The regex, flip-flop operator and 0 were clearly some sort of idiom that I was unfamiliar with. I had only ever used the flip-flop with numbers, such as <code>1..10</code>, which iterates from numbers 1 through 10. How does it work? Let&rsquo;s check <a href="http://perldoc.perl.org/perlop.html">perlop</a>:</p>
+
+<pre><code>&gt; Each ".." operator maintains its own boolean state, even across calls to a subroutine that contains it. It is false as long as its left operand is false. Once the left operand is true, the range operator stays true until the right operand is true *AFTER* which the range operator becomes false again.
+</code></pre>
+
+<p>The mysterious line thus worked like this:</p>
+
+<ul>
+<li>Skip lines of the input file until the left side, a match for the start token, is true</li>
+<li>Don&rsquo;t skip lines again until the right side, <code>0</code>, is evaluated as true (which never happens).</li>
+<li>The state of this flip-flop operator is stored between subsequent calls to the subroutine. It&rsquo;s a hidden global variable! Usually flip-flop operators are used in contexts that are guaranteed a reset after iteration (such as <code>1..10</code>). Not so here! I replaced the offending code with some that keeps state for me:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>Manually state management fixes the problem</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">my</span> <span class="nv">$started</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="k">while</span><span class="p">(</span><span class="sr">&lt;$file_in&gt;</span><span class="p">){</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="sr">/^=startHere/i</span><span class="p">){</span>
+</span><span class='line'>        <span class="nv">$started</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">next</span> <span class="k">unless</span> <span class="nv">$started</span><span class="p">;</span>
+</span><span class='line'><span class="c1">#continue processing...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With this, everything works as expected:</p>
+
+<pre><code>&gt;perl test.pl
+1..2
+ok 1
+File not processed; missing '=startHere' line.
+ok 2
+</code></pre>
+
+<p>Note that this bug only presented itself to me because I changed the legacy standalone script to be its own module, creating the possibility of storing state between subroutine calls.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/01/27/when-not-to-use-perls-implicit-close/">When Not to Use Perl&#8217;s Implicit Close; Suffering From Buffering</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-27T00:00:00+09:00" pubdate data-updated="true">Jan 27<sup>th</sup>, 2013</time>
+        
+           | <a href="/blog/2013/01/27/when-not-to-use-perls-implicit-close/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2013/01/27/when-not-to-use-perls-implicit-close/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This post is a quick note on a bug I had difficulty tracking down.</p>
+
+<p>One nice feature of Perl, introduced long before my time, is that of implicit closing. Perl closes filehandles for you when you forget (maybe on purpose). So the following is not a resource leak as a standalone script:</p>
+
+<figure class='code'><figcaption><span>Implicit close example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">open</span> <span class="k">my</span> <span class="nv">$file</span><span class="p">,</span> <span class="s">&#39;&gt;utf8&#39;</span><span class="p">,</span> <span class="s">&#39;/path/to/new/file&#39;</span>
+</span><span class='line'>    <span class="ow">or</span> <span class="nb">die</span> <span class="s">&quot;couldn&#39;t open file: $!&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">print</span> <span class="nv">$file</span> <span class="s">&#39;Hello!&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When the script finishes, Perl will close $file for you, so you can be nice and lazy. The caveat to this is that the variable <code>$.</code> isn&rsquo;t reset as it would be with a normal close (<a href="http://perldoc.perl.org/functions/close.html">see docs here</a>). <a href="http://www.perlmonks.org/?node_id=353259"><code>$.</code></a> holds the current line number from the last file read. So if you were processing a file line-by-line and found an error, you might print an error like <code>bad value foo on line XYZ</code> using the <code>$.</code> variable for <code>XYZ</code>. I raised a question about this on <a href="http://stackoverflow.com/questions/14513477/perl-implicit-close-resets#comment20233976_14513477">StackOverflow</a>.</p>
+
+<p>Today I found another case where not explicitly closing a filehandle means trouble. I was working on testing a <a href="https://github.com/briandfoy/modulino-demo/blob/master/lib/Modulino/Demo.pm">modulino</a>-style script with flexible outputs. You can call a method to set the handle that this script prints to. In my test script, I was setting the handle to be some filehandle and then checking the contents of the file against a string. The problem? The file was always empty at run time, but contained what I expected it to when I manually inspected it. Here&rsquo;s some example broken code:</p>
+
+<figure class='code'><figcaption><span>Suffering from buffering with implicit close</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1">#ImplicitClose.pm</span>
+</span><span class='line'><span class="nb">package</span> <span class="nn">Demo::Bad::</span><span class="n">ImplicitClose</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
+</span><span class='line'><span class="k">sub </span><span class="nf">new</span> <span class="p">{</span>
+</span><span class='line'> <span class="k">my</span> <span class="p">(</span><span class="nv">$class</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+</span><span class='line'> <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="p">{};</span>
+</span><span class='line'> <span class="nb">bless</span> <span class="nv">$self</span><span class="p">,</span> <span class="nv">$class</span><span class="p">;</span>
+</span><span class='line'> <span class="k">return</span> <span class="nv">$self</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">sub </span><span class="nf">output_fh</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">my</span> <span class="p">(</span> <span class="nv">$self</span><span class="p">,</span> <span class="nv">$fh</span> <span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nv">$fh</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span> <span class="nb">ref</span><span class="p">(</span><span class="nv">$fh</span><span class="p">)</span> <span class="ow">eq</span> <span class="s">&#39;GLOB&#39;</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nv">$self</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">output_fh</span><span class="p">}</span> <span class="o">=</span> <span class="nv">$fh</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nb">open</span> <span class="k">my</span> <span class="nv">$fh2</span><span class="p">,</span> <span class="s">&#39;&gt;&#39;</span><span class="p">,</span> <span class="nv">$fh</span> <span class="ow">or</span> <span class="nb">die</span> <span class="s">&quot;Couldn&#39;t open $fh&quot;</span><span class="p">;</span>
+</span><span class='line'>            <span class="nv">$self</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">output_fh</span><span class="p">}</span> <span class="o">=</span> <span class="nv">$fh2</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="nv">$self</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">output_fh</span><span class="p">};</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">sub </span><span class="nf">some_long_method</span> <span class="p">{</span>
+</span><span class='line'> <span class="k">my</span> <span class="p">(</span><span class="nv">$self</span><span class="p">,</span> <span class="nv">$text</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+</span><span class='line'> <span class="k">print</span> <span class="p">{</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">output_fh</span><span class="p">}</span> <span class="p">}</span> <span class="nv">$text</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="c1">#test.pl</span>
+</span><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="n">autodie</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Test::</span><span class="n">More</span> <span class="n">tests</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">File::</span><span class="n">Slurp</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">Demo::Bad::</span><span class="n">ImplicitClose</span><span class="p">;</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">$file_name</span> <span class="o">=</span> <span class="s">&#39;file1.txt&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="c1">#make sure we pass the test from outputting something *this* run</span>
+</span><span class='line'><span class="nb">unlink</span> <span class="nv">$file_name</span> <span class="k">if</span> <span class="o">-</span><span class="n">e</span> <span class="nv">$file_name</span><span class="p">;</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">$print</span> <span class="o">=</span> <span class="s">&#39;some junk&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">$demo</span> <span class="o">=</span> <span class="nn">Demo::Bad::</span><span class="n">ImplicitClose</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$demo</span><span class="o">-&gt;</span><span class="n">output_fh</span><span class="p">(</span><span class="nv">$file_name</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$demo</span><span class="o">-&gt;</span><span class="n">some_long_method</span><span class="p">(</span><span class="nv">$print</span><span class="p">);</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">$contents</span> <span class="o">=</span> <span class="n">read_file</span><span class="p">(</span><span class="nv">$file_name</span><span class="p">);</span>
+</span><span class='line'><span class="n">is</span><span class="p">(</span><span class="nv">$contents</span><span class="p">,</span> <span class="nv">$print</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you run <code>test.pl</code>, you&rsquo;ll see that its one and only test fails:</p>
+
+<pre><code>&gt;perl -I[folder where you put the Demo directory] test.pl
+1..1
+not ok 1
+#   Failed test at test.pl line 68.
+#          got: ''
+#     expected: 'some junk'
+# Looks like you failed 1 test of 1.
+</code></pre>
+
+<p>Then, when you inspect the contents of <code>file1.txt</code>, you have:</p>
+
+<pre><code>some junk
+</code></pre>
+
+<p>What happened here? I was <a href="http://perl.plover.com/FAQs/Buffering.html">suffering from buffering</a>. Because neither <code>test.pl</code> nor <code>ImplicitClose.pm</code> closed the file, it was still open when I was trying to read it. Nothing had been written to it yet because the amount printed was so small that it had to wait in the buffer either until there was more to write or until the file was closed, which would flush the buffer. Implicit close wouldn&rsquo;t be performed until the the filehandle&rsquo;s reference count reached 0, and the <code>$demo</code> object still had a reference to it. So the test would have worked fine if I had assigned <code>undef</code> to <code>$demo</code>, or just closed the filehandle.</p>
+
+<p>Watch those implicit closes.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/01/20/testing-perl-distributions-with-test/">Testing Perl Distributions With Test Subdirectories</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-20T00:00:00+09:00" pubdate data-updated="true">Jan 20<sup>th</sup>, 2013</time>
+        
+           | <a href="/blog/2013/01/20/testing-perl-distributions-with-test/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2013/01/20/testing-perl-distributions-with-test/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Normally I run my test suites with the prove utility:</p>
+
+<p><code>prove -vl --merge</code></p>
+
+<p>The <code>v</code> option turns on verbose processing, and the l option adds <code>lib/</code> to the include path. <code>prove</code>then runs all of the tests in the <code>t/</code> folder.</p>
+
+<p>Today, I had a new problem. I merged multiple distributions into one (<a href="http://jasonkarns.com/blog/merge-two-git-repositories-into-one/">without losing any Git history!</a>), and each had a test suite that I wanted to keep separate. Naturally, I moved the tests from each distribution into its own subdirectory under <code>t/</code>. However, this time when I ran <code>prove -vl</code>, I got this message:</p>
+
+<pre><code>Files=0, Tests=0,  0 wallclock secs ( 0.00 usr +  0.00 sys =  0.00 CPU)
+Result: NOTESTS
+</code></pre>
+
+<p>Dubious&hellip; Well, I needed to know how to test with subdirectories in the <code>t/</code> folder, so I looked at the <a href="https://metacpan.org/module/prove">prove</a> documentation and found the <code>-r</code> option. The <code>r</code> stands for &ldquo;recurse&rdquo;, meaning that the test files would be found by recursing into the directories of the distribution (starting at the top in the root of the distribution). That turned out to be exactly what I needed!</p>
+
+<pre><code>prove -vlr
+t/parser/01-testParser.t
+...
+All tests successful.
+Files=28, Tests=1815, 211 wallclock secs ( 0.92 usr + 0.28 sys = 1.20 CPU)
+Result: PASS
+</code></pre>
+
+<p>Woohoo!</p>
+
+<p>Also, both <code>MakeMaker</code>and <code>Module::Build</code> recurse in the same way during module testing. If you use <code>Dist::Zilla</code>, then you&rsquo;ll probably have the plugins <code>[MakeMaker]</code> and <code>[ModuleBuild]</code>. Using these, <code>dzil test</code> will recurse in the same way.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/3">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/index.html">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/01/06/my-new-toy-algomation/">My New Toy: Algomation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/11/09/the-oh-so-exotic-grocery-list/">The Oh So Exotic Grocery List</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/07/yotchare/">Yotchare!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/13/2-knuth-classics-are-freely-available/">Knuth Classics Are Freely Available</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/10/five-things-we-need-to-know-about-technological-change/">Five Things We Need to Know About Technological Change</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/garfieldnate?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Nate Glenn -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'garfieldnate';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

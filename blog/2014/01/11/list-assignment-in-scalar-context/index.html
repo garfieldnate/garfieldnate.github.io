@@ -1,0 +1,382 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>List Assignment in Scalar Context - Garfield Nate</title>
+  <meta name="author" content="Nate Glenn">
+
+  
+  <meta name="description" content="(Cross-posted on blogs.perl.org) This week I received some special help on SO in understanding how the goatse operator works. I was very thankful for &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://garfieldnate.github.io/blog/2014/01/11/list-assignment-in-scalar-context">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Garfield Nate" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+
+  <!-- Load jQuery from google for better caching; if that fails, load the local copy -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- For GitHub repo display; use with the githubrepo-octopress plugin -->
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+<!--script>
+  $.noConflict()
+</script-->
+
+<script src="/javascripts/libs/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+<script src="/javascripts/menu.min.js" type="text/javascript"></script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-26857949-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Garfield Nate</a></h1>
+  
+    <h2>Big Fat Hairy Programmer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:garfieldnate.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li>
+    <a href="/resume/resume-en.html">Resume</a>
+    <ul>
+        <il><a href="/resume/resume-en.html">English</a></il>
+        <il><a href="/resume/resume-ja.html">日本語</a></il>
+    </ul>
+  </li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">List Assignment in Scalar Context</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-11T00:00:00+09:00" pubdate data-updated="true">Jan 11<sup>th</sup>, 2014</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>(Cross-posted on <a href="http://blogs.perl.org/users/nate_glenn/2014/01/list-assignment-in-scalar-context.html">blogs.perl.org</a>)</p>
+
+<p>This week I received some special help <a href="http://stackoverflow.com/questions/21037846/why-does-the-goatse-operator-work/21069822">on SO</a> in understanding how the goatse operator works. I was very thankful for everyone&rsquo;s help. <a href="http://www.perlmonks.org/?node_id=790129">These</a> <a href="http://www.perlmonks.org/?node_id=527973">two</a> articles were also very helpful and I recommend reading them.</p>
+
+<p>Part of my confusion over the goatse operator was not knowing the difference between list and scalar assignment operators, which both are indicated via &lsquo;=&rsquo;. Further confusing is the fact that each can be used in either scalar or list context, so you can have list assignment in scalar context or scalar assignment in list context.</p>
+
+<p>The type of assignment is determined by what is being assigned to. As ikegami says, assignment to an aggregate is a list assignment, aggregate meaning an array, a hash, a parenthetical expression, or a my/our/local variable declared with parens.</p>
+
+<p>The context of an assignment operator will really only matter when you are storing or checking the return value. You can store the value of an assignment operator by using another asignment operator: <code>blah1 = blah2 = blah3</code>, where <code>blah1</code> is the value returned by assigning <code>blah3</code> to <code>blah2</code>. The value gets checked in other contexts too, like inside a control structure condition: <code>if(my $line = &lt;&gt;)</code>, etc. Here are examples for each combination of context and assignment operator:</p>
+
+<figure class='code'><figcaption><span>Example context/assignment combinations</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1"># scalar assignment in scalar context</span>
+</span><span class='line'><span class="nv">$thing</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$foo</span> <span class="o">=</span> <span class="s">&#39;bar&#39;</span><span class="p">);</span> <span class="c1"># assignment returns $foo as lvalue</span>
+</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># bar</span>
+</span><span class='line'><span class="c1"># scalar assignment in list context</span>
+</span><span class='line'><span class="p">(</span><span class="nv">$thing</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$foo</span> <span class="o">=</span> <span class="s">&#39;bar&#39;</span><span class="p">);</span> <span class="c1">#assignment returns ($foo), $foo is lvalue</span>
+</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># bar</span>
+</span><span class='line'><span class="c1"># list assignment in scalar context;</span>
+</span><span class='line'><span class="c1"># assignment returns number of items in RHS of list assignment</span>
+</span><span class='line'><span class="nv">$thing</span> <span class="o">=</span> <span class="p">((</span><span class="nv">$foo</span><span class="p">,</span> <span class="nv">$bar</span><span class="p">)</span> <span class="o">=</span> <span class="sx">qw(foo bar)</span><span class="p">);</span>
+</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># 2</span>
+</span><span class='line'><span class="nv">$thing</span> <span class="o">=</span> <span class="p">(()</span> <span class="o">=</span> <span class="sx">qw(foo bar)</span><span class="p">)</span>
+</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># 2</span>
+</span><span class='line'><span class="nv">$thing</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=</span> <span class="sx">qw(foo bar)</span><span class="p">;</span>
+</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># 2</span>
+</span><span class='line'><span class="c1"># list assignment in list context</span>
+</span><span class='line'><span class="c1"># assignment returns LHS list as lvalues</span>
+</span><span class='line'><span class="p">(</span><span class="nv">$thing</span><span class="p">)</span> <span class="o">=</span> <span class="p">((</span><span class="nv">$foo</span><span class="p">,</span> <span class="nv">$bar</span><span class="p">)</span> <span class="o">=</span> <span class="sx">qw(foo bar)</span><span class="p">);</span>
+</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># foo</span>
+</span><span class='line'><span class="p">(</span><span class="nv">$thing</span><span class="p">)</span> <span class="o">=</span> <span class="p">(()</span> <span class="o">=</span> <span class="sx">qw(foo bar)</span><span class="p">);</span>
+</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># nothing ($thing is undef)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That third one is of course the goatse operator. By the way for the record I totally think it looks more like a Saturn, though my wife disagrees and everyone seems to call it goatse. Anyway, though generally list assignment in scalar context is the rarest one, there are other occurrences. Ysth mentions the <code>each</code> operator inside of a <code>while</code> loop:</p>
+
+<figure class='code'><figcaption><span>`each` operator in a `while` loop</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">while</span><span class="p">(</span><span class="k">my</span> <span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nv">$value</span><span class="p">)</span> <span class="o">=</span> <span class="nb">each</span> <span class="nv">%hash</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The aggregate on the left makes this list assignment, and <code>while</code> makes it scalar context. Once the hash is out of keys, <code>each</code> returns <code>()</code> so that the assignment operator returns <code>0</code>, finishing the <code>while</code> loop.</p>
+
+<p>I was pretty happy to finally understand this area I never quite understood I didn&rsquo;t understand (though someone might still point out I don&rsquo;t know what I&rsquo;m talking about, as seems to be common with this subject). Today, though, I thought of one more usage of list assignment in scalar context that is probably used erroneously fairly often: quick and dirty parameter checking:</p>
+
+<figure class='code'><figcaption><span>Incorrect quick and dirty parameter checking</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">my</span> <span class="p">(</span><span class="nv">$input</span><span class="p">,</span> <span class="nv">$output</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@ARGV</span> <span class="ow">or</span> <span class="nb">die</span> <span class="s">&#39;Usage: script &lt;input&gt; &lt;output&gt;&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I always thought that the assignment would return $output, probably by analogy with comma expression assignment to a scalar (<code>$stuff = qw(foo bar)</code>). However, if the user fails to provide a second parameter, the error would not be caught. This assignment will return the number of elements in @ARGV, which could be <code>1</code> instead of the required <code>2</code>. So this use is only correct when unpacking <code>@_</code> or <code>@ARGV</code> and expecting exactly one variable:</p>
+
+<figure class='code'><figcaption><span>OK quick and dirty parameter checking</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">my</span> <span class="p">(</span><span class="nv">$input</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@ARGV</span> <span class="ow">or</span> <span class="nb">die</span> <span class="s">&#39;Usage: script &lt;input&gt;&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is probably obvious to Perl old-timers, but to me it was a revelation. And it doesn&rsquo;t look like I&rsquo;m the only one, either. Grepping CPAN for assignment of an array to a parenthetical with &lsquo;or&rsquo; after it turns up many mis-uses <a href="http://grep.cpan.me/?q=%5C%29%5Cs*%3D%5Cs*%40%5B%5E+%5Cr%5Cn%5D%2B%5Cs%2Bor">here</a>.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Nate Glenn</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-11T00:00:00+09:00" pubdate data-updated="true">Jan 11<sup>th</sup>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/context/'>context</a>, <a class='category' href='/blog/categories/list/'>list</a>, <a class='category' href='/blog/categories/list-assignment/'>list assignment</a>, <a class='category' href='/blog/categories/parameter-checking/'>parameter checking</a>, <a class='category' href='/blog/categories/perl/'>perl</a>, <a class='category' href='/blog/categories/scalar/'>scalar</a>, <a class='category' href='/blog/categories/scalar-context/'>scalar context</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://garfieldnate.github.io/blog/2014/01/11/list-assignment-in-scalar-context/" data-via="garfieldnate" data-counturl="http://garfieldnate.github.io/blog/2014/01/11/list-assignment-in-scalar-context/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on/" title="Previous Post: Packaging XML::LibXML with PAR Packer on Windows">&laquo; Packaging XML::LibXML with PAR Packer on Windows</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/07/02/preparation-the-key-to-a-less-painful-windows-reinstall/" title="Next Post: Preparation: The Key to a Less Painful Windows Reinstall">Preparation: The Key to a Less Painful Windows Reinstall &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/01/06/my-new-toy-algomation/">My New Toy: Algomation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/11/09/the-oh-so-exotic-grocery-list/">The Oh So Exotic Grocery List</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/07/yotchare/">Yotchare!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/13/2-knuth-classics-are-freely-available/">Knuth Classics Are Freely Available</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/10/five-things-we-need-to-know-about-technological-change/">Five Things We Need to Know About Technological Change</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/garfieldnate?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Nate Glenn -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'garfieldnate';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://garfieldnate.github.io/blog/2014/01/11/list-assignment-in-scalar-context/';
+        var disqus_url = 'http://garfieldnate.github.io/blog/2014/01/11/list-assignment-in-scalar-context/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

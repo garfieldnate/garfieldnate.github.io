@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: C++ | Garfield Nate]]></title>
+  <link href="http://garfieldnate.github.io/blog/categories/c-plus-plus/atom.xml" rel="self"/>
+  <link href="http://garfieldnate.github.io/"/>
+  <updated>2015-02-13T01:21:37+09:00</updated>
+  <id>http://garfieldnate.github.io/</id>
+  <author>
+    <name><![CDATA[Nate Glenn]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Refactoring the Soar Lexer]]></title>
+    <link href="http://garfieldnate.github.io/blog/2014/07/27/refactoring-the-soar-lexer/"/>
+    <updated>2014-07-27T19:51:53+09:00</updated>
+    <id>http://garfieldnate.github.io/blog/2014/07/27/refactoring-the-soar-lexer</id>
+    <content type="html"><![CDATA[<p>After my <a href="blog/2014/7/13/code-reading-the-soar-parser">last writeup</a> on how <a href="https://github.com/SoarGroup/Soar">Soar</a> parses Soar code, I decided to dive in and try and refactor it, starting with the lexer (and here&rsquo;s the resulting <a href="https://github.com/SoarGroup/Soar/pull/178">PR</a>). I haven&rsquo;t worked with C/C++ in a while, and a good part of the code I changed was close to my age, so it was an interesting learning experience for me.</p>
+
+<p>The lexer used global state stored via an agent to keep track of the current input character and lexeme as well as to remember line and column numbers. The goal of the refactoring was of course to change that, but 30 commits later I have not yet completely separated the agent from the Lexer because all printing logic (warnings, etc.) requires an agent. The result of this is that after every change I make I have to do <code>build Tests</code> and watch the entire project be rebuilt because of the various interdependencies. Also, the lexer has none if its own tests, and so the full test suite must be run to find possible problems. The result here is that every time I make a change and need to see if it works, I start a long compile/test process running and watch more of <a href="http://www.imdb.com/title/tt1637727/">some show</a> while waiting for it to finish (you&rsquo;ve probably seen <a href="http://xkcd.com/303/">this comic</a> before). So the global state is not only difficult to work with, but it also slows development to a crawl.</p>
+
+<p>The lexer had a lot of dead code which told me the story of how it used to work. Originally it would read Soar code straight from a file; later it was retrofitted to take production strings directly as an &ldquo;alternate&rdquo;. There must have been something off about the string input, however, because besides setting <code>alternate_input_string</code>, <code>alternate_input_suffix</code> was also required, and always needed to be set to <code>") "</code>. Once the production string was finished, the lexer would read the suffix. The original reason for this was long gone, but the parser still expected productions to end with an <code>R_PAREN</code> lexeme, as did other lexer clients. Later developers copied the incantation to lex a string, not knowing why it was needed, and the refactored jSoar parser implementation has the check for the parenthesis commented and marked <a href="https://github.com/soartech/jsoar/blob/master/jsoar-core/src/main/java/org/jsoar/kernel/parser/original/OriginalParserImpl.java#L2005">&ldquo;this makes no sense to me&rdquo;</a>. So the current functionality started out as an alternative for testing or something and then became the only use case, leaving dead code everywhere.</p>
+
+<p>Some of the updating work I did was already done in the [9.5] branch, but it was still interesting. There were workarounds for the old Think C and Symantech C++ compilers, between <code>THINK_C</code> and <code>__SC__</code> <code>#ifdef</code>s. I had no idea what they were and found an excellent compiler macros list project on <a href="http://sourceforge.net/p/predef/wiki/Home/">SourceForge</a>. Apparently C had no boolean variable types, either, so programmers used <code>typedef char Bool</code> and defined <code>TRUE</code> and <code>FALSE</code> manually, and part of updating to C++ code is changing those to real <code>bool</code> types.</p>
+
+<p>The value of making small, working commits was reinforced when my initial pull request broke the automated build when <code>--no-scu</code> was set. This setting causes each <code>.cpp</code> file to be compiled separately, ensuring that the build fails if a <code>#include</code> directive was forgotten somewhere. I was able to bisect the Git history and discover the problem pretty quickly.</p>
+
+<h2>Nuggets:</h2>
+
+<ul>
+<li>Alex set up <a href="http://jenkins-ci.org/">Jenkins</a> <a href="https://github.com/SoarGroup/Soar/issues/169">to test pull requests</a>, so I was able to push several times and get live feedback during another build each time.</li>
+<li>The legacy spaghetti code wasn&rsquo;t too difficult to untangle and I&rsquo;m confident I can do a lot more</li>
+</ul>
+
+
+<h2>New TODO&rsquo;s:</h2>
+
+<ul>
+<li>A printer or printer manager class to decouple the <code>agent</code> code from everything else in Soar (jSoar is <a href="https://github.com/soartech/jsoar/blob/master/jsoar-core/src/main/java/org/jsoar/kernel/tracing/Printer.java">way ahead</a> on that one).</li>
+<li>Unit tests for the lexer, preferably data-driven to reduce the amount of required recompilation</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Code Reading: The Soar Parser]]></title>
+    <link href="http://garfieldnate.github.io/blog/2014/07/13/code-reading-the-soar-parser/"/>
+    <updated>2014-07-13T05:04:54+09:00</updated>
+    <id>http://garfieldnate.github.io/blog/2014/07/13/code-reading-the-soar-parser</id>
+    <content type="html"><![CDATA[<!-- I've thought for a while that it would be fun to write a series of "code reading" posts, where I try to read and understand how some large program works and explain my findings. -->
+
+
+<p>To investigate the possibility of an upcoming project, I&rsquo;ve been wanting to know how Soar parses productions, and if there&rsquo;s any way to retrofit it to make a parser usable by various IDE&rsquo;s. I have tried to make <a href="https://github.com/garfieldnate/Soar-Production">two</a> <a href="https://github.com/garfieldnate/Java-Soar-Parser">separate</a> parsers for Soar code already, and it just seems to be difficult to imitate the real thing. If you&rsquo;d like to follow along, you can view or download the code on GitHub:</p>
+
+<p><div class="github-widget" data-repo="SoarGroup/Soar"></div></p>
+
+<p>Disclaimer: My &ldquo;critiques&rdquo; of the code are areas that I think can use some contributions or TLC. Soar was written and is maintained by programmers and researchers far greater than I, and I am not dismissing the hard work and craft that went into its construction. The Soar code has evolved over 20-30 years in an academic environment, and I expect it to have a few rough edges.</p>
+
+<h2>Step 0: Some Background Knowledge</h2>
+
+<p>OK, so I guess background knowledge would be useful for the readers. [Soar])(<a href="http://sitemaker.umich.edu/soar/home">http://sitemaker.umich.edu/soar/home</a>) is a  cognitive architecture used for creating agents. Cognitive meaning it provides the basic faculties required for gaining and using knowledge, and agents meaning programs that make choices to accomplish a goal of some kind. Soar has its own programming language, and instead of the familiar loops and functions it has productions. Soar code looks something like this:</p>
+
+<p>```tcl Example Soar code
+watch 5
+source somefile.txt
+sp {some*production</p>
+
+<pre><code>(state &lt;s&gt; ^foo |want greeting|)
+</code></pre>
+
+<p>&mdash;></p>
+
+<pre><code>(&lt;s&gt; ^operator &lt;o&gt;)
+(&lt;o&gt; ^name hello-world ^greeting |hello world|)
+</code></pre>
+
+<p>}
+<code>``
+The first two lines are commands; the first makes the command line interface much more verbose and the second loads another Soar file. The</code>sp {&hellip;}<code>is a Soar production, which is where the bulk of the language features are. Productions do all the work (thus soar is called a [production system](https://en.wikipedia.org/wiki/Production_system)). Productions match the program state ([working memory](https://en.wikipedia.org/wiki/Working_memory)) and make changes to it if the match is successful. The production above matches a state that has a</code>foo<code>attribute with a value of</code>want greeting<code>, and if that succeeds then it creates a special</code>operator` attribute which in turn has two more attributes. Working memory is organized like a network of attributes and values, and Soar cycles over the productions, changing memory and working towards a goal. This is accomplished efficiently through the <a href="https://en.wikipedia.org/wiki/Rete_algorithm">RETE</a> algorithm, which I&rsquo;d like to study another time.</p>
+
+<p>That all might leave it unclear, but at least understand that Soar is cool because it allows you to make programs that <a href="http://sitemaker.umich.edu/soar/files/mohan.pdf">play Mario</a>, <a href="http://www.isi.edu/soar/soar-ifor-project.html">fly planes</a>, or <a href="http://www.cs.cmu.edu/afs/cs/project/soar/utc/nl/doc/nl-homepage.html">talk</a> (all of those with caveats, of course; work is ongoing).</p>
+
+<h2>Step 1: Try to Build It</h2>
+
+<p>The first thing I wanted was to build Soar on my own computer. After all, if I can&rsquo;t even build it, what&rsquo;s the point in trying to modify it? I&rsquo;ve always had terrible experiences trying to build C/C++ projects on Windows. This was a little better because Windows is supported and a release is provided regularly, but there were still hiccups.</p>
+
+<p>The build instructions are <a href="">here</a>. To do a full build you need Python, SWIG, Tcl, and a C++ compiler toolchain. The build is done via <a href="http://www.scons.org/">Scons</a>, but batch and sh files are used to do initial checking of the available tools (and it&rsquo;s easier to double-click a batch file on Windows than to call Python). My first attempt ended in an uncaught error dumping messages to the screen because I had not used the Visual Studio Prompt. Once I figured this out (and <a href="https://github.com/SoarGroup/Soar/pull/161">improved</a> the message for future users) the build died again trying to generate C# bindings. This was reported and <a href="https://github.com/SoarGroup/Soar/issues/160">fixed</a>, after which I was able to do a partial build. I had some more <a href="https://github.com/SoarGroup/Soar/issues/165">trouble</a> because I was using the wrong MSVC toolchain (!), but now it builds without any issues.</p>
+
+<p>Overall, the build system is very nice. It&rsquo;s hands-off, and just works. The maintainers are very responsive and dedicated to a working cross-platform build. I do wish there were more comments in the build scripts, since I have never used Scons and had some trouble looking through it. Also it would be nice to have the build instructions in the repository instead of on a separate website.</p>
+
+<h2>Step 2: How does Soar parse Soar code?</h2>
+
+<p>The answer to this turned out to be more interesting than I thought. My own attempts at writing a single Soar parser didn&rsquo;t work very well because Soar actually has two parsers! Well, actually it has 76 parsers; one to split commands into constituents and then one for each of 75 possible Soar commands. <code>sp</code> is just one of many commands.</p>
+
+<p>Let&rsquo;s start by looking at what happens when you source a file. The code for the source command is in <code>Core/CLI/src/cli_source.cpp</code>. <code>DoSource</code> of line 80 is called, and after loading the input file into memory and doing some error checking and logging it calls <code>Source</code> of line 212. Only the first 4 lines matter for understanding the parser:</p>
+
+<p>```c++ The source command parses the input file <a href="https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_source.cpp">https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_source.cpp</a> cli_source.cpp start:212
+bool CommandLineInterface::Source(const char* buffer, bool printFileStack)
+{</p>
+
+<pre><code>soar::tokenizer tokenizer;
+tokenizer.set_handler(&amp;m_Parser);
+if (tokenizer.evaluate(buffer))
+    return true;
+</code></pre>
+
+<p>```</p>
+
+<p>It creates a new <code>tokenizer</code> and sets its handler to <code>m_parser</code>, the main CLI parser available from <code>cli_commandLineInterface.h</code>. The parser can be passed to <code>set_handler</code> because it implements <code>tokenizer_callback</code> (declared in <code>tokenizer.h</code>) by having the <code>handle_command</code> method:</p>
+
+<p>```c++ signature for the handle_command method <a href="https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/shared/tokenizer.h">https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/shared/tokenizer.h</a> tokenizer.h start:43</p>
+
+<pre><code>    /**
+     * Implement to handle commands. The words of the command are in the
+     * passed argv vector. The first entry in the vector is the command.
+     * The vector is guaranteed to never be empty, though the first command
+     * could be.
+     * @return true if the command was ok, or false if there is an error.
+     *         Returning false will stop parsing and cause
+     *         tokenizer::evaluate to return false.
+     */
+    virtual bool handle_command(std::vector&lt;std::string&gt;&amp; argv) = 0;
+</code></pre>
+
+<p>```</p>
+
+<p>Next, <code>tokenizer.h</code> tells me why I got it wrong when I tried to make my own Soar parser:</p>
+
+<p>```c++ tokenizer.h contains a Tcl parser! <a href="https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/shared/tokenizer.h">https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/shared/tokenizer.h</a> tokenizer.h  start:186
+ /**</p>
+
+<pre><code> * Essentially implements a simple Tcl parser, with some exceptions.
+ *
+ * Takes a string and farily efficiently converts it in to a series of
+ * callbacks with arguments separated in to a vector of strings (what Tcl
+ * refers to as "words").
+ *
+</code></pre>
+
+<p>```</p>
+
+<p>So I&rsquo;ve had it backwards, building a Soar production parser and then as an afterthought adding methods to parse other commands. This &ldquo;tokenizer&rdquo; parses Tcl commands and enforces rules on the individual words. For instance, this checks that curly braces match within words, and follows rules of escaping and quoting inside of and outside of quoted and curly-braced sections. This would certainly make some parts of a production parser simpler!</p>
+
+<p>So <code>tokenizer::evaluate</code> parses individual Tcl commands and sends them to the <code>handle_command</code> routine of <code>/Core/CLI/src/cli_Parser.h</code>. This then finds a <code>ParserCommand</code> object using a prefix lookup on the first word of the command; i.e. <code>wa</code> gives you the <code>watch</code> command, <code>pr</code> gives you the <code>print</code> command, etc. The prefix search is basically this:</p>
+
+<pre><code>given a command string $str
+    make a list of all commands that start with the same letter as $str
+    for each next letter in $str
+        remove the commands that don't have the same letter at the same spot
+    return the list of matching commands
+</code></pre>
+
+<p>If more than one matching command is found, then the input is ambiguous and a warning is printed and no command is executed. Hmm, there&rsquo;s a TODO note there about using a simpler lookup mechanism.</p>
+
+<p>How is the list of commands populated in the first place? Using the parser&rsquo;s <code>AddCommand</code> method. All of the normal Soar commands are added at runtime in <code>cli_CommandLineInterface.cpp</code>, and there are some other examples of <code>AddCommand</code> in the test code.</p>
+
+<p>```c++ The command line interface registers all of the Soar functions <a href="https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_CommandLineInterface.cpp">https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_CommandLineInterface.cpp</a> start:40</p>
+
+<pre><code>m_Parser.AddCommand(new cli::AddWMECommand(*this));
+m_Parser.AddCommand(new cli::AliasCommand(*this));
+m_Parser.AddCommand(new cli::AllocateCommand(*this));
+m_Parser.AddCommand(new cli::BreakCommand(*this));
+m_Parser.AddCommand(new cli::CaptureInputCommand(*this));
+...
+</code></pre>
+
+<p>```</p>
+
+<p>The commands themselves are <code>ParserCommand</code> objects and are all declared in <code>cli_Commands.h</code>. The structure of a command class is given in <code>cli_parser.h</code>:</p>
+
+<p>```c++ ParserCommand class declaration <a href="https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_Commands.h">https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_Commands.h</a> start:15</p>
+
+<pre><code>class ParserCommand
+{
+public:
+    virtual ~ParserCommand() {};
+    virtual const char* GetString() const = 0;
+    virtual const char* GetSyntax() const = 0;
+    virtual bool Parse(std::vector&lt;std::string&gt;&amp; argv) = 0;
+};
+</code></pre>
+
+<p>```</p>
+
+<p><code>GetString</code> is the name of the command and is used as the first word in the command invocation (<code>watch</code>, <code>sp</code>, etc.). This is used by the prefix lookup code discussed above. <code>GetSyntax</code> gives a usage statement in case the user invokes the command incorrectly. <code>Parse</code> is the meat of the command; it takes the list of command words and performs the action specified by them.</p>
+
+<p>Although the <code>Parse</code> method could directly contain the command actions, all of the <code>Parse</code> implementations simply parse the command and then call <code>DoXYZ</code>. These methods are declared in <code>cli_Cli.h</code> and are implemented in their own files (<code>cli_source.cpp</code>, <code>cli_break.cpp</code>, etc.). Here is the implemention of the <code>sp</code> command as an example:</p>
+
+<p>```c++ SPCommand <a href="https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_Commands.h">https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_Commands.h</a> cli_Commands.h start:3393
+   class SPCommand : public cli::ParserCommand</p>
+
+<pre><code>{
+public:
+    SPCommand(cli::Cli&amp; cli) : cli(cli), ParserCommand() {}
+    virtual ~SPCommand() {}
+    virtual const char* GetString() const { return "sp"; }
+    virtual const char* GetSyntax() const
+    {
+        return
+            "Syntax: sp {production_body}";
+    }
+
+    virtual bool Parse(std::vector&lt; std::string &gt;&amp;argv)
+    {
+        // One argument (the stuff in the brackets, minus the brackets
+        if (argv.size() &lt; 2)
+            return cli.SetError(GetSyntax());
+        if (argv.size() &gt; 2)
+            return cli.SetError(GetSyntax());
+
+        return cli.DoSP(argv[1]);
+    }
+
+private:
+    cli::Cli&amp; cli;
+
+    SPCommand&amp; operator=(const SPCommand&amp;);
+};
+</code></pre>
+
+<p>```</p>
+
+<p>The <code>DoSP</code> command is in <code>cli_sp.cpp</code>. Here, some craziness comes out. We find <code>soarAlternateInput</code>, which has no documentation and relates to fuctionality that is rather unclear. Then we have the use of a global agent provided by the global <code>m_pAgentSML</code> of <code>cli_CommandLineInterface.h</code>.</p>
+
+<p>```c++ Parsing a Soar production <a href="https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_sp.cpp">https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_sp.cpp</a> cli_sp.cpp start:42
+ agent* agnt = m_pAgentSML->GetSoarAgent();</p>
+
+<pre><code>soarAlternateInput( agnt, productionString.c_str(), const_cast&lt;char*&gt;(") "), true );
+set_lexer_allow_ids( agnt, false );
+get_lexeme( agnt );
+
+production* p;
+unsigned char rete_addition_result = 0;
+p = parse_production( agnt, &amp;rete_addition_result );
+
+set_lexer_allow_ids( agnt, true );
+soarAlternateInput( agnt, 0, 0, true ); 
+</code></pre>
+
+<p>```</p>
+
+<p>The lexer and parser files in <code>\Core\SoarKernel\src</code> work together to load a production, with the parser repeatedly calling <code>get_lexeme</code> (line 747 of <code>lexer.cpp</code>) to find the next token. After checking for comments and doing some other stuff I don&rsquo;t get yet (<code>fake_rparen_at_eol</code>) it calls a lexing method based on the current character in the buffer using <code>lexer_routines</code> as a dispatch table.</p>
+
+<p>```c++ lexer employs a dispatch table  <a href="https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/SoarKernel/src/lexer.cpp">https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/SoarKernel/src/lexer.cpp</a> lexer.cpp start:840
+  record_position_of_start_of_lexeme(thisAgent);
+  if (thisAgent->current_char!=EOF)</p>
+
+<pre><code>(*(lexer_routines[static_cast&lt;unsigned char&gt;(thisAgent-&gt;current_char)]))(thisAgent);
+</code></pre>
+
+<p>  else</p>
+
+<pre><code>lex_eof(thisAgent);
+</code></pre>
+
+<p>```</p>
+
+<p>The explicit functionality of the tokenizer and parser are nicely separated, meaning that production tokenizing can be done context-free, or without the parser sharing knowledge with the tokenizer. However, things are actually crazier than that because the lexer is tied intimately with an agent:</p>
+
+<p>```c++ Lexer state stored in an agent <a href="https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/SoarKernel/src/agent.h">https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/SoarKernel/src/agent.h</a> agent.h start:256
+  /<em> &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash; Lexer stuff &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; </em>/</p>
+
+<p>  lexer_source_file * current_file; /<em> file we&rsquo;re currently reading </em>/
+  int                 current_char; /<em> holds current input character </em>/
+  struct lexeme_info  lexeme;       /<em> holds current lexeme </em>/
+  Bool                print_prompt_flag;
+```</p>
+
+<p>The <code>get_lexeme</code> method requires an agent as an argument, even though the agent was provided via <code>init_lexer</code>. During tokenization, <code>get_lexeme</code> sets the <code>lexeme</code> and <code>current_char</code> fields in the agent. So even though there&rsquo;s a nice separation of parser and lexer/tokenizer, there is potential there for the parser to change the state of the lexer, the input buffer, etc. It doesn&rsquo;t look like that happens, but it&rsquo;s not a good possibility. You also have to call <code>get_lexeme</code> before calling <code>parse_production</code>, and <code>parse_production</code> adds the input production to the RETE network directly instead of returning a parsed production. There&rsquo;s severe coupling between the lexer, the agent, and the parser. This could probably be remedied easily. Ideally the lexer would need only text and return a stream of tokens with no side effects; the parser would instantiate the lexer and would have access to an agent for the RHS functions.</p>
+
+<h2>Step 4: How does <code>gp</code> work?</h2>
+
+<p><code>gp</code> is a command that generates new Soar productions by permuting values inside of square brackets in an otherwise normal-looking production. <code>gp</code> was an added mystery to me because its syntax was almost the same as that for <code>sp</code>, but it allowed syntactic variations deep in the parse tree. Here is an example <code>gp</code> statement:</p>
+
+<p>``` tcl Example gp <a href="https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Tests/Agents/testgp.soar">https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Tests/Agents/testgp.soar</a> testgp.soar
+gp {gp*test1
+(state <s> ^operator <o> +</p>
+
+<pre><code>       ^someflag [true false])   # some normal values
+</code></pre>
+
+<p>(<o> ^name foo</p>
+
+<pre><code> ^att [val1 1.3 |another val|])  # a value with a space, in pipes
+</code></pre>
+
+<p>&mdash;>
+(<s> ^operator <o> = 5)
+}
+```</p>
+
+<p>This turned out to be simple once I understood CLI parsing. <code>DoGP</code> is located in <code>/Core/CLI/src/cli_gp.cpp</code>. It simply looks for the special <code>[]</code> syntax in a string and generates new strings to be loaded as productions by <code>DoSP</code>. This is simple and easy, but means that there may not be an easy way to do syntax coloring for it.</p>
+
+<p>```c++ DoGP calls DoSP <a href="https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_gp.cpp">https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_gp.cpp</a> cli_gp.cpp start:276</p>
+
+<pre><code>if(!DoSP(generatedProduction))
+{
+    return false;
+}
+</code></pre>
+
+<p>```</p>
+
+<h2>Conclusions</h2>
+
+<p>Reading the Soar parser code is an awesome exercise that I plan to continue. I probably won&rsquo;t write up another post as detailed as this one, instead writing a code guide once I&rsquo;ve grokked it well enough. That will probably be a better contribution to the writers, anyway.</p>
+
+<p>Reading it was actually an interesting bit of archaeology, too. There are notes sprinkled about with author initials and dates back to at least 1994. Notes like that would not have been necessary if a version control system had been available or in use. There are also bug numbers referring to a long-gone database, references to code that doesn&rsquo;t exist anymore, and commented commented comments. I wish that project history were available prior to 2010.</p>
+
+<p>The design of the Soar parser makes a lot of sense to me now. A Tcl parser parses commands, verifying quotes, escaping, comments and brace or quote matching; a command object is located and is given the command arguments; the command object then parses the arguments and takes whatever action is required. It should be a simple process to create and register new commands in Soar.</p>
+
+<p>The parser and tokenizer for Soar productions are not difficult to understand as far as their operation goes. However, the strong coupling and use of global variables need improvement, especially if <a href="http://sourceforge.net/p/soar/mailman/message/22147559/">parallelization is a concern</a>.</p>
+
+<h3>Low-Hanging Fruits</h3>
+
+<ul>
+<li>Rename the parsers and tokenizers so they don&rsquo;t get confused:
+
+<ul>
+<li><code>Core/SoarKernel/src/lexer</code> &ndash;> <code>Core/SoarKernel/src/production_tokenizer</code></li>
+<li><code>Core/SoarKernel/src/parser</code> &ndash; <code>Core/SoarKernel/src/production_parser</code></li>
+<li><code>Core/shared/tokenizer</code> &ndash;> <code>Core/CLI/src/cli_tokenizer</code></li>
+<li><code>Core/CLI/src/cli_parser</code> &ndash;> this one is fine</li>
+</ul>
+</li>
+<li>add a project README containing build instructions</li>
+<li>consistency
+
+<ul>
+<li>choose tabs or spaces, but not both!</li>
+<li>put declarations at either top or bottom of file</li>
+<li>capitalize or don&rsquo;t capitalize names; camelCase or snake_case</li>
+</ul>
+</li>
+<li>find and remove commented-out code</li>
+<li>read and grok the code, then add comments about what it does</li>
+</ul>
+
+
+<p>A less low-hanging fruit would be trying to address some of the many <code>TODO</code>/<code>BUGBUG</code>/<code>FIXME</code>/<code>need</code> notes sprinkled throughout. Interestingly, searching <code>FIXME</code> gives lots of results in the included Scons distribution, as well!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CS 240 Web Crawler at BYU]]></title>
+    <link href="http://garfieldnate.github.io/blog/2011/11/03/cs-240-web-crawler-at-byu/"/>
+    <updated>2011-11-03T00:00:00+09:00</updated>
+    <id>http://garfieldnate.github.io/blog/2011/11/03/cs-240-web-crawler-at-byu</id>
+    <content type="html"><![CDATA[<p>I recently polished off the web crawler project for CS 240 at BYU. It&rsquo;s probably the most talked-about project in the CS major, and the cause of so many students retaking the class.</p>
+
+<p>The specification for the web crawler assignment can be found <a href="http://students.cs.byu.edu/~cs240ta/fall2011/projects/crawler/">here</a>. Basically, given a start URL, the crawler finds every link on a page, follows them, downloads the pages, and indexes each of the words on a page, as long as they are not in a given stop words file; then it follows the links from that page, and so on. All of the indexed information is printed out to XML files. The code also has to conform to proper style, and no memory leaks are allowed.<br />For those who still need to do the project or haven&rsquo;t taken the following exam yet, I thought I&rsquo;d post a note or two of help.</p>
+
+<p>First off, check your constructors! In an initialization for a templatized BST node, I had been invoking the default copy constructor. A copy constructor looks like this:</p>
+
+<pre><code>T(const T &amp;amp; other)
+</code></pre>
+
+<p>In the contained object, I had only implemented the operator= construction. My class T had pointers in it, and those pointers were to objects which were allocated on the heap with the new keyword. The default copy constructor copied the pointers, and when the copy of the object of type T was deleted, so were the structures that its pointers pointed to. Since the original object pointed to the same structures, that object would then cause a segfault when destroyed because it would try to delete non-existent structures. Ouch!</p>
+
+<p>That bug wasted a good 6 hours of my life. Needless to say, I was a little scared of the next assignment: a debugging exam. The class TAs put 4 bugs into our code (they didn&rsquo;t touch comments, asserts, or unit tests), and we had 3 hours to find them. Here&rsquo;s what the TA&rsquo;s did to my code:</p>
+
+<ul>
+<li>In my URL class, I call erase on a string representing a relative URL to get ride of the &ldquo;../&rdquo; at the beginning. The correct code is url.erase(0,3), but the TAs changed it to url.erase(0,2).</li>
+<li>In my BST Insert method, there is a control structure that determines whether to put a value on a node&rsquo;s left or right, and the TA&rsquo;s changed one of the left&rsquo;s to right&rsquo;s, i.e. <code>node-&gt;left = new BSTNode&lt;T&gt; (v);</code> was changed to <code>node-&gt;right = new BSTNode&lt;T&gt; (v);</code>.</li>
+<li>I have several boolean flags in an HTMLparser class which keep track of whether processing is inside of a header, title, body, or html tag. They should all be false at the beginning of processing, but one of them was changed to true, e.g. <code>constructor():titleFlag(false),bodyFlag(false),headerFlag(true){...</code></li>
+<li>The last bug was a memory leak. In my linked list Insert method, I declare a linked list node, use a control structure to determine the proper location of the new node, and then set the node with a call to <code>new</code> and insert it in that location. The TA&rsquo;s changed the declaration to be a definition which used the <code>new</code> keyword, so I always allocated one extra node on the heap.</li>
+</ul>
+
+
+<p>The first three bugs I was I able find through unit testing. The last one I pinpointed using valgrind and print statements; however, even though it was staring me in the face, I couldn&rsquo;t find it and only got 75% on the exam.</p>
+
+<p>In case somebody finds the code interesting/useful, I&rsquo;ll post it <a href="https://sites.google.com/site/complingfiles/files/crawler.7z?attredirects=0&amp;d=1">here</a> (no cheating!). Make with <code>make bin</code>. Run with <code>bin/crawler &lt;start url&gt; &lt;stopwords file&gt; &lt;output file&gt;</code>.</p>
+]]></content>
+  </entry>
+  
+</feed>

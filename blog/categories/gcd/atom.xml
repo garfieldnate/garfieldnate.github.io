@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Gcd | Garfield Nate]]></title>
+  <link href="http://garfieldnate.github.io/blog/categories/gcd/atom.xml" rel="self"/>
+  <link href="http://garfieldnate.github.io/"/>
+  <updated>2015-02-13T01:21:37+09:00</updated>
+  <id>http://garfieldnate.github.io/</id>
+  <author>
+    <name><![CDATA[Nate Glenn]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Extended Euclidian Algorithm in Perl]]></title>
+    <link href="http://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl/"/>
+    <updated>2013-04-15T00:00:00+09:00</updated>
+    <id>http://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl</id>
+    <content type="html"><![CDATA[<p>This week I learned about the extended Euclidian algorithm for finding a linear combination of two numbers that yields their GCD. For example, the GCD of 213 and 171 is 3, and -4<em>213 + 5</em>171 = 3. This algorithm is important in the <a href="http://en.wikipedia.org/wiki/RSA_(algorithm">RSA</a>) encryption scheme.</p>
+
+<p>I had quite a difficult time getting myself to fully understand how it works. I jumped between <a href="http://en.wikipedia.org/wiki/Extended_euclidean_algorithm">Wikipedia</a>, my <a href="http://www.amazon.com/Data-Structures-Problem-Solving-Using/dp/0321541405/ref=sr_1_1?ie=UTF8&amp;amp;qid=1365529203&amp;amp;sr=8-1&amp;amp;keywords=data+structures+and+problem+solving+using+java">data structures textbook</a> (don&rsquo;t buy it), a <a href="http://www.youtube.com/watch?v=twlo21D9LY0">YouTube video</a>, and this excellent <a href="http://public.csusm.edu/aitken_html/m422/Handout1.pdf">number theory class lecture</a>. The lecture is the best, though I think there may be a typographical error in the recursive formula.</p>
+
+<p>The basic idea uses recursion with an easy base step. We call <code>Euclid(a,b)</code> with <code>a ≥ b</code>:</p>
+
+<ul>
+<li>The base case is when b is 0. The GCD of x and 0 is always x, and the coefficients to produce a GCD of 0 are 1 and 0 (or anything else): 1*x + 0(or anything)*0 = x. So the base case returns (1,0)</li>
+<li>Any other step starts by recursively calling <code>Euclid(b, a mod b)</code>. We know that the GCD of a and b is the same as the GCD of b and a mod b (lemma 12 in the lecture). This recursive call is guaranteed to eventually get to the base case of b = 0.</li>
+<li>After finding the coefficients for producing the GCD from b and a mod b, we can calculate the ones for producing the GCD from a and b, because a mod b can be put in terms of a and b (see the code comments for the formulas).</li>
+</ul>
+
+
+<p>To really help myself understand the whole thing, I wrote a Perl script to illustrate it. I put in lots of comments as I worked my way through it.</p>
+
+<p>``` perl The extended Euclidian algorithm
+use strict;
+use strict;
+use warnings;
+use 5.010;</p>
+
+<h1>start with a >= b</h1>
+
+<p>my @nums = sort {$b &lt;=> $a} @ARGV;</p>
+
+<p>gcd(@nums);</p>
+
+<h1>input: two numbers (a,b) a >= b > 0</h1>
+
+<h1>output: the coefficients which which yield their GCD;</h1>
+
+<p>sub gcd {
+ my ($a, $b) = @_;</p>
+
+<p> #base case; the GCD of x and 0 always x;
+ #and the coefficients will always be 1 and 0 (or anything) because</p>
+
+<p> #1<em>x + 0</em>0 = x</p>
+
+<p>if($b == 0){
+  say &ldquo;GCD is $a&rdquo;;
+  say &ldquo;(a,b) = ($a,$b), coefficients = (1,0)&rdquo;;
+  say &ldquo;1x$a + 0x$b = $a&rdquo;;
+  return (1, 0);
+ }</p>
+
+<p> #otherwise, we evaluate u and v for k = ub + vr, where r is a mod b
+ #gcd(b, a%b) gives the same value
+ my $remainder = $a % $b;
+ my ($u, $v) = gcd($b, $remainder);
+ #now we can find k in terms of a and b because we know r in terms a and b
+ #r = a &ndash; bq, where q = the whole part of a/b
+ #k = ub + vr = ub + v(a &ndash; bq) = va + b(u-qv)
+ #so the coefficient on a is v, and the coefficient on b is 1-qv
+ my $x = $v;
+ my $q = int(($a/$b));
+ my $y = $u &ndash; $q<em>$x;
+ say &ldquo;(a,b) = ($a,$b), coefficients are ($x,$y)&rdquo;;
+ say &ldquo;${x}x$a + ${y}x$b = &rdquo; . ($x</em>$a + $y*$b);
+ return ($x, $y);
+}
+```</p>
+
+<p>Feel free to leave a comment if you think that something could be stated more clearly. I hope it helps anyone else trying to learn how the extended Euclidian algorithm works.</p>
+]]></content>
+  </entry>
+  
+</feed>

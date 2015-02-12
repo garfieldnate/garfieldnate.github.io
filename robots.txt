@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://garfieldnate.github.io/sitemap.xml 
