@@ -1,0 +1,857 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Garfield Nate</title>
+  <meta name="author" content="Nate Glenn">
+
+  
+  <meta name="description" content="I recently released the Soar Tools package for Sublime Text, and I took a few notes that might help the next author. Sublime Text is pretty awesome &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://garfieldnate.github.io">
+  <link href="/favicon.png" rel="icon">
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Garfield Nate" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+
+  <!-- Load jQuery from google for better caching; if that fails, load the local copy -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- For GitHub repo display; use with the githubrepo-octopress plugin -->
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+<!--script>
+  $.noConflict()
+</script-->
+
+<script src="/javascripts/libs/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+<script src="/javascripts/menu.min.js" type="text/javascript"></script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-26857949-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Garfield Nate</a></h1>
+  
+    <h2>Big Fat Hairy Programmer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:garfieldnate.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li>
+    <a href="/resume/resume-en.html">Resume</a>
+    <ul>
+        <il><a href="/resume/resume-en.html">English</a></il>
+        <il><a href="/resume/resume-ja.html">日本語</a></il>
+    </ul>
+  </li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/">Notes on Writing a Syntax Highlighter for Sublime Text</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-15T22:59:35+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I recently released the <a href="http://garfieldnate.github.io/Sublime-Soar-Tools/">Soar Tools</a> package for Sublime Text, and I took a few notes that might help the next author. Sublime Text is pretty awesome in a lot of ways, but the documentation is more tutorial + forums than it is a thorough explanation. I mainly followed the directions <a href="http://sublime-text-unofficial-documentation.readthedocs.org/en/latest/extensibility/syntaxdefs.html">here</a>. My tips are as follows:</p>
+
+<ul>
+<li>Don&rsquo;t try to copy that BNF grammar into tmLanguage format. It&rsquo;s not designed for specifying grammars, it&rsquo;s designed for highlighting. That means that it&rsquo;s robust and will highlight while you&rsquo;re typing instead of waiting until you have a compilable program to highlight. This is a big advantage, especially for Soar, where there&rsquo;s a lot of typing to get a production sourcable. Instead of making a fully recursive grammar, pick out the few big areas that should be treated differently, such as the inside of a class or other curly-braced section, and detect them in the main <code>patterns</code> list, parsing the insides with patterns in the <code>repository</code>.</li>
+<li><p>Be careful about the YAML syntax. It looks simple, but you can mess it up easily. For example, <code>paterns</code> is the ONLY item that takes an array for a child. That means that you should have</p>
+
+<pre><code>  patterns:
+  - comment:...
+</code></pre>
+
+<p>but no other keyword will have a child starting with a dash (<code>-</code>).</p></li>
+<li><p>You need to write the rules in order of application. No two rules will apply to the same section of text, so it&rsquo;s first come, first served. For example, you can&rsquo;t match a JavaDoc comment block starting with <code>/**</code> in one rule and <em>then</em> match <code>@arg</code>, etc. in a separate rule. The proper way to do that is to use a <code>begin/end</code> rule with a nested <code>patterns</code> section. Put quoted strings first, and then comments. That way `&ldquo;this is a //string&rdquo;`` doesn&rsquo;t turn into half-string, half-comment.</p></li>
+<li>Regexes are for the most part Perly; lookahead (<code>(?!xyz)</code>)works, but I haven&rsquo;t tested other look-arounds. One gotcha to keep in mind is that <code>*</code> and <code>+</code> do not match greedily, unlike Perl.</li>
+<li><code>include:</code> sections must be inside <code>patterns:</code> sections.</li>
+<li>You&rsquo;ll do lots of re-loading and restarting. An error box popped up saying something strange when you converted/saved the grammar? Restart sublime after trying a fix. If you get a fail message when Sublime reloads, then you didn&rsquo;t fix it and you need to try again, with another restart. Highlighting will not work at all until you&rsquo;ve done a restart with it working. (This has apparently been improved in build 3068, but I don&rsquo;t have access as a trial user.) You changed something in one syntax file that&rsquo;s included in the rule of another? Compile/save both grammars (compile meaning turn your YAML into plist XML).</li>
+</ul>
+
+
+<p>I hope this saves the next developer some time. Overall, the biggest gotcha for me was just realizing that I wasn&rsquo;t writing a BNF-style grammar to completely validate the syntax in a file, but a list of patterns and the scopes that they create or match in. Once I understood this, actually writing the rules was not too difficult a task.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/06/my-new-toy-algomation/">My New Toy: Algomation</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-06T20:20:34+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2015/01/06/my-new-toy-algomation/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2015/01/06/my-new-toy-algomation/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Lately I&rsquo;ve been losing sleep trying to understand an algorithm I read about in an <a href="http://www.inf.upol.cz/trnecka/fka/addintent.pdf">academic publication</a>. Part of the problem was that the <a href="https://en.wikipedia.org/wiki/Analogical_modeling">application</a> I was applying it to required a sort of reversal, which was confusing. But a bigger part of the problem was that I just couldn&rsquo;t &ldquo;see&rdquo; it. I&rsquo;d lay in bed, trying to imagine working with ping-pong balls on a string, or marbles on fishing line, or anything I could really get my &ldquo;mind&rsquo;s hands&rdquo; on.</p>
+
+<p>A few days ago I thought to myself, &ldquo;there has to be a better way; there has to be a tool to help me do this.&rdquo; In my life time I&rsquo;ve done very little visual work, all of it bad, and I know I can&rsquo;t be alone. But after taking Robert Sedgewick&rsquo;s <a href="https://www.coursera.org/course/algs4partI">algorithms</a> course and seeing all of the lovely visualizations from his lab, I knew there must be tools out there for visualizing algorithms, at least for educational use. Surprisingly, I didn&rsquo;t find too many quick ways to do this, but one recently created service fit the bill.</p>
+
+<p>It&rsquo;s called <a href="http://www.algomation.com/">Algomation</a>. Lots of algorithms are available just for viewing on the home page. Each algorithm gets a viewing window for whatever visualization is provided, and the user can rewind as needed. A handy info box on the side gives information on the current operation, variables, and even code location. The visualizations themselves look very nice.</p>
+
+<p>Once you&rsquo;re registered, you can create new algorithms or fork from others' creations. Here&rsquo;s mine:</p>
+
+<iframe allowfullscreen src="http://www.algomation.com/embeddedplayer?embedded=true&algorithm=54a68d7ea7f8e70200042664" width="900" height="556" seamless="seamless" frameborder="0" style="border:1px solid lightgray" scrolling="no"></iframe>
+
+
+<p>Granted, this is a little rough around the edges (and I have used the heck out of the feedback form); however, this is way better than imagining ping-pong balls on a string, and now I <em>really</em> understand how AddIntent works. The service is still young, and I have high hopes for this becoming an expansive library of algorithm visualizations.</p>
+
+<p>Here&rsquo;s my wishlist (in no particular order):</p>
+
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Rete_algorithm">RETE</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Analogical_modeling">Analogical Modeling</a>, and other machine learning algorithms</li>
+<li><a href="https://en.wikipedia.org/wiki/CYK_algorithm">CKY</a>, and other parsing algorithms</li>
+<li><a href="https://en.wikipedia.org/wiki/Formal_concept_analysis#Algorithms_for_generating_formal_concepts_and_constructing_concept_lattices">Close-by-One</a>, and other FCA algorithms</li>
+<li><a href="https://en.wikipedia.org/wiki/Cooley%E2%80%93Tukey_FFT_algorithm">Cooley-Tukey Fast Fourier Transform</a></li>
+</ul>
+
+
+<p>What&rsquo;s on your wishlist?</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/09/the-oh-so-exotic-grocery-list/">The Oh So Exotic Grocery List</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-09T13:59:26+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2014/11/09/the-oh-so-exotic-grocery-list/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2014/11/09/the-oh-so-exotic-grocery-list/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Since Erika is working and I am not, I try to take care of the apartment by shopping for food, cleaning and cooking as much as possible. I wrote out a list of everything that was needed and headed to Hallow&rsquo;s to do the week&rsquo;s shopping.</p>
+
+<p>While I was picking out some tofu for mabodofu, two little 7 or 8-year-old girls ran up to me and started talking excitedly. I felt a little weird; a grown man talking to little girls at the super market might be considered a little creepy in the US. They asked me if I would be their friend and I thought &ldquo;what the heck, sure, we&rsquo;re friends&rdquo; thinking that would be the end of it. They ran off excitedly and I resumed my shopping.</p>
+
+<p>As I was looking at chahan (fried rice) mixes they ran up again. I think they were playing tag but became distracted by my foreign-ness. They asked what my terribly scribbled shopping list was, and I told them it was just a list. They were excited to see something so exotic, and ran off to play some more tag.</p>
+
+<p>Then, when I was looking at soy sauce, they ran up with <em>another</em> little girl to introduce us. This girl was more shy. They told her, &ldquo;watch! he&rsquo;s SOOO good&rdquo;, and then turned to me and said &ldquo;say it!&rdquo;. &ldquo;Say what?&rdquo; &ldquo;English.&rdquo; &ldquo;What English?&rdquo; She was a little frustrated that I didn&rsquo;t know what she was talking about, and she stuck her finger into my shopping list. &ldquo;This English!&rdquo; &ldquo;Oh, oh, uh, sure. Ahem. Sour cream. Olive oil. Chicken Thighs&hellip;&rdquo; This elicited impressed squeals from the girls. &ldquo;Wow! He&rsquo;s so good!&rdquo; They than ran off again.</p>
+
+<p>They came back again later to ask me how to say &ldquo;hide and seek&rdquo;, which they could not pronounce, so I gave it to them again in katakana-English (haido ando shiiku). They knew cat and dog, though. They came back one final time when I was looking at onions to asked me the darndest question. &ldquo;Hey, um, sensei [they assumed that because I was a foreigner that I was an English teacher], how did you get SOOO good at English?&rdquo; This caused me to laugh heartily. I explained to them that I spoke English as a child, as did my family, and I didn&rsquo;t learn Japanese until I was 20. This elicited only puzzled looks from them. English is so hard; why wouldn&rsquo;t you just speak Japanese? They obviously learned English without learning about other countries in school. They then ran off again to continue their game of かくれんぼう (kakurenbou).</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/09/07/yotchare/">Yotchare!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-07T21:59:33+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2014/09/07/yotchare/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2014/09/07/yotchare/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I haven&rsquo;t written as much lately as I should have, so here are some things that happened in August.</p>
+
+<p>The most important Kasaoka event in August was the Yotchare festival. Summer in Japan is when most of the festivities happen, and students get August off of school. Kasaoka has a parade where everyone dances the Yotchare, or their choreographed version of it. A thousand people gathered on main street, and 30-40 groups danced down the street. A camera crew from the local Kasaoka TV station was there.</p>
+
+<p>Erika and I had originally planned on participating with KIEA (the international organization in town), but we didn&rsquo;t make it to the practices. We drove downtown with Misao&rsquo;s family and walked along the street watching the performances. Misao took us to the back of the parade where the groups start, and suddenly we were pushed out with the rest of the members from KIEA and had to figure out the dance, while of course being recorded and broadcasted live. Misao was nice enough to lend Erika a kimono for the event, but I was especially embarassed because I was wearing a junkie t-shirt, cargo shorts, and my sandals with holes in them (as if being tall and blonde don&rsquo;t make me stand out enough!). Most of the rest of the group were wearing either a nice kimono or nice traditional dress from their country (looked mostly like India or Thailand?). We did manage to figure out the dance, though, and the KIEA group won the 一生懸命で賞, or the &ldquo;you did it with all your might&rdquo; prize!</p>
+
+<p><img class="center" src="/images/content_images/yottyare-1.jpg" title="KIEA doing the Yotchare dance" ></p>
+
+<p><img class="center" src="/images/content_images/yottyare-2.jpg" title="Here you can see a few of the many people taking pictures of us. Those giant lights are for the news crew." ></p>
+
+<p>There are some other cool pictures online. This one from facebook shows some people dressed as Ebisu, the god of commerce, and some in Kabuni suits (the local mascot is Kabuni, a cartoon horseshoe crab).</p>
+
+<p><img class="center" src="https://scontent-a-ams.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/p180x540/10537742_1446994242253771_944159117839706341_n.jpg?oh=b4e45158341bff97a2ed0510a9fbe2a2&oe=54910D78" title="Yotchare'ers dressed as Ebisu and Kabuni" ></p>
+
+<p>Weeks later, some people who meet me for the first time still say &ldquo;oh yeah, you were in the parade!&rdquo;</p>
+
+<p>&ldquo;Yotchare&rdquo;, by the way, means &ldquo;welcome&rdquo; in the local dialect.</p>
+
+<p>Later in the month was the annual fireworks festival, done in every city across Japan around the same time. This event is also attended by many wearing kimono and geta. They actually distributed a complete program for the show, describing the size of every firework that was to be ignited every minute of the show, and who paid for it. I had to make a quick trip back to the apartment because I forgot my <a href="https://en.wikipedia.org/wiki/Phonophobia">earplugs</a>!</p>
+
+<p><img class="center" src="/images/content_images/August-2014-fireworks.jpg" title="Kasaoka fireworks" ></p>
+
+<p>Bentley took me on a long bike ride to <a href="https://en.wikipedia.org/wiki/Asakuchi,_Okayama">Asakuchi</a>. It has a nice beach and an interesting formation of three islands:</p>
+
+<p><img class="center" src="/images/content_images/mittsu-shima.jpg" title="mitsu shima (three-island)" ></p>
+
+<p>The view from Yorishima park is also amazing, if you can get there:</p>
+
+<p><img class="center" src="/images/content_images/bentley-climbing.jpg" title="Bentley climbing the mountain to Yorishima park. Erika thinks this would make a nice Nike advertisement." ></p>
+
+<p><img class="center" src="/images/content_images/yorishima-view.jpg" title="The view of Asakuchi from Yorishima park" ></p>
+
+<p>Erika and I went back to eat at the cafe and take pictures later:</p>
+
+<p><img class="center" src="/images/content_images/erika-ooshima.jpg" title="Erika in front of a view of the ocean from Oshima" ></p>
+
+<p>We celebrated Misao&rsquo;s birthday at her daughter, Sayo&rsquo;s, house:</p>
+
+<p><img class="center" src="/images/content_images/misao-birthday.jpg" title="Misao and her birthday cake(s). The TV is playing a YouTube party with a hundred gaijin." ></p>
+
+<p>That was particularly fun because we had somen in one of these enclosed river things (<a href="http://www.amazon.co.jp/%E5%AE%B6%E5%BA%AD%E7%94%A8-%E3%81%9D%E3%81%86%E3%82%81%E3%82%93%E6%B5%81%E3%81%97%E5%99%A8-%E6%96%B0%E7%AB%B9%E5%8F%96%E7%89%A9%E8%AA%9E-%E6%B5%81%E3%81%97%E3%81%9D%E3%81%86%E3%82%81%E3%82%93%E6%A9%9F-%E6%B5%81%E3%81%97%E3%81%9D%E3%81%86%E3%82%81%E3%82%93%E5%99%A8/dp/B005C0EJP0">picture on Amazon</a>). Traditionally the noodles are sent down a long bamboo pipe and whoever wants some plucks it out. This thing uses a pump to send the noodles around in circles until someone wants some. Neat! You get a thousand points if you can manage to grab a cherry tomato from the stream using chopsticks.</p>
+
+<p>We went to eat Indian food in Fukuyama, and on the way found a super nice library. They have this neat water-themed architecture:</p>
+
+<p><img class="center" src="/images/content_images/erika-fukuyama-library.jpg" title="Erika at the Fukuyama library." ></p>
+
+<p>The other side of the building has a waterfall staircase parallel with the regular staircase, but I couldn&rsquo;t get a good picture.</p>
+
+<p>Also, a random picture from Fukuyama for my fire-fighting uncle:</p>
+
+<p><img class="center" src="/images/content_images/fukuyama-fire-hydrant.jpg" title="A decorated Fukuyama fire hydrant with a fire-lady on it" ></p>
+
+<p>The decorations on the manholes/fire hydrants are different in every town and lots of them are painted like this one. Just one of the many ways Japanese people give their towns character.</p>
+
+<p>Lastly, we got a new bookshelf for our apartment! We love it. Hopefully, carrying it home in the rain will be the most dangerous thing I ever do in Japan!</p>
+
+<p><img class="center" src="/images/content_images/bookshelf-bike.jpg"></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/13/2-knuth-classics-are-freely-available/">Knuth Classics Are Freely Available</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-13T12:50:29+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2014/08/13/2-knuth-classics-are-freely-available/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2014/08/13/2-knuth-classics-are-freely-available/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Donald Knuth wrote TeX in C/WEB. WEB is his system for writing literate programs which become both source code and typeset documents explaining the program&rsquo;s operation. Some of his programs have been published: <a href="http://www.goodreads.com/book/show/499934.Computers_Typesetting_Volume_B">TeX: The Program</a> and <a href="http://www.goodreads.com/book/show/1746886.Computers_Typesetting_Volume_D">Metafont: The Program</a>. Others have not: I don&rsquo;t believe Bibtex was published in book form, for example.</p>
+
+<p>All of these works are available online, though you have to generate the PDF yourself. The TeX live distribution (included in MikTeX, among others) comes with Knuth&rsquo;s WEB system for doing this. If you want a copy of TeX: The Program and you have TeX live, you can download some WEB programs from <a href="http://tug.org/texlive/devsrc/Build/source/texk/web2c/">http://tug.org/texlive/devsrc/Build/source/texk/web2c/</a> and convert them yourselves. Let&rsquo;s do TeX as an example. Download tex.web and tex.ch. Then do this:</p>
+
+<pre><code>weave tex.web tex.ch tex.tex
+pdftex tex.tex
+</code></pre>
+
+<p>Voila! One Knuth classic ready for reading. <code>weave</code> was available on my path because I have MikTeX installed on my computer. I did hit one snag- the first time I downloaded one of these files, I viewed it in the browser and then copied and pasted the entire thing into a text editor and saved it. This turned all of the newlines into Windows-style CRLF&rsquo;s, and <code>weave</code> would die with the unhelpful message, <code>read operation failed</code>. The WEB system only works with Unix-style newlines, so make sure you download the file as-is if you are on Windows. The change file is also required for whatever reason, so if you don&rsquo;t want it, just create a dummy change file containing <code>%</code> (a single empty comment).</p>
+
+<p>Overall I&rsquo;m pretty happy that it was so easy to generate these documents from such old sources. I wonder how difficult it will be to build the executables.</p>
+
+<hr />
+
+<p>Available programs:</p>
+
+<ul>
+<li>bibtex</li>
+<li>dvicopy</li>
+<li>dvitype</li>
+<li>gftodvi</li>
+<li>gftopk</li>
+<li>gftype</li>
+<li>mf (Metafont)</li>
+<li>mft (older Metafont?)</li>
+<li>patgen</li>
+<li>pktogf</li>
+<li>pktype</li>
+<li>pltotf</li>
+<li>pooltype</li>
+<li>tangle</li>
+<li>weave</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/10/five-things-we-need-to-know-about-technological-change/">Five Things We Need to Know About Technological Change</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-10T22:28:41+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2014/08/10/five-things-we-need-to-know-about-technological-change/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2014/08/10/five-things-we-need-to-know-about-technological-change/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3><a href="http://www.cs.ucdavis.edu/~rogaway/classes/188/materials/postman.pdf">Niel Postman: Five Things We Need to Know About Technological Change</a></h3>
+
+<blockquote><p>To a man with a hammer, everything looks like a nail. We may extend that truism:&hellip; To a person with a computer, everything looks like data&hellip; every technology has a prejudice. Like language itself, it predisposes us to favor and value certain perspectives and accomplishments. In a culture without writing, human memory is of the greatest importance, as are the proverbs, sayings and songs which contain the accumulated oral wisdom of centuries. That is why Solomon was thought to be the wisest of men. In Kings I we are told he knew 3,000 proverbs. But in a culture with writing, such feats of memory are considered a waste of time, and proverbs are merely irrelevant fancies. The writing person favors logical organization and systematic analysis, not proverbs. The telegraphic person values speed, not introspection. The television person values immediacy, not history. And computer people, what shall we say of them? Perhaps we can say that the computer person values information, not knowledge, certainly not wisdom. Indeed, in the computer age, the concept of wisdom may vanish altogether.</p></blockquote>
+
+<p>I can&rsquo;t help but feel he hit the nail on the head in helping me spot my own concerns about how I use computers or even books now. It reminds me of a quote from <a href="http://www.amazon.com/The-High-Beta-Rich-Wealthy-Bubble/dp/0307589897">The High Beta Rich</a> saying that rich people who spend lavishly end up not being able to get out of bed in the morning without $250,000. Because we are so rich in information, we end up craving it and becoming slave to it, instead of learning to accomplish more with less. We need to use information to better ourselves instead of just hoarding it or showering in it.</p>
+
+<p>Another bias introduced by modern computers is multitasking. The machine multitasks, so we also multitask constantly. It&rsquo;s not good for concentration or productivity (<em>becomes self conscious and switches to editor&rsquo;s distraction-free mode</em>).</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/08/schools-kill-creativity/">Schools Kill Creativity</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-08T22:12:22+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2014/08/08/schools-kill-creativity/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2014/08/08/schools-kill-creativity/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3><a href="http://www.ted.com/talks/ken_robinson_says_schools_kill_creativity">Ken Robinson Says Schools Kill Creativity</a></h3>
+
+<p>First post of my new linklog; I&rsquo;ll be writing responses to articles from BYU&rsquo;s <a href="http://students.cs.byu.edu/~knutson/cs404">CS 404</a>.</p>
+
+<p>There&rsquo;s another reason schools kill creativity in my opinion: by killing intrinsic motivation. The worst culprit is literature class. I did honors/AP all through high school, and haven&rsquo;t read a classic since (except Ender&rsquo;s Game, which is a rather new classic). Who wants to read anything when it&rsquo;s just required reading to make the grade? Kids should learn to enjoy good works of mankind because they are enriching, instead of just developing an aversion to requirements of &ldquo;the system&rdquo;. <a href="https://en.wikipedia.org/wiki/Sudbury_school">Sudbury Schools</a> look nice. No classes!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/27/refactoring-the-soar-lexer/">Refactoring the Soar Lexer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-27T19:51:53+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2014/07/27/refactoring-the-soar-lexer/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2014/07/27/refactoring-the-soar-lexer/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>After my <a href="blog/2014/7/13/code-reading-the-soar-parser">last writeup</a> on how <a href="https://github.com/SoarGroup/Soar">Soar</a> parses Soar code, I decided to dive in and try and refactor it, starting with the lexer (and here&rsquo;s the resulting <a href="https://github.com/SoarGroup/Soar/pull/178">PR</a>). I haven&rsquo;t worked with C/C++ in a while, and a good part of the code I changed was close to my age, so it was an interesting learning experience for me.</p>
+
+<p>The lexer used global state stored via an agent to keep track of the current input character and lexeme as well as to remember line and column numbers. The goal of the refactoring was of course to change that, but 30 commits later I have not yet completely separated the agent from the Lexer because all printing logic (warnings, etc.) requires an agent. The result of this is that after every change I make I have to do <code>build Tests</code> and watch the entire project be rebuilt because of the various interdependencies. Also, the lexer has none if its own tests, and so the full test suite must be run to find possible problems. The result here is that every time I make a change and need to see if it works, I start a long compile/test process running and watch more of <a href="http://www.imdb.com/title/tt1637727/">some show</a> while waiting for it to finish (you&rsquo;ve probably seen <a href="http://xkcd.com/303/">this comic</a> before). So the global state is not only difficult to work with, but it also slows development to a crawl.</p>
+
+<p>The lexer had a lot of dead code which told me the story of how it used to work. Originally it would read Soar code straight from a file; later it was retrofitted to take production strings directly as an &ldquo;alternate&rdquo;. There must have been something off about the string input, however, because besides setting <code>alternate_input_string</code>, <code>alternate_input_suffix</code> was also required, and always needed to be set to <code>") "</code>. Once the production string was finished, the lexer would read the suffix. The original reason for this was long gone, but the parser still expected productions to end with an <code>R_PAREN</code> lexeme, as did other lexer clients. Later developers copied the incantation to lex a string, not knowing why it was needed, and the refactored jSoar parser implementation has the check for the parenthesis commented and marked <a href="https://github.com/soartech/jsoar/blob/master/jsoar-core/src/main/java/org/jsoar/kernel/parser/original/OriginalParserImpl.java#L2005">&ldquo;this makes no sense to me&rdquo;</a>. So the current functionality started out as an alternative for testing or something and then became the only use case, leaving dead code everywhere.</p>
+
+<p>Some of the updating work I did was already done in the [9.5] branch, but it was still interesting. There were workarounds for the old Think C and Symantech C++ compilers, between <code>THINK_C</code> and <code>__SC__</code> <code>#ifdef</code>s. I had no idea what they were and found an excellent compiler macros list project on <a href="http://sourceforge.net/p/predef/wiki/Home/">SourceForge</a>. Apparently C had no boolean variable types, either, so programmers used <code>typedef char Bool</code> and defined <code>TRUE</code> and <code>FALSE</code> manually, and part of updating to C++ code is changing those to real <code>bool</code> types.</p>
+
+<p>The value of making small, working commits was reinforced when my initial pull request broke the automated build when <code>--no-scu</code> was set. This setting causes each <code>.cpp</code> file to be compiled separately, ensuring that the build fails if a <code>#include</code> directive was forgotten somewhere. I was able to bisect the Git history and discover the problem pretty quickly.</p>
+
+<h2>Nuggets:</h2>
+
+<ul>
+<li>Alex set up <a href="http://jenkins-ci.org/">Jenkins</a> <a href="https://github.com/SoarGroup/Soar/issues/169">to test pull requests</a>, so I was able to push several times and get live feedback during another build each time.</li>
+<li>The legacy spaghetti code wasn&rsquo;t too difficult to untangle and I&rsquo;m confident I can do a lot more</li>
+</ul>
+
+
+<h2>New TODO&rsquo;s:</h2>
+
+<ul>
+<li>A printer or printer manager class to decouple the <code>agent</code> code from everything else in Soar (jSoar is <a href="https://github.com/soartech/jsoar/blob/master/jsoar-core/src/main/java/org/jsoar/kernel/tracing/Printer.java">way ahead</a> on that one).</li>
+<li>Unit tests for the lexer, preferably data-driven to reduce the amount of required recompilation</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/15/random-slice-of-culture-unicode-proposals/">Random Slice of Culture: Unicode Proposals</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-15T12:35:28+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2014/07/15/random-slice-of-culture-unicode-proposals/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2014/07/15/random-slice-of-culture-unicode-proposals/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>So a couple of weeks ago I had a casual use for <a href="https://en.wikipedia.org/wiki/Hentaigana">hentaigana</a> and went looking to see if there were Unicode code points. Alas, there were none, but through Wikipedia I found that there was a <a href="http://std.dkuug.dk/jtc1/sc2/wg2/docs/n3698.pdf">proposal</a> to include it. The proposal document includes relevant uses such as transcribing old documents, restaurant names and documents on calligraphy. Unfortunately the proposal hasn&rsquo;t been accepted yet, but it did lead to an interesting discovery.</p>
+
+<p>The containing directory has <em>all</em> of the Unicode proposals, some of them labeled urgent because characters have become common use. For example, <a href="n4584A">http://std.dkuug.dk/JTC1/SC2/WG2/docs/n4584A.pdf</a> calls for the addition of several Chinese characters for scientific use, such as 鎶, which is used for the new(ish) element Copernicum, some other weird-looking ones. <a href="n4583">http://std.dkuug.dk/JTC1/SC2/WG2/docs/n4583.pdf</a> is a request for special Chinese characters that were used by a Russian mission in Beijing to transcribe Slavonic sounds. <a href="n3734">http://std.dkuug.dk/jtc1/sc2/wg2/docs/n3734.pdf</a> requests an Arabic character used in Urdu for a specific Indian calendar.</p>
+
+<p>Also, apparently two years after the hentaigana proposal was shelved, the Japanese government <a href="http://std.dkuug.dk/jtc1/sc2/wg2/docs/n4091.doc">sent word</a> saying they actually needed it to encode names of some people born before 1948. Now that&rsquo;s interesting! I&rsquo;ve never met someone with a hentaigana name.</p>
+
+<p>Each of these comes with cultural background, descriptions of the required glyphs, and pictures or screenshots of the glyphs in the wild.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/14/code-reading-pl2bat-dot-pl/">Code Reading: pl2bat.pl</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-14T15:42:07+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2014/07/14/code-reading-pl2bat-dot-pl/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2014/07/14/code-reading-pl2bat-dot-pl/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When you install a Perl distribution from CPAN that comes with an executable script, Perl adds it to your path so it can be treated like any other command line program. On a <em>nix system, all that needs to be done for this to work is to set the script to be executable. Windows doesn&rsquo;t have executable script files with shebang lines like </em>nix, however, so Perl generates a batch file.</p>
+
+<p>Let&rsquo;s see how this works. First, let&rsquo;s pick a distribution that comes with an executable script. The <code>App::</code> namespace is a great place to look for that.</p>
+
+<pre><code>cpan App::Cleo
+...
+Running make install
+Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\lib\App\Cleo.pm
+Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo
+Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo.bat
+...
+</code></pre>
+
+<p>Hmm, cleo.bat. That&rsquo;s not in the <a href="https://metacpan.org/source/THALJEF/App-Cleo-0.004/bin">distribution</a>! Let&rsquo;s take a look:</p>
+
+<figure class='code'><figcaption><span>Cleo.bat linenos:false</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='bat'><span class='line'><span class="p">@</span>rem <span class="o">=</span> &#39;--*-Perl-*--
+</span><span class='line'><span class="p">@</span><span class="k">echo</span> <span class="k">off</span>
+</span><span class='line'><span class="k">if</span> <span class="s2">&quot;%OS%&quot;</span> <span class="o">==</span> <span class="s2">&quot;Windows_NT&quot;</span> <span class="k">goto</span> <span class="nl">WinNT</span>
+</span><span class='line'><span class="k">IF</span> <span class="k">EXIST</span> <span class="s2">&quot;%~dp0perl.exe&quot;</span> (
+</span><span class='line'><span class="s2">&quot;%~dp0perl.exe&quot;</span> -x -S <span class="s2">&quot;%0&quot;</span> <span class="nv">%1</span> <span class="nv">%2</span> <span class="nv">%3</span> <span class="nv">%4</span> <span class="nv">%5</span> <span class="nv">%6</span> <span class="nv">%7</span> <span class="nv">%8</span> <span class="nv">%9</span>
+</span><span class='line'>) <span class="k">ELSE</span> <span class="k">IF</span> <span class="k">EXIST</span> <span class="s2">&quot;%~dp0..\..\bin\perl.exe&quot;</span> (
+</span><span class='line'><span class="s2">&quot;%~dp0..\..\bin\perl.exe&quot;</span> -x -S <span class="s2">&quot;%0&quot;</span> <span class="nv">%1</span> <span class="nv">%2</span> <span class="nv">%3</span> <span class="nv">%4</span> <span class="nv">%5</span> <span class="nv">%6</span> <span class="nv">%7</span> <span class="nv">%8</span> <span class="nv">%9</span>
+</span><span class='line'>) <span class="k">ELSE</span> (
+</span><span class='line'>perl -x -S <span class="s2">&quot;%0&quot;</span> <span class="nv">%1</span> <span class="nv">%2</span> <span class="nv">%3</span> <span class="nv">%4</span> <span class="nv">%5</span> <span class="nv">%6</span> <span class="nv">%7</span> <span class="nv">%8</span> <span class="nv">%9</span>
+</span><span class='line'>)
+</span><span class='line'>
+</span><span class='line'>...
+</span><span class='line'>
+</span><span class='line'>#!<span class="n">/usr/bin/env</span> perl
+</span><span class='line'>#line <span class="m">29</span>
+</span><span class='line'>
+</span><span class='line'>use strict;
+</span><span class='line'>use warnings;
+</span><span class='line'>use App<span class="c">::Cleo;</span>
+</span><span class='line'>
+</span><span class='line'>our $VERSION <span class="o">=</span> <span class="m">0</span>.<span class="m">003</span>;
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It seems to be a batch script with the entirety of cleo.pl pasted in the bottom. How does that work? Well first there&rsquo;s a little bit of logic to differentiate requirements on Windows NT versus other Windows systems, and some logic to deal with Perl being located in different places (relative to <code>%~dp0</code>, the directory containing the script). <code>%0</code> is the name of the script being run, and Perl is being invoked on it with different arguments. The other %number arguments are the script arguments, which are passed along to the script once again. So this is a batch script that passes itself to Perl? But what&rsquo;s Perl going to do with all of the batch garbage that comes before the actual Perl script?</p>
+
+<p>The magic here is in the <code>-x</code> switch. From <a href="http://perldoc.perl.org/perlrun.html">perlrun</a>:</p>
+
+<pre><code>tells Perl that the program is embedded in a larger chunk of unrelated text, such as in a mail message. Leading garbage will be discarded until the first line that starts with #! and contains the string "perl". Any meaningful switches on that line will be applied.
+</code></pre>
+
+<p>Ooh! That&rsquo;s an interesting feature. I wonder if anyone still uses it for emailed scripts.</p>
+
+<p>So the batch script calls Perl on itself, and Perl skips all of the batch syntax and goes straight to the shebang line (<code>#!/usr/bin/env perl</code>) and runs the original <a href="https://metacpan.org/source/THALJEF/App-Cleo-0.004/bin/cleo">cleo</a> Perl script.</p>
+
+<p>The mechanism used to create this is is <a href="https://metacpan.org/pod/distribution/perl/win32/bin/pl2bat.pl">pl2bat.pl</a>, and you&rsquo;ll find interesting history, motivation and gotchas in the documentation there. Thanks to pl2bat, CPAN author scripts are installed on Windows and added to the path. I can just open my cmd and type <code>cleo</code> to start the app.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/2">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/">Notes on Writing a Syntax Highlighter for Sublime Text</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/06/my-new-toy-algomation/">My New Toy: Algomation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/11/09/the-oh-so-exotic-grocery-list/">The Oh So Exotic Grocery List</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/07/yotchare/">Yotchare!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/13/2-knuth-classics-are-freely-available/">Knuth Classics Are Freely Available</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/garfieldnate?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Nate Glenn -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'garfieldnate';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

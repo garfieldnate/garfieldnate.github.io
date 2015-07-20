@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Graphing Grammar Parses From CMU Sphinx 4 - Garfield Nate</title>
+  <meta name="author" content="Nate Glenn">
+
+  
+  <meta name="description" content="CMU Sphinx comes with some neat grammar parsing stuff that I never knew about. It uses JSGF (as detailed here) and comes with several demos, showing &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://garfieldnate.github.io/blog/2012/06/29/graphing-grammar-parses-from-cmu-sphinx">
+  <link href="/favicon.png" rel="icon">
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Garfield Nate" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+
+  <!-- Load jQuery from google for better caching; if that fails, load the local copy -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- For GitHub repo display; use with the githubrepo-octopress plugin -->
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+<!--script>
+  $.noConflict()
+</script-->
+
+<script src="/javascripts/libs/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+<script src="/javascripts/menu.min.js" type="text/javascript"></script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-26857949-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Garfield Nate</a></h1>
+  
+    <h2>Big Fat Hairy Programmer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:garfieldnate.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li>
+    <a href="/resume/resume-en.html">Resume</a>
+    <ul>
+        <il><a href="/resume/resume-en.html">English</a></il>
+        <il><a href="/resume/resume-ja.html">日本語</a></il>
+    </ul>
+  </li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Graphing Grammar Parses From CMU Sphinx 4</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-29T00:00:00+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>CMU Sphinx comes with some neat grammar parsing stuff that I never knew about. It uses JSGF (as detailed <a href="http://cmusphinx.sourceforge.net/sphinx4/javadoc/edu/cmu/sphinx/jsgf/JSGFGrammar.html">here</a>) and comes with several demos, showing how to use a basic grammar, arc weights, tags, and even getting a <a href="http://cmusphinx.sourceforge.net/sphinx4/src/apps/edu/cmu/sphinx/demo/jsapi/tags/README.html">javascript representation</a> of the final parse! At work I&rsquo;ve been needing to do some custom processing of the grammar output, but it was more conceptually difficult than I&rsquo;d planned. So after figuring out how to traverse a parse tree, I decided to write a little application to print out the parse of a given sentence. The eclipse project for it can be found <a href="https://sites.google.com/site/complingfiles/files/ParsePrinter.zip?attredirects=0&amp;amp;d=1">here</a>.</p>
+
+<p>Given this small gramamar:</p>
+
+<pre><code>#JSGF V1.0;
+grammar sidTests ;
+
+public &lt;greet&gt; = &lt;greeting&gt; [&lt;person&gt;] [i am &lt;person&gt;];
+
+&lt;greeting&gt; = konnichiwa {language:japanese} | hello {language:english} | guten tag {language:german};
+
+&lt;person&gt; = john {gender:man} | martha {gender:female} | kelly;
+</code></pre>
+
+<p>If we parse the sentence &ldquo;konnichiwa kelly i am john&rdquo;, the program outputs the following:</p>
+
+<pre><code>digraph {
+ "greet-2147483647" [label="greet" color=magenta];
+ "greet-2147483647" -&gt; "(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )-2147483646";
+ "(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )-2147483646" [label="(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )" color=green];
+ "(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )-2147483646" -&gt; "greeting-2147483645";
+ "greeting-2147483645" [label="greeting" color=magenta];
+ "greeting-2147483645" -&gt; "konnichiwa {language:japanese}-2147483644";
+ "konnichiwa {language:japanese}-2147483644" [label="konnichiwa {language:japanese}" color=green];
+ "konnichiwa {language:japanese}-2147483644" -&gt; "language:japanese-2147483643";
+ "language:japanese-2147483643" [label="{language:japanese}" color=red];
+ "language:japanese-2147483643" -&gt; "konnichiwa-2147483642";
+ "konnichiwa-2147483642" [label="konnichiwa" color=cadetblue shape=box];
+ "(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )-2147483646" -&gt; "(&lt;sidTests.person&gt; = kelly)-2147483641";
+ "(&lt;sidTests.person&gt; = kelly)-2147483641" [label="(&lt;sidTests.person&gt; = kelly)" color=green];
+ "(&lt;sidTests.person&gt; = kelly)-2147483641" -&gt; "person-2147483640";
+ "person-2147483640" [label="person" color=magenta];
+ "person-2147483640" -&gt; "kelly-2147483639";
+ "kelly-2147483639" [label="kelly" color=green];
+ "kelly-2147483639" -&gt; "kelly-2147483638";
+ "kelly-2147483638" [label="kelly" color=cadetblue shape=box];
+ "(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )-2147483646" -&gt; "i am (&lt;sidTests.person&gt; = john {gender:man})-2147483637";
+ "i am (&lt;sidTests.person&gt; = john {gender:man})-2147483637" [label="i am (&lt;sidTests.person&gt; = john {gender:man})" color=green];
+ "i am (&lt;sidTests.person&gt; = john {gender:man})-2147483637" -&gt; "i-2147483636";
+ "i-2147483636" [label="i" color=cadetblue shape=box];
+ "i am (&lt;sidTests.person&gt; = john {gender:man})-2147483637" -&gt; "am-2147483635";
+ "am-2147483635" [label="am" color=cadetblue shape=box];
+ "i am (&lt;sidTests.person&gt; = john {gender:man})-2147483637" -&gt; "person-2147483634";
+ "person-2147483634" [label="person" color=magenta];
+ "person-2147483634" -&gt; "john {gender:man}-2147483633";
+ "john {gender:man}-2147483633" [label="john {gender:man}" color=green];
+ "john {gender:man}-2147483633" -&gt; "gender:man-2147483632";
+ "gender:man-2147483632" [label="{gender:man}" color=red];
+ "gender:man-2147483632" -&gt; "john-2147483631";
+ "john-2147483631" [label="john" color=cadetblue shape=box];
+}
+</code></pre>
+
+<p>which is all a big mess until we run it through GraphViz and see this:</p>
+
+<div class="separator" style="clear: both; text-align: center;">
+<img class="center" src="/images/content_images/jsgf_parse.jpg" width="640" height="294" title="A graph of the JSGF sentence parse" >
+</div>
+
+
+<p>A graph explaining how our sentence was parsed! I color code the parse: green is a RuleSequence, magenta is a RuleParse, light blue is a Token, red is a Tag, yellow (which there strangely aren&rsquo;t any of) is a RuleName.</p>
+
+<p>I notice two very strange things here. First, RuleParses don&rsquo;t have anything as a direct child except for RuleSequences (RuleName is also possible but not shown). So RuleSequences will always be present and may only have one child. Second, text is treated as a sub-component of a tag instead of the other way around. So the text is tagging the tag? I don&rsquo;t know why they designed it that way, but at least now that I have a graph of the parse so I can figure out how to properly process it.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Nate Glenn</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-29T00:00:00+09:00" pubdate data-updated="true"></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='//cmu-sphinx/'>cmu sphinx</a>, <a class='category' href='//grammar/'>grammar</a>, <a class='category' href='//graph/'>graph</a>, <a class='category' href='//graphviz/'>graphviz</a>, <a class='category' href='//java/'>java</a>, <a class='category' href='//parsing/'>parsing</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://garfieldnate.github.io/blog/2012/06/29/graphing-grammar-parses-from-cmu-sphinx/" data-via="garfieldnate" data-counturl="http://garfieldnate.github.io/blog/2012/06/29/graphing-grammar-parses-from-cmu-sphinx/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/05/11/getting-wordnet-verb-frames-with-jaws/" title="Previous Post: Getting WordNet Verb Frames With JAWS">&laquo; Getting WordNet Verb Frames With JAWS</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/08/17/perl-tip-dont-use-traditional-installer/" title="Next Post: Perl Tip: Don't Use a Makefile for Your Module">Perl Tip: Don't Use a Makefile for Your Module &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/">Notes on Writing a Syntax Highlighter for Sublime Text</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/06/my-new-toy-algomation/">My New Toy: Algomation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/11/09/the-oh-so-exotic-grocery-list/">The Oh So Exotic Grocery List</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/07/yotchare/">Yotchare!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/13/2-knuth-classics-are-freely-available/">Knuth Classics Are Freely Available</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/garfieldnate?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Nate Glenn -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'garfieldnate';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://garfieldnate.github.io/blog/2012/06/29/graphing-grammar-parses-from-cmu-sphinx/';
+        var disqus_url = 'http://garfieldnate.github.io/blog/2012/06/29/graphing-grammar-parses-from-cmu-sphinx/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

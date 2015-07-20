@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Wordnet | Garfield Nate]]></title>
+  <link href="http://garfieldnate.github.io/categories/wordnet/atom.xml" rel="self"/>
+  <link href="http://garfieldnate.github.io/"/>
+  <updated>2015-07-20T11:30:30+09:00</updated>
+  <id>http://garfieldnate.github.io/</id>
+  <author>
+    <name><![CDATA[Nate Glenn]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Getting WordNet Verb Frames With JAWS]]></title>
+    <link href="http://garfieldnate.github.io/blog/2012/05/11/getting-wordnet-verb-frames-with-jaws/"/>
+    <updated>2012-05-11T00:00:00+09:00</updated>
+    <id>http://garfieldnate.github.io/blog/2012/05/11/getting-wordnet-verb-frames-with-jaws</id>
+    <content type="html"><![CDATA[<p>I love using JAWS to access WordNet. It has a rather extensive API, runs quickly, and doesn&rsquo;t require too much configuration. All you have to do is<a href="http://lyle.smu.edu/~tspell/jaws/index.html"> download the Jaws binary jar</a> and <a href="http://wordnet.princeton.edu/wordnet/download/">WordNet</a>, and then specify to JAWS where the WordNet files are (I will demonstrate this later).</p>
+
+<p>One thing that did take a while to figure out was how to get verb frames from it. A verb frame is an indication of how the verb may be used. For example, the entry for the verb &ldquo;fax&rdquo; in WordNet contains the following frames:</p>
+
+<ul>
+<li><code>Somebody ----s something to somebody</code></li>
+<li><code>Somebody ----s somebody something</code></li>
+<li><code>Somebody ----s somebody</code></li>
+<li><code>Somebody ----s something</code></li>
+<li><code>Somebody ----s</code></li>
+</ul>
+
+
+<p>Let&rsquo;s look at the WordNet file to see how frames are specified. If you open data.verb, you will see that &ldquo;sun&rdquo; occurs twice. The frames are listed like so:</p>
+
+<pre><code>02112546 39 v 04 sun 0 insolate 0 solarize 0 solarise ... 01 + 08 00 | expose to the rays of the sun or affect by exposure to the sun
+
+00104147 29 v 02 sun 0 sunbathe ... 03 + 02 00 + 22 00 + 09 01 | expose one's body to the sun
+</code></pre>
+
+<p>The <code>01</code> and <code>03</code> indicate the number of verb frames, <code>08</code>, <code>02</code>, <code>22</code>, and <code>09</code> are frame numbers. The <code>00</code>&rsquo;s and <code>01</code> that follow the frame numbers indicate which words in the synset the numbers apply to. <code>00</code> means the frame is applicable to all members. The <code>01</code> in the second entry means that frame 9 is only for the word <code>sun</code>, and not for the second word, <code>sunbathe</code>.<br />There are two methods provided by JAWS to get frames. They are both contained in the <a href="http://lyle.smu.edu/~tspell/jaws/doc/edu/smu/tspell/wordnet/VerbSynset.html"><code>VerbSynset</code></a> class:</p>
+
+<pre><code class="java Methods available in VerbSynset for retrieving verb frames"> /**
+  * Returns the sentence frames (if any) associated with this verb meaning.
+  * Sentence frames are examples of how the verb can be used / applied, and
+  * all the frames returned by this method apply to all word forms in the
+  * synset.
+  *
+  * @return Sentence frames associated with all word forms in this synset.
+  * @see
+  *         Format of Lexicographer Files ("Verb Frames")
+  */
+ public String[] getSentenceFrames();
+
+ /**
+  * Returns the sentence frames (if any) that are specific to a particular
+  * word form within this synset, where sentence frames are examples of
+  * how the word form can be used / applied.
+  *
+  * @param  wordForm Word form for which to return sentence frames.
+  * @return Sentence frames that are specific to the word form.
+  * @see
+  *         Format of Lexicographer Files ("Verb Frames")
+  */
+ public String[] getSentenceFrames(String wordForm);
+</code></pre>
+
+<p>Keep in mind that the VerbSynset class is completely divorced from the actual orthographic representation of a word, since a synset may belong to several different words. The first method returns all of the frames that apply to every word in the synset, or to all of the frames marked with a 00 in the data.verb file as shown above. The second method returns only the frames which are marked as being specific to a single orthographic representation, specified by the one argument for the method. The return values are complementary and each is incomplete by itself. However, given only the synset offset or only the word to look up, JAWS is returning as much information as is possible. If you know both the synset number and the orthographic representation of a word you need frames for (and I don&rsquo;t see why you wouldn&rsquo;t), then the getWordFramesComplete method in the program below demonstrates how to get all of the available frames:</p>
+
+<pre><code class="java Retrieve all available verb frames for a given orthography/synset combination">package edu.byu.xnlsoar.test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.smu.tspell.wordnet.Synset;
+import edu.smu.tspell.wordnet.SynsetType;
+import edu.smu.tspell.wordnet.VerbSynset;
+import edu.smu.tspell.wordnet.WordNetDatabase;
+import edu.smu.tspell.wordnet.impl.file.SampleFrameFactory;
+import edu.smu.tspell.wordnet.impl.file.SynsetFactory;
+import edu.smu.tspell.wordnet.impl.file.SynsetPointer;
+
+public class DemoFrames {
+
+ private static WordNetDatabase database;
+ private static SynsetFactory synsetFactory;
+ //initialize everything here
+ static{
+  System.setProperty("wordnet.database.dir", "./lib/3.0/dict");
+  database = WordNetDatabase.getFileInstance();
+  synsetFactory = SynsetFactory.getInstance();
+ }
+
+ /**
+  *
+  * @param synsetOffset Synset number to look up frames for
+  * @return Array of frames for the synset; only returns frames
+  * which apply to every word in the synset
+  * frames
+  */
+ public static List&lt;string&gt; getGeneralSynsetFrames(int synsetOffset){
+  SynsetPointer sp = new SynsetPointer(SynsetType.VERB, synsetOffset);
+  VerbSynset vSynset = (VerbSynset) synsetFactory.getSynset(sp);
+  List&lt;string&gt; frames = new ArrayList&lt;string&gt;();
+  for(String s : vSynset.getSentenceFrames())
+   frames.add(s);
+  return frames;
+ }
+
+ /**
+  *
+  * @param lemma Base form of the word you want to look up
+  * @return Array of frames for the lemma; only returns those
+  * that are specific to a particular word form within each synset.
+  * frames
+  */
+ public static List&lt;string&gt; getWordFramesSpecific(String lemma){
+  List&lt;string&gt; frames = new ArrayList&lt;string&gt;();
+  Synset[] synsets = database.getSynsets(lemma,SynsetType.VERB);
+  for(Synset synset : synsets){
+   for(String s : ((VerbSynset) synset).getSentenceFrames(lemma))
+    frames.add(s);
+  }
+  return frames;
+ }
+
+ /**
+  * This one is more difficult to understand...
+  * @param lemma Base form of the word you want to look up
+  * @return Array of frames for the lemma; only returns those
+  * that match every word in each of the synsets that contain this word.
+  */
+ public static List&lt;string&gt; getWordFramesGeneral(String lemma){
+  List&lt;string&gt; frames = new ArrayList&lt;string&gt;();
+  Synset[] synsets = database.getSynsets(lemma,SynsetType.VERB);
+  for(Synset synset : synsets){
+   for(String s : ((VerbSynset) synset).getSentenceFrames())
+    frames.add(s);
+  }
+  return frames;
+ }
+
+ /**
+  * This method is the best. It returns all possible frames
+  * given a synset number and the accompanying word.
+  * @param lemma Base form of the word you want to look up
+  * @param synsetOffset Synset number to look up frames for
+  * @return Array of frames for the synset; returns all frames
+  * for this word within this synset.
+  * frames
+  */
+ public static List&lt;string&gt; getWordFramesComplete(String lemma, int synsetOffset){
+  SynsetPointer sp = new SynsetPointer(SynsetType.VERB, synsetOffset);
+  VerbSynset vSynset = (VerbSynset) synsetFactory.getSynset(sp);
+  List&lt;string&gt; frames = new ArrayList&lt;string&gt;();
+  for(String s : vSynset.getSentenceFrames(lemma))
+   frames.add(s);
+  for(String s : vSynset.getSentenceFrames())
+   frames.add(s);
+  return frames;
+ }
+
+ /**
+  * Prints out several different queries for the frames of "fax"
+  */
+ public static void main(String[] args) {
+  int offset = 104147;//the synset meaning "expose one's body to the sun"
+  System.out.println(getGeneralSynsetFrames(offset));//returns 2 frames
+  System.out.println(getWordFramesSpecific("sun"));//returns 1 frame
+  System.out.println(getWordFramesGeneral("sun"));//returns 3 frames
+  System.out.println(getWordFramesComplete("sunbathe",offset));//returns 2 frames
+  System.out.println(getWordFramesComplete("sun",offset));//returns 3 frames (different from before)
+ }
+}
+</code></pre>
+
+<p><code>getWordFramesComplete</code> calls both of the available methods in JAWS, retrieving both frames that apply to all words in a synset and the frames that are specific to a single word in the synset.</p>
+]]></content>
+  </entry>
+  
+</feed>

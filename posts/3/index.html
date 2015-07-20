@@ -1,0 +1,1837 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Garfield Nate</title>
+  <meta name="author" content="Nate Glenn">
+
+  
+  <meta name="description" content="Normally I run my test suites with the prove utility: prove -vl --merge The v option turns on verbose processing, and the l option adds lib/ to the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://garfieldnate.github.io/posts/3">
+  <link href="/favicon.png" rel="icon">
+  <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Garfield Nate" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+
+  <!-- Load jQuery from google for better caching; if that fails, load the local copy -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- For GitHub repo display; use with the githubrepo-octopress plugin -->
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+<script type="text/javascript" src="/javascripts/jquery.githubRepoWidget.min.js"></script>
+<!--script>
+  $.noConflict()
+</script-->
+
+<script src="/javascripts/libs/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+<script src="/javascripts/menu.min.js" type="text/javascript"></script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-26857949-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Garfield Nate</a></h1>
+  
+    <h2>Big Fat Hairy Programmer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:garfieldnate.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li>
+    <a href="/resume/resume-en.html">Resume</a>
+    <ul>
+        <il><a href="/resume/resume-en.html">English</a></il>
+        <il><a href="/resume/resume-ja.html">日本語</a></il>
+    </ul>
+  </li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/01/20/testing-perl-distributions-with-test/">Testing Perl Distributions With Test Subdirectories</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-20T00:00:00+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2013/01/20/testing-perl-distributions-with-test/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2013/01/20/testing-perl-distributions-with-test/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Normally I run my test suites with the prove utility:</p>
+
+<p><code>prove -vl --merge</code></p>
+
+<p>The <code>v</code> option turns on verbose processing, and the l option adds <code>lib/</code> to the include path. <code>prove</code>then runs all of the tests in the <code>t/</code> folder.</p>
+
+<p>Today, I had a new problem. I merged multiple distributions into one (<a href="http://jasonkarns.com/blog/merge-two-git-repositories-into-one/">without losing any Git history!</a>), and each had a test suite that I wanted to keep separate. Naturally, I moved the tests from each distribution into its own subdirectory under <code>t/</code>. However, this time when I ran <code>prove -vl</code>, I got this message:</p>
+
+<pre><code>Files=0, Tests=0,  0 wallclock secs ( 0.00 usr +  0.00 sys =  0.00 CPU)
+Result: NOTESTS
+</code></pre>
+
+<p>Dubious&hellip; Well, I needed to know how to test with subdirectories in the <code>t/</code> folder, so I looked at the <a href="https://metacpan.org/module/prove">prove</a> documentation and found the <code>-r</code> option. The <code>r</code> stands for &ldquo;recurse&rdquo;, meaning that the test files would be found by recursing into the directories of the distribution (starting at the top in the root of the distribution). That turned out to be exactly what I needed!</p>
+
+<pre><code>prove -vlr
+t/parser/01-testParser.t
+...
+All tests successful.
+Files=28, Tests=1815, 211 wallclock secs ( 0.92 usr + 0.28 sys = 1.20 CPU)
+Result: PASS
+</code></pre>
+
+<p>Woohoo!</p>
+
+<p>Also, both <code>MakeMaker</code>and <code>Module::Build</code> recurse in the same way during module testing. If you use <code>Dist::Zilla</code>, then you&rsquo;ll probably have the plugins <code>[MakeMaker]</code> and <code>[ModuleBuild]</code>. Using these, <code>dzil test</code> will recurse in the same way.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/17/perl-tip-dont-use-traditional-installer/">Perl Tip: Don't Use a Makefile for Your Module</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-17T00:00:00+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2012/08/17/perl-tip-dont-use-traditional-installer/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2012/08/17/perl-tip-dont-use-traditional-installer/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>During my internship at <a href="http://www.soartech.com/">SoarTech</a>, I got a chance to learn a lot more about creating Perl modules. I put together a package of scripts for converting old file formats for speech recognition grammars, and I thought it worked beautifully. Of course, to start my module I used the classic tool h2xs:</p>
+
+<pre><code>h2xs -X -n Foo::Bar
+</code></pre>
+
+<p>My final code was well tested, and quick to install. I asked my co-worker to install it on his machine, and it was just as easy to use.</p>
+
+<p>I was confident when I presented it to the company, until someone asked, &ldquo;so, these Perl scripts, they work on Windows, Mac, Linux, etc., right?&rdquo; I told them they <em>should</em>, since Perl is cross-platform. I became (a good kind of) paranoid, and asked my boss to test my code on his Mac (I was using Windows). The thing exploded when fed my script! I couldn&rsquo;t believe it! What could I have done so wrong?</p>
+
+<p>So, the next day I stayed home a bit to borrow my wife&rsquo;s Mac and do more testing. But there was a big problem: my module used <a href="http://search.cpan.org/~mschwern/ExtUtils-MakeMaker-6.62/lib/ExtUtils/MakeMaker.pm">ExtUtils::MakeMaker</a> to install itself. This has been the standard for years, and the majority of CPAN modules use this for installation. The cpan utility recognizes it, and runs installation automatically. However, <a href="http://schwern.dreamhosters.com/talks/MakeMaker_Is_DOOMED/">MakeMaker is DOOMED!</a> It requires an external tool, make, which you can find on every *nix platform, but everywhere else it has to be installed by the user. Strawberry Perl and ActiveState Perl for Windows come with a version (dmake or nmake). But on Mac, you have to install <a href="https://developer.apple.com/xcode/">XCode</a>, a whopping 4 gigabyte distribution for Mac developers.</p>
+
+<p>&hellip;</p>
+
+<p>Dangit&hellip;</p>
+
+<p>My solution was to follow <a href="http://search.cpan.org/~mschwern/">Michael Schwern</a>&rsquo;s advice and convert to using <a href="http://search.cpan.org/~leont/Module-Build-0.4002/lib/Module/Build.pm">Module::Build</a>, which does not have external dependencies. There happens to be a <a href="http://search.cpan.org/~schubiger/Module-Build-Convert-0.49/lib/Module/Build/Convert.pm">converter</a> to help you switch. When I ran it on my code, it didn&rsquo;t give a completely valid output, but the edits I did were minimal. From a user standpoint, the module will still be installed using the <code>cpan</code> utility, so nothing has changed.</p>
+
+<p>When I put new distribution, with a shiny new Build.PL file, on a Mac, I still had some failed tests, but there weren&rsquo;t intermingled with the giant BOOM that happens when the <code>cpan</code> utility can&rsquo;t find <code>make</code>. After fixing a bug or two, my module works on Windows and Mac and my boss is a happy camper.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/29/graphing-grammar-parses-from-cmu-sphinx/">Graphing Grammar Parses From CMU Sphinx 4</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-29T00:00:00+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2012/06/29/graphing-grammar-parses-from-cmu-sphinx/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2012/06/29/graphing-grammar-parses-from-cmu-sphinx/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>CMU Sphinx comes with some neat grammar parsing stuff that I never knew about. It uses JSGF (as detailed <a href="http://cmusphinx.sourceforge.net/sphinx4/javadoc/edu/cmu/sphinx/jsgf/JSGFGrammar.html">here</a>) and comes with several demos, showing how to use a basic grammar, arc weights, tags, and even getting a <a href="http://cmusphinx.sourceforge.net/sphinx4/src/apps/edu/cmu/sphinx/demo/jsapi/tags/README.html">javascript representation</a> of the final parse! At work I&rsquo;ve been needing to do some custom processing of the grammar output, but it was more conceptually difficult than I&rsquo;d planned. So after figuring out how to traverse a parse tree, I decided to write a little application to print out the parse of a given sentence. The eclipse project for it can be found <a href="https://sites.google.com/site/complingfiles/files/ParsePrinter.zip?attredirects=0&amp;amp;d=1">here</a>.</p>
+
+<p>Given this small gramamar:</p>
+
+<pre><code>#JSGF V1.0;
+grammar sidTests ;
+
+public &lt;greet&gt; = &lt;greeting&gt; [&lt;person&gt;] [i am &lt;person&gt;];
+
+&lt;greeting&gt; = konnichiwa {language:japanese} | hello {language:english} | guten tag {language:german};
+
+&lt;person&gt; = john {gender:man} | martha {gender:female} | kelly;
+</code></pre>
+
+<p>If we parse the sentence &ldquo;konnichiwa kelly i am john&rdquo;, the program outputs the following:</p>
+
+<pre><code>digraph {
+ "greet-2147483647" [label="greet" color=magenta];
+ "greet-2147483647" -&gt; "(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )-2147483646";
+ "(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )-2147483646" [label="(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )" color=green];
+ "(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )-2147483646" -&gt; "greeting-2147483645";
+ "greeting-2147483645" [label="greeting" color=magenta];
+ "greeting-2147483645" -&gt; "konnichiwa {language:japanese}-2147483644";
+ "konnichiwa {language:japanese}-2147483644" [label="konnichiwa {language:japanese}" color=green];
+ "konnichiwa {language:japanese}-2147483644" -&gt; "language:japanese-2147483643";
+ "language:japanese-2147483643" [label="{language:japanese}" color=red];
+ "language:japanese-2147483643" -&gt; "konnichiwa-2147483642";
+ "konnichiwa-2147483642" [label="konnichiwa" color=cadetblue shape=box];
+ "(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )-2147483646" -&gt; "(&lt;sidTests.person&gt; = kelly)-2147483641";
+ "(&lt;sidTests.person&gt; = kelly)-2147483641" [label="(&lt;sidTests.person&gt; = kelly)" color=green];
+ "(&lt;sidTests.person&gt; = kelly)-2147483641" -&gt; "person-2147483640";
+ "person-2147483640" [label="person" color=magenta];
+ "person-2147483640" -&gt; "kelly-2147483639";
+ "kelly-2147483639" [label="kelly" color=green];
+ "kelly-2147483639" -&gt; "kelly-2147483638";
+ "kelly-2147483638" [label="kelly" color=cadetblue shape=box];
+ "(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )-2147483646" -&gt; "i am (&lt;sidTests.person&gt; = john {gender:man})-2147483637";
+ "i am (&lt;sidTests.person&gt; = john {gender:man})-2147483637" [label="i am (&lt;sidTests.person&gt; = john {gender:man})" color=green];
+ "i am (&lt;sidTests.person&gt; = john {gender:man})-2147483637" -&gt; "i-2147483636";
+ "i-2147483636" [label="i" color=cadetblue shape=box];
+ "i am (&lt;sidTests.person&gt; = john {gender:man})-2147483637" -&gt; "am-2147483635";
+ "am-2147483635" [label="am" color=cadetblue shape=box];
+ "i am (&lt;sidTests.person&gt; = john {gender:man})-2147483637" -&gt; "person-2147483634";
+ "person-2147483634" [label="person" color=magenta];
+ "person-2147483634" -&gt; "john {gender:man}-2147483633";
+ "john {gender:man}-2147483633" [label="john {gender:man}" color=green];
+ "john {gender:man}-2147483633" -&gt; "gender:man-2147483632";
+ "gender:man-2147483632" [label="{gender:man}" color=red];
+ "gender:man-2147483632" -&gt; "john-2147483631";
+ "john-2147483631" [label="john" color=cadetblue shape=box];
+}
+</code></pre>
+
+<p>which is all a big mess until we run it through GraphViz and see this:</p>
+
+<div class="separator" style="clear: both; text-align: center;">
+<img class="center" src="/images/content_images/jsgf_parse.jpg" width="640" height="294" title="A graph of the JSGF sentence parse" >
+</div>
+
+
+<p>A graph explaining how our sentence was parsed! I color code the parse: green is a RuleSequence, magenta is a RuleParse, light blue is a Token, red is a Tag, yellow (which there strangely aren&rsquo;t any of) is a RuleName.</p>
+
+<p>I notice two very strange things here. First, RuleParses don&rsquo;t have anything as a direct child except for RuleSequences (RuleName is also possible but not shown). So RuleSequences will always be present and may only have one child. Second, text is treated as a sub-component of a tag instead of the other way around. So the text is tagging the tag? I don&rsquo;t know why they designed it that way, but at least now that I have a graph of the parse so I can figure out how to properly process it.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/11/getting-wordnet-verb-frames-with-jaws/">Getting WordNet Verb Frames With JAWS</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-11T00:00:00+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2012/05/11/getting-wordnet-verb-frames-with-jaws/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2012/05/11/getting-wordnet-verb-frames-with-jaws/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I love using JAWS to access WordNet. It has a rather extensive API, runs quickly, and doesn&rsquo;t require too much configuration. All you have to do is<a href="http://lyle.smu.edu/~tspell/jaws/index.html"> download the Jaws binary jar</a> and <a href="http://wordnet.princeton.edu/wordnet/download/">WordNet</a>, and then specify to JAWS where the WordNet files are (I will demonstrate this later).</p>
+
+<p>One thing that did take a while to figure out was how to get verb frames from it. A verb frame is an indication of how the verb may be used. For example, the entry for the verb &ldquo;fax&rdquo; in WordNet contains the following frames:</p>
+
+<ul>
+<li><code>Somebody ----s something to somebody</code></li>
+<li><code>Somebody ----s somebody something</code></li>
+<li><code>Somebody ----s somebody</code></li>
+<li><code>Somebody ----s something</code></li>
+<li><code>Somebody ----s</code></li>
+</ul>
+
+
+<p>Let&rsquo;s look at the WordNet file to see how frames are specified. If you open data.verb, you will see that &ldquo;sun&rdquo; occurs twice. The frames are listed like so:</p>
+
+<pre><code>02112546 39 v 04 sun 0 insolate 0 solarize 0 solarise ... 01 + 08 00 | expose to the rays of the sun or affect by exposure to the sun
+
+00104147 29 v 02 sun 0 sunbathe ... 03 + 02 00 + 22 00 + 09 01 | expose one's body to the sun
+</code></pre>
+
+<p>The <code>01</code> and <code>03</code> indicate the number of verb frames, <code>08</code>, <code>02</code>, <code>22</code>, and <code>09</code> are frame numbers. The <code>00</code>&rsquo;s and <code>01</code> that follow the frame numbers indicate which words in the synset the numbers apply to. <code>00</code> means the frame is applicable to all members. The <code>01</code> in the second entry means that frame 9 is only for the word <code>sun</code>, and not for the second word, <code>sunbathe</code>.<br />There are two methods provided by JAWS to get frames. They are both contained in the <a href="http://lyle.smu.edu/~tspell/jaws/doc/edu/smu/tspell/wordnet/VerbSynset.html"><code>VerbSynset</code></a> class:</p>
+
+<figure class='code'><figcaption><span>Methods available in VerbSynset for retrieving verb frames</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  * Returns the sentence frames (if any) associated with this verb meaning.</span>
+</span><span class='line'><span class="cm">  * Sentence frames are examples of how the verb can be used / applied, and</span>
+</span><span class='line'><span class="cm">  * all the frames returned by this method apply to all word forms in the</span>
+</span><span class='line'><span class="cm">  * synset.</span>
+</span><span class='line'><span class="cm">  *</span>
+</span><span class='line'><span class="cm">  * @return Sentence frames associated with all word forms in this synset.</span>
+</span><span class='line'><span class="cm">  * @see</span>
+</span><span class='line'><span class="cm">  *         Format of Lexicographer Files (&quot;Verb Frames&quot;)</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'> <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getSentenceFrames</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'> <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  * Returns the sentence frames (if any) that are specific to a particular</span>
+</span><span class='line'><span class="cm">  * word form within this synset, where sentence frames are examples of</span>
+</span><span class='line'><span class="cm">  * how the word form can be used / applied.</span>
+</span><span class='line'><span class="cm">  *</span>
+</span><span class='line'><span class="cm">  * @param  wordForm Word form for which to return sentence frames.</span>
+</span><span class='line'><span class="cm">  * @return Sentence frames that are specific to the word form.</span>
+</span><span class='line'><span class="cm">  * @see</span>
+</span><span class='line'><span class="cm">  *         Format of Lexicographer Files (&quot;Verb Frames&quot;)</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'> <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getSentenceFrames</span><span class="o">(</span><span class="n">String</span> <span class="n">wordForm</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Keep in mind that the VerbSynset class is completely divorced from the actual orthographic representation of a word, since a synset may belong to several different words. The first method returns all of the frames that apply to every word in the synset, or to all of the frames marked with a 00 in the data.verb file as shown above. The second method returns only the frames which are marked as being specific to a single orthographic representation, specified by the one argument for the method. The return values are complementary and each is incomplete by itself. However, given only the synset offset or only the word to look up, JAWS is returning as much information as is possible. If you know both the synset number and the orthographic representation of a word you need frames for (and I don&rsquo;t see why you wouldn&rsquo;t), then the getWordFramesComplete method in the program below demonstrates how to get all of the available frames:</p>
+
+<figure class='code'><figcaption><span>Retrieve all available verb frames for a given orthography/synset combination</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">edu</span><span class="o">.</span><span class="na">byu</span><span class="o">.</span><span class="na">xnlsoar</span><span class="o">.</span><span class="na">test</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.Synset</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.SynsetType</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.VerbSynset</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.WordNetDatabase</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.impl.file.SampleFrameFactory</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.impl.file.SynsetFactory</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.impl.file.SynsetPointer</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DemoFrames</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'> <span class="kd">private</span> <span class="kd">static</span> <span class="n">WordNetDatabase</span> <span class="n">database</span><span class="o">;</span>
+</span><span class='line'> <span class="kd">private</span> <span class="kd">static</span> <span class="n">SynsetFactory</span> <span class="n">synsetFactory</span><span class="o">;</span>
+</span><span class='line'> <span class="c1">//initialize everything here</span>
+</span><span class='line'> <span class="kd">static</span><span class="o">{</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">&quot;wordnet.database.dir&quot;</span><span class="o">,</span> <span class="s">&quot;./lib/3.0/dict&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">database</span> <span class="o">=</span> <span class="n">WordNetDatabase</span><span class="o">.</span><span class="na">getFileInstance</span><span class="o">();</span>
+</span><span class='line'>  <span class="n">synsetFactory</span> <span class="o">=</span> <span class="n">SynsetFactory</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+</span><span class='line'> <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'> <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  *</span>
+</span><span class='line'><span class="cm">  * @param synsetOffset Synset number to look up frames for</span>
+</span><span class='line'><span class="cm">  * @return Array of frames for the synset; only returns frames</span>
+</span><span class='line'><span class="cm">  * which apply to every word in the synset</span>
+</span><span class='line'><span class="cm">  * frames</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="nf">getGeneralSynsetFrames</span><span class="o">(</span><span class="kt">int</span> <span class="n">synsetOffset</span><span class="o">){</span>
+</span><span class='line'>  <span class="n">SynsetPointer</span> <span class="n">sp</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">SynsetPointer</span><span class="o">(</span><span class="n">SynsetType</span><span class="o">.</span><span class="na">VERB</span><span class="o">,</span> <span class="n">synsetOffset</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">VerbSynset</span> <span class="n">vSynset</span> <span class="o">=</span> <span class="o">(</span><span class="n">VerbSynset</span><span class="o">)</span> <span class="n">synsetFactory</span><span class="o">.</span><span class="na">getSynset</span><span class="o">(</span><span class="n">sp</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">frames</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;();</span>
+</span><span class='line'>  <span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">vSynset</span><span class="o">.</span><span class="na">getSentenceFrames</span><span class="o">())</span>
+</span><span class='line'>   <span class="n">frames</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">frames</span><span class="o">;</span>
+</span><span class='line'> <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'> <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  *</span>
+</span><span class='line'><span class="cm">  * @param lemma Base form of the word you want to look up</span>
+</span><span class='line'><span class="cm">  * @return Array of frames for the lemma; only returns those</span>
+</span><span class='line'><span class="cm">  * that are specific to a particular word form within each synset.</span>
+</span><span class='line'><span class="cm">  * frames</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="nf">getWordFramesSpecific</span><span class="o">(</span><span class="n">String</span> <span class="n">lemma</span><span class="o">){</span>
+</span><span class='line'>  <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">frames</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;();</span>
+</span><span class='line'>  <span class="n">Synset</span><span class="o">[]</span> <span class="n">synsets</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getSynsets</span><span class="o">(</span><span class="n">lemma</span><span class="o">,</span><span class="n">SynsetType</span><span class="o">.</span><span class="na">VERB</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">for</span><span class="o">(</span><span class="n">Synset</span> <span class="n">synset</span> <span class="o">:</span> <span class="n">synsets</span><span class="o">){</span>
+</span><span class='line'>   <span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span> <span class="o">:</span> <span class="o">((</span><span class="n">VerbSynset</span><span class="o">)</span> <span class="n">synset</span><span class="o">).</span><span class="na">getSentenceFrames</span><span class="o">(</span><span class="n">lemma</span><span class="o">))</span>
+</span><span class='line'>    <span class="n">frames</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">frames</span><span class="o">;</span>
+</span><span class='line'> <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'> <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  * This one is more difficult to understand...</span>
+</span><span class='line'><span class="cm">  * @param lemma Base form of the word you want to look up</span>
+</span><span class='line'><span class="cm">  * @return Array of frames for the lemma; only returns those</span>
+</span><span class='line'><span class="cm">  * that match every word in each of the synsets that contain this word.</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="nf">getWordFramesGeneral</span><span class="o">(</span><span class="n">String</span> <span class="n">lemma</span><span class="o">){</span>
+</span><span class='line'>  <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">frames</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;();</span>
+</span><span class='line'>  <span class="n">Synset</span><span class="o">[]</span> <span class="n">synsets</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getSynsets</span><span class="o">(</span><span class="n">lemma</span><span class="o">,</span><span class="n">SynsetType</span><span class="o">.</span><span class="na">VERB</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">for</span><span class="o">(</span><span class="n">Synset</span> <span class="n">synset</span> <span class="o">:</span> <span class="n">synsets</span><span class="o">){</span>
+</span><span class='line'>   <span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span> <span class="o">:</span> <span class="o">((</span><span class="n">VerbSynset</span><span class="o">)</span> <span class="n">synset</span><span class="o">).</span><span class="na">getSentenceFrames</span><span class="o">())</span>
+</span><span class='line'>    <span class="n">frames</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">frames</span><span class="o">;</span>
+</span><span class='line'> <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'> <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  * This method is the best. It returns all possible frames</span>
+</span><span class='line'><span class="cm">  * given a synset number and the accompanying word.</span>
+</span><span class='line'><span class="cm">  * @param lemma Base form of the word you want to look up</span>
+</span><span class='line'><span class="cm">  * @param synsetOffset Synset number to look up frames for</span>
+</span><span class='line'><span class="cm">  * @return Array of frames for the synset; returns all frames</span>
+</span><span class='line'><span class="cm">  * for this word within this synset.</span>
+</span><span class='line'><span class="cm">  * frames</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="nf">getWordFramesComplete</span><span class="o">(</span><span class="n">String</span> <span class="n">lemma</span><span class="o">,</span> <span class="kt">int</span> <span class="n">synsetOffset</span><span class="o">){</span>
+</span><span class='line'>  <span class="n">SynsetPointer</span> <span class="n">sp</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">SynsetPointer</span><span class="o">(</span><span class="n">SynsetType</span><span class="o">.</span><span class="na">VERB</span><span class="o">,</span> <span class="n">synsetOffset</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">VerbSynset</span> <span class="n">vSynset</span> <span class="o">=</span> <span class="o">(</span><span class="n">VerbSynset</span><span class="o">)</span> <span class="n">synsetFactory</span><span class="o">.</span><span class="na">getSynset</span><span class="o">(</span><span class="n">sp</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">frames</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;();</span>
+</span><span class='line'>  <span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">vSynset</span><span class="o">.</span><span class="na">getSentenceFrames</span><span class="o">(</span><span class="n">lemma</span><span class="o">))</span>
+</span><span class='line'>   <span class="n">frames</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">vSynset</span><span class="o">.</span><span class="na">getSentenceFrames</span><span class="o">())</span>
+</span><span class='line'>   <span class="n">frames</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">frames</span><span class="o">;</span>
+</span><span class='line'> <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'> <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  * Prints out several different queries for the frames of &quot;fax&quot;</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">offset</span> <span class="o">=</span> <span class="mi">104147</span><span class="o">;</span><span class="c1">//the synset meaning &quot;expose one&#39;s body to the sun&quot;</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getGeneralSynsetFrames</span><span class="o">(</span><span class="n">offset</span><span class="o">));</span><span class="c1">//returns 2 frames</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getWordFramesSpecific</span><span class="o">(</span><span class="s">&quot;sun&quot;</span><span class="o">));</span><span class="c1">//returns 1 frame</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getWordFramesGeneral</span><span class="o">(</span><span class="s">&quot;sun&quot;</span><span class="o">));</span><span class="c1">//returns 3 frames</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getWordFramesComplete</span><span class="o">(</span><span class="s">&quot;sunbathe&quot;</span><span class="o">,</span><span class="n">offset</span><span class="o">));</span><span class="c1">//returns 2 frames</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getWordFramesComplete</span><span class="o">(</span><span class="s">&quot;sun&quot;</span><span class="o">,</span><span class="n">offset</span><span class="o">));</span><span class="c1">//returns 3 frames (different from before)</span>
+</span><span class='line'> <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>getWordFramesComplete</code> calls both of the available methods in JAWS, retrieving both frames that apply to all words in a synset and the frames that are specific to a single word in the synset.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/12/30/review-development-of-language/">Review: The Development of Language Processing Strategies: A Cross-linguistic Study Between Japanese and English</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-30T00:00:00+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2011/12/30/review-development-of-language/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2011/12/30/review-development-of-language/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.goodreads.com/book/show/3945971-the-development-of-language-processing-strategies" style="float: left; padding-right: 20px;">
+<img src="http://photo.goodreads.com/books/1267076529m/3945971.jpg" title="&#34;The Development of Language Processing Strategies: A Cross-linguistic Study Between Japanese and English&#34;" alt="&#34;The Development of Language Processing Strategies: A Cross-linguistic Study Between Japanese and English&#34;"></a><a href="http://www.goodreads.com/book/show/3945971-the-development-of-language-processing-strategies">The Development of Language Processing Strategies: A Cross-linguistic Study Between Japanese and English</a> by <a href="http://www.goodreads.com/author/show/1682824.Reiko_Mazuka">Reiko Mazuka</a></p>
+
+<p>My rating: <a href="http://www.goodreads.com/review/show/252591433">4 of 5 stars</a></p>
+
+<p>This is basically an updated version of Mazuka&rsquo;s PHD thesis. This book is a significant work on human sentence processing involving data from a head final and a head initial language.</p>
+
+<p>Mazuka presents data on sentence processing experiments with English speaking adults and Japanese speaking children and adults. She shows that sentence processing strategies are the same in children and adults (though their ability differs with age), and that sentence processing strategies differ cross-linguistically. Her experimental data include probe latency tasks (PLTs) for lexical and semantic information in English and Japanese sentences.</p>
+
+<p>A probe latency task involves a subject listening to a sentence and responding to questions about its contents. In lexical PLT, a subject is asked if the sentence contained the specified lexical item. In semantic PLT, the subject is asked if a sentence contained a portion which has a similar meaning to a specified word or phrase. The experimenter then carefully designs sentences which test the subjects' ability to process different types of sentences. Mazuka&rsquo;s experiment measure response time and also the accuracy of the subjects' responses. Her findings for cross-linguistic processing differences are as follows:</p>
+
+<p>English speakers showed processing differences for main and subordinate clauses, while Japanese speakers did not.</p>
+
+<p>English speakers showed different effects for semantic and lexical tasks, while Japanese speakers did not.</p>
+
+<p>In English speakers, response time for semantic probe latency tasks involving sentence-initial subordinate clauses (an LB structure) was increased, while in Japanese speakers it was greatly decreased.</p>
+
+<p>Japanese speaker response times to both lexical and semantic PLTs involving left-branching and coordinate structures were the same; English speakers showed much larger recency effects in LB than coordinate sentences.</p>
+
+<p>Hypotheses about the human language processing mechanism which assume a single processing strategy do not account for these data. Japanese speakers process LB structures efficiently, and English speakers process RB structures efficiently. This is impossible in a parser which assumes only one processing strategy, and a parser which can efficiently process both would be too powerful to account for real human data. For Japanese speakers to process LB structures as efficiently as English speakers do RB structures, processing must be done bottom-up instead of top-down. Mazuka therefore hypothesizes that Universal Grammar (UG) contains a parameter which determines whether a language is right- or left-branching (RB or LB), and that this is linked with the processing strategy by specifying whether processing should be done top-down or bottom-up. She also hypothesizes that in English, main and subordinate clauses are processed to a different semantic level at some initial encoding stage, accounting differences in English main and subordinate clause PLT tasks. This needs to be further tested in the future with PLTs involving two clause sentences beginning with an explicit subordinator in Japanese.</p>
+
+<p>She states that future research is required to determine the exact relationship between her experimental data and the operation of the human sentence parser as she has hypothesized.</p>
+
+<p>Since some languages such as German, actually branch in different directions for different types of clauses, her hypothesis needs to be revised to account for this. I&rsquo;m hoping that her hypotheses can be tested in detail in some sort of a cogntive modeling system. <a href="http://www.goodreads.com/review/list/2794644-nathan-glenn">View all my reviews</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/06/list-of-japanese-nlp-tools/">List of Japanese NLP Tools</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-06T00:00:00+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2011/11/06/list-of-japanese-nlp-tools/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2011/11/06/list-of-japanese-nlp-tools/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I haven&rsquo;t tried out all of these so I don&rsquo;t have comments for everything, but hopefully this list will come in useful for someone.</p>
+
+<h2>Morphological analyzers/tokenizers</h2>
+
+<ul>
+<li><a href="http://sourceforge.net/projects/itadaki/">Itadaki</a>: a Japanese processing module for OpenOffice. I&rsquo;ve done a tiny bit of work and issue documentation on a fork <a href="https://github.com/garfieldnate/itadaki">here</a>, and someone forked that to work with a Japanese/German dictionary <a href="https://github.com/wichmann/Itadaki">here</a>.</li>
+<li>GoSen: Uses <a href="http://java.net/projects/sen/">sen</a> as a base, and is part of Itadaki; a pure Java version of ChaSen. See my previous post on where to download it from.</li>
+<li><a href="http://mecab.sourceforge.net/">MeCab</a>: This page also contains a comparison of MeCab, ChaSen, JUMAN, and Kakasi.</li>
+<li><a href="http://chasen.naist.jp/hiki/ChaSen/?%C3%E3%E4%A5%A4%CE%C7%DB%C9%DB">ChaSen</a></li>
+<li><a href="http://nlp.ist.i.kyoto-u.ac.jp/EN/index.php?JUMAN">JUMAN</a></li>
+<li><a href="http://code.google.com/p/cabocha/">Cabocha</a>: Uses support vector machines for morphological and dependency structure analysis.</li>
+<li><a href="https://github.com/sile/gomoku">Gomoku</a></li>
+<li><a href="http://igo.sourceforge.jp/">Igo</a></li>
+<li><a href="https://github.com/atilika/kuromoji">Kuromoji</a>: Donated to Apache and used in Solr. Looks nice.</li>
+</ul>
+
+
+<h2>Corpora</h2>
+
+<ul>
+<li><a href="http://www.env.kitakyu-u.ac.jp/corpus/docs/index.html">Hypermedia Corpus</a></li>
+<li><a href="http://www.sfs.uni-tuebingen.de/en/tuebajs.shtml">TüBa-J/S</a>: Japanese treebank from universityu of Tübingen. Not as heavily annotated as I&rsquo;d hoped. You have to send them an agreement to download it, but it&rsquo;s free.</li>
+<li><a href="http://www.gsk.or.jp/catalog_e.html">GSK</a>: Not free, but very cheap.</li>
+<li><a href="http://www.ldc.upenn.edu/">LDC</a>: Expensive unless your institution is a member</li>
+</ul>
+
+
+<h2>Other lexical resources</h2>
+
+<ul>
+<li><a href="http://kakasi.namazu.org/">Kakasi</a>: Gives readings for kanji compounds.</li>
+<li><a href="http://nlpwww.nict.go.jp/wn-ja/index.en.html">WordNet</a>: Stil under development by NiCT. The sense numbers are cross-indexed with those in the English WordNet, so it could be useful for translation. Also, there are no verb frames like there are in English.</li>
+<li><a href="http://cl.it.okayama-u.ac.jp/rsc/data/index.html">LCS Database</a>: From Okayama University</li>
+<li><a href="http://jfn.st.hc.keio.ac.jp/index.html">Framenet</a>: Unfortunately you can only do online browsing.</li>
+<li><a href="http://tell.fll.purdue.edu/chakoshi/public.html">Chakoshi</a>: Online collocation search engine.</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/06/itadaki-gosen-and-ipadic-27/">Itadaki GoSen and IPADIC 2.7</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-06T00:00:00+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2011/11/06/itadaki-gosen-and-ipadic-27/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2011/11/06/itadaki-gosen-and-ipadic-27/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>Update3: I&rsquo;ve forked the Itadaki project on <a href="https://github.com/garfieldnate/Itadaki">GitHub</a> to keep track of it better.</strong></p>
+
+<p><strong>Update2: I made an executable JAR for GoSen that runs the ReadingProcessorDemo. It requires Java 6; just unzip the contents of <a href="https://sites.google.com/site/complingfiles/files/gosen.7z?attredirects=0&amp;d=1">this zip file</a> to your computer and click on the jar file.</strong></p>
+
+<p><strong>Update1: The IPADIC dictionary is no longer available from its original location. It has been replaced by the <a href="http://sourceforge.jp/projects/naist-jdic/">NAIST</a> dictionary. I have edited the following post to reflect the needed changes.</strong></p>
+
+<p>Itadaki is a software suite for processing Japanese in OpenOffice. GoSen, part of the Itadaki project, is a pure Java morphological analysis tool for Japanese, and I have found it extremely useful in my research. Unfortunately, the page for this project went down recently, making the tools harder to find. Itadaki is still available through Google code <a href="http://code.google.com/p/itadaki/">here</a>, but I can&rsquo;t find a separate installment of GoSen. The old GoSen website can still be accessed through the way-back-machine<a href="http://web.archive.org/web/20080108030419/http://itadaki.org/wiki/index.php/Itadaki"> here</a>. The other problem is that GoSen hasn&rsquo;t been updated since 2007, and in it&rsquo;s current release cannot handle the latest release of IPADIC. I&rsquo;ll describe how to fix it in this post.</p>
+
+<p>Why does it matter that we can&rsquo;t use the latest version of IPADIC? Well, here&rsquo;s an example. I am using GoSen in my thesis work right now, and I put in a sentence which included a negative, past tense verb, such as 行かなかった. It analyzed it as な being used for negation, and かった being the past tense of the verb かう. That is indeed a problem! Using the newer IPADIC fixed it for me, though. To do that, download <a href="http://neu101.up.seesaa.net/etc/gosen-t001.zip">this</a> modified version of GoSen. The explanation for the fix is <a href="http://neu101.seesaa.net/article/182625342.html">here</a>. Basically, a change in the new IPADIC versions to work better with MeCab adds a bunch of commas that break GoSen.</p>
+
+<p><strong>Edit: Once you&rsquo;ve downloaded and unzipped GoSen, run ant in the top directory to build an executable JAR file. Note that if you want javadoc, you&rsquo;ll have to change build.xml so that the javadoc command has &lsquo;encoding=&ldquo;utf-8&rdquo;&rsquo;. Next, you must download the IPADIC dictionary from its legacy repository, <a href="http://sourceforge.jp/projects/ipadic/downloads/24435/ipadic-2.7.0.tar.gz/">here</a>. Unpack the contents into testdata/dictionary. Change testdata/dictionary/build.xml so that the value of &ldquo;ipadic.version&rdquo; is &ldquo;2.7.0&rdquo; (the version that you downloaded). Now run ant in this directory to build the dictionary. [If you had errors, you may have forgotten to run ant in the top level directory first.]</strong></p>
+
+<p>Then, to run a demo and see what amazing things GoSen can do, copy the dictionary.xml file from the testdata/dictionary directory to the dictionary/dictionary directory, go back to the root directory of GoSen, and then run <code>java -cp bin examples.ReadingProcessorDemo testData/dictionary/dictionary.xml</code>. The GoSen site says to run using the testdata folder, but that means you&rsquo;ll have to download the dictionary twice, which is dumb. When you run the above command, you&rsquo;ll get this GUI:</p>
+
+<p><img class="center" src="/images/content_images/gosen.gif" width="209" height="320" title="&#34;Screenshot of GoSen's reading processor demo&#34;" alt="&#34;Screenshot of GoSen's reading processor demo&#34;"></p>
+
+<p>Notice that it tokenizes the sentence, gives readings, and allows you to choose among alternatives analyses. It also gives information on part of speech and inflection.</p>
+
+<p>To use GoSen in an Eclipse project, add gosen-1.0beta.jar to the project build path. You also need to have the dictionary directory somewhere, along with the dictionary.xml file. This code will get you started:</p>
+
+<figure class='code'><figcaption><span>Tokenizing with GoSen</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">edu</span><span class="o">.</span><span class="na">byu</span><span class="o">.</span><span class="na">xnlsoar</span><span class="o">.</span><span class="na">jp</span><span class="o">.</span><span class="na">lexacc</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">edu.byu.xnlsoar.utils.Constants</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">net.java.sen.SenFactory</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">net.java.sen.StringTagger</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">net.java.sen.dictionary.Morpheme</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">net.java.sen.dictionary.Token</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GoSenInterface</span> <span class="o">{</span>
+</span><span class='line'> <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">token</span><span class="o">&gt;</span> <span class="nf">tokenize</span><span class="o">(</span><span class="n">String</span> <span class="n">sentence</span><span class="o">){</span>
+</span><span class='line'>  <span class="n">StringTagger</span> <span class="n">tagger</span> <span class="o">=</span> <span class="n">SenFactory</span><span class="o">.</span><span class="na">getStringTagger</span><span class="o">(</span><span class="n">Constants</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&quot;GOSEN_DICT_CONFIG&quot;</span><span class="o">));</span>
+</span><span class='line'>  <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>   <span class="k">return</span> <span class="n">tagger</span><span class="o">.</span><span class="na">analyze</span><span class="o">(</span><span class="n">sentence</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>   <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span><span class='line'>   <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(-</span><span class="mi">1</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'> <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>  <span class="n">String</span> <span class="n">sentence</span> <span class="o">=</span> <span class="s">&quot;やっぱり日本語情報処理って簡単に出来ちゃうんだもんな。&quot;</span><span class="o">;</span>
+</span><span class='line'>  <span class="n">GoSenInterface</span> <span class="n">dict</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">GoSenInterface</span><span class="o">();</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;tokenizing &quot;</span> <span class="o">+</span> <span class="n">sentence</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">List</span><span class="o">&lt;</span><span class="n">token</span><span class="o">&gt;</span> <span class="n">tokens</span> <span class="o">=</span> <span class="n">dict</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="n">sentence</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">tokens</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">Morpheme</span> <span class="n">m</span><span class="o">;</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;surface, lemma, POS, conjugation&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">for</span><span class="o">(</span><span class="n">Token</span> <span class="n">t</span> <span class="o">:</span> <span class="n">tokens</span><span class="o">){</span>
+</span><span class='line'>   <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">t</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span><span class="o">);</span>
+</span><span class='line'>   <span class="n">m</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="na">getMorpheme</span><span class="o">();</span>
+</span><span class='line'>   <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">getBasicForm</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span><span class="o">);</span>
+</span><span class='line'>   <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">getPartOfSpeech</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span><span class="o">);</span>
+</span><span class='line'>   <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">getConjugationalType</span><span class="o">());</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'> <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you run that you will get:</p>
+
+<pre><code>tokenizing やっぱり日本語情報処理って簡単に出来ちゃうんだもんな。
+[やっぱり, 日本語, 情報処理, って, 簡単, に, 出来, ちゃう, ん, だ, もん, な, 。]
+surface, lemma, POS, conjugation
+やっぱり, やっぱり, 副詞-一般, *
+日本語, 日本語, 名詞-一般, *
+情報処理, 情報処理, 名詞-一般, *
+って, って, 助詞-格助詞-連語, *
+簡単, 簡単, 名詞-形容動詞語幹, *
+に, に, 助詞-副詞化, *
+出来, 出来る, 動詞-自立, 一段
+ちゃう, ちゃう, 動詞-非自立, 五段・ワ行促音便
+ん, ん, 名詞-非自立-一般, *
+だ, だ, 助動詞, 特殊・ダ
+もん, もん, 名詞-非自立-一般, *
+な, だ, 助動詞, 特殊・ダ
+。, 。, 記号-句点, *
+</code></pre>
+
+<p>You have plenty of other options while processing, like grabbing alternate readings, etc. Notice that it got one wrong here: ちゃう is a contraction of てしまう, not a verb whose lemma is ちゃう. It doesn&rsquo;t seem to work on contractions because every token needs a surface form. So this might not work well on informal registers such as tweets or blogs unless some pre-preprocessing is done.</p>
+
+<p>Feel free to leave any questions or comments.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/03/cs-240-web-crawler-at-byu/">CS 240 Web Crawler at BYU</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-03T00:00:00+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2011/11/03/cs-240-web-crawler-at-byu/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2011/11/03/cs-240-web-crawler-at-byu/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I recently polished off the web crawler project for CS 240 at BYU. It&rsquo;s probably the most talked-about project in the CS major, and the cause of so many students retaking the class.</p>
+
+<p>The specification for the web crawler assignment can be found <a href="http://students.cs.byu.edu/~cs240ta/fall2011/projects/crawler/">here</a>. Basically, given a start URL, the crawler finds every link on a page, follows them, downloads the pages, and indexes each of the words on a page, as long as they are not in a given stop words file; then it follows the links from that page, and so on. All of the indexed information is printed out to XML files. The code also has to conform to proper style, and no memory leaks are allowed.<br />For those who still need to do the project or haven&rsquo;t taken the following exam yet, I thought I&rsquo;d post a note or two of help.</p>
+
+<p>First off, check your constructors! In an initialization for a templatized BST node, I had been invoking the default copy constructor. A copy constructor looks like this:</p>
+
+<pre><code>T(const T &amp;amp; other)
+</code></pre>
+
+<p>In the contained object, I had only implemented the operator= construction. My class T had pointers in it, and those pointers were to objects which were allocated on the heap with the new keyword. The default copy constructor copied the pointers, and when the copy of the object of type T was deleted, so were the structures that its pointers pointed to. Since the original object pointed to the same structures, that object would then cause a segfault when destroyed because it would try to delete non-existent structures. Ouch!</p>
+
+<p>That bug wasted a good 6 hours of my life. Needless to say, I was a little scared of the next assignment: a debugging exam. The class TAs put 4 bugs into our code (they didn&rsquo;t touch comments, asserts, or unit tests), and we had 3 hours to find them. Here&rsquo;s what the TA&rsquo;s did to my code:</p>
+
+<ul>
+<li>In my URL class, I call erase on a string representing a relative URL to get ride of the &ldquo;../&rdquo; at the beginning. The correct code is url.erase(0,3), but the TAs changed it to url.erase(0,2).</li>
+<li>In my BST Insert method, there is a control structure that determines whether to put a value on a node&rsquo;s left or right, and the TA&rsquo;s changed one of the left&rsquo;s to right&rsquo;s, i.e. <code>node-&gt;left = new BSTNode&lt;T&gt; (v);</code> was changed to <code>node-&gt;right = new BSTNode&lt;T&gt; (v);</code>.</li>
+<li>I have several boolean flags in an HTMLparser class which keep track of whether processing is inside of a header, title, body, or html tag. They should all be false at the beginning of processing, but one of them was changed to true, e.g. <code>constructor():titleFlag(false),bodyFlag(false),headerFlag(true){...</code></li>
+<li>The last bug was a memory leak. In my linked list Insert method, I declare a linked list node, use a control structure to determine the proper location of the new node, and then set the node with a call to <code>new</code> and insert it in that location. The TA&rsquo;s changed the declaration to be a definition which used the <code>new</code> keyword, so I always allocated one extra node on the heap.</li>
+</ul>
+
+
+<p>The first three bugs I was I able find through unit testing. The last one I pinpointed using valgrind and print statements; however, even though it was staring me in the face, I couldn&rsquo;t find it and only got 75% on the exam.</p>
+
+<p>In case somebody finds the code interesting/useful, I&rsquo;ll post it <a href="https://sites.google.com/site/complingfiles/files/crawler.7z?attredirects=0&amp;d=1">here</a> (no cheating!). Make with <code>make bin</code>. Run with <code>bin/crawler &lt;start url&gt; &lt;stopwords file&gt; &lt;output file&gt;</code>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/09/01/string-allignment-with-edit-operations/">String Allignment With Edit Operations</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-01T00:00:00+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2011/09/01/string-allignment-with-edit-operations/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2011/09/01/string-allignment-with-edit-operations/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A common way to measure the distance between two strings is using Levenshtein distance. Levenshtein distance is the minimum number of deletions, insertions, and substitutions needed to transform one string into another. Finding the distance between two strings is useful in certain applications such as spell checking (a word processor will suggest dictionary words that are close to your misspelled word). See <a href="http://en.wikipedia.org/wiki/Levenshtein_distance">wikipedia</a> for more details and an example of Levenshtein distance calculation.</p>
+
+<p>Another related and also important operation is to find the minimum edit alignment; that is, once the minimum edit distance between the two strings is found, output the sequence of operations that can be used to change the one string into the other. For example, if we let C mean &ldquo;correct&rdquo;, S mean &ldquo;substitution&rdquo;, D mean &ldquo;deletion&rdquo; and I mean &ldquo;insertion&rdquo;, then the edit alignment between the characters in &ldquo;construction&rdquo; and &ldquo;distortions&rdquo; would be ISSCCISSCCCCD. Here is an explanation of the alignment:</p>
+
+<ul>
+<li>I: Insert a &ldquo;c&rdquo; ->cdistortions</li>
+<li>S: Substitute &ldquo;d&rdquo; for &ldquo;o&rdquo; ->coistortions</li>
+<li>S: Substitute &ldquo;i&rdquo; for &ldquo;n&rdquo; -> constortions</li>
+<li>CC: Leave the &ldquo;st&rdquo; alone</li>
+<li>I: Insert &ldquo;r&rdquo; -> constrortion</li>
+<li>S: Substitute &ldquo;u&rdquo; for &ldquo;o&rdquo; -> contrurtion</li>
+<li>S: Substitute &ldquo;c&rdquo; for &ldquo;r&rdquo; -> constructions</li>
+<li>CCCC: Leave &ldquo;tion&rdquo; alone</li>
+<li>D: delete &ldquo;s&rdquo; -> construction</li>
+</ul>
+
+
+<p> This sort of an allignment operation is commonly used in grading the output of machine translation and speech recognition systems, though the operations are done at the word level instead of the character level. When I needed a quick piece of code to do the alignment in my own application, though, there was none to be found on the internet! So I made my own and am posting it here. The logic for determining the proper string of edit operations is taken from a StackOverflow answer <a href="http://stackoverflow.com/questions/5849139/levenshtein-distance-inferring-the-edit-operations-from-the-matrix/5861206#5861206">here</a>. And now the code:</p>
+
+<figure class='code'><figcaption><span>align two strings via edit operations</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="cm">/**</span>
+</span><span class='line'><span class="cm">  * @return List of Operations representing allignment between list1 and</span>
+</span><span class='line'><span class="cm">  * list2. The allignment represents operations to change list2 into list1.</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span> <span class="nf">levenshteinAllignment</span><span class="o">(</span><span class="n">Object</span><span class="o">[]</span> <span class="n">list1</span><span class="o">,</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">list2</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kt">int</span><span class="o">[][]</span> <span class="n">distanceMatrix</span> <span class="o">=</span> <span class="n">getDistanceMatrix</span><span class="o">(</span><span class="n">list1</span><span class="o">,</span> <span class="n">list2</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">List</span> <span class="n">ops</span><span class="o">=</span> <span class="k">new</span> <span class="nf">ArrayList</span><span class="o">(</span>
+</span><span class='line'>              <span class="n">list1</span><span class="o">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="n">list2</span><span class="o">.</span><span class="na">length</span> <span class="o">?</span> <span class="n">list1</span><span class="o">.</span><span class="na">length</span> <span class="o">:</span> <span class="n">list2</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+</span><span class='line'>      <span class="c1">//think of distance chart as going from bottom left to top right;</span>
+</span><span class='line'>      <span class="c1">//current position coordinates; start at top right.</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="n">list1</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="n">list2</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+</span><span class='line'>      <span class="c1">//could have moved to current position from three others; store their scores here.</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">diag</span><span class="o">;</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">left</span><span class="o">;</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">below</span><span class="o">;</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">current</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">while</span> <span class="o">(</span><span class="n">row</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">col</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">diag</span> <span class="o">=</span> <span class="n">getVal</span><span class="o">(</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span><span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span><span class="n">distanceMatrix</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">left</span> <span class="o">=</span> <span class="n">getVal</span><span class="o">(</span><span class="n">row</span><span class="o">,</span><span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span><span class="n">distanceMatrix</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">below</span> <span class="o">=</span> <span class="n">getVal</span><span class="o">(</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span><span class="n">col</span><span class="o">,</span><span class="n">distanceMatrix</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">current</span> <span class="o">=</span> <span class="n">distanceMatrix</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//              if the value in the diagonal cell (going up+left) is smaller or equal to the</span>
+</span><span class='line'><span class="c1">//                 values found in the other two cells</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//              AND</span>
+</span><span class='line'><span class="c1">//                 if this is same or 1 minus the value of the current cell</span>
+</span><span class='line'>          <span class="k">if</span><span class="o">(</span><span class="n">diag</span> <span class="o">&lt;=</span> <span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">diag</span> <span class="o">&lt;=</span> <span class="n">below</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">diag</span> <span class="o">==</span> <span class="n">current</span> <span class="o">||</span> <span class="n">diag</span> <span class="o">==</span> <span class="n">current</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)){</span>
+</span><span class='line'><span class="c1">//                  then  &quot;take the diagonal cell&quot;</span>
+</span><span class='line'><span class="c1">//                if the value of the diagonal cell is one less than the current cell:</span>
+</span><span class='line'>              <span class="k">if</span><span class="o">(</span><span class="n">diag</span> <span class="o">==</span> <span class="n">current</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
+</span><span class='line'><span class="c1">//                   Add a SUBSTITUTION operation (from the letters corresponding to</span>
+</span><span class='line'><span class="c1">//                   the _current_ cell)</span>
+</span><span class='line'>                  <span class="n">ops</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nf">Operation</span><span class="o">(</span><span class="n">Operation</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">SUBSTITUTION</span><span class="o">,</span><span class="n">list1</span><span class="o">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="o">],</span><span class="n">list2</span><span class="o">[</span><span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="o">]));</span>
+</span><span class='line'>              <span class="k">else</span>
+</span><span class='line'><span class="c1">//                   otherwise: do not add an operation this was a no-operation.</span>
+</span><span class='line'>                  <span class="n">ops</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nf">Operation</span><span class="o">(</span><span class="n">Operation</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">CORRECT</span><span class="o">,</span><span class="n">list1</span><span class="o">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="o">]));</span>
+</span><span class='line'>              <span class="c1">//move diagonally</span>
+</span><span class='line'>              <span class="n">row</span><span class="o">--;</span>
+</span><span class='line'>              <span class="n">col</span><span class="o">--;</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'><span class="c1">//</span>
+</span><span class='line'><span class="c1">//           elseif the value in the cell to the left is smaller or equal to the value of</span>
+</span><span class='line'><span class="c1">//               the cell below current cell</span>
+</span><span class='line'><span class="c1">//           AND</span>
+</span><span class='line'><span class="c1">//           if this value is same or 1 minus the value of the current cell</span>
+</span><span class='line'>          <span class="k">else</span> <span class="nf">if</span><span class="o">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">below</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">left</span> <span class="o">==</span> <span class="n">current</span> <span class="o">||</span> <span class="n">left</span> <span class="o">==</span> <span class="n">current</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)){</span>
+</span><span class='line'><span class="c1">//               add an INSERTION of the cell to the left</span>
+</span><span class='line'>              <span class="n">ops</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nf">Operation</span><span class="o">(</span><span class="n">Operation</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">INSERTION</span><span class="o">,</span><span class="n">list2</span><span class="o">[</span><span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="o">]));</span>
+</span><span class='line'>              <span class="c1">//move left</span>
+</span><span class='line'>              <span class="n">col</span><span class="o">--;</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'><span class="c1">//           else</span>
+</span><span class='line'>          <span class="k">else</span><span class="o">{</span>
+</span><span class='line'><span class="c1">//              take the cell below, add</span>
+</span><span class='line'><span class="c1">//              Add a DELETION operation</span>
+</span><span class='line'>              <span class="n">ops</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nf">Operation</span><span class="o">(</span><span class="n">Operation</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">DELETION</span><span class="o">,</span><span class="n">list1</span><span class="o">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="o">]));</span>
+</span><span class='line'>              <span class="c1">//move down</span>
+</span><span class='line'>              <span class="n">row</span><span class="o">--;</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="n">Collections</span><span class="o">.</span><span class="na">reverse</span><span class="o">(</span><span class="n">ops</span><span class="o">);</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">ops</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getVal</span><span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">,</span> <span class="kt">int</span> <span class="n">col</span><span class="o">,</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">distanceMatrix</span><span class="o">){</span>
+</span><span class='line'>      <span class="k">if</span><span class="o">(</span><span class="n">row</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">row</span> <span class="o">&gt;</span> <span class="n">distanceMatrix</span><span class="o">.</span><span class="na">length</span><span class="o">)</span>
+</span><span class='line'>          <span class="k">return</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">if</span><span class="o">(</span><span class="n">col</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">col</span> <span class="o">&gt;</span> <span class="n">distanceMatrix</span><span class="o">.</span><span class="na">length</span><span class="o">)</span>
+</span><span class='line'>          <span class="k">return</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">else</span> <span class="k">return</span> <span class="n">distanceMatrix</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">];</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Operation</span><span class="o">{</span>
+</span><span class='line'>      <span class="kd">private</span> <span class="n">Type</span> <span class="n">type</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">private</span> <span class="n">Object</span> <span class="n">object1</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">private</span> <span class="n">Object</span> <span class="n">object2</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="kd">enum</span> <span class="n">Type</span><span class="o">{</span>
+</span><span class='line'>          <span class="n">CORRECT</span><span class="o">,</span><span class="n">SUBSTITUTION</span><span class="o">,</span><span class="n">DELETION</span><span class="o">,</span><span class="n">INSERTION</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="nf">Operation</span><span class="o">(</span><span class="n">Type</span> <span class="n">t</span><span class="o">,</span> <span class="n">Object</span> <span class="n">o1</span><span class="o">){</span>
+</span><span class='line'>          <span class="n">type</span> <span class="o">=</span> <span class="n">t</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">object1</span> <span class="o">=</span> <span class="n">o1</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">object2</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="nf">Operation</span><span class="o">(</span><span class="n">Type</span> <span class="n">t</span><span class="o">,</span> <span class="n">Object</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Object</span> <span class="n">o2</span><span class="o">){</span>
+</span><span class='line'>          <span class="n">type</span> <span class="o">=</span> <span class="n">t</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">object1</span> <span class="o">=</span> <span class="n">o1</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">object2</span> <span class="o">=</span> <span class="n">o2</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="nd">@Override</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">(){</span>
+</span><span class='line'>          <span class="k">if</span><span class="o">(</span><span class="n">type</span> <span class="o">==</span> <span class="n">Type</span><span class="o">.</span><span class="na">SUBSTITUTION</span><span class="o">)</span>
+</span><span class='line'>              <span class="k">return</span> <span class="s">&quot;Substitution: &quot;</span> <span class="o">+</span> <span class="n">object1</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot; -&gt; &quot;</span> <span class="o">+</span> <span class="n">object2</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+</span><span class='line'>          <span class="k">if</span><span class="o">(</span><span class="n">type</span> <span class="o">==</span> <span class="n">Type</span><span class="o">.</span><span class="na">CORRECT</span><span class="o">)</span>
+</span><span class='line'>              <span class="k">return</span> <span class="s">&quot;Correct:      &quot;</span> <span class="o">+</span> <span class="n">object1</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+</span><span class='line'>          <span class="k">if</span><span class="o">(</span><span class="n">type</span> <span class="o">==</span> <span class="n">Type</span><span class="o">.</span><span class="na">DELETION</span><span class="o">)</span>
+</span><span class='line'>              <span class="k">return</span> <span class="s">&quot;Deletion:     &quot;</span> <span class="o">+</span> <span class="n">object1</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+</span><span class='line'>          <span class="k">if</span><span class="o">(</span><span class="n">type</span> <span class="o">==</span> <span class="n">Type</span><span class="o">.</span><span class="na">INSERTION</span><span class="o">)</span>
+</span><span class='line'>              <span class="k">return</span> <span class="s">&quot;Insertion:    &quot;</span> <span class="o">+</span> <span class="n">object1</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+</span><span class='line'>          <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  *</span>
+</span><span class='line'><span class="cm">  * @param array of objects to compare</span>
+</span><span class='line'><span class="cm">  * @param array of objects to compare</span>
+</span><span class='line'><span class="cm">  * @return Levenshtein distance between arrays.</span>
+</span><span class='line'><span class="cm">  * This method uses the equals(Object o) method to compare the</span>
+</span><span class='line'><span class="cm">  * objects in the two arrays, returning the Levenshtein distance between them.</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">levenshteinDistance</span><span class="o">(</span><span class="n">Object</span><span class="o">[]</span> <span class="n">list1</span><span class="o">,</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">list2</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="kt">int</span><span class="o">[][]</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">getDistanceMatrix</span><span class="o">(</span><span class="n">list1</span><span class="o">,</span> <span class="n">list2</span><span class="o">);</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">distance</span><span class="o">[</span><span class="n">list1</span><span class="o">.</span><span class="na">length</span><span class="o">][</span><span class="n">list2</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  *</span>
+</span><span class='line'><span class="cm">  * @param list1</span>
+</span><span class='line'><span class="cm">  * @param list2</span>
+</span><span class='line'><span class="cm">  * @return A completely filled distance matrix; movement from [i-1][j]</span>
+</span><span class='line'><span class="cm">  *         represents insertion, from [i][j-1] represents deletion, and from</span>
+</span><span class='line'><span class="cm">  *         [i-1][j-1] represents substitution or no operation.</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[][]</span> <span class="nf">getDistanceMatrix</span><span class="o">(</span><span class="n">Object</span><span class="o">[]</span> <span class="n">list1</span><span class="o">,</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">list2</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kt">int</span><span class="o">[][]</span> <span class="n">distanceMatrix</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">list1</span><span class="o">.</span><span class="na">length</span> <span class="o">+</span> <span class="mi">1</span><span class="o">][</span><span class="n">list2</span><span class="o">.</span><span class="na">length</span> <span class="o">+</span> <span class="mi">1</span><span class="o">];</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">list1</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+</span><span class='line'>          <span class="n">distanceMatrix</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">list2</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span>
+</span><span class='line'>          <span class="n">distanceMatrix</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">list1</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+</span><span class='line'>          <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">list2</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span>
+</span><span class='line'>              <span class="n">distanceMatrix</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">minimum</span><span class="o">(</span><span class="n">distanceMatrix</span><span class="o">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span><span class="c1">// insertion</span>
+</span><span class='line'>                      <span class="n">distanceMatrix</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span><span class="c1">// deletion</span>
+</span><span class='line'>                      <span class="n">distanceMatrix</span><span class="o">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]</span><span class="c1">// substitution or correct</span>
+</span><span class='line'>                              <span class="o">+</span> <span class="o">((</span><span class="n">list1</span><span class="o">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="n">list2</span><span class="o">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]))</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="mi">1</span><span class="o">));</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">distanceMatrix</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  * Same as Math.min, but returns the minimum of three arguments instead of</span>
+</span><span class='line'><span class="cm">  * two.</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">minimum</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">,</span> <span class="kt">int</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">),</span> <span class="n">c</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For word level alignment, you can call it on Strings using the split function like so:</p>
+
+<figure class='code'><figcaption><span>example string alignment</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="k">for</span><span class="o">(</span><span class="n">Operation</span> <span class="n">o</span> <span class="o">:</span> <span class="n">levenshteinAllignment</span><span class="o">(</span>
+</span><span class='line'>          <span class="s">&quot;What My house gleams with the light of the moon and your face&quot;</span>
+</span><span class='line'>                  <span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&quot; &quot;</span><span class="o">),</span>
+</span><span class='line'>          <span class="s">&quot;Your house with the light of the the moon and my face&quot;</span>
+</span><span class='line'>                  <span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&quot; &quot;</span><span class="o">))</span>
+</span><span class='line'>      <span class="o">)</span>
+</span><span class='line'>          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And the output would be:</p>
+
+<pre><code>Deletion:     What
+Substitution: My -&gt; Your
+Correct:      house
+Deletion:     gleams
+Correct:      with
+Correct:      the
+Correct:      light
+Correct:      of
+Correct:      the
+Insertion:    the
+Correct:      moon
+Correct:      and
+Substitution: your -&gt; my
+Correct:      face
+</code></pre>
+
+<p>Feel free to use and edit this as you like. Many applications disregard the strings that are correct and only output the edit operations, and that should be an easy edit.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/08/17/java-code-distributional-statistics-of/">Distributional Statistics of Log Values in Linear Domain</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-17T00:00:00+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2011/08/17/java-code-distributional-statistics-of/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2011/08/17/java-code-distributional-statistics-of/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Quite a long title, sorry. Basically, I had a bunch of log values (and they needed to stay logarithmic to avoid underflow) and I wanted to compute distributional statistics on them, like mean, variance and kurtosis. I wasn&rsquo;t sure if it would be valid to compute these kinds of statistics on the numbers as is, so I created a class to do all of the calculations in linear space. I&rsquo;ll post the result here, though there may be bugs (tell me if you find some!).</p>
+
+<p>One thing to remember is that if the statistics map onto a negative number in linear space then it will be impossible to take the logarithm; therefore, these are invalid operations and you have to consider this before trying to retrieve any numbers from this program. I hope someone finds this useful!</p>
+
+<figure class='code'><figcaption><span>calculate statistical values of logs in the linear domain</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">edu</span><span class="o">.</span><span class="na">jhu</span><span class="o">.</span><span class="na">clsp</span><span class="o">.</span><span class="na">ws11</span><span class="o">.</span><span class="na">rerank</span><span class="o">.</span><span class="na">utils</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/**</span>
+</span><span class='line'><span class="cm"> * This class returns distributional statistics given a list of numbers. The numbers are assumed to</span>
+</span><span class='line'><span class="cm"> * be in logarithmic space, and all of the computation is done on numbers converted from log to linear</span>
+</span><span class='line'><span class="cm"> * space; the results are returned again in log space.</span>
+</span><span class='line'><span class="cm"> * @author Nate Glenn</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LogDistributionalStats</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kt">double</span><span class="o">[]</span> <span class="n">numbers</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kt">int</span> <span class="n">N</span><span class="o">;</span><span class="c1">//number of numbers input</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kt">double</span> <span class="n">logN</span><span class="o">;</span><span class="c1">//log(N)</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kt">double</span> <span class="n">min</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kt">double</span> <span class="n">median</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kt">double</span> <span class="n">max</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kt">double</span> <span class="n">mean</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kt">double</span> <span class="n">avgAbsDeviation</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kt">double</span> <span class="n">standardDeviation</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kt">double</span> <span class="n">variance</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kt">double</span> <span class="n">skew</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kt">double</span> <span class="n">kurtosis</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kt">double</span> <span class="n">sum</span><span class="o">;</span>
+</span><span class='line'>  <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  * Compute statistics on nums. If norm is true, then compute statistics after normalizing</span>
+</span><span class='line'><span class="cm">  * the array, except for min, mean, and max.</span>
+</span><span class='line'><span class="cm">  *</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="nf">LogDistributionalStats</span><span class="o">(</span><span class="kt">double</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">norm</span><span class="o">){</span>
+</span><span class='line'>      <span class="n">N</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+</span><span class='line'>      <span class="c1">//must make new array so as to avoid overwriting the input.</span>
+</span><span class='line'>      <span class="n">numbers</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="n">N</span><span class="o">];</span>
+</span><span class='line'>      <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numbers</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+</span><span class='line'>          <span class="n">numbers</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+</span><span class='line'>      <span class="n">logN</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="n">N</span><span class="o">);</span>
+</span><span class='line'>      <span class="c1">//compute sum, mean, min, and max before normalization (if done at all)</span>
+</span><span class='line'>      <span class="n">sum</span> <span class="o">=</span> <span class="n">sumAsLinear</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">mean</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">-</span> <span class="n">logN</span><span class="o">;</span>
+</span><span class='line'>      <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">numbers</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">min</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+</span><span class='line'>      <span class="n">max</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="o">];</span>
+</span><span class='line'>      <span class="k">if</span><span class="o">(</span><span class="n">norm</span><span class="o">)</span>
+</span><span class='line'>          <span class="n">ArrayUtils</span><span class="o">.</span><span class="na">minusAll</span><span class="o">(</span><span class="n">numbers</span><span class="o">,</span><span class="n">sum</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="kt">double</span> <span class="n">deviation</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">if</span><span class="o">(</span><span class="n">N</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">){</span>
+</span><span class='line'>          <span class="k">for</span><span class="o">(</span><span class="kt">double</span> <span class="n">d</span> <span class="o">:</span> <span class="n">numbers</span><span class="o">){</span>
+</span><span class='line'>              <span class="n">deviation</span> <span class="o">=</span> <span class="n">LogMath</span><span class="o">.</span><span class="na">linearDifference</span><span class="o">(</span><span class="n">mean</span><span class="o">,</span> <span class="n">d</span><span class="o">);</span>
+</span><span class='line'>              <span class="n">avgAbsDeviation</span> <span class="o">=</span> <span class="n">LogMath</span><span class="o">.</span><span class="na">addAsLinear</span><span class="o">(</span><span class="n">avgAbsDeviation</span><span class="o">,</span> <span class="n">deviation</span><span class="o">);</span>
+</span><span class='line'>              <span class="n">variance</span> <span class="o">+=</span> <span class="n">deviation</span><span class="o">*</span><span class="mi">2</span><span class="o">;</span>
+</span><span class='line'>              <span class="n">skew</span> <span class="o">+=</span> <span class="n">deviation</span><span class="o">*</span><span class="mi">3</span><span class="o">;</span>
+</span><span class='line'>              <span class="n">kurtosis</span> <span class="o">+=</span> <span class="n">deviation</span><span class="o">*</span><span class="mi">4</span><span class="o">;</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>          <span class="n">variance</span> <span class="o">-=</span> <span class="n">Math</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">standardDeviation</span> <span class="o">=</span> <span class="n">variance</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">skew</span> <span class="o">-=</span> <span class="n">logN</span><span class="o">+</span><span class="n">variance</span><span class="o">+</span><span class="n">standardDeviation</span><span class="o">;</span>
+</span><span class='line'>          <span class="c1">//don&#39;t do negative 3 calculation here.</span>
+</span><span class='line'>          <span class="n">kurtosis</span> <span class="o">=</span> <span class="n">kurtosis</span><span class="o">-(</span><span class="n">logN</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">variance</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="k">else</span><span class="o">{</span>
+</span><span class='line'>          <span class="k">for</span><span class="o">(</span><span class="kt">double</span> <span class="n">d</span> <span class="o">:</span> <span class="n">numbers</span><span class="o">){</span>
+</span><span class='line'>              <span class="n">deviation</span> <span class="o">=</span> <span class="n">LogMath</span><span class="o">.</span><span class="na">linearDifference</span><span class="o">(</span><span class="n">mean</span><span class="o">,</span> <span class="n">d</span><span class="o">);</span>
+</span><span class='line'>              <span class="n">avgAbsDeviation</span> <span class="o">=</span> <span class="n">LogMath</span><span class="o">.</span><span class="na">addAsLinear</span><span class="o">(</span><span class="n">avgAbsDeviation</span><span class="o">,</span> <span class="n">deviation</span><span class="o">);</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>          <span class="n">variance</span> <span class="o">=</span> <span class="n">Double</span><span class="o">.</span><span class="na">NaN</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">standardDeviation</span> <span class="o">=</span> <span class="n">Double</span><span class="o">.</span><span class="na">NaN</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">skew</span> <span class="o">=</span> <span class="n">Double</span><span class="o">.</span><span class="na">NaN</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">kurtosis</span> <span class="o">=</span> <span class="n">Double</span><span class="o">.</span><span class="na">NaN</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="n">avgAbsDeviation</span> <span class="o">-=</span> <span class="n">logN</span><span class="o">;</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">if</span><span class="o">(</span><span class="n">N</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+</span><span class='line'>          <span class="n">median</span> <span class="o">=</span> <span class="n">LogMath</span><span class="o">.</span><span class="na">addAsLinear</span><span class="o">(</span><span class="n">numbers</span><span class="o">[</span><span class="n">mid</span><span class="o">-</span><span class="mi">1</span><span class="o">],</span> <span class="n">numbers</span><span class="o">[</span><span class="n">mid</span><span class="o">])</span> <span class="o">-</span> <span class="n">Math</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>          <span class="n">median</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">[</span><span class="n">mid</span><span class="o">];</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  *</span>
+</span><span class='line'><span class="cm">  * @param nums</span>
+</span><span class='line'><span class="cm">  * @return Linear space sum of all numbers in nums</span>
+</span><span class='line'><span class="cm">  */</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kt">double</span> <span class="nf">sumAsLinear</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kt">double</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">for</span><span class="o">(</span><span class="kt">double</span> <span class="n">d</span> <span class="o">:</span> <span class="n">numbers</span><span class="o">)</span>
+</span><span class='line'>          <span class="n">total</span> <span class="o">=</span> <span class="n">LogMath</span><span class="o">.</span><span class="na">addAsLinear</span><span class="o">(</span><span class="n">total</span><span class="o">,</span> <span class="n">d</span><span class="o">);</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">total</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getMin</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">min</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getMax</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">max</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getMean</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">mean</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getStandardDeviation</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">standardDeviation</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getVariance</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">variance</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getSkew</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">skew</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getSum</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">sum</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/**</span>
+</span><span class='line'><span class="cm">  * Kurtosis is not calculated with any linear combinations (subtracting three)</span>
+</span><span class='line'><span class="cm">  * This is because it is often impossible to convert this to log space, since</span>
+</span><span class='line'><span class="cm">  * the final product is so often negative. If you want the minus three back again, you can</span>
+</span><span class='line'><span class="cm">  * try to minus it yourself and handle any exceptions (use LogMath.minusAsLinear()).</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getKurtosis</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">kurtosis</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getMedian</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">median</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/4">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/2">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/">Notes on Writing a Syntax Highlighter for Sublime Text</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/06/my-new-toy-algomation/">My New Toy: Algomation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/11/09/the-oh-so-exotic-grocery-list/">The Oh So Exotic Grocery List</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/07/yotchare/">Yotchare!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/13/2-knuth-classics-are-freely-available/">Knuth Classics Are Freely Available</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/garfieldnate?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Nate Glenn -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'garfieldnate';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

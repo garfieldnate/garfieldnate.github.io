@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Subdirectories | Garfield Nate]]></title>
+  <link href="http://garfieldnate.github.io/categories/subdirectories/atom.xml" rel="self"/>
+  <link href="http://garfieldnate.github.io/"/>
+  <updated>2015-07-20T11:30:30+09:00</updated>
+  <id>http://garfieldnate.github.io/</id>
+  <author>
+    <name><![CDATA[Nate Glenn]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Testing Perl Distributions With Test Subdirectories]]></title>
+    <link href="http://garfieldnate.github.io/blog/2013/01/20/testing-perl-distributions-with-test/"/>
+    <updated>2013-01-20T00:00:00+09:00</updated>
+    <id>http://garfieldnate.github.io/blog/2013/01/20/testing-perl-distributions-with-test</id>
+    <content type="html"><![CDATA[<p>Normally I run my test suites with the prove utility:</p>
+
+<p><code>prove -vl --merge</code></p>
+
+<p>The <code>v</code> option turns on verbose processing, and the l option adds <code>lib/</code> to the include path. <code>prove</code>then runs all of the tests in the <code>t/</code> folder.</p>
+
+<p>Today, I had a new problem. I merged multiple distributions into one (<a href="http://jasonkarns.com/blog/merge-two-git-repositories-into-one/">without losing any Git history!</a>), and each had a test suite that I wanted to keep separate. Naturally, I moved the tests from each distribution into its own subdirectory under <code>t/</code>. However, this time when I ran <code>prove -vl</code>, I got this message:</p>
+
+<pre><code>Files=0, Tests=0,  0 wallclock secs ( 0.00 usr +  0.00 sys =  0.00 CPU)
+Result: NOTESTS
+</code></pre>
+
+<p>Dubious&hellip; Well, I needed to know how to test with subdirectories in the <code>t/</code> folder, so I looked at the <a href="https://metacpan.org/module/prove">prove</a> documentation and found the <code>-r</code> option. The <code>r</code> stands for &ldquo;recurse&rdquo;, meaning that the test files would be found by recursing into the directories of the distribution (starting at the top in the root of the distribution). That turned out to be exactly what I needed!</p>
+
+<pre><code>prove -vlr
+t/parser/01-testParser.t
+...
+All tests successful.
+Files=28, Tests=1815, 211 wallclock secs ( 0.92 usr + 0.28 sys = 1.20 CPU)
+Result: PASS
+</code></pre>
+
+<p>Woohoo!</p>
+
+<p>Also, both <code>MakeMaker</code>and <code>Module::Build</code> recurse in the same way during module testing. If you use <code>Dist::Zilla</code>, then you&rsquo;ll probably have the plugins <code>[MakeMaker]</code> and <code>[ModuleBuild]</code>. Using these, <code>dzil test</code> will recurse in the same way.</p>
+]]></content>
+  </entry>
+  
+</feed>

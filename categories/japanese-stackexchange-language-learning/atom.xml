@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Japanese Stackexchange Language Learning | Garfield Nate]]></title>
+  <link href="http://garfieldnate.github.io/categories/japanese-stackexchange-language-learning/atom.xml" rel="self"/>
+  <link href="http://garfieldnate.github.io/"/>
+  <updated>2015-07-20T11:30:30+09:00</updated>
+  <id>http://garfieldnate.github.io/</id>
+  <author>
+    <name><![CDATA[Nate Glenn]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Japanese Stackexchange]]></title>
+    <link href="http://garfieldnate.github.io/blog/2011/07/21/japanese-stackexchange/"/>
+    <updated>2011-07-21T00:00:00+09:00</updated>
+    <id>http://garfieldnate.github.io/blog/2011/07/21/japanese-stackexchange</id>
+    <content type="html"><![CDATA[<p><a href="http://www.stackoverflow.com/">Stackoverflow</a> is one of those sites born of an idea so golden you can hardly believe nobody has ever done it before. Using a simple system of reputation, priveleges and badges, users are encouraged to post answers to on-topic questions for the benefit of the asker and the internet community at large. I go there whenever I need help with a random programming problem. Questions are usually answered quickly because people want the points, and I don&rsquo;t have to feel bad about bothering anyone because asking a question gives someone the opportunity to build their reputation. Started in 2008, the site was immediately a phenomenal success and is still alive and well today. Though stackoverflow is focused on computer programming, the launch of <a href="http://www.stackexchange.com/">stackexchange</a> allowed the growth of other sites on a variety of content. <a href="http://area51.stackexchange.com/">Area 51</a> is sort of a sandbox for people to propose new sites and build communities to nourish and govern those sites.</p>
+
+<p>Recently I was excited to find that a Japanese stackexchange beta site was ready to open. On opening day I was hooked! I answered a large portion of the questions that were answered that day. In fact, I was so hooked that I had to stop posting&hellip; I think that part of the success of stack exchange is that the design creates motivation to answer questions in a manner similar to addicting online games; reputation points aren&rsquo;t worth anything in real life, but somehow racking &lsquo;em up is such a satisfying experience that one keeps going back for more. I consider harvesting the power of addictive point systems for the good of mankind to be a praiseworthy accomplishment, but I must refrain myself from getting caught up in it. I will, however, not stop myself from asking questions, because however fun that may be it is not as addicting.</p>
+
+<p>Anyway, I just wanted to put in a good word for the new <a href="http://japanese.stackexchange.com/">Japanese stackexchange</a> site. If it doesn&rsquo;t get enough traffic it will be shut down, so tell everyone you know who wants to learn Japanese to start asking questions! Or, if you know Japanese, start answering. The best way to learn is to teach. Plus you get this cool banner:</p>
+
+<p><a href="http://japanese.stackexchange.com/users/24/nate-glenn">
+    <img class="center 208 58 <a" src="href="http://japanese.stackexchange.com/users/flair/24.png">http://japanese.stackexchange.com/users/flair/24.png</a>" title="&ldquo;profile for Nate Glenn at Japanese Language and Usage, Q&amp;A for students, teachers, and linguists wanting to discuss the finer points of the Japanese language&rdquo;" >
+</a></p>
+]]></content>
+  </entry>
+  
+</feed>
