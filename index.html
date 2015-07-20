@@ -9,7 +9,7 @@
   <meta name="author" content="Nate Glenn">
 
   
-  <meta name="description" content="I recently released the Soar Tools package for Sublime Text, and I took a few notes that might help the next author. Sublime Text is pretty awesome &hellip;">
+  <meta name="description" content="A while back I watched a neat presentation from Justin Searls called The Social Coding Contract. He has lots of good things to say, but there was one &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -97,6 +97,128 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/20/hacking-through-an-octopress-update/">Hacking Through an Octopress Update</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-20T22:10:27+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2015/07/20/hacking-through-an-octopress-update/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A while back I watched a neat presentation from Justin Searls called <a href="http://blog.testdouble.com/posts/2014-12-02-the-social-coding-contract.html">The Social Coding Contract</a>. He has lots of good things to say, but there was one comment that really hit home: my Jekyll blog was easy to setup 6 months ago, but now it&rsquo;s impossible to maintain. Heh. Most of my trouble could have been avoided with more careful management of dependencies, but alas I am not a Ruby person and I did not realize that <code>bundle update</code> would completely sink my publishing abilities for 4 months. When I update Perl modules, <code>cpan</code> runs their tests on my machine and refuses to install unless they pass. <code>bundle</code> just installs them!</p>
+
+<p>I think I ran into every possible problem, which was actually a good learning experience. Like <a href="blog/2014/07/07/using-octopress-one-more-thing/">uncle</a> said, that&rsquo;s what I get for using Windows! Some of the problems were my being a noob, and others were problems with various ruby modules. Honestly I don&rsquo;t think that anyone with this many problems should even be using the platform, but gosh darnit I wanted it to work. And while I was at it, I updated to Octopress 3.0, which I believe will be much more manageable (I can freeze the gem version, instead of having to track Git commits). Here&rsquo;s to the next person struggling with Octopress or Jekyll on Windows:</p>
+
+<h3>Problems</h3>
+
+<ul>
+<li><code>jekyll serve</code> exits silently
+
+<ul>
+<li>See <a href="https://github.com/jekyll/jekyll/issues/2320">https://github.com/jekyll/jekyll/issues/2320</a></li>
+<li>Solve by specifying <code>gem 'listen', '2.7.8'</code> in your Gemfile. I tried 2.7.6 first, but ran into other problems.</li>
+<li>Don&rsquo;t forget to delete Gemfile.lock when changing your gem versions</li>
+</ul>
+</li>
+<li><code>Build Warning: Layout 'nil' requested in atom.xml does not exist</code>
+
+<ul>
+<li><a href="https://github.com/jekyll/jekyll/issues/2712">https://github.com/jekyll/jekyll/issues/2712</a></li>
+<li>The layout specified in the YAML front matter in the given file apparently says <code>nil</code>, meaning don&rsquo;t use any template in the _layouts folder.</li>
+<li>The correct way to specify it is <code>null</code></li>
+</ul>
+</li>
+<li>When trying to <a href="http://jekyll-windows.juthilo.com/3-syntax-highlighting/">install Pygments</a> you get <code>LookupError: unknown encoding: cp65001</code>
+
+<ul>
+<li>Python doesn&rsquo;t normally accept cp65001 as utf-8, but they&rsquo;re close enough, probably</li>
+<li>Do <code>set PYTHONIOENCODING=utf-8</code> before running <code>python -m pip install pygments</code></li>
+</ul>
+</li>
+<li><code>Error:  undefined method '[]' for nil:NilClass</code> in pygments_code.rb
+
+<ul>
+<li>This is caused by Pygments returning nil; it will do this if the system call to Python takes too long. Maybe your machine is busy, or maybe it&rsquo;s just slow like mine.</li>
+<li>To solve this, do <code>set MENTOS_TIMEOUT=100</code> so it won&rsquo;t time out. Then delete <code>.pygments-cache</code>, which will have saved that nil result.</li>
+<li>See <a href="https://github.com/tmm1/pygments.rb/issues/78,">https://github.com/tmm1/pygments.rb/issues/78,</a> <a href="https://github.com/jekyll/jekyll/pull/2148">https://github.com/jekyll/jekyll/pull/2148</a> and <a href="https://github.com/octopress/octopress/issues/128">https://github.com/octopress/octopress/issues/128</a></li>
+</ul>
+</li>
+<li><code>celluloid/calls.rb:48:in 'check': wrong number of arguments (2 for 1) (ArgumentError)</code>
+
+<ul>
+<li>The version of listen that we need (2.7.8) doesn&rsquo;t work with celluloid 17 or higher.</li>
+<li>Specify <code>gem 'celluloid', '0.16.0'</code> in your Gemfile to fix.</li>
+<li>See <a href="https://github.com/celluloid/celluloid/issues/619">https://github.com/celluloid/celluloid/issues/619</a> and <a href="https://talk.jekyllrb.com/t/error-while-trying-to-run-jekyll-serve/933/6">https://talk.jekyllrb.com/t/error-while-trying-to-run-jekyll-serve/933/6</a></li>
+</ul>
+</li>
+<li>When you run <code>octopress deploy</code>, you get <code>error : src refspec master doesn't match any</code>
+
+<ul>
+<li>In my case, I had deployed once with the wrong branch name was trying to redeploy to the correct branch. The result of a deploy is cached and currently the branch is not changed properly.</li>
+<li>Fix the problem by deleting <code>.deploy</code> and redeploying</li>
+<li>See <a href="https://github.com/octopress/deploy/issues/64">https://github.com/octopress/deploy/issues/64</a></li>
+</ul>
+</li>
+<li><code>octopress deploy</code> does not first run a build; you must do <code>jekyll build</code> first.</li>
+<li><code>octopress new draft Title</code>, etc. gives <code>cannot load such file: octopress/draft</code>.
+
+<ul>
+<li>I don&rsquo;t know why this is happening yet</li>
+<li>For now the fix is to run <code>bundle exec octopress new draft Title</code></li>
+<li>See <a href="https://github.com/octopress/octopress/issues/102">https://github.com/octopress/octopress/issues/102</a></li>
+<li>&ldquo;Such file&rdquo; is a very Japanese expression, by the way: そのようなファイル</li>
+</ul>
+</li>
+<li>linklog entries don&rsquo;t work properly (I don&rsquo;t think they ever have).
+
+<ul>
+<li>The functionality is supposed to be in Octopress 3.0, but I just don&rsquo;t see it.</li>
+<li>You can do it yourself manually by following the directions here: <a href="http://www.candlerblog.com/2012/01/30/octopress-linked-list/">http://www.candlerblog.com/2012/01/30/octopress-linked-list/</a>
+
+<ul>
+<li>I chose not to; I didn&rsquo;t like the way it looked, and I&rsquo;d rather wait for an update. It&rsquo;s not a show-stopper.</li>
+</ul>
+</li>
+<li>See <a href="https://github.com/imathis/octopress/issues/418">https://github.com/imathis/octopress/issues/418</a></li>
+</ul>
+</li>
+<li>Regenerating appears to take forever, so I just have to restart every time. That&rsquo;s annoying. Unfortunately I don&rsquo;t currently have any solution to that. It&rsquo;s also not a show-stopper.</li>
+</ul>
+
+
+<p>After smoothing out all of the real errors, the (currently) permanent workarounds I need are 1) to set <code>MENTOS_TIMEOUT</code> to a large number and 2) to run commands with <code>bundle exec</code>.</p>
+
+<p>Hope this helps!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -628,118 +750,6 @@ pdftex tex.tex
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/07/14/code-reading-pl2bat-dot-pl/">Code Reading: pl2bat.pl</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-07-14T15:42:07+09:00" pubdate data-updated="true"></time>
-        
-           | <a href="/blog/2014/07/14/code-reading-pl2bat-dot-pl/#disqus_thread"
-             data-disqus-identifier="http://garfieldnate.github.io/blog/2014/07/14/code-reading-pl2bat-dot-pl/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>When you install a Perl distribution from CPAN that comes with an executable script, Perl adds it to your path so it can be treated like any other command line program. On a <em>nix system, all that needs to be done for this to work is to set the script to be executable. Windows doesn&rsquo;t have executable script files with shebang lines like </em>nix, however, so Perl generates a batch file.</p>
-
-<p>Let&rsquo;s see how this works. First, let&rsquo;s pick a distribution that comes with an executable script. The <code>App::</code> namespace is a great place to look for that.</p>
-
-<pre><code>cpan App::Cleo
-...
-Running make install
-Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\lib\App\Cleo.pm
-Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo
-Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo.bat
-...
-</code></pre>
-
-<p>Hmm, cleo.bat. That&rsquo;s not in the <a href="https://metacpan.org/source/THALJEF/App-Cleo-0.004/bin">distribution</a>! Let&rsquo;s take a look:</p>
-
-<figure class='code'><figcaption><span>Cleo.bat linenos:false</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='bat'><span class='line'><span class="p">@</span>rem <span class="o">=</span> &#39;--*-Perl-*--
-</span><span class='line'><span class="p">@</span><span class="k">echo</span> <span class="k">off</span>
-</span><span class='line'><span class="k">if</span> <span class="s2">&quot;%OS%&quot;</span> <span class="o">==</span> <span class="s2">&quot;Windows_NT&quot;</span> <span class="k">goto</span> <span class="nl">WinNT</span>
-</span><span class='line'><span class="k">IF</span> <span class="k">EXIST</span> <span class="s2">&quot;%~dp0perl.exe&quot;</span> (
-</span><span class='line'><span class="s2">&quot;%~dp0perl.exe&quot;</span> -x -S <span class="s2">&quot;%0&quot;</span> <span class="nv">%1</span> <span class="nv">%2</span> <span class="nv">%3</span> <span class="nv">%4</span> <span class="nv">%5</span> <span class="nv">%6</span> <span class="nv">%7</span> <span class="nv">%8</span> <span class="nv">%9</span>
-</span><span class='line'>) <span class="k">ELSE</span> <span class="k">IF</span> <span class="k">EXIST</span> <span class="s2">&quot;%~dp0..\..\bin\perl.exe&quot;</span> (
-</span><span class='line'><span class="s2">&quot;%~dp0..\..\bin\perl.exe&quot;</span> -x -S <span class="s2">&quot;%0&quot;</span> <span class="nv">%1</span> <span class="nv">%2</span> <span class="nv">%3</span> <span class="nv">%4</span> <span class="nv">%5</span> <span class="nv">%6</span> <span class="nv">%7</span> <span class="nv">%8</span> <span class="nv">%9</span>
-</span><span class='line'>) <span class="k">ELSE</span> (
-</span><span class='line'>perl -x -S <span class="s2">&quot;%0&quot;</span> <span class="nv">%1</span> <span class="nv">%2</span> <span class="nv">%3</span> <span class="nv">%4</span> <span class="nv">%5</span> <span class="nv">%6</span> <span class="nv">%7</span> <span class="nv">%8</span> <span class="nv">%9</span>
-</span><span class='line'>)
-</span><span class='line'>
-</span><span class='line'>...
-</span><span class='line'>
-</span><span class='line'>#!<span class="n">/usr/bin/env</span> perl
-</span><span class='line'>#line <span class="m">29</span>
-</span><span class='line'>
-</span><span class='line'>use strict;
-</span><span class='line'>use warnings;
-</span><span class='line'>use App<span class="c">::Cleo;</span>
-</span><span class='line'>
-</span><span class='line'>our $VERSION <span class="o">=</span> <span class="m">0</span>.<span class="m">003</span>;
-</span><span class='line'>...
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It seems to be a batch script with the entirety of cleo.pl pasted in the bottom. How does that work? Well first there&rsquo;s a little bit of logic to differentiate requirements on Windows NT versus other Windows systems, and some logic to deal with Perl being located in different places (relative to <code>%~dp0</code>, the directory containing the script). <code>%0</code> is the name of the script being run, and Perl is being invoked on it with different arguments. The other %number arguments are the script arguments, which are passed along to the script once again. So this is a batch script that passes itself to Perl? But what&rsquo;s Perl going to do with all of the batch garbage that comes before the actual Perl script?</p>
-
-<p>The magic here is in the <code>-x</code> switch. From <a href="http://perldoc.perl.org/perlrun.html">perlrun</a>:</p>
-
-<pre><code>tells Perl that the program is embedded in a larger chunk of unrelated text, such as in a mail message. Leading garbage will be discarded until the first line that starts with #! and contains the string "perl". Any meaningful switches on that line will be applied.
-</code></pre>
-
-<p>Ooh! That&rsquo;s an interesting feature. I wonder if anyone still uses it for emailed scripts.</p>
-
-<p>So the batch script calls Perl on itself, and Perl skips all of the batch syntax and goes straight to the shebang line (<code>#!/usr/bin/env perl</code>) and runs the original <a href="https://metacpan.org/source/THALJEF/App-Cleo-0.004/bin/cleo">cleo</a> Perl script.</p>
-
-<p>The mechanism used to create this is is <a href="https://metacpan.org/pod/distribution/perl/win32/bin/pl2bat.pl">pl2bat.pl</a>, and you&rsquo;ll find interesting history, motivation and gotchas in the documentation there. Thanks to pl2bat, CPAN author scripts are installed on Windows and added to the path. I can just open my cmd and type <code>cleo</code> to start the app.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -755,6 +765,10 @@ Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo.bat
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/20/hacking-through-an-octopress-update/">Hacking Through an Octopress Update</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/">Notes on Writing a Syntax Highlighter for Sublime Text</a>
       </li>
     
@@ -768,10 +782,6 @@ Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo.bat
     
       <li class="post">
         <a href="/blog/2014/09/07/yotchare/">Yotchare!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/08/13/2-knuth-classics-are-freely-available/">Knuth Classics Are Freely Available</a>
       </li>
     
   </ul>

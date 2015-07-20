@@ -1,13 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'jekyll'
-
-group :jekyll_plugins do
+group :development do
+    gem 'jekyll', '~> 2.0'
     gem 'octopress', '~> 3.0.0.rc'
-    gem "octopress-image-tag"
-    gem "octopress-date-format"
-    gem "octopress-codeblock"
-    gem "octopress-quote-tag"
+    gem 'octopress-image-tag'
+    gem 'octopress-date-format'
+    gem 'octopress-codeblock'
+    gem 'octopress-quote-tag'
     gem 'octopress-linkblog'
     # other versions cause "jekyll serve" to fail
     gem 'listen', '2.7.8'
@@ -24,9 +23,9 @@ group :jekyll_plugins do
     # HTML templating
     gem 'haml', '~> 4.0'
     # Textile processing
-    # gem 'RedCloth', '~> 4.2.9'
+    gem 'RedCloth', '~> 4.2.9'
     # CSS framework
-    # gem 'compass', '~> 0.12.2'
+    gem 'compass', '~> 0.12.2'
     # use globs in SASS
-    # gem 'sass-globbing', '~> 1.0.0'
+    gem 'sass-globbing', '~> 1.0.0'
 end

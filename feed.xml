@@ -6,9 +6,113 @@
 </description>
     <link>http://garfieldnate.github.io/</link>
     <atom:link href="http://garfieldnate.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 20 Jul 2015 15:08:28 +0900</pubDate>
-    <lastBuildDate>Mon, 20 Jul 2015 15:08:28 +0900</lastBuildDate>
+    <pubDate>Mon, 20 Jul 2015 22:12:30 +0900</pubDate>
+    <lastBuildDate>Mon, 20 Jul 2015 22:12:30 +0900</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Hacking Through an Octopress Update</title>
+        <description>&lt;p&gt;A while back I watched a neat presentation from Justin Searls called &lt;a href=&quot;http://blog.testdouble.com/posts/2014-12-02-the-social-coding-contract.html&quot;&gt;The Social Coding Contract&lt;/a&gt;. He has lots of good things to say, but there was one comment that really hit home: my Jekyll blog was easy to setup 6 months ago, but now it&amp;rsquo;s impossible to maintain. Heh. Most of my trouble could have been avoided with more careful management of dependencies, but alas I am not a Ruby person and I did not realize that &lt;code&gt;bundle update&lt;/code&gt; would completely sink my publishing abilities for 4 months. When I update Perl modules, &lt;code&gt;cpan&lt;/code&gt; runs their tests on my machine and refuses to install unless they pass. &lt;code&gt;bundle&lt;/code&gt; just installs them!&lt;/p&gt;
+
+&lt;p&gt;I think I ran into every possible problem, which was actually a good learning experience. Like &lt;a href=&quot;blog/2014/07/07/using-octopress-one-more-thing/&quot;&gt;uncle&lt;/a&gt; said, that&amp;rsquo;s what I get for using Windows! Some of the problems were my being a noob, and others were problems with various ruby modules. Honestly I don&amp;rsquo;t think that anyone with this many problems should even be using the platform, but gosh darnit I wanted it to work. And while I was at it, I updated to Octopress 3.0, which I believe will be much more manageable (I can freeze the gem version, instead of having to track Git commits). Here&amp;rsquo;s to the next person struggling with Octopress or Jekyll on Windows:&lt;/p&gt;
+
+&lt;h3&gt;Problems&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;jekyll serve&lt;/code&gt; exits silently
+
+&lt;ul&gt;
+&lt;li&gt;See &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/2320&quot;&gt;https://github.com/jekyll/jekyll/issues/2320&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Solve by specifying &lt;code&gt;gem 'listen', '2.7.8'&lt;/code&gt; in your Gemfile. I tried 2.7.6 first, but ran into other problems.&lt;/li&gt;
+&lt;li&gt;Don&amp;rsquo;t forget to delete Gemfile.lock when changing your gem versions&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Build Warning: Layout 'nil' requested in atom.xml does not exist&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/2712&quot;&gt;https://github.com/jekyll/jekyll/issues/2712&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;The layout specified in the YAML front matter in the given file apparently says &lt;code&gt;nil&lt;/code&gt;, meaning don&amp;rsquo;t use any template in the _layouts folder.&lt;/li&gt;
+&lt;li&gt;The correct way to specify it is &lt;code&gt;null&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;When trying to &lt;a href=&quot;http://jekyll-windows.juthilo.com/3-syntax-highlighting/&quot;&gt;install Pygments&lt;/a&gt; you get &lt;code&gt;LookupError: unknown encoding: cp65001&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Python doesn&amp;rsquo;t normally accept cp65001 as utf-8, but they&amp;rsquo;re close enough, probably&lt;/li&gt;
+&lt;li&gt;Do &lt;code&gt;set PYTHONIOENCODING=utf-8&lt;/code&gt; before running &lt;code&gt;python -m pip install pygments&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Error:  undefined method '[]' for nil:NilClass&lt;/code&gt; in pygments_code.rb
+
+&lt;ul&gt;
+&lt;li&gt;This is caused by Pygments returning nil; it will do this if the system call to Python takes too long. Maybe your machine is busy, or maybe it&amp;rsquo;s just slow like mine.&lt;/li&gt;
+&lt;li&gt;To solve this, do &lt;code&gt;set MENTOS_TIMEOUT=100&lt;/code&gt; so it won&amp;rsquo;t time out. Then delete &lt;code&gt;.pygments-cache&lt;/code&gt;, which will have saved that nil result.&lt;/li&gt;
+&lt;li&gt;See &lt;a href=&quot;https://github.com/tmm1/pygments.rb/issues/78,&quot;&gt;https://github.com/tmm1/pygments.rb/issues/78,&lt;/a&gt; &lt;a href=&quot;https://github.com/jekyll/jekyll/pull/2148&quot;&gt;https://github.com/jekyll/jekyll/pull/2148&lt;/a&gt; and &lt;a href=&quot;https://github.com/octopress/octopress/issues/128&quot;&gt;https://github.com/octopress/octopress/issues/128&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;celluloid/calls.rb:48:in 'check': wrong number of arguments (2 for 1) (ArgumentError)&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The version of listen that we need (2.7.8) doesn&amp;rsquo;t work with celluloid 17 or higher.&lt;/li&gt;
+&lt;li&gt;Specify &lt;code&gt;gem 'celluloid', '0.16.0'&lt;/code&gt; in your Gemfile to fix.&lt;/li&gt;
+&lt;li&gt;See &lt;a href=&quot;https://github.com/celluloid/celluloid/issues/619&quot;&gt;https://github.com/celluloid/celluloid/issues/619&lt;/a&gt; and &lt;a href=&quot;https://talk.jekyllrb.com/t/error-while-trying-to-run-jekyll-serve/933/6&quot;&gt;https://talk.jekyllrb.com/t/error-while-trying-to-run-jekyll-serve/933/6&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;When you run &lt;code&gt;octopress deploy&lt;/code&gt;, you get &lt;code&gt;error : src refspec master doesn't match any&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;In my case, I had deployed once with the wrong branch name was trying to redeploy to the correct branch. The result of a deploy is cached and currently the branch is not changed properly.&lt;/li&gt;
+&lt;li&gt;Fix the problem by deleting &lt;code&gt;.deploy&lt;/code&gt; and redeploying&lt;/li&gt;
+&lt;li&gt;See &lt;a href=&quot;https://github.com/octopress/deploy/issues/64&quot;&gt;https://github.com/octopress/deploy/issues/64&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;octopress deploy&lt;/code&gt; does not first run a build; you must do &lt;code&gt;jekyll build&lt;/code&gt; first.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;octopress new draft Title&lt;/code&gt;, etc. gives &lt;code&gt;cannot load such file: octopress/draft&lt;/code&gt;.
+
+&lt;ul&gt;
+&lt;li&gt;I don&amp;rsquo;t know why this is happening yet&lt;/li&gt;
+&lt;li&gt;For now the fix is to run &lt;code&gt;bundle exec octopress new draft Title&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;See &lt;a href=&quot;https://github.com/octopress/octopress/issues/102&quot;&gt;https://github.com/octopress/octopress/issues/102&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Such file&amp;rdquo; is a very Japanese expression, by the way: そのようなファイル&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;linklog entries don&amp;rsquo;t work properly (I don&amp;rsquo;t think they ever have).
+
+&lt;ul&gt;
+&lt;li&gt;The functionality is supposed to be in Octopress 3.0, but I just don&amp;rsquo;t see it.&lt;/li&gt;
+&lt;li&gt;You can do it yourself manually by following the directions here: &lt;a href=&quot;http://www.candlerblog.com/2012/01/30/octopress-linked-list/&quot;&gt;http://www.candlerblog.com/2012/01/30/octopress-linked-list/&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;I chose not to; I didn&amp;rsquo;t like the way it looked, and I&amp;rsquo;d rather wait for an update. It&amp;rsquo;s not a show-stopper.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;See &lt;a href=&quot;https://github.com/imathis/octopress/issues/418&quot;&gt;https://github.com/imathis/octopress/issues/418&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Regenerating appears to take forever, so I just have to restart every time. That&amp;rsquo;s annoying. Unfortunately I don&amp;rsquo;t currently have any solution to that. It&amp;rsquo;s also not a show-stopper.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;After smoothing out all of the real errors, the (currently) permanent workarounds I need are 1) to set &lt;code&gt;MENTOS_TIMEOUT&lt;/code&gt; to a large number and 2) to run commands with &lt;code&gt;bundle exec&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Hope this helps!&lt;/p&gt;
+</description>
+        <pubDate>Mon, 20 Jul 2015 22:10:27 +0900</pubDate>
+        <link>http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/</link>
+        <guid isPermaLink="true">http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/</guid>
+        
+        
+        <category>octopress</category>
+        
+        <category>jekyll</category>
+        
+        <category>ruby</category>
+        
+        <category>gems</category>
+        
+        <category>windows</category>
+        
+      </item>
     
       <item>
         <title>Notes on Writing a Syntax Highlighter for Sublime Text</title>
@@ -223,7 +327,7 @@
       </item>
     
       <item>
-        <title>Knuth Classics Are Freely Available</title>
+        <title>Knuth Classics are Freely Available</title>
         <description>&lt;p&gt;Donald Knuth wrote TeX in C/WEB. WEB is his system for writing literate programs which become both source code and typeset documents explaining the program&amp;rsquo;s operation. Some of his programs have been published: &lt;a href=&quot;http://www.goodreads.com/book/show/499934.Computers_Typesetting_Volume_B&quot;&gt;TeX: The Program&lt;/a&gt; and &lt;a href=&quot;http://www.goodreads.com/book/show/1746886.Computers_Typesetting_Volume_D&quot;&gt;Metafont: The Program&lt;/a&gt;. Others have not: I don&amp;rsquo;t believe Bibtex was published in book form, for example.&lt;/p&gt;
 
 &lt;p&gt;All of these works are available online, though you have to generate the PDF yourself. The TeX live distribution (included in MikTeX, among others) comes with Knuth&amp;rsquo;s WEB system for doing this. If you want a copy of TeX: The Program and you have TeX live, you can download some WEB programs from &lt;a href=&quot;http://tug.org/texlive/devsrc/Build/source/texk/web2c/&quot;&gt;http://tug.org/texlive/devsrc/Build/source/texk/web2c/&lt;/a&gt; and convert them yourselves. Let&amp;rsquo;s do TeX as an example. Download tex.web and tex.ch. Then do this:&lt;/p&gt;
@@ -385,100 +489,6 @@ pdftex tex.tex
         <link>http://garfieldnate.github.io/blog/2014/07/15/random-slice-of-culture-unicode-proposals/</link>
         <guid isPermaLink="true">http://garfieldnate.github.io/blog/2014/07/15/random-slice-of-culture-unicode-proposals/</guid>
         
-        
-      </item>
-    
-      <item>
-        <title>Code Reading: pl2bat.pl</title>
-        <description>&lt;p&gt;When you install a Perl distribution from CPAN that comes with an executable script, Perl adds it to your path so it can be treated like any other command line program. On a &lt;em&gt;nix system, all that needs to be done for this to work is to set the script to be executable. Windows doesn&amp;rsquo;t have executable script files with shebang lines like &lt;/em&gt;nix, however, so Perl generates a batch file.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s see how this works. First, let&amp;rsquo;s pick a distribution that comes with an executable script. The &lt;code&gt;App::&lt;/code&gt; namespace is a great place to look for that.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;cpan App::Cleo
-...
-Running make install
-Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\lib\App\Cleo.pm
-Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo
-Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo.bat
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Hmm, cleo.bat. That&amp;rsquo;s not in the &lt;a href=&quot;https://metacpan.org/source/THALJEF/App-Cleo-0.004/bin&quot;&gt;distribution&lt;/a&gt;! Let&amp;rsquo;s take a look:&lt;/p&gt;
-
-&lt;div class='bogus-wrapper'&gt;&lt;notextile&gt;&lt;figure class='code'&gt;&lt;figcaption&gt;&lt;span&gt;Cleo.bat linenos:false&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class='line-number'&gt;1&lt;/span&gt;
-&lt;span class='line-number'&gt;2&lt;/span&gt;
-&lt;span class='line-number'&gt;3&lt;/span&gt;
-&lt;span class='line-number'&gt;4&lt;/span&gt;
-&lt;span class='line-number'&gt;5&lt;/span&gt;
-&lt;span class='line-number'&gt;6&lt;/span&gt;
-&lt;span class='line-number'&gt;7&lt;/span&gt;
-&lt;span class='line-number'&gt;8&lt;/span&gt;
-&lt;span class='line-number'&gt;9&lt;/span&gt;
-&lt;span class='line-number'&gt;10&lt;/span&gt;
-&lt;span class='line-number'&gt;11&lt;/span&gt;
-&lt;span class='line-number'&gt;12&lt;/span&gt;
-&lt;span class='line-number'&gt;13&lt;/span&gt;
-&lt;span class='line-number'&gt;14&lt;/span&gt;
-&lt;span class='line-number'&gt;15&lt;/span&gt;
-&lt;span class='line-number'&gt;16&lt;/span&gt;
-&lt;span class='line-number'&gt;17&lt;/span&gt;
-&lt;span class='line-number'&gt;18&lt;/span&gt;
-&lt;span class='line-number'&gt;19&lt;/span&gt;
-&lt;span class='line-number'&gt;20&lt;/span&gt;
-&lt;span class='line-number'&gt;21&lt;/span&gt;
-&lt;span class='line-number'&gt;22&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;td class='code'&gt;&lt;pre&gt;&lt;code class='bat'&gt;&lt;span class='line'&gt;&lt;span class=&quot;p&quot;&gt;@&lt;/span&gt;rem &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &amp;#39;--*-Perl-*--
-&lt;/span&gt;&lt;span class='line'&gt;&lt;span class=&quot;p&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;off&lt;/span&gt;
-&lt;/span&gt;&lt;span class='line'&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;%OS%&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Windows_NT&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;goto&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;WinNT&lt;/span&gt;
-&lt;/span&gt;&lt;span class='line'&gt;&lt;span class=&quot;k&quot;&gt;IF&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;EXIST&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;%~dp0perl.exe&amp;quot;&lt;/span&gt; (
-&lt;/span&gt;&lt;span class='line'&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;%~dp0perl.exe&amp;quot;&lt;/span&gt; -x -S &lt;span class=&quot;s2&quot;&gt;&amp;quot;%0&amp;quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%1&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%2&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%3&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%4&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%5&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%6&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%7&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%8&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%9&lt;/span&gt;
-&lt;/span&gt;&lt;span class='line'&gt;) &lt;span class=&quot;k&quot;&gt;ELSE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;IF&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;EXIST&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;%~dp0..\..\bin\perl.exe&amp;quot;&lt;/span&gt; (
-&lt;/span&gt;&lt;span class='line'&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;%~dp0..\..\bin\perl.exe&amp;quot;&lt;/span&gt; -x -S &lt;span class=&quot;s2&quot;&gt;&amp;quot;%0&amp;quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%1&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%2&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%3&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%4&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%5&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%6&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%7&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%8&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%9&lt;/span&gt;
-&lt;/span&gt;&lt;span class='line'&gt;) &lt;span class=&quot;k&quot;&gt;ELSE&lt;/span&gt; (
-&lt;/span&gt;&lt;span class='line'&gt;perl -x -S &lt;span class=&quot;s2&quot;&gt;&amp;quot;%0&amp;quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%1&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%2&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%3&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%4&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%5&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%6&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%7&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%8&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%9&lt;/span&gt;
-&lt;/span&gt;&lt;span class='line'&gt;)
-&lt;/span&gt;&lt;span class='line'&gt;
-&lt;/span&gt;&lt;span class='line'&gt;...
-&lt;/span&gt;&lt;span class='line'&gt;
-&lt;/span&gt;&lt;span class='line'&gt;#!&lt;span class=&quot;n&quot;&gt;/usr/bin/env&lt;/span&gt; perl
-&lt;/span&gt;&lt;span class='line'&gt;#line &lt;span class=&quot;m&quot;&gt;29&lt;/span&gt;
-&lt;/span&gt;&lt;span class='line'&gt;
-&lt;/span&gt;&lt;span class='line'&gt;use strict;
-&lt;/span&gt;&lt;span class='line'&gt;use warnings;
-&lt;/span&gt;&lt;span class='line'&gt;use App&lt;span class=&quot;c&quot;&gt;::Cleo;&lt;/span&gt;
-&lt;/span&gt;&lt;span class='line'&gt;
-&lt;/span&gt;&lt;span class='line'&gt;our $VERSION &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;003&lt;/span&gt;;
-&lt;/span&gt;&lt;span class='line'&gt;...
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/notextile&gt;&lt;/div&gt;
-
-
-&lt;p&gt;It seems to be a batch script with the entirety of cleo.pl pasted in the bottom. How does that work? Well first there&amp;rsquo;s a little bit of logic to differentiate requirements on Windows NT versus other Windows systems, and some logic to deal with Perl being located in different places (relative to &lt;code&gt;%~dp0&lt;/code&gt;, the directory containing the script). &lt;code&gt;%0&lt;/code&gt; is the name of the script being run, and Perl is being invoked on it with different arguments. The other %number arguments are the script arguments, which are passed along to the script once again. So this is a batch script that passes itself to Perl? But what&amp;rsquo;s Perl going to do with all of the batch garbage that comes before the actual Perl script?&lt;/p&gt;
-
-&lt;p&gt;The magic here is in the &lt;code&gt;-x&lt;/code&gt; switch. From &lt;a href=&quot;http://perldoc.perl.org/perlrun.html&quot;&gt;perlrun&lt;/a&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;tells Perl that the program is embedded in a larger chunk of unrelated text, such as in a mail message. Leading garbage will be discarded until the first line that starts with #! and contains the string &quot;perl&quot;. Any meaningful switches on that line will be applied.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Ooh! That&amp;rsquo;s an interesting feature. I wonder if anyone still uses it for emailed scripts.&lt;/p&gt;
-
-&lt;p&gt;So the batch script calls Perl on itself, and Perl skips all of the batch syntax and goes straight to the shebang line (&lt;code&gt;#!/usr/bin/env perl&lt;/code&gt;) and runs the original &lt;a href=&quot;https://metacpan.org/source/THALJEF/App-Cleo-0.004/bin/cleo&quot;&gt;cleo&lt;/a&gt; Perl script.&lt;/p&gt;
-
-&lt;p&gt;The mechanism used to create this is is &lt;a href=&quot;https://metacpan.org/pod/distribution/perl/win32/bin/pl2bat.pl&quot;&gt;pl2bat.pl&lt;/a&gt;, and you&amp;rsquo;ll find interesting history, motivation and gotchas in the documentation there. Thanks to pl2bat, CPAN author scripts are installed on Windows and added to the path. I can just open my cmd and type &lt;code&gt;cleo&lt;/code&gt; to start the app.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 14 Jul 2014 15:42:07 +0900</pubDate>
-        <link>http://garfieldnate.github.io/blog/2014/07/14/code-reading-pl2bat-dot-pl/</link>
-        <guid isPermaLink="true">http://garfieldnate.github.io/blog/2014/07/14/code-reading-pl2bat-dot-pl/</guid>
-        
-        
-        <category>code reading</category>
-        
-        <category>perl</category>
-        
-        <category>batch</category>
-        
-        <category>pl2bat.pl</category>
-        
-        <category>distributions</category>
         
       </item>
     
