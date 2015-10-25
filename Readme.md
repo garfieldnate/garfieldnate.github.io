@@ -5,6 +5,5 @@ To run an Octopress command, do:
 
 To generate and deploy:
 
-    bundle exec jekyll build --watch
+    bundle exec jekyll build (--watch doesn't work right now)
     bundle exec octopress deploy
-

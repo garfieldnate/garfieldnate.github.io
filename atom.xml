@@ -4,7 +4,7 @@
   <title><![CDATA[Garfield Nate]]></title>
   <link href="http://garfieldnate.github.io/atom.xml" rel="self"/>
   <link href="http://garfieldnate.github.io/"/>
-  <updated>2015-10-25T20:36:00+09:00</updated>
+  <updated>2015-10-25T20:40:43+09:00</updated>
   <id>http://garfieldnate.github.io/</id>
   <author>
     <name><![CDATA[Nate Glenn]]></name>
@@ -18,9 +18,7 @@
     <link href="http://garfieldnate.github.io/blog/2015/10/25/my-dream-planner-come-true-almost/"/>
     <updated>2015-10-25T19:23:49+09:00</updated>
     <id>http://garfieldnate.github.io/blog/2015/10/25/my-dream-planner-come-true-almost</id>
-    <content type="html"><![CDATA[<h1>My Dream Planner, Come True, Almost</h1>
-
-<p>I say almost because I haven&rsquo;t printed it yet. But I have a PDF!</p>
+    <content type="html"><![CDATA[<p>I say almost because I haven&rsquo;t printed it yet. But I have a <a href="https://github.com/garfieldnate/Personal-Planner/releases">PDF</a>!</p>
 
 <p>When I was in college I had a favorite planner. It was the perfect size for my hand, and just had lines for each day, with one week visible in a two-page spread. It had a space in the front for schedules, and some blank pages in the back for notes and adresses. Nice and simple. I looked forward to buying it every year, and the last one I bought I also laminated and rebound so it would last longer.</p>
 
