@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Garfield Nate]]></title>
   <link href="http://garfieldnate.github.io/categories/octopress/atom.xml" rel="self"/>
   <link href="http://garfieldnate.github.io/"/>
-  <updated>2015-07-20T22:12:30+09:00</updated>
+  <updated>2015-10-25T20:36:00+09:00</updated>
   <id>http://garfieldnate.github.io/</id>
   <author>
     <name><![CDATA[Nate Glenn]]></name>
@@ -45,7 +45,7 @@
 
 <ul>
 <li>Python doesn&rsquo;t normally accept cp65001 as utf-8, but they&rsquo;re close enough, probably</li>
-<li>Do <code>set PYTHONIOENCODING=utf-8</code> before running <code>python -m pip install pygments</code></li>
+<li>Do <code>set PYTHONIOENCODING=utf-8</code> before running <code>python -m pip install pygments</code>; if that doesn&rsquo;t work (it broke for me on a Japanese computer), set the code page to ascii via <code>chcp 437</code> instead.</li>
 </ul>
 </li>
 <li><code>Error:  undefined method '[]' for nil:NilClass</code> in pygments_code.rb

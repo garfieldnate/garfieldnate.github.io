@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://garfieldnate.github.io/blog/2015/10/25/my-dream-planner-come-true-almost/</loc>
+    <lastmod>2015-10-25T19:23:49+09:00</lastmod>
+  </url>
+  <url>
     <loc>http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/</loc>
     <lastmod>2015-07-20T22:10:27+09:00</lastmod>
   </url>
@@ -559,6 +563,30 @@
   </url>
   <url>
     <loc>http://garfieldnate.github.io/categories/gems/</loc>
+  </url>
+  <url>
+    <loc>http://garfieldnate.github.io/categories/holidays/</loc>
+  </url>
+  <url>
+    <loc>http://garfieldnate.github.io/categories/planner/</loc>
+  </url>
+  <url>
+    <loc>http://garfieldnate.github.io/categories/html/</loc>
+  </url>
+  <url>
+    <loc>http://garfieldnate.github.io/categories/css/</loc>
+  </url>
+  <url>
+    <loc>http://garfieldnate.github.io/categories/calendars/</loc>
+  </url>
+  <url>
+    <loc>http://garfieldnate.github.io/posts/2/</loc>
+  </url>
+  <url>
+    <loc>http://garfieldnate.github.io/posts/3/</loc>
+  </url>
+  <url>
+    <loc>http://garfieldnate.github.io/posts/4/</loc>
   </url>
   <url>
     <loc>http://garfieldnate.github.io/resume/resume-en.html</loc>

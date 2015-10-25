@@ -153,7 +153,7 @@
 
 <ul>
 <li>Python doesn&rsquo;t normally accept cp65001 as utf-8, but they&rsquo;re close enough, probably</li>
-<li>Do <code>set PYTHONIOENCODING=utf-8</code> before running <code>python -m pip install pygments</code></li>
+<li>Do <code>set PYTHONIOENCODING=utf-8</code> before running <code>python -m pip install pygments</code>; if that doesn&rsquo;t work (it broke for me on a Japanese computer), set the code page to ascii via <code>chcp 437</code> instead.</li>
 </ul>
 </li>
 <li><code>Error:  undefined method '[]' for nil:NilClass</code> in pygments_code.rb
@@ -262,6 +262,8 @@
         <a class="basic-alignment left" href="/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/" title="Previous Post: Notes on Writing a Syntax Highlighter for Sublime Text">&laquo; Notes on Writing a Syntax Highlighter for Sublime Text</a>
       
       
+        <a class="basic-alignment right" href="/blog/2015/10/25/my-dream-planner-come-true-almost/" title="Next Post: My Dream Planner, Come True, Almost">My Dream Planner, Come True, Almost &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -273,6 +275,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/10/25/my-dream-planner-come-true-almost/">My Dream Planner, Come True, Almost</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2015/07/20/hacking-through-an-octopress-update/">Hacking Through an Octopress Update</a>
@@ -288,10 +294,6 @@
     
       <li class="post">
         <a href="/blog/2014/11/09/the-oh-so-exotic-grocery-list/">The Oh So Exotic Grocery List</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/09/07/yotchare/">Yotchare!</a>
       </li>
     
   </ul>

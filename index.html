@@ -9,7 +9,7 @@
   <meta name="author" content="Nate Glenn">
 
   
-  <meta name="description" content="A while back I watched a neat presentation from Justin Searls called The Social Coding Contract. He has lots of good things to say, but there was one &hellip;">
+  <meta name="description" content="My Dream Planner, Come True, Almost I say almost because I haven&rsquo;t printed it yet. But I have a PDF! When I was in college I had a favorite &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,6 +103,80 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2015/10/25/my-dream-planner-come-true-almost/">My Dream Planner, Come True, Almost</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-10-25T19:23:49+09:00" pubdate data-updated="true"></time>
+        
+           | <a href="/blog/2015/10/25/my-dream-planner-come-true-almost/#disqus_thread"
+             data-disqus-identifier="http://garfieldnate.github.io/blog/2015/10/25/my-dream-planner-come-true-almost/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>My Dream Planner, Come True, Almost</h1>
+
+<p>I say almost because I haven&rsquo;t printed it yet. But I have a PDF!</p>
+
+<p>When I was in college I had a favorite planner. It was the perfect size for my hand, and just had lines for each day, with one week visible in a two-page spread. It had a space in the front for schedules, and some blank pages in the back for notes and adresses. Nice and simple. I looked forward to buying it every year, and the last one I bought I also laminated and rebound so it would last longer.</p>
+
+<p>Now that I&rsquo;m not at BYU, though, I can&rsquo;t get that planner. I can&rsquo;t even buy it on the bookstore website, gosh darn it. So I took the opportunity to try a different technology out and make my own, hopefully this time my <em>dream</em> planner.</p>
+
+<p>What makes it my <em>dream</em> planner? Well, let me tell you! It has <em>graph</em> paper note pages. That would have been nice when I was thinking about lattices all the time for <a href="https://github.com/garfieldnate/Weka_AnalogicalModeling">analogical modeling</a>. Best of all, it comes with both Japanese and American holidays, so I can know what&rsquo;s going on in both of my home countries. It&rsquo;s even got birthdays and my wedding aniversary, so I have no excuse to forget! I also gave the covers a personal touch: a mario star on the front, and a <a href="http://smile.amazon.com/Outrageous-Origin-Garfields-Force-Book/dp/0816772061">Garfield</a> on the back!</p>
+
+<p>What&rsquo;s this &ldquo;different&rdquo; technology I tried out, you ask? It&rsquo;s HTML/CSS. I know, it&rsquo;s not that different, but it was new to me, and it turned out to be pretty difficult to make a nice, printable document with CSS that worked in any one browser. This was an unfortunate finding, because after my honor&rsquo;s thesis I&rsquo;m burned out on LaTeX.</p>
+
+<p>The entries of the planner, though, are generated using Perl and a bunch of CPAN. This was mostly fine. I used the very simple <code>XML::Writer</code> for HTML generation, but for date handling I had to use a combination of <code>Date::Simple</code>, <code>Date::Calendar</code>, <code>Calendar::Japanese::Holiday</code>, and <code>Calendar</code>. <code>Date::Simple</code> gave me a quick way to cycle through all of the days in a year. <code>$date++</code> is the next day. Pretty simple, as the name implies. To handle holiday lookup, I needed <code>Date::Calendar</code>. This gives me the date of Easter, as well as letting me specify holidays with changing dates, like Mother&rsquo;s Day. <code>Calendar::Japanese::Holiday</code> gave me Japanese holidays, which I didn&rsquo;t feel like specifying in <code>Date::Calendar</code> and keeping track of myself, especially since they might change (&ldquo;Mountain Day&rdquo; is a new holiday starting next year, for example).</p>
+
+<p>The last one, <code>Calendar</code>, I used because it came with a Chinese calendar and I wanted to know when to mark 十五夜 (juugoya, fifteenth night), or 月見 (tsukimi, moon viewing) on the calendar. That&rsquo;s one that you can&rsquo;t really do <a href="http://en.wikipedia.org/wiki/Japanese_calendar#Gregorian_months_and_the_.22One-Month_Delay.22">tsuki-okure</a> with. The conversion wasn&rsquo;t straight-forward, but I came up with this for giving me the best Gregorian calendar day for looking at the moon and eating rice cakes:</p>
+
+<pre><code>my $year = 2015;
+# start with any date near the middle of the year just to initialize
+# the Chinese cycle/year correctly
+my $temp_date = Calendar-&gt;new_from_Gregorian(7, 1, $year);
+$temp_date-&gt;convert_to_China();
+# get tsukimi date from cycle and year found above, and date 8/15
+my $tsukimi = Calendar-&gt;new_from_China(-cycle =&gt; $temp_date-&gt;cycle, -year =&gt; $temp_date-&gt;year, -month =&gt; 8, -day =&gt; 15);
+$tsukimi-&gt;convert_to_Gregorian();
+print "Schedule moon-viewing party for $year/" . $tsukimi-&gt;month . '/' . $tsukimi-&gt;day;
+</code></pre>
+
+<p>And of course I marked this in my planner with the emoji for moon viewing ceremony: 🎑.</p>
+
+<p>Modules added to my wish list (or find list, if they already exist):</p>
+
+<pre><code>* an emoji converter that would take :bear:, :corn:, etc. and give back either the unicode character or code point.
+* Calendar module that allows specifying holidays in different calendars. For example, specifying that tsukimi is on 8/15 in the Chinese calendar, and being able to check whether a day matches regardless of what calendar the day was created with. My trick above worked for tsukimi, but further gymnastics would be required for the new year, since there might be more than one in a Gregorian year.
+</code></pre>
+
+<p>I&rsquo;ll cover my CSS woes another time.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2015/07/20/hacking-through-an-octopress-update/">Hacking Through an Octopress Update</a></h1>
     
     
@@ -156,7 +230,7 @@
 
 <ul>
 <li>Python doesn&rsquo;t normally accept cp65001 as utf-8, but they&rsquo;re close enough, probably</li>
-<li>Do <code>set PYTHONIOENCODING=utf-8</code> before running <code>python -m pip install pygments</code></li>
+<li>Do <code>set PYTHONIOENCODING=utf-8</code> before running <code>python -m pip install pygments</code>; if that doesn&rsquo;t work (it broke for me on a Japanese computer), set the code page to ascii via <code>chcp 437</code> instead.</li>
 </ul>
 </li>
 <li><code>Error:  undefined method '[]' for nil:NilClass</code> in pygments_code.rb
@@ -705,51 +779,6 @@ pdftex tex.tex
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/07/15/random-slice-of-culture-unicode-proposals/">Random Slice of Culture: Unicode Proposals</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-07-15T12:35:28+09:00" pubdate data-updated="true"></time>
-        
-           | <a href="/blog/2014/07/15/random-slice-of-culture-unicode-proposals/#disqus_thread"
-             data-disqus-identifier="http://garfieldnate.github.io/blog/2014/07/15/random-slice-of-culture-unicode-proposals/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>So a couple of weeks ago I had a casual use for <a href="https://en.wikipedia.org/wiki/Hentaigana">hentaigana</a> and went looking to see if there were Unicode code points. Alas, there were none, but through Wikipedia I found that there was a <a href="http://std.dkuug.dk/jtc1/sc2/wg2/docs/n3698.pdf">proposal</a> to include it. The proposal document includes relevant uses such as transcribing old documents, restaurant names and documents on calligraphy. Unfortunately the proposal hasn&rsquo;t been accepted yet, but it did lead to an interesting discovery.</p>
-
-<p>The containing directory has <em>all</em> of the Unicode proposals, some of them labeled urgent because characters have become common use. For example, <a href="n4584A">http://std.dkuug.dk/JTC1/SC2/WG2/docs/n4584A.pdf</a> calls for the addition of several Chinese characters for scientific use, such as 鎶, which is used for the new(ish) element Copernicum, some other weird-looking ones. <a href="n4583">http://std.dkuug.dk/JTC1/SC2/WG2/docs/n4583.pdf</a> is a request for special Chinese characters that were used by a Russian mission in Beijing to transcribe Slavonic sounds. <a href="n3734">http://std.dkuug.dk/jtc1/sc2/wg2/docs/n3734.pdf</a> requests an Arabic character used in Urdu for a specific Indian calendar.</p>
-
-<p>Also, apparently two years after the hentaigana proposal was shelved, the Japanese government <a href="http://std.dkuug.dk/jtc1/sc2/wg2/docs/n4091.doc">sent word</a> saying they actually needed it to encode names of some people born before 1948. Now that&rsquo;s interesting! I&rsquo;ve never met someone with a hentaigana name.</p>
-
-<p>Each of these comes with cultural background, descriptions of the required glyphs, and pictures or screenshots of the glyphs in the wild.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -765,6 +794,10 @@ pdftex tex.tex
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/10/25/my-dream-planner-come-true-almost/">My Dream Planner, Come True, Almost</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/20/hacking-through-an-octopress-update/">Hacking Through an Octopress Update</a>
       </li>
     
@@ -778,10 +811,6 @@ pdftex tex.tex
     
       <li class="post">
         <a href="/blog/2014/11/09/the-oh-so-exotic-grocery-list/">The Oh So Exotic Grocery List</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/09/07/yotchare/">Yotchare!</a>
       </li>
     
   </ul>
