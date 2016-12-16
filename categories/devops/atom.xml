@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Devops | Garfield Nate]]></title>
   <link href="http://garfieldnate.github.io/categories/devops/atom.xml" rel="self"/>
   <link href="http://garfieldnate.github.io/"/>
-  <updated>2015-12-13T16:19:10+09:00</updated>
+  <updated>2016-12-16T17:48:31+01:00</updated>
   <id>http://garfieldnate.github.io/</id>
   <author>
     <name><![CDATA[Nate Glenn]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Preparation: The Key to a Less Painful Windows Reinstall]]></title>
     <link href="http://garfieldnate.github.io/blog/2014/07/02/preparation-the-key-to-a-less-painful-windows-reinstall/"/>
-    <updated>2014-07-02T13:00:38+09:00</updated>
+    <updated>2014-07-02T06:00:38+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2014/07/02/preparation-the-key-to-a-less-painful-windows-reinstall</id>
     <content type="html"><![CDATA[<p>Recently I decided to work on an <a href="https://github.com/stepmania/stepmania/issues/196">easy ticket</a> in StepMania to get into the source code. It turned out that I (gasp!) actually needed to build the project on my computer, but of course I was missing required libraries: DirectX 9 and the DirectX SDK. No matter what I tried, neither of these would successfully install on my computer, and I decided that the only way to install it would be to reinstall Windows (which worked, but ugh!). Usually reinstalling Windows is a terrible process that can take days and leave you lost on your own computer, which is now missing all of your favorite programs and customizations. This time, I thought, I should make it as painless as possible.</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Debugging | Garfield Nate]]></title>
   <link href="http://garfieldnate.github.io/categories/debugging/atom.xml" rel="self"/>
   <link href="http://garfieldnate.github.io/"/>
-  <updated>2015-12-13T16:19:10+09:00</updated>
+  <updated>2016-12-16T17:48:31+01:00</updated>
   <id>http://garfieldnate.github.io/</id>
   <author>
     <name><![CDATA[Nate Glenn]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[CS 240 Web Crawler at BYU]]></title>
     <link href="http://garfieldnate.github.io/blog/2011/11/03/cs-240-web-crawler-at-byu/"/>
-    <updated>2011-11-03T00:00:00+09:00</updated>
+    <updated>2011-11-03T00:00:00+01:00</updated>
     <id>http://garfieldnate.github.io/blog/2011/11/03/cs-240-web-crawler-at-byu</id>
     <content type="html"><![CDATA[<p>I recently polished off the web crawler project for CS 240 at BYU. It&rsquo;s probably the most talked-about project in the CS major, and the cause of so many students retaking the class.</p>
 

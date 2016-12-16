@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Japanese | Garfield Nate]]></title>
   <link href="http://garfieldnate.github.io/categories/japanese/atom.xml" rel="self"/>
   <link href="http://garfieldnate.github.io/"/>
-  <updated>2015-12-13T16:19:10+09:00</updated>
+  <updated>2016-12-16T17:48:31+01:00</updated>
   <id>http://garfieldnate.github.io/</id>
   <author>
     <name><![CDATA[Nate Glenn]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Review: The Development of Language Processing Strategies: A Cross-linguistic Study Between Japanese and English]]></title>
     <link href="http://garfieldnate.github.io/blog/2011/12/30/review-development-of-language/"/>
-    <updated>2011-12-30T00:00:00+09:00</updated>
+    <updated>2011-12-30T00:00:00+01:00</updated>
     <id>http://garfieldnate.github.io/blog/2011/12/30/review-development-of-language</id>
     <content type="html"><![CDATA[<p><a href="http://www.goodreads.com/book/show/3945971-the-development-of-language-processing-strategies" style="float: left; padding-right: 20px;">
 <img class="<a" src="href="http://photo.goodreads.com/books/1267076529m/3945971.jpg">http://photo.goodreads.com/books/1267076529m/3945971.jpg</a>" title="&ldquo;The Development of Language Processing Strategies: A Cross-linguistic Study Between Japanese and English&rdquo;" ></a><a href="http://www.goodreads.com/book/show/3945971-the-development-of-language-processing-strategies">The Development of Language Processing Strategies: A Cross-linguistic Study Between Japanese and English</a> by <a href="http://www.goodreads.com/author/show/1682824.Reiko_Mazuka">Reiko Mazuka</a></p>
@@ -48,7 +48,7 @@
   <entry>
     <title type="html"><![CDATA[List of Japanese NLP Tools]]></title>
     <link href="http://garfieldnate.github.io/blog/2011/11/06/list-of-japanese-nlp-tools/"/>
-    <updated>2011-11-06T00:00:00+09:00</updated>
+    <updated>2011-11-06T00:00:00+01:00</updated>
     <id>http://garfieldnate.github.io/blog/2011/11/06/list-of-japanese-nlp-tools</id>
     <content type="html"><![CDATA[<p>I haven&rsquo;t tried out all of these so I don&rsquo;t have comments for everything, but hopefully this list will come in useful for someone.</p>
 
@@ -93,7 +93,7 @@
   <entry>
     <title type="html"><![CDATA[Itadaki GoSen and IPADIC 2.7]]></title>
     <link href="http://garfieldnate.github.io/blog/2011/11/06/itadaki-gosen-and-ipadic-27/"/>
-    <updated>2011-11-06T00:00:00+09:00</updated>
+    <updated>2011-11-06T00:00:00+01:00</updated>
     <id>http://garfieldnate.github.io/blog/2011/11/06/itadaki-gosen-and-ipadic-27</id>
     <content type="html"><![CDATA[<p><strong>Update3: I&rsquo;ve forked the Itadaki project on <a href="https://github.com/garfieldnate/Itadaki">GitHub</a> to keep track of it better.</strong></p>
 

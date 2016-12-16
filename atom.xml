@@ -4,7 +4,7 @@
   <title><![CDATA[Garfield Nate]]></title>
   <link href="http://garfieldnate.github.io/atom.xml" rel="self"/>
   <link href="http://garfieldnate.github.io/"/>
-  <updated>2015-12-13T16:19:10+09:00</updated>
+  <updated>2016-12-16T17:48:31+01:00</updated>
   <id>http://garfieldnate.github.io/</id>
   <author>
     <name><![CDATA[Nate Glenn]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Japan Is a Great Place to Be]]></title>
     <link href="http://garfieldnate.github.io/blog/2015/12/13/japan-is-a-great-place-to-be/"/>
-    <updated>2015-12-13T16:06:51+09:00</updated>
+    <updated>2015-12-13T08:06:51+01:00</updated>
     <id>http://garfieldnate.github.io/blog/2015/12/13/japan-is-a-great-place-to-be</id>
     <content type="html"><![CDATA[<p>So, it happened again: you meet up with some gaijin friends, and it turns into a big Japan-bashing fest. Every thing that&rsquo;s been bugging them for the past several months comes flooding out, and the back-and-forth between gaijin experiencing similar issues brings the criticism to an uncomfortable peak. The evening has become less of pleasurable conversation and more of a giant therapy session.</p>
 
@@ -55,7 +55,7 @@ P.S. Good restaurant food in the US is often very expensive, especially after ti
   <entry>
     <title type="html"><![CDATA[My Dream Planner, Come True, Almost]]></title>
     <link href="http://garfieldnate.github.io/blog/2015/10/25/my-dream-planner-come-true-almost/"/>
-    <updated>2015-10-25T19:23:49+09:00</updated>
+    <updated>2015-10-25T11:23:49+01:00</updated>
     <id>http://garfieldnate.github.io/blog/2015/10/25/my-dream-planner-come-true-almost</id>
     <content type="html"><![CDATA[<p>I say almost because I haven&rsquo;t printed it yet. But I have a <a href="https://github.com/garfieldnate/Personal-Planner/releases">PDF</a>!</p>
 
@@ -97,7 +97,7 @@ print "Schedule moon-viewing party for $year/" . $tsukimi-&gt;month . '/' . $tsu
   <entry>
     <title type="html"><![CDATA[Hacking Through an Octopress Update]]></title>
     <link href="http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/"/>
-    <updated>2015-07-20T22:10:27+09:00</updated>
+    <updated>2015-07-20T15:10:27+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update</id>
     <content type="html"><![CDATA[<p>A while back I watched a neat presentation from Justin Searls called <a href="http://blog.testdouble.com/posts/2014-12-02-the-social-coding-contract.html">The Social Coding Contract</a>. He has lots of good things to say, but there was one comment that really hit home: my Jekyll blog was easy to setup 6 months ago, but now it&rsquo;s impossible to maintain. Heh. Most of my trouble could have been avoided with more careful management of dependencies, but alas I am not a Ruby person and I did not realize that <code>bundle update</code> would completely sink my publishing abilities for 4 months. When I update Perl modules, <code>cpan</code> runs their tests on my machine and refuses to install unless they pass. <code>bundle</code> just installs them!</p>
 
@@ -189,7 +189,7 @@ print "Schedule moon-viewing party for $year/" . $tsukimi-&gt;month . '/' . $tsu
   <entry>
     <title type="html"><![CDATA[Notes on Writing a Syntax Highlighter for Sublime Text]]></title>
     <link href="http://garfieldnate.github.io/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/"/>
-    <updated>2015-03-15T22:59:35+09:00</updated>
+    <updated>2015-03-15T14:59:35+01:00</updated>
     <id>http://garfieldnate.github.io/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text</id>
     <content type="html"><![CDATA[<p>I recently released the <a href="http://garfieldnate.github.io/Sublime-Soar-Tools/">Soar Tools</a> package for Sublime Text, and I took a few notes that might help the next author. Sublime Text is pretty awesome in a lot of ways, but the documentation is more tutorial + forums than it is a thorough explanation. I mainly followed the directions <a href="http://sublime-text-unofficial-documentation.readthedocs.org/en/latest/extensibility/syntaxdefs.html">here</a>. My tips are as follows:</p>
 
@@ -216,7 +216,7 @@ print "Schedule moon-viewing party for $year/" . $tsukimi-&gt;month . '/' . $tsu
   <entry>
     <title type="html"><![CDATA[My New Toy: Algomation]]></title>
     <link href="http://garfieldnate.github.io/blog/2015/01/06/my-new-toy-algomation/"/>
-    <updated>2015-01-06T20:20:34+09:00</updated>
+    <updated>2015-01-06T12:20:34+01:00</updated>
     <id>http://garfieldnate.github.io/blog/2015/01/06/my-new-toy-algomation</id>
     <content type="html"><![CDATA[<p>Lately I&rsquo;ve been losing sleep trying to understand an algorithm I read about in an <a href="http://www.inf.upol.cz/trnecka/fka/addintent.pdf">academic publication</a>. Part of the problem was that the <a href="https://en.wikipedia.org/wiki/Analogical_modeling">application</a> I was applying it to required a sort of reversal, which was confusing. But a bigger part of the problem was that I just couldn&rsquo;t &ldquo;see&rdquo; it. I&rsquo;d lay in bed, trying to imagine working with ping-pong balls on a string, or marbles on fishing line, or anything I could really get my &ldquo;mind&rsquo;s hands&rdquo; on.</p>
 
@@ -249,7 +249,7 @@ print "Schedule moon-viewing party for $year/" . $tsukimi-&gt;month . '/' . $tsu
   <entry>
     <title type="html"><![CDATA[The Oh So Exotic Grocery List]]></title>
     <link href="http://garfieldnate.github.io/blog/2014/11/09/the-oh-so-exotic-grocery-list/"/>
-    <updated>2014-11-09T13:59:26+09:00</updated>
+    <updated>2014-11-09T05:59:26+01:00</updated>
     <id>http://garfieldnate.github.io/blog/2014/11/09/the-oh-so-exotic-grocery-list</id>
     <content type="html"><![CDATA[<p>Since Erika is working and I am not, I try to take care of the apartment by shopping for food, cleaning and cooking as much as possible. I wrote out a list of everything that was needed and headed to Hallow&rsquo;s to do the week&rsquo;s shopping.</p>
 
@@ -266,7 +266,7 @@ print "Schedule moon-viewing party for $year/" . $tsukimi-&gt;month . '/' . $tsu
   <entry>
     <title type="html"><![CDATA[Yotchare!]]></title>
     <link href="http://garfieldnate.github.io/blog/2014/09/07/yotchare/"/>
-    <updated>2014-09-07T21:59:33+09:00</updated>
+    <updated>2014-09-07T14:59:33+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2014/09/07/yotchare</id>
     <content type="html"><![CDATA[<p>I haven&rsquo;t written as much lately as I should have, so here are some things that happened in August.</p>
 
@@ -331,7 +331,7 @@ print "Schedule moon-viewing party for $year/" . $tsukimi-&gt;month . '/' . $tsu
   <entry>
     <title type="html"><![CDATA[Knuth Classics Are Freely Available]]></title>
     <link href="http://garfieldnate.github.io/blog/2014/08/13/2-knuth-classics-are-freely-available/"/>
-    <updated>2014-08-13T12:50:29+09:00</updated>
+    <updated>2014-08-13T05:50:29+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2014/08/13/2-knuth-classics-are-freely-available</id>
     <content type="html"><![CDATA[<p>Donald Knuth wrote TeX in C/WEB. WEB is his system for writing literate programs which become both source code and typeset documents explaining the program&rsquo;s operation. Some of his programs have been published: <a href="http://www.goodreads.com/book/show/499934.Computers_Typesetting_Volume_B">TeX: The Program</a> and <a href="http://www.goodreads.com/book/show/1746886.Computers_Typesetting_Volume_D">Metafont: The Program</a>. Others have not: I don&rsquo;t believe Bibtex was published in book form, for example.</p>
 
@@ -373,7 +373,7 @@ pdftex tex.tex
   <entry>
     <title type="html"><![CDATA[Five Things We Need to Know About Technological Change]]></title>
     <link href="http://garfieldnate.github.io/blog/2014/08/10/five-things-we-need-to-know-about-technological-change/"/>
-    <updated>2014-08-10T22:28:41+09:00</updated>
+    <updated>2014-08-10T15:28:41+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2014/08/10/five-things-we-need-to-know-about-technological-change</id>
     <content type="html"><![CDATA[<h3><a href="http://www.cs.ucdavis.edu/~rogaway/classes/188/materials/postman.pdf">Niel Postman: Five Things We Need to Know About Technological Change</a></h3>
 
@@ -388,7 +388,7 @@ pdftex tex.tex
   <entry>
     <title type="html"><![CDATA[Schools Kill Creativity]]></title>
     <link href="http://garfieldnate.github.io/blog/2014/08/08/schools-kill-creativity/"/>
-    <updated>2014-08-08T22:12:22+09:00</updated>
+    <updated>2014-08-08T15:12:22+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2014/08/08/schools-kill-creativity</id>
     <content type="html"><![CDATA[<h3><a href="http://www.ted.com/talks/ken_robinson_says_schools_kill_creativity">Ken Robinson Says Schools Kill Creativity</a></h3>
 
@@ -401,7 +401,7 @@ pdftex tex.tex
   <entry>
     <title type="html"><![CDATA[Refactoring the Soar Lexer]]></title>
     <link href="http://garfieldnate.github.io/blog/2014/07/27/refactoring-the-soar-lexer/"/>
-    <updated>2014-07-27T19:51:53+09:00</updated>
+    <updated>2014-07-27T12:51:53+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2014/07/27/refactoring-the-soar-lexer</id>
     <content type="html"><![CDATA[<p>After my <a href="blog/2014/7/13/code-reading-the-soar-parser">last writeup</a> on how <a href="https://github.com/SoarGroup/Soar">Soar</a> parses Soar code, I decided to dive in and try and refactor it, starting with the lexer (and here&rsquo;s the resulting <a href="https://github.com/SoarGroup/Soar/pull/178">PR</a>). I haven&rsquo;t worked with C/C++ in a while, and a good part of the code I changed was close to my age, so it was an interesting learning experience for me.</p>
 
@@ -434,7 +434,7 @@ pdftex tex.tex
   <entry>
     <title type="html"><![CDATA[Random Slice of Culture: Unicode Proposals]]></title>
     <link href="http://garfieldnate.github.io/blog/2014/07/15/random-slice-of-culture-unicode-proposals/"/>
-    <updated>2014-07-15T12:35:28+09:00</updated>
+    <updated>2014-07-15T05:35:28+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2014/07/15/random-slice-of-culture-unicode-proposals</id>
     <content type="html"><![CDATA[<p>So a couple of weeks ago I had a casual use for <a href="https://en.wikipedia.org/wiki/Hentaigana">hentaigana</a> and went looking to see if there were Unicode code points. Alas, there were none, but through Wikipedia I found that there was a <a href="http://std.dkuug.dk/jtc1/sc2/wg2/docs/n3698.pdf">proposal</a> to include it. The proposal document includes relevant uses such as transcribing old documents, restaurant names and documents on calligraphy. Unfortunately the proposal hasn&rsquo;t been accepted yet, but it did lead to an interesting discovery.</p>
 
@@ -449,7 +449,7 @@ pdftex tex.tex
   <entry>
     <title type="html"><![CDATA[Code Reading: pl2bat.pl]]></title>
     <link href="http://garfieldnate.github.io/blog/2014/07/14/code-reading-pl2bat-dot-pl/"/>
-    <updated>2014-07-14T15:42:07+09:00</updated>
+    <updated>2014-07-14T08:42:07+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2014/07/14/code-reading-pl2bat-dot-pl</id>
     <content type="html"><![CDATA[<p>When you install a Perl distribution from CPAN that comes with an executable script, Perl adds it to your path so it can be treated like any other command line program. On a <em>nix system, all that needs to be done for this to work is to set the script to be executable. Windows doesn&rsquo;t have executable script files with shebang lines like </em>nix, however, so Perl generates a batch file.</p>
 
@@ -530,9 +530,9 @@ Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo.bat
   
   <entry>
     <title type="html"><![CDATA[Code Reading: The Soar Parser]]></title>
-    <link href="http://garfieldnate.github.io/blog/2014/07/13/code-reading-the-soar-parser/"/>
-    <updated>2014-07-13T05:04:54+09:00</updated>
-    <id>http://garfieldnate.github.io/blog/2014/07/13/code-reading-the-soar-parser</id>
+    <link href="http://garfieldnate.github.io/blog/2014/07/12/code-reading-the-soar-parser/"/>
+    <updated>2014-07-12T22:04:54+02:00</updated>
+    <id>http://garfieldnate.github.io/blog/2014/07/12/code-reading-the-soar-parser</id>
     <content type="html"><![CDATA[<!-- I've thought for a while that it would be fun to write a series of "code reading" posts, where I try to read and understand how some large program works and explain my findings. -->
 
 
@@ -896,9 +896,9 @@ Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo.bat
   
   <entry>
     <title type="html"><![CDATA[Using Octopress- One More Thing]]></title>
-    <link href="http://garfieldnate.github.io/blog/2014/07/07/using-octopress-one-more-thing/"/>
-    <updated>2014-07-07T06:46:39+09:00</updated>
-    <id>http://garfieldnate.github.io/blog/2014/07/07/using-octopress-one-more-thing</id>
+    <link href="http://garfieldnate.github.io/blog/2014/07/06/using-octopress-one-more-thing/"/>
+    <updated>2014-07-06T23:46:39+02:00</updated>
+    <id>http://garfieldnate.github.io/blog/2014/07/06/using-octopress-one-more-thing</id>
     <content type="html"><![CDATA[<p>&ldquo;Aiiiiyaaaa! Jacky! You did not install Ruuuubyyy. You need that to write your blog.&rdquo;</p>
 
 <p>&ldquo;I already install Ruby, uncle, but it still does not work. <code>rake generate</code> creates empty HTML file! Look, it&rsquo;s broken!&rdquo;</p>
@@ -941,7 +941,7 @@ Generating... C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/posix-spawn-0.3.8/lib/posi
   <entry>
     <title type="html"><![CDATA[July 4, 2014: Internet and a Bike Ride]]></title>
     <link href="http://garfieldnate.github.io/blog/2014/07/05/july-4-2014-internet-and-a-bike-ride/"/>
-    <updated>2014-07-05T11:08:46+09:00</updated>
+    <updated>2014-07-05T04:08:46+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2014/07/05/july-4-2014-internet-and-a-bike-ride</id>
     <content type="html"><![CDATA[<p>Maybe I&rsquo;ll manage to keep a somewhat OK journal if I write it on my blog&hellip;</p>
 
@@ -966,7 +966,7 @@ Generating... C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/posix-spawn-0.3.8/lib/posi
   <entry>
     <title type="html"><![CDATA[Preparation: The Key to a Less Painful Windows Reinstall]]></title>
     <link href="http://garfieldnate.github.io/blog/2014/07/02/preparation-the-key-to-a-less-painful-windows-reinstall/"/>
-    <updated>2014-07-02T13:00:38+09:00</updated>
+    <updated>2014-07-02T06:00:38+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2014/07/02/preparation-the-key-to-a-less-painful-windows-reinstall</id>
     <content type="html"><![CDATA[<p>Recently I decided to work on an <a href="https://github.com/stepmania/stepmania/issues/196">easy ticket</a> in StepMania to get into the source code. It turned out that I (gasp!) actually needed to build the project on my computer, but of course I was missing required libraries: DirectX 9 and the DirectX SDK. No matter what I tried, neither of these would successfully install on my computer, and I decided that the only way to install it would be to reinstall Windows (which worked, but ugh!). Usually reinstalling Windows is a terrible process that can take days and leave you lost on your own computer, which is now missing all of your favorite programs and customizations. This time, I thought, I should make it as painless as possible.</p>
 
@@ -1061,7 +1061,7 @@ echo "Now install KeyTweak by hand"
   <entry>
     <title type="html"><![CDATA[List Assignment in Scalar Context]]></title>
     <link href="http://garfieldnate.github.io/blog/2014/01/11/list-assignment-in-scalar-context/"/>
-    <updated>2014-01-11T00:00:00+09:00</updated>
+    <updated>2014-01-11T00:00:00+01:00</updated>
     <id>http://garfieldnate.github.io/blog/2014/01/11/list-assignment-in-scalar-context</id>
     <content type="html"><![CDATA[<p>(Cross-posted on <a href="http://blogs.perl.org/users/nate_glenn/2014/01/list-assignment-in-scalar-context.html">blogs.perl.org</a>)</p>
 
@@ -1146,7 +1146,7 @@ echo "Now install KeyTweak by hand"
   <entry>
     <title type="html"><![CDATA[Packaging XML::LibXML With PAR Packer on Windows]]></title>
     <link href="http://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on/"/>
-    <updated>2013-08-27T00:00:00+09:00</updated>
+    <updated>2013-08-27T00:00:00+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on</id>
     <content type="html"><![CDATA[<p>PAR Packer is an excellent utility for delivering your Perl scripts as standalone executables. A standalone executable is highly desired in, for example, a corporate environment where everyone needs a program you wrote but you can&rsquo;t expect anyone to learn how to run Perl programs.</p>
 
@@ -1168,7 +1168,7 @@ echo "Now install KeyTweak by hand"
   <entry>
     <title type="html"><![CDATA[The Extended Euclidian Algorithm in Perl]]></title>
     <link href="http://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl/"/>
-    <updated>2013-04-15T00:00:00+09:00</updated>
+    <updated>2013-04-15T00:00:00+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl</id>
     <content type="html"><![CDATA[<p>This week I learned about the extended Euclidian algorithm for finding a linear combination of two numbers that yields their GCD. For example, the GCD of 213 and 171 is 3, and -4<em>213 + 5</em>171 = 3. This algorithm is important in the <a href="http://en.wikipedia.org/wiki/RSA_(algorithm">RSA</a>) encryption scheme.</p>
 

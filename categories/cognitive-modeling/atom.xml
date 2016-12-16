@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Cognitive Modeling | Garfield Nate]]></title>
   <link href="http://garfieldnate.github.io/categories/cognitive-modeling/atom.xml" rel="self"/>
   <link href="http://garfieldnate.github.io/"/>
-  <updated>2015-12-13T16:19:10+09:00</updated>
+  <updated>2016-12-16T17:48:31+01:00</updated>
   <id>http://garfieldnate.github.io/</id>
   <author>
     <name><![CDATA[Nate Glenn]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Review: The Development of Language Processing Strategies: A Cross-linguistic Study Between Japanese and English]]></title>
     <link href="http://garfieldnate.github.io/blog/2011/12/30/review-development-of-language/"/>
-    <updated>2011-12-30T00:00:00+09:00</updated>
+    <updated>2011-12-30T00:00:00+01:00</updated>
     <id>http://garfieldnate.github.io/blog/2011/12/30/review-development-of-language</id>
     <content type="html"><![CDATA[<p><a href="http://www.goodreads.com/book/show/3945971-the-development-of-language-processing-strategies" style="float: left; padding-right: 20px;">
 <img class="<a" src="href="http://photo.goodreads.com/books/1267076529m/3945971.jpg">http://photo.goodreads.com/books/1267076529m/3945971.jpg</a>" title="&ldquo;The Development of Language Processing Strategies: A Cross-linguistic Study Between Japanese and English&rdquo;" ></a><a href="http://www.goodreads.com/book/show/3945971-the-development-of-language-processing-strategies">The Development of Language Processing Strategies: A Cross-linguistic Study Between Japanese and English</a> by <a href="http://www.goodreads.com/author/show/1682824.Reiko_Mazuka">Reiko Mazuka</a></p>
@@ -48,7 +48,7 @@
   <entry>
     <title type="html"><![CDATA[Parsing in a Cognitive Modeller]]></title>
     <link href="http://garfieldnate.github.io/blog/2011/07/29/parsing-in-cognitive-modeller/"/>
-    <updated>2011-07-29T00:00:00+09:00</updated>
+    <updated>2011-07-29T00:00:00+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2011/07/29/parsing-in-cognitive-modeller</id>
     <content type="html"><![CDATA[<p>A colleague of mine recently expressed interest in the research I am doing for an honors thesis. &ldquo;Syntactic parsing in a cognitive modeling system&rdquo; isn&rsquo;t exactly a crystal clear expression of my work, after all. I embarrassed myself by throwing out a few cursory statements before trailing off and ending with a &ldquo;it&rsquo;s kind of hard to explain&rdquo;. Why can&rsquo;t I explain my own work? Partly because I don&rsquo;t explain it very often and therefore I&rsquo;m bad at it. Another reason is that I have met with opposition to it in the past. Fellow linguists are immediately fascinated with the idea of modeling language use inside of a digital brain; computer scientists remain relatively unimpressed. &ldquo;There are plenty of blazing fast parsers out there, so why build one just to act like a human? Besides, you don&rsquo;t even know if the computer is doing the same thing we are!&rdquo; I&rsquo;m going to use this and the next post to organize my thoughts and try to explain how parsing works in a cognitive modeling system, and why we would even try it in the first place.</p>
 

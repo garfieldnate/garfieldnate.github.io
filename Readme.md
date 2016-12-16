@@ -1,3 +1,9 @@
+#Nate's Blog
+
+Uses Octopress 3. See docs here:
+
+https://github.com/octopress/octopress
+
 To run an Octopress command, do:
 
     set %MENTOS_TIMEOUT%=1000

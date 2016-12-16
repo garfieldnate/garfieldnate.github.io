@@ -4,7 +4,7 @@
   <title><![CDATA[Category: pl2bat.pl | Garfield Nate]]></title>
   <link href="http://garfieldnate.github.io/categories/pl2bat-dot-pl/atom.xml" rel="self"/>
   <link href="http://garfieldnate.github.io/"/>
-  <updated>2015-12-13T16:19:10+09:00</updated>
+  <updated>2016-12-16T17:48:31+01:00</updated>
   <id>http://garfieldnate.github.io/</id>
   <author>
     <name><![CDATA[Nate Glenn]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Code Reading: pl2bat.pl]]></title>
     <link href="http://garfieldnate.github.io/blog/2014/07/14/code-reading-pl2bat-dot-pl/"/>
-    <updated>2014-07-14T15:42:07+09:00</updated>
+    <updated>2014-07-14T08:42:07+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2014/07/14/code-reading-pl2bat-dot-pl</id>
     <content type="html"><![CDATA[<p>When you install a Perl distribution from CPAN that comes with an executable script, Perl adds it to your path so it can be treated like any other command line program. On a <em>nix system, all that needs to be done for this to work is to set the script to be executable. Windows doesn&rsquo;t have executable script files with shebang lines like </em>nix, however, so Perl generates a batch file.</p>
 

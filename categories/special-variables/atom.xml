@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Special Variables | Garfield Nate]]></title>
   <link href="http://garfieldnate.github.io/categories/special-variables/atom.xml" rel="self"/>
   <link href="http://garfieldnate.github.io/"/>
-  <updated>2015-12-13T16:19:10+09:00</updated>
+  <updated>2016-12-16T17:48:31+01:00</updated>
   <id>http://garfieldnate.github.io/</id>
   <author>
     <name><![CDATA[Nate Glenn]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[When Not to Use Perl's Implicit Close; Suffering From Buffering]]></title>
     <link href="http://garfieldnate.github.io/blog/2013/01/27/when-not-to-use-perls-implicit-close/"/>
-    <updated>2013-01-27T00:00:00+09:00</updated>
+    <updated>2013-01-27T00:00:00+01:00</updated>
     <id>http://garfieldnate.github.io/blog/2013/01/27/when-not-to-use-perls-implicit-close</id>
     <content type="html"><![CDATA[<p>This post is a quick note on a bug I had difficulty tracking down.</p>
 

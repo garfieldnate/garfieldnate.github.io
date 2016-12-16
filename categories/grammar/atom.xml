@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Grammar | Garfield Nate]]></title>
   <link href="http://garfieldnate.github.io/categories/grammar/atom.xml" rel="self"/>
   <link href="http://garfieldnate.github.io/"/>
-  <updated>2015-12-13T16:19:10+09:00</updated>
+  <updated>2016-12-16T17:48:31+01:00</updated>
   <id>http://garfieldnate.github.io/</id>
   <author>
     <name><![CDATA[Nate Glenn]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Notes on Writing a Syntax Highlighter for Sublime Text]]></title>
     <link href="http://garfieldnate.github.io/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/"/>
-    <updated>2015-03-15T22:59:35+09:00</updated>
+    <updated>2015-03-15T14:59:35+01:00</updated>
     <id>http://garfieldnate.github.io/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text</id>
     <content type="html"><![CDATA[<p>I recently released the <a href="http://garfieldnate.github.io/Sublime-Soar-Tools/">Soar Tools</a> package for Sublime Text, and I took a few notes that might help the next author. Sublime Text is pretty awesome in a lot of ways, but the documentation is more tutorial + forums than it is a thorough explanation. I mainly followed the directions <a href="http://sublime-text-unofficial-documentation.readthedocs.org/en/latest/extensibility/syntaxdefs.html">here</a>. My tips are as follows:</p>
 
@@ -43,7 +43,7 @@
   <entry>
     <title type="html"><![CDATA[Graphing Grammar Parses From CMU Sphinx 4]]></title>
     <link href="http://garfieldnate.github.io/blog/2012/06/29/graphing-grammar-parses-from-cmu-sphinx/"/>
-    <updated>2012-06-29T00:00:00+09:00</updated>
+    <updated>2012-06-29T00:00:00+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2012/06/29/graphing-grammar-parses-from-cmu-sphinx</id>
     <content type="html"><![CDATA[<p>CMU Sphinx comes with some neat grammar parsing stuff that I never knew about. It uses JSGF (as detailed <a href="http://cmusphinx.sourceforge.net/sphinx4/javadoc/edu/cmu/sphinx/jsgf/JSGFGrammar.html">here</a>) and comes with several demos, showing how to use a basic grammar, arc weights, tags, and even getting a <a href="http://cmusphinx.sourceforge.net/sphinx4/src/apps/edu/cmu/sphinx/demo/jsapi/tags/README.html">javascript representation</a> of the final parse! At work I&rsquo;ve been needing to do some custom processing of the grammar output, but it was more conceptually difficult than I&rsquo;d planned. So after figuring out how to traverse a parse tree, I decided to write a little application to print out the parse of a given sentence. The eclipse project for it can be found <a href="https://sites.google.com/site/complingfiles/files/ParsePrinter.zip?attredirects=0&amp;amp;d=1">here</a>.</p>
 

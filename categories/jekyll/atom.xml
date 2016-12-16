@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Jekyll | Garfield Nate]]></title>
   <link href="http://garfieldnate.github.io/categories/jekyll/atom.xml" rel="self"/>
   <link href="http://garfieldnate.github.io/"/>
-  <updated>2015-12-13T16:19:10+09:00</updated>
+  <updated>2016-12-16T17:48:31+01:00</updated>
   <id>http://garfieldnate.github.io/</id>
   <author>
     <name><![CDATA[Nate Glenn]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Hacking Through an Octopress Update]]></title>
     <link href="http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/"/>
-    <updated>2015-07-20T22:10:27+09:00</updated>
+    <updated>2015-07-20T15:10:27+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update</id>
     <content type="html"><![CDATA[<p>A while back I watched a neat presentation from Justin Searls called <a href="http://blog.testdouble.com/posts/2014-12-02-the-social-coding-contract.html">The Social Coding Contract</a>. He has lots of good things to say, but there was one comment that really hit home: my Jekyll blog was easy to setup 6 months ago, but now it&rsquo;s impossible to maintain. Heh. Most of my trouble could have been avoided with more careful management of dependencies, but alas I am not a Ruby person and I did not realize that <code>bundle update</code> would completely sink my publishing abilities for 4 months. When I update Perl modules, <code>cpan</code> runs their tests on my machine and refuses to install unless they pass. <code>bundle</code> just installs them!</p>
 
@@ -107,9 +107,9 @@
   
   <entry>
     <title type="html"><![CDATA[Using Octopress- One More Thing]]></title>
-    <link href="http://garfieldnate.github.io/blog/2014/07/07/using-octopress-one-more-thing/"/>
-    <updated>2014-07-07T06:46:39+09:00</updated>
-    <id>http://garfieldnate.github.io/blog/2014/07/07/using-octopress-one-more-thing</id>
+    <link href="http://garfieldnate.github.io/blog/2014/07/06/using-octopress-one-more-thing/"/>
+    <updated>2014-07-06T23:46:39+02:00</updated>
+    <id>http://garfieldnate.github.io/blog/2014/07/06/using-octopress-one-more-thing</id>
     <content type="html"><![CDATA[<p>&ldquo;Aiiiiyaaaa! Jacky! You did not install Ruuuubyyy. You need that to write your blog.&rdquo;</p>
 
 <p>&ldquo;I already install Ruby, uncle, but it still does not work. <code>rake generate</code> creates empty HTML file! Look, it&rsquo;s broken!&rdquo;</p>

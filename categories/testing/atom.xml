@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Testing | Garfield Nate]]></title>
   <link href="http://garfieldnate.github.io/categories/testing/atom.xml" rel="self"/>
   <link href="http://garfieldnate.github.io/"/>
-  <updated>2015-12-13T16:19:10+09:00</updated>
+  <updated>2016-12-16T17:48:31+01:00</updated>
   <id>http://garfieldnate.github.io/</id>
   <author>
     <name><![CDATA[Nate Glenn]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Managing Global State: The Flip-Flop Operator]]></title>
     <link href="http://garfieldnate.github.io/blog/2013/02/03/managing-global-state-flip-flop-operator/"/>
-    <updated>2013-02-03T00:00:00+09:00</updated>
+    <updated>2013-02-03T00:00:00+01:00</updated>
     <id>http://garfieldnate.github.io/blog/2013/02/03/managing-global-state-flip-flop-operator</id>
     <content type="html"><![CDATA[<p>Today I was faced with another mysterious failing test while writing a test suite for some legacy code. I knew it had to be a problem with persisting state because this particular test only failed when processing a particular data set with the same object which was just used to process another set.</p>
 
@@ -158,7 +158,7 @@ ok 2
   <entry>
     <title type="html"><![CDATA[Testing Perl Distributions With Test Subdirectories]]></title>
     <link href="http://garfieldnate.github.io/blog/2013/01/20/testing-perl-distributions-with-test/"/>
-    <updated>2013-01-20T00:00:00+09:00</updated>
+    <updated>2013-01-20T00:00:00+01:00</updated>
     <id>http://garfieldnate.github.io/blog/2013/01/20/testing-perl-distributions-with-test</id>
     <content type="html"><![CDATA[<p>Normally I run my test suites with the prove utility:</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java Math Statistics Logarithm | Garfield Nate]]></title>
   <link href="http://garfieldnate.github.io/categories/java-math-statistics-logarithm/atom.xml" rel="self"/>
   <link href="http://garfieldnate.github.io/"/>
-  <updated>2015-12-13T16:19:10+09:00</updated>
+  <updated>2016-12-16T17:48:31+01:00</updated>
   <id>http://garfieldnate.github.io/</id>
   <author>
     <name><![CDATA[Nate Glenn]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Distributional Statistics of Log Values in Linear Domain]]></title>
     <link href="http://garfieldnate.github.io/blog/2011/08/17/java-code-distributional-statistics-of/"/>
-    <updated>2011-08-17T00:00:00+09:00</updated>
+    <updated>2011-08-17T00:00:00+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2011/08/17/java-code-distributional-statistics-of</id>
     <content type="html"><![CDATA[<p>Quite a long title, sorry. Basically, I had a bunch of log values (and they needed to stay logarithmic to avoid underflow) and I wanted to compute distributional statistics on them, like mean, variance and kurtosis. I wasn&rsquo;t sure if it would be valid to compute these kinds of statistics on the numbers as is, so I created a class to do all of the calculations in linear space. I&rsquo;ll post the result here, though there may be bugs (tell me if you find some!).</p>
 

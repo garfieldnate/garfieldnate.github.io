@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Garfield Nate</title>
-    <description>Nate's personal and technical blog
+    <description>Nate&#39;s personal and technical blog
 </description>
     <link>http://garfieldnate.github.io/</link>
     <atom:link href="http://garfieldnate.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 13 Dec 2015 16:19:10 +0900</pubDate>
-    <lastBuildDate>Sun, 13 Dec 2015 16:19:10 +0900</lastBuildDate>
+    <pubDate>Fri, 16 Dec 2016 17:48:31 +0100</pubDate>
+    <lastBuildDate>Fri, 16 Dec 2016 17:48:31 +0100</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -44,7 +44,7 @@ P.S. Good restaurant food in the US is often very expensive, especially after ti
 
 &lt;p&gt;Now, I understand there are exceptions to every rule, and that there is a giant barrier to getting to this point: getting used to Japan and learning to speak Japanese. I may post on these another time.&lt;/p&gt;
 </description>
-        <pubDate>Sun, 13 Dec 2015 16:06:51 +0900</pubDate>
+        <pubDate>Sun, 13 Dec 2015 08:06:51 +0100</pubDate>
         <link>http://garfieldnate.github.io/blog/2015/12/13/japan-is-a-great-place-to-be/</link>
         <guid isPermaLink="true">http://garfieldnate.github.io/blog/2015/12/13/japan-is-a-great-place-to-be/</guid>
         
@@ -75,7 +75,7 @@ $temp_date-&amp;gt;convert_to_China();
 # get tsukimi date from cycle and year found above, and date 8/15
 my $tsukimi = Calendar-&amp;gt;new_from_China(-cycle =&amp;gt; $temp_date-&amp;gt;cycle, -year =&amp;gt; $temp_date-&amp;gt;year, -month =&amp;gt; 8, -day =&amp;gt; 15);
 $tsukimi-&amp;gt;convert_to_Gregorian();
-print &quot;Schedule moon-viewing party for $year/&quot; . $tsukimi-&amp;gt;month . '/' . $tsukimi-&amp;gt;day;
+print &quot;Schedule moon-viewing party for $year/&quot; . $tsukimi-&amp;gt;month . &#39;/&#39; . $tsukimi-&amp;gt;day;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;And of course I marked this in my planner with the emoji for moon viewing ceremony: 🎑.&lt;/p&gt;
@@ -88,7 +88,7 @@ print &quot;Schedule moon-viewing party for $year/&quot; . $tsukimi-&amp;gt;mont
 
 &lt;p&gt;I&amp;rsquo;ll cover my CSS woes another time.&lt;/p&gt;
 </description>
-        <pubDate>Sun, 25 Oct 2015 19:23:49 +0900</pubDate>
+        <pubDate>Sun, 25 Oct 2015 11:23:49 +0100</pubDate>
         <link>http://garfieldnate.github.io/blog/2015/10/25/my-dream-planner-come-true-almost/</link>
         <guid isPermaLink="true">http://garfieldnate.github.io/blog/2015/10/25/my-dream-planner-come-true-almost/</guid>
         
@@ -124,11 +124,11 @@ print &quot;Schedule moon-viewing party for $year/&quot; . $tsukimi-&amp;gt;mont
 
 &lt;ul&gt;
 &lt;li&gt;See &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/2320&quot;&gt;https://github.com/jekyll/jekyll/issues/2320&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Solve by specifying &lt;code&gt;gem 'listen', '2.7.8'&lt;/code&gt; in your Gemfile. I tried 2.7.6 first, but ran into other problems.&lt;/li&gt;
+&lt;li&gt;Solve by specifying &lt;code&gt;gem &#39;listen&#39;, &#39;2.7.8&#39;&lt;/code&gt; in your Gemfile. I tried 2.7.6 first, but ran into other problems.&lt;/li&gt;
 &lt;li&gt;Don&amp;rsquo;t forget to delete Gemfile.lock when changing your gem versions&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Build Warning: Layout 'nil' requested in atom.xml does not exist&lt;/code&gt;
+&lt;li&gt;&lt;code&gt;Build Warning: Layout &#39;nil&#39; requested in atom.xml does not exist&lt;/code&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/2712&quot;&gt;https://github.com/jekyll/jekyll/issues/2712&lt;/a&gt;&lt;/li&gt;
@@ -143,7 +143,7 @@ print &quot;Schedule moon-viewing party for $year/&quot; . $tsukimi-&amp;gt;mont
 &lt;li&gt;Do &lt;code&gt;set PYTHONIOENCODING=utf-8&lt;/code&gt; before running &lt;code&gt;python -m pip install pygments&lt;/code&gt;; if that doesn&amp;rsquo;t work (it broke for me on a Japanese computer), set the code page to ascii via &lt;code&gt;chcp 437&lt;/code&gt; instead.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Error:  undefined method '[]' for nil:NilClass&lt;/code&gt; in pygments_code.rb
+&lt;li&gt;&lt;code&gt;Error:  undefined method &#39;[]&#39; for nil:NilClass&lt;/code&gt; in pygments_code.rb
 
 &lt;ul&gt;
 &lt;li&gt;This is caused by Pygments returning nil; it will do this if the system call to Python takes too long. Maybe your machine is busy, or maybe it&amp;rsquo;s just slow like mine.&lt;/li&gt;
@@ -151,15 +151,15 @@ print &quot;Schedule moon-viewing party for $year/&quot; . $tsukimi-&amp;gt;mont
 &lt;li&gt;See &lt;a href=&quot;https://github.com/tmm1/pygments.rb/issues/78,&quot;&gt;https://github.com/tmm1/pygments.rb/issues/78,&lt;/a&gt; &lt;a href=&quot;https://github.com/jekyll/jekyll/pull/2148&quot;&gt;https://github.com/jekyll/jekyll/pull/2148&lt;/a&gt; and &lt;a href=&quot;https://github.com/octopress/octopress/issues/128&quot;&gt;https://github.com/octopress/octopress/issues/128&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;code&gt;celluloid/calls.rb:48:in 'check': wrong number of arguments (2 for 1) (ArgumentError)&lt;/code&gt;
+&lt;li&gt;&lt;code&gt;celluloid/calls.rb:48:in &#39;check&#39;: wrong number of arguments (2 for 1) (ArgumentError)&lt;/code&gt;
 
 &lt;ul&gt;
 &lt;li&gt;The version of listen that we need (2.7.8) doesn&amp;rsquo;t work with celluloid 17 or higher.&lt;/li&gt;
-&lt;li&gt;Specify &lt;code&gt;gem 'celluloid', '0.16.0'&lt;/code&gt; in your Gemfile to fix.&lt;/li&gt;
+&lt;li&gt;Specify &lt;code&gt;gem &#39;celluloid&#39;, &#39;0.16.0&#39;&lt;/code&gt; in your Gemfile to fix.&lt;/li&gt;
 &lt;li&gt;See &lt;a href=&quot;https://github.com/celluloid/celluloid/issues/619&quot;&gt;https://github.com/celluloid/celluloid/issues/619&lt;/a&gt; and &lt;a href=&quot;https://talk.jekyllrb.com/t/error-while-trying-to-run-jekyll-serve/933/6&quot;&gt;https://talk.jekyllrb.com/t/error-while-trying-to-run-jekyll-serve/933/6&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;When you run &lt;code&gt;octopress deploy&lt;/code&gt;, you get &lt;code&gt;error : src refspec master doesn't match any&lt;/code&gt;
+&lt;li&gt;When you run &lt;code&gt;octopress deploy&lt;/code&gt;, you get &lt;code&gt;error : src refspec master doesn&#39;t match any&lt;/code&gt;
 
 &lt;ul&gt;
 &lt;li&gt;In my case, I had deployed once with the wrong branch name was trying to redeploy to the correct branch. The result of a deploy is cached and currently the branch is not changed properly.&lt;/li&gt;
@@ -198,7 +198,7 @@ print &quot;Schedule moon-viewing party for $year/&quot; . $tsukimi-&amp;gt;mont
 
 &lt;p&gt;Hope this helps!&lt;/p&gt;
 </description>
-        <pubDate>Mon, 20 Jul 2015 22:10:27 +0900</pubDate>
+        <pubDate>Mon, 20 Jul 2015 15:10:27 +0200</pubDate>
         <link>http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/</link>
         <guid isPermaLink="true">http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/</guid>
         
@@ -237,7 +237,7 @@ print &quot;Schedule moon-viewing party for $year/&quot; . $tsukimi-&amp;gt;mont
 
 &lt;p&gt;I hope this saves the next developer some time. Overall, the biggest gotcha for me was just realizing that I wasn&amp;rsquo;t writing a BNF-style grammar to completely validate the syntax in a file, but a list of patterns and the scopes that they create or match in. Once I understood this, actually writing the rules was not too difficult a task.&lt;/p&gt;
 </description>
-        <pubDate>Sun, 15 Mar 2015 22:59:35 +0900</pubDate>
+        <pubDate>Sun, 15 Mar 2015 14:59:35 +0100</pubDate>
         <link>http://garfieldnate.github.io/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/</link>
         <guid isPermaLink="true">http://garfieldnate.github.io/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/</guid>
         
@@ -266,7 +266,7 @@ print &quot;Schedule moon-viewing party for $year/&quot; . $tsukimi-&amp;gt;mont
 
 &lt;p&gt;It&amp;rsquo;s called &lt;a href=&quot;http://www.algomation.com/&quot;&gt;Algomation&lt;/a&gt;. Lots of algorithms are available just for viewing on the home page. Each algorithm gets a viewing window for whatever visualization is provided, and the user can rewind as needed. A handy info box on the side gives information on the current operation, variables, and even code location. The visualizations themselves look very nice.&lt;/p&gt;
 
-&lt;p&gt;Once you&amp;rsquo;re registered, you can create new algorithms or fork from others' creations. Here&amp;rsquo;s mine:&lt;/p&gt;
+&lt;p&gt;Once you&amp;rsquo;re registered, you can create new algorithms or fork from others&#39; creations. Here&amp;rsquo;s mine:&lt;/p&gt;
 
 &lt;iframe allowfullscreen src=&quot;http://www.algomation.com/embeddedplayer?embedded=true&amp;algorithm=54a68d7ea7f8e70200042664&quot; width=&quot;900&quot; height=&quot;556&quot; seamless=&quot;seamless&quot; frameborder=&quot;0&quot; style=&quot;border:1px solid lightgray&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;
 
@@ -286,7 +286,7 @@ print &quot;Schedule moon-viewing party for $year/&quot; . $tsukimi-&amp;gt;mont
 
 &lt;p&gt;What&amp;rsquo;s on your wishlist?&lt;/p&gt;
 </description>
-        <pubDate>Tue, 06 Jan 2015 20:20:34 +0900</pubDate>
+        <pubDate>Tue, 06 Jan 2015 12:20:34 +0100</pubDate>
         <link>http://garfieldnate.github.io/blog/2015/01/06/my-new-toy-algomation/</link>
         <guid isPermaLink="true">http://garfieldnate.github.io/blog/2015/01/06/my-new-toy-algomation/</guid>
         
@@ -319,7 +319,7 @@ print &quot;Schedule moon-viewing party for $year/&quot; . $tsukimi-&amp;gt;mont
 
 &lt;p&gt;They came back again later to ask me how to say &amp;ldquo;hide and seek&amp;rdquo;, which they could not pronounce, so I gave it to them again in katakana-English (haido ando shiiku). They knew cat and dog, though. They came back one final time when I was looking at onions to asked me the darndest question. &amp;ldquo;Hey, um, sensei [they assumed that because I was a foreigner that I was an English teacher], how did you get SOOO good at English?&amp;rdquo; This caused me to laugh heartily. I explained to them that I spoke English as a child, as did my family, and I didn&amp;rsquo;t learn Japanese until I was 20. This elicited only puzzled looks from them. English is so hard; why wouldn&amp;rsquo;t you just speak Japanese? They obviously learned English without learning about other countries in school. They then ran off again to continue their game of かくれんぼう (kakurenbou).&lt;/p&gt;
 </description>
-        <pubDate>Sun, 09 Nov 2014 13:59:26 +0900</pubDate>
+        <pubDate>Sun, 09 Nov 2014 05:59:26 +0100</pubDate>
         <link>http://garfieldnate.github.io/blog/2014/11/09/the-oh-so-exotic-grocery-list/</link>
         <guid isPermaLink="true">http://garfieldnate.github.io/blog/2014/11/09/the-oh-so-exotic-grocery-list/</guid>
         
@@ -350,7 +350,7 @@ print &quot;Schedule moon-viewing party for $year/&quot; . $tsukimi-&amp;gt;mont
 
 &lt;p&gt;There are some other cool pictures online. This one from facebook shows some people dressed as Ebisu, the god of commerce, and some in Kabuni suits (the local mascot is Kabuni, a cartoon horseshoe crab).&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;center&quot; src=&quot;https://scontent-a-ams.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/p180x540/10537742_1446994242253771_944159117839706341_n.jpg?oh=b4e45158341bff97a2ed0510a9fbe2a2&amp;oe=54910D78&quot; title=&quot;Yotchare'ers dressed as Ebisu and Kabuni&quot; &gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;center&quot; src=&quot;https://scontent-a-ams.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/p180x540/10537742_1446994242253771_944159117839706341_n.jpg?oh=b4e45158341bff97a2ed0510a9fbe2a2&amp;oe=54910D78&quot; title=&quot;Yotchare&#39;ers dressed as Ebisu and Kabuni&quot; &gt;&lt;/p&gt;
 
 &lt;p&gt;Weeks later, some people who meet me for the first time still say &amp;ldquo;oh yeah, you were in the parade!&amp;rdquo;&lt;/p&gt;
 
@@ -396,7 +396,7 @@ print &quot;Schedule moon-viewing party for $year/&quot; . $tsukimi-&amp;gt;mont
 
 &lt;p&gt;&lt;img class=&quot;center&quot; src=&quot;/images/content_images/bookshelf-bike.jpg&quot;&gt;&lt;/p&gt;
 </description>
-        <pubDate>Sun, 07 Sep 2014 21:59:33 +0900</pubDate>
+        <pubDate>Sun, 07 Sep 2014 14:59:33 +0200</pubDate>
         <link>http://garfieldnate.github.io/blog/2014/09/07/yotchare/</link>
         <guid isPermaLink="true">http://garfieldnate.github.io/blog/2014/09/07/yotchare/</guid>
         
@@ -464,7 +464,7 @@ pdftex tex.tex
 &lt;/ul&gt;
 
 </description>
-        <pubDate>Wed, 13 Aug 2014 12:50:29 +0900</pubDate>
+        <pubDate>Wed, 13 Aug 2014 05:50:29 +0200</pubDate>
         <link>http://garfieldnate.github.io/blog/2014/08/13/2-knuth-classics-are-freely-available/</link>
         <guid isPermaLink="true">http://garfieldnate.github.io/blog/2014/08/13/2-knuth-classics-are-freely-available/</guid>
         
@@ -495,7 +495,7 @@ pdftex tex.tex
 
 &lt;p&gt;Another bias introduced by modern computers is multitasking. The machine multitasks, so we also multitask constantly. It&amp;rsquo;s not good for concentration or productivity (&lt;em&gt;becomes self conscious and switches to editor&amp;rsquo;s distraction-free mode&lt;/em&gt;).&lt;/p&gt;
 </description>
-        <pubDate>Sun, 10 Aug 2014 22:28:41 +0900</pubDate>
+        <pubDate>Sun, 10 Aug 2014 15:28:41 +0200</pubDate>
         <link>http://garfieldnate.github.io/blog/2014/08/10/five-things-we-need-to-know-about-technological-change/</link>
         <guid isPermaLink="true">http://garfieldnate.github.io/blog/2014/08/10/five-things-we-need-to-know-about-technological-change/</guid>
         
@@ -520,7 +520,7 @@ pdftex tex.tex
 
 &lt;p&gt;There&amp;rsquo;s another reason schools kill creativity in my opinion: by killing intrinsic motivation. The worst culprit is literature class. I did honors/AP all through high school, and haven&amp;rsquo;t read a classic since (except Ender&amp;rsquo;s Game, which is a rather new classic). Who wants to read anything when it&amp;rsquo;s just required reading to make the grade? Kids should learn to enjoy good works of mankind because they are enriching, instead of just developing an aversion to requirements of &amp;ldquo;the system&amp;rdquo;. &lt;a href=&quot;https://en.wikipedia.org/wiki/Sudbury_school&quot;&gt;Sudbury Schools&lt;/a&gt; look nice. No classes!&lt;/p&gt;
 </description>
-        <pubDate>Fri, 08 Aug 2014 22:12:22 +0900</pubDate>
+        <pubDate>Fri, 08 Aug 2014 15:12:22 +0200</pubDate>
         <link>http://garfieldnate.github.io/blog/2014/08/08/schools-kill-creativity/</link>
         <guid isPermaLink="true">http://garfieldnate.github.io/blog/2014/08/08/schools-kill-creativity/</guid>
         

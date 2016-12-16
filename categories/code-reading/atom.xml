@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Code Reading | Garfield Nate]]></title>
   <link href="http://garfieldnate.github.io/categories/code-reading/atom.xml" rel="self"/>
   <link href="http://garfieldnate.github.io/"/>
-  <updated>2015-12-13T16:19:10+09:00</updated>
+  <updated>2016-12-16T17:48:31+01:00</updated>
   <id>http://garfieldnate.github.io/</id>
   <author>
     <name><![CDATA[Nate Glenn]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Knuth Classics Are Freely Available]]></title>
     <link href="http://garfieldnate.github.io/blog/2014/08/13/2-knuth-classics-are-freely-available/"/>
-    <updated>2014-08-13T12:50:29+09:00</updated>
+    <updated>2014-08-13T05:50:29+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2014/08/13/2-knuth-classics-are-freely-available</id>
     <content type="html"><![CDATA[<p>Donald Knuth wrote TeX in C/WEB. WEB is his system for writing literate programs which become both source code and typeset documents explaining the program&rsquo;s operation. Some of his programs have been published: <a href="http://www.goodreads.com/book/show/499934.Computers_Typesetting_Volume_B">TeX: The Program</a> and <a href="http://www.goodreads.com/book/show/1746886.Computers_Typesetting_Volume_D">Metafont: The Program</a>. Others have not: I don&rsquo;t believe Bibtex was published in book form, for example.</p>
 
@@ -58,7 +58,7 @@ pdftex tex.tex
   <entry>
     <title type="html"><![CDATA[Refactoring the Soar Lexer]]></title>
     <link href="http://garfieldnate.github.io/blog/2014/07/27/refactoring-the-soar-lexer/"/>
-    <updated>2014-07-27T19:51:53+09:00</updated>
+    <updated>2014-07-27T12:51:53+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2014/07/27/refactoring-the-soar-lexer</id>
     <content type="html"><![CDATA[<p>After my <a href="blog/2014/7/13/code-reading-the-soar-parser">last writeup</a> on how <a href="https://github.com/SoarGroup/Soar">Soar</a> parses Soar code, I decided to dive in and try and refactor it, starting with the lexer (and here&rsquo;s the resulting <a href="https://github.com/SoarGroup/Soar/pull/178">PR</a>). I haven&rsquo;t worked with C/C++ in a while, and a good part of the code I changed was close to my age, so it was an interesting learning experience for me.</p>
 
@@ -91,7 +91,7 @@ pdftex tex.tex
   <entry>
     <title type="html"><![CDATA[Code Reading: pl2bat.pl]]></title>
     <link href="http://garfieldnate.github.io/blog/2014/07/14/code-reading-pl2bat-dot-pl/"/>
-    <updated>2014-07-14T15:42:07+09:00</updated>
+    <updated>2014-07-14T08:42:07+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2014/07/14/code-reading-pl2bat-dot-pl</id>
     <content type="html"><![CDATA[<p>When you install a Perl distribution from CPAN that comes with an executable script, Perl adds it to your path so it can be treated like any other command line program. On a <em>nix system, all that needs to be done for this to work is to set the script to be executable. Windows doesn&rsquo;t have executable script files with shebang lines like </em>nix, however, so Perl generates a batch file.</p>
 
@@ -149,9 +149,9 @@ our $VERSION = 0.003;
   
   <entry>
     <title type="html"><![CDATA[Code Reading: The Soar Parser]]></title>
-    <link href="http://garfieldnate.github.io/blog/2014/07/13/code-reading-the-soar-parser/"/>
-    <updated>2014-07-13T05:04:54+09:00</updated>
-    <id>http://garfieldnate.github.io/blog/2014/07/13/code-reading-the-soar-parser</id>
+    <link href="http://garfieldnate.github.io/blog/2014/07/12/code-reading-the-soar-parser/"/>
+    <updated>2014-07-12T22:04:54+02:00</updated>
+    <id>http://garfieldnate.github.io/blog/2014/07/12/code-reading-the-soar-parser</id>
     <content type="html"><![CDATA[<!-- I've thought for a while that it would be fun to write a series of "code reading" posts, where I try to read and understand how some large program works and explain my findings. -->
 
 

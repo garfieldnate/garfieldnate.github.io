@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Windows | Garfield Nate]]></title>
   <link href="http://garfieldnate.github.io/categories/windows/atom.xml" rel="self"/>
   <link href="http://garfieldnate.github.io/"/>
-  <updated>2015-12-13T16:19:10+09:00</updated>
+  <updated>2016-12-16T17:48:31+01:00</updated>
   <id>http://garfieldnate.github.io/</id>
   <author>
     <name><![CDATA[Nate Glenn]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Hacking Through an Octopress Update]]></title>
     <link href="http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/"/>
-    <updated>2015-07-20T22:10:27+09:00</updated>
+    <updated>2015-07-20T15:10:27+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update</id>
     <content type="html"><![CDATA[<p>A while back I watched a neat presentation from Justin Searls called <a href="http://blog.testdouble.com/posts/2014-12-02-the-social-coding-contract.html">The Social Coding Contract</a>. He has lots of good things to say, but there was one comment that really hit home: my Jekyll blog was easy to setup 6 months ago, but now it&rsquo;s impossible to maintain. Heh. Most of my trouble could have been avoided with more careful management of dependencies, but alas I am not a Ruby person and I did not realize that <code>bundle update</code> would completely sink my publishing abilities for 4 months. When I update Perl modules, <code>cpan</code> runs their tests on my machine and refuses to install unless they pass. <code>bundle</code> just installs them!</p>
 
@@ -107,9 +107,9 @@
   
   <entry>
     <title type="html"><![CDATA[Using Octopress- One More Thing]]></title>
-    <link href="http://garfieldnate.github.io/blog/2014/07/07/using-octopress-one-more-thing/"/>
-    <updated>2014-07-07T06:46:39+09:00</updated>
-    <id>http://garfieldnate.github.io/blog/2014/07/07/using-octopress-one-more-thing</id>
+    <link href="http://garfieldnate.github.io/blog/2014/07/06/using-octopress-one-more-thing/"/>
+    <updated>2014-07-06T23:46:39+02:00</updated>
+    <id>http://garfieldnate.github.io/blog/2014/07/06/using-octopress-one-more-thing</id>
     <content type="html"><![CDATA[<p>&ldquo;Aiiiiyaaaa! Jacky! You did not install Ruuuubyyy. You need that to write your blog.&rdquo;</p>
 
 <p>&ldquo;I already install Ruby, uncle, but it still does not work. <code>rake generate</code> creates empty HTML file! Look, it&rsquo;s broken!&rdquo;</p>
@@ -152,7 +152,7 @@ Generating... C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/posix-spawn-0.3.8/lib/posi
   <entry>
     <title type="html"><![CDATA[Preparation: The Key to a Less Painful Windows Reinstall]]></title>
     <link href="http://garfieldnate.github.io/blog/2014/07/02/preparation-the-key-to-a-less-painful-windows-reinstall/"/>
-    <updated>2014-07-02T13:00:38+09:00</updated>
+    <updated>2014-07-02T06:00:38+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2014/07/02/preparation-the-key-to-a-less-painful-windows-reinstall</id>
     <content type="html"><![CDATA[<p>Recently I decided to work on an <a href="https://github.com/stepmania/stepmania/issues/196">easy ticket</a> in StepMania to get into the source code. It turned out that I (gasp!) actually needed to build the project on my computer, but of course I was missing required libraries: DirectX 9 and the DirectX SDK. No matter what I tried, neither of these would successfully install on my computer, and I decided that the only way to install it would be to reinstall Windows (which worked, but ugh!). Usually reinstalling Windows is a terrible process that can take days and leave you lost on your own computer, which is now missing all of your favorite programs and customizations. This time, I thought, I should make it as painless as possible.</p>
 
@@ -247,7 +247,7 @@ echo "Now install KeyTweak by hand"
   <entry>
     <title type="html"><![CDATA[Packaging XML::LibXML With PAR Packer on Windows]]></title>
     <link href="http://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on/"/>
-    <updated>2013-08-27T00:00:00+09:00</updated>
+    <updated>2013-08-27T00:00:00+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on</id>
     <content type="html"><![CDATA[<p>PAR Packer is an excellent utility for delivering your Perl scripts as standalone executables. A standalone executable is highly desired in, for example, a corporate environment where everyone needs a program you wrote but you can&rsquo;t expect anyone to learn how to run Perl programs.</p>
 

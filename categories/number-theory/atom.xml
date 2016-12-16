@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Number Theory | Garfield Nate]]></title>
   <link href="http://garfieldnate.github.io/categories/number-theory/atom.xml" rel="self"/>
   <link href="http://garfieldnate.github.io/"/>
-  <updated>2015-12-13T16:19:10+09:00</updated>
+  <updated>2016-12-16T17:48:31+01:00</updated>
   <id>http://garfieldnate.github.io/</id>
   <author>
     <name><![CDATA[Nate Glenn]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[The Extended Euclidian Algorithm in Perl]]></title>
     <link href="http://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl/"/>
-    <updated>2013-04-15T00:00:00+09:00</updated>
+    <updated>2013-04-15T00:00:00+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl</id>
     <content type="html"><![CDATA[<p>This week I learned about the extended Euclidian algorithm for finding a linear combination of two numbers that yields their GCD. For example, the GCD of 213 and 171 is 3, and -4<em>213 + 5</em>171 = 3. This algorithm is important in the <a href="http://en.wikipedia.org/wiki/RSA_(algorithm">RSA</a>) encryption scheme.</p>
 

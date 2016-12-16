@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Alignment | Garfield Nate]]></title>
   <link href="http://garfieldnate.github.io/categories/alignment/atom.xml" rel="self"/>
   <link href="http://garfieldnate.github.io/"/>
-  <updated>2015-12-13T16:19:10+09:00</updated>
+  <updated>2016-12-16T17:48:31+01:00</updated>
   <id>http://garfieldnate.github.io/</id>
   <author>
     <name><![CDATA[Nate Glenn]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[String Allignment With Edit Operations]]></title>
     <link href="http://garfieldnate.github.io/blog/2011/09/01/string-allignment-with-edit-operations/"/>
-    <updated>2011-09-01T00:00:00+09:00</updated>
+    <updated>2011-09-01T00:00:00+02:00</updated>
     <id>http://garfieldnate.github.io/blog/2011/09/01/string-allignment-with-edit-operations</id>
     <content type="html"><![CDATA[<p>A common way to measure the distance between two strings is using Levenshtein distance. Levenshtein distance is the minimum number of deletions, insertions, and substitutions needed to transform one string into another. Finding the distance between two strings is useful in certain applications such as spell checking (a word processor will suggest dictionary words that are close to your misspelled word). See <a href="http://en.wikipedia.org/wiki/Levenshtein_distance">wikipedia</a> for more details and an example of Levenshtein distance calculation.</p>
 
