@@ -4,7 +4,7 @@
   <title><![CDATA[Garfield Nate]]></title>
   <link href="http://garfieldnate.github.io/atom.xml" rel="self"/>
   <link href="http://garfieldnate.github.io/"/>
-  <updated>2017-02-12T15:04:42+01:00</updated>
+  <updated>2017-02-12T15:39:06+01:00</updated>
   <id>http://garfieldnate.github.io/</id>
   <author>
     <name><![CDATA[Nate Glenn]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[I Live in Germany Now]]></title>
+    <link href="http://garfieldnate.github.io/blog/2017/02/12/i-live-in-germany-now/"/>
+    <updated>2017-02-12T13:30:00+01:00</updated>
+    <id>http://garfieldnate.github.io/blog/2017/02/12/i-live-in-germany-now</id>
+    <content type="html"><![CDATA[<p>As of three and a half months ago, my wife and I live in Düsseldorf, Germany! This has been a whirlwind for us, and I have experienced emotional highs and lows as I adjust to a new (better) job and sometimes pine away for Japan.</p>
+
+<p>Last year it became clear to me that my job in Japan was crushing me and that I had to move on before I no longer could. For several months I searched only for remote jobs because I didn&rsquo;t want to move. A combination of factors prevented this from working out, and we decided we would move (almost) anywhere in the world for a good job. Long story short, I now work at Trivago&rsquo;s central headquarters on a mix of full-stack dev and data science.</p>
+
+<p>So far, Trivago has been an excellent company to work for. I was initially attracted to them because they value empathy and authenticity, which makes for a much less stressful work environment. My previous company had no declared company values, culture or code of conduct, and employees could be ground down by long work hours, stressful interactions, and unknown expectations (mostly unacknowledged, of course). Europeans value vacation time much more than Americans or Japanese, so I went from having a standard 10 days a year to 25 (or more, since it&rsquo;s self-determined at Trivago). The work hours are self-determined, as well. My time is valued, and the organization is flexible and agile. My input actually matters here.</p>
+
+<p>We are almost through dealing with culture shock, but we still miss Japan. Some things we miss:</p>
+
+<ul>
+<li>Japanese food. I miss artisanal ramen, soba, tofu, donburi, and the convenience of rice. In general I&rsquo;m just lost when it comes time to cook. I&rsquo;ve also had some bad experiences with MSG-packed meals.</li>
+<li>Biking. My image of Europe was that there would be lots of bicycling, but Germany seems to be a land of cars. Biking is generally a sport instead of a method of transportation, which means that bikes are expensive, there&rsquo;s less infrastructure like parking, and it feels more dangerous when using roads.</li>
+<li>Trains. The trains in Düsseldorf are very difficult to use. The ticket machines do not tell you which ticket you should buy, and you don&rsquo;t know if you are doing it wrong until your ticket is checked and you might be fined. The ticket machines inside the train only take coins, and sometimes they don&rsquo;t even work.</li>
+<li>Apartments. In Germany you have to wire your own lights and install your entire kitchen. They do not generally have closets, so you have to buy more furniture.</li>
+<li>No combinis. You don&rsquo;t know how important these are until you have to do without them. Paying bills, printing documents, quick meals, and supermarket items all now have to be done at separate, often distant locations, and with restrictive hours.</li>
+<li>Communication style. In Japan, controversial topics are avoided in polite conversation. This is not the case in Germany or the US.</li>
+</ul>
+
+
+<p>Here are some things that make us happy about living in Germany:</p>
+
+<ul>
+<li>German food. Much of traditional US food comes from Germany, and the bountiful meat and dairy are very welcome. In Japan the only cheese you can find is bland mozarella, unless you go to expensive import stores.</li>
+<li>Reduced business hours. This may be annoying for customers who expect to get food at midnight, but it means that the whole country can rest on the nights and weekends. Most employers also understand and prioritize work-life balance.</li>
+<li>Culture. I never cared about Europe before, but now that I&rsquo;m here it&rsquo;s fascinating to learn about European history and culture, which is where my own family comes from. There is luxurious architecture beyond anything I have ever seen. There are dozens of countries with other languages and cultures within a short plane ride, <em>and they don&rsquo;t require a new visa to visit</em>. And of course it&rsquo;s exciting to be learning a new language!</li>
+</ul>
+
+
+<p>I look forward to exploring Germany and the rest of Europe, to learning new languages (Trivago has an internal language exchange), and growing professionally in my new position.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Japan Is a Great Place to Be]]></title>
@@ -994,73 +1030,6 @@ while(my ($key, $value) = each %hash)
 </code></pre>
 
 <p>Is there a simpler way to do this? What&rsquo;s with all the underscores? Comments and questions welcome below.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Extended Euclidian Algorithm in Perl]]></title>
-    <link href="http://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl/"/>
-    <updated>2013-04-15T00:00:00+02:00</updated>
-    <id>http://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl</id>
-    <content type="html"><![CDATA[<p>This week I learned about the extended Euclidian algorithm for finding a linear combination of two numbers that yields their GCD. For example, the GCD of 213 and 171 is 3, and -4<em>213 + 5</em>171 = 3. This algorithm is important in the <a href="http://en.wikipedia.org/wiki/RSA_(algorithm">RSA</a>) encryption scheme.</p>
-
-<p>I had quite a difficult time getting myself to fully understand how it works. I jumped between <a href="http://en.wikipedia.org/wiki/Extended_euclidean_algorithm">Wikipedia</a>, my <a href="http://www.amazon.com/Data-Structures-Problem-Solving-Using/dp/0321541405/ref=sr_1_1?ie=UTF8&amp;amp;qid=1365529203&amp;amp;sr=8-1&amp;amp;keywords=data+structures+and+problem+solving+using+java">data structures textbook</a> (don&rsquo;t buy it), a <a href="http://www.youtube.com/watch?v=twlo21D9LY0">YouTube video</a>, and this excellent <a href="http://public.csusm.edu/aitken_html/m422/Handout1.pdf">number theory class lecture</a>. The lecture is the best, though I think there may be a typographical error in the recursive formula.</p>
-
-<p>The basic idea uses recursion with an easy base step. We call <code>Euclid(a,b)</code> with <code>a ≥ b</code>:</p>
-
-<ul>
-<li>The base case is when b is 0. The GCD of x and 0 is always x, and the coefficients to produce a GCD of 0 are 1 and 0 (or anything else): 1*x + 0(or anything)*0 = x. So the base case returns (1,0)</li>
-<li>Any other step starts by recursively calling <code>Euclid(b, a mod b)</code>. We know that the GCD of a and b is the same as the GCD of b and a mod b (lemma 12 in the lecture). This recursive call is guaranteed to eventually get to the base case of b = 0.</li>
-<li>After finding the coefficients for producing the GCD from b and a mod b, we can calculate the ones for producing the GCD from a and b, because a mod b can be put in terms of a and b (see the code comments for the formulas).</li>
-</ul>
-
-
-<p>To really help myself understand the whole thing, I wrote a Perl script to illustrate it. I put in lots of comments as I worked my way through it.</p>
-
-<pre><code class="perl The extended Euclidian algorithm">use strict;
-use strict;
-use warnings;
-use 5.010;
-#start with a &gt;= b
-my @nums = sort {$b &lt;=&gt; $a} @ARGV;
-
-gcd(@nums);
-
-#input: two numbers (a,b) a &gt;= b &gt; 0
-#output: the coefficients which which yield their GCD;
-sub gcd {
- my ($a, $b) = @_;
-
- #base case; the GCD of x and 0 always x;
- #and the coefficients will always be 1 and 0 (or anything) because
-
- #1*x + 0*0 = x
-
-if($b == 0){
-  say "GCD is $a";
-  say "(a,b) = ($a,$b), coefficients = (1,0)";
-  say "1x$a + 0x$b = $a";
-  return (1, 0);
- }
-
- #otherwise, we evaluate u and v for k = ub + vr, where r is a mod b
- #gcd(b, a%b) gives the same value
- my $remainder = $a % $b;
- my ($u, $v) = gcd($b, $remainder);
- #now we can find k in terms of a and b because we know r in terms a and b
- #r = a - bq, where q = the whole part of a/b
- #k = ub + vr = ub + v(a - bq) = va + b(u-qv)
- #so the coefficient on a is v, and the coefficient on b is 1-qv
- my $x = $v;
- my $q = int(($a/$b));
- my $y = $u - $q*$x;
- say "(a,b) = ($a,$b), coefficients are ($x,$y)";
- say "${x}x$a + ${y}x$b = " . ($x*$a + $y*$b);
- return ($x, $y);
-}
-</code></pre>
-
-<p>Feel free to leave a comment if you think that something could be stated more clearly. I hope it helps anyone else trying to learn how the extended Euclidian algorithm works.</p>
 ]]></content>
   </entry>
   

@@ -6,9 +6,55 @@
 </description>
     <link>http://garfieldnate.github.io/</link>
     <atom:link href="http://garfieldnate.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 12 Feb 2017 15:04:42 +0100</pubDate>
-    <lastBuildDate>Sun, 12 Feb 2017 15:04:42 +0100</lastBuildDate>
+    <pubDate>Sun, 12 Feb 2017 15:39:06 +0100</pubDate>
+    <lastBuildDate>Sun, 12 Feb 2017 15:39:06 +0100</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>I Live in Germany Now</title>
+        <description>&lt;p&gt;As of three and a half months ago, my wife and I live in Düsseldorf, Germany! This has been a whirlwind for us, and I have experienced emotional highs and lows as I adjust to a new (better) job and sometimes pine away for Japan.&lt;/p&gt;
+
+&lt;p&gt;Last year it became clear to me that my job in Japan was crushing me and that I had to move on before I no longer could. For several months I searched only for remote jobs because I didn&amp;rsquo;t want to move. A combination of factors prevented this from working out, and we decided we would move (almost) anywhere in the world for a good job. Long story short, I now work at Trivago&amp;rsquo;s central headquarters on a mix of full-stack dev and data science.&lt;/p&gt;
+
+&lt;p&gt;So far, Trivago has been an excellent company to work for. I was initially attracted to them because they value empathy and authenticity, which makes for a much less stressful work environment. My previous company had no declared company values, culture or code of conduct, and employees could be ground down by long work hours, stressful interactions, and unknown expectations (mostly unacknowledged, of course). Europeans value vacation time much more than Americans or Japanese, so I went from having a standard 10 days a year to 25 (or more, since it&amp;rsquo;s self-determined at Trivago). The work hours are self-determined, as well. My time is valued, and the organization is flexible and agile. My input actually matters here.&lt;/p&gt;
+
+&lt;p&gt;We are almost through dealing with culture shock, but we still miss Japan. Some things we miss:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Japanese food. I miss artisanal ramen, soba, tofu, donburi, and the convenience of rice. In general I&amp;rsquo;m just lost when it comes time to cook. I&amp;rsquo;ve also had some bad experiences with MSG-packed meals.&lt;/li&gt;
+&lt;li&gt;Biking. My image of Europe was that there would be lots of bicycling, but Germany seems to be a land of cars. Biking is generally a sport instead of a method of transportation, which means that bikes are expensive, there&amp;rsquo;s less infrastructure like parking, and it feels more dangerous when using roads.&lt;/li&gt;
+&lt;li&gt;Trains. The trains in Düsseldorf are very difficult to use. The ticket machines do not tell you which ticket you should buy, and you don&amp;rsquo;t know if you are doing it wrong until your ticket is checked and you might be fined. The ticket machines inside the train only take coins, and sometimes they don&amp;rsquo;t even work.&lt;/li&gt;
+&lt;li&gt;Apartments. In Germany you have to wire your own lights and install your entire kitchen. They do not generally have closets, so you have to buy more furniture.&lt;/li&gt;
+&lt;li&gt;No combinis. You don&amp;rsquo;t know how important these are until you have to do without them. Paying bills, printing documents, quick meals, and supermarket items all now have to be done at separate, often distant locations, and with restrictive hours.&lt;/li&gt;
+&lt;li&gt;Communication style. In Japan, controversial topics are avoided in polite conversation. This is not the case in Germany or the US.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;Here are some things that make us happy about living in Germany:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;German food. Much of traditional US food comes from Germany, and the bountiful meat and dairy are very welcome. In Japan the only cheese you can find is bland mozarella, unless you go to expensive import stores.&lt;/li&gt;
+&lt;li&gt;Reduced business hours. This may be annoying for customers who expect to get food at midnight, but it means that the whole country can rest on the nights and weekends. Most employers also understand and prioritize work-life balance.&lt;/li&gt;
+&lt;li&gt;Culture. I never cared about Europe before, but now that I&amp;rsquo;m here it&amp;rsquo;s fascinating to learn about European history and culture, which is where my own family comes from. There is luxurious architecture beyond anything I have ever seen. There are dozens of countries with other languages and cultures within a short plane ride, &lt;em&gt;and they don&amp;rsquo;t require a new visa to visit&lt;/em&gt;. And of course it&amp;rsquo;s exciting to be learning a new language!&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;I look forward to exploring Germany and the rest of Europe, to learning new languages (Trivago has an internal language exchange), and growing professionally in my new position.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 12 Feb 2017 13:30:00 +0100</pubDate>
+        <link>http://garfieldnate.github.io/blog/2017/02/12/i-live-in-germany-now/</link>
+        <guid isPermaLink="true">http://garfieldnate.github.io/blog/2017/02/12/i-live-in-germany-now/</guid>
+        
+        
+        <category>Germany</category>
+        
+        <category>Europe</category>
+        
+        <category>life</category>
+        
+        <category>travel</category>
+        
+      </item>
     
       <item>
         <title>Japan is a Great Place to be</title>
@@ -48,6 +94,10 @@ P.S. Good restaurant food in the US is often very expensive, especially after ti
         <link>http://garfieldnate.github.io/blog/2015/12/13/japan-is-a-great-place-to-be/</link>
         <guid isPermaLink="true">http://garfieldnate.github.io/blog/2015/12/13/japan-is-a-great-place-to-be/</guid>
         
+        
+        <category>Japan</category>
+        
+        <category>life</category>
         
       </item>
     
@@ -509,27 +559,6 @@ pdftex tex.tex
         <category>culture</category>
         
         <category>history</category>
-        
-      </item>
-    
-      <item>
-        <title>Schools Kill Creativity</title>
-        <description>&lt;h3&gt;&lt;a href=&quot;http://www.ted.com/talks/ken_robinson_says_schools_kill_creativity&quot;&gt;Ken Robinson Says Schools Kill Creativity&lt;/a&gt;&lt;/h3&gt;
-
-&lt;p&gt;First post of my new linklog; I&amp;rsquo;ll be writing responses to articles from BYU&amp;rsquo;s &lt;a href=&quot;http://students.cs.byu.edu/~knutson/cs404&quot;&gt;CS 404&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;There&amp;rsquo;s another reason schools kill creativity in my opinion: by killing intrinsic motivation. The worst culprit is literature class. I did honors/AP all through high school, and haven&amp;rsquo;t read a classic since (except Ender&amp;rsquo;s Game, which is a rather new classic). Who wants to read anything when it&amp;rsquo;s just required reading to make the grade? Kids should learn to enjoy good works of mankind because they are enriching, instead of just developing an aversion to requirements of &amp;ldquo;the system&amp;rdquo;. &lt;a href=&quot;https://en.wikipedia.org/wiki/Sudbury_school&quot;&gt;Sudbury Schools&lt;/a&gt; look nice. No classes!&lt;/p&gt;
-</description>
-        <pubDate>Fri, 08 Aug 2014 15:12:22 +0200</pubDate>
-        <link>http://garfieldnate.github.io/blog/2014/08/08/schools-kill-creativity/</link>
-        <guid isPermaLink="true">http://garfieldnate.github.io/blog/2014/08/08/schools-kill-creativity/</guid>
-        
-        
-        <category>education</category>
-        
-        <category>creativity</category>
-        
-        <category>CS 404</category>
         
       </item>
     
