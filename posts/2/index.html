@@ -116,8 +116,6 @@
 
 
 
-  
-
 
 <time datetime="2014-07-27T12:51:53+02:00" pubdate data-updated="true"></time>
         
@@ -179,8 +177,6 @@
 
 
 
-  
-
 
 <time datetime="2014-07-15T05:35:28+02:00" pubdate data-updated="true"></time>
         
@@ -224,8 +220,6 @@
 
 
 
-  
-
 
 <time datetime="2014-07-14T08:42:07+02:00" pubdate data-updated="true"></time>
         
@@ -252,52 +246,29 @@ Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo.bat
 
 <p>Hmm, cleo.bat. That&rsquo;s not in the <a href="https://metacpan.org/source/THALJEF/App-Cleo-0.004/bin">distribution</a>! Let&rsquo;s take a look:</p>
 
-<figure class='code'><figcaption><span>Cleo.bat linenos:false</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='bat'><span class='line'><span class="p">@</span>rem <span class="o">=</span> &#39;--*-Perl-*--
-</span><span class='line'><span class="p">@</span><span class="k">echo</span> <span class="k">off</span>
-</span><span class='line'><span class="k">if</span> <span class="s2">&quot;%OS%&quot;</span> <span class="o">==</span> <span class="s2">&quot;Windows_NT&quot;</span> <span class="k">goto</span> <span class="nl">WinNT</span>
-</span><span class='line'><span class="k">IF</span> <span class="k">EXIST</span> <span class="s2">&quot;%~dp0perl.exe&quot;</span> (
-</span><span class='line'><span class="s2">&quot;%~dp0perl.exe&quot;</span> -x -S <span class="s2">&quot;%0&quot;</span> <span class="nv">%1</span> <span class="nv">%2</span> <span class="nv">%3</span> <span class="nv">%4</span> <span class="nv">%5</span> <span class="nv">%6</span> <span class="nv">%7</span> <span class="nv">%8</span> <span class="nv">%9</span>
-</span><span class='line'>) <span class="k">ELSE</span> <span class="k">IF</span> <span class="k">EXIST</span> <span class="s2">&quot;%~dp0..\..\bin\perl.exe&quot;</span> (
-</span><span class='line'><span class="s2">&quot;%~dp0..\..\bin\perl.exe&quot;</span> -x -S <span class="s2">&quot;%0&quot;</span> <span class="nv">%1</span> <span class="nv">%2</span> <span class="nv">%3</span> <span class="nv">%4</span> <span class="nv">%5</span> <span class="nv">%6</span> <span class="nv">%7</span> <span class="nv">%8</span> <span class="nv">%9</span>
-</span><span class='line'>) <span class="k">ELSE</span> (
-</span><span class='line'>perl -x -S <span class="s2">&quot;%0&quot;</span> <span class="nv">%1</span> <span class="nv">%2</span> <span class="nv">%3</span> <span class="nv">%4</span> <span class="nv">%5</span> <span class="nv">%6</span> <span class="nv">%7</span> <span class="nv">%8</span> <span class="nv">%9</span>
-</span><span class='line'>)
-</span><span class='line'>
-</span><span class='line'>...
-</span><span class='line'>
-</span><span class='line'>#!<span class="n">/usr/bin/env</span> perl
-</span><span class='line'>#line <span class="m">29</span>
-</span><span class='line'>
-</span><span class='line'>use strict;
-</span><span class='line'>use warnings;
-</span><span class='line'>use App<span class="c">::Cleo;</span>
-</span><span class='line'>
-</span><span class='line'>our $VERSION <span class="o">=</span> <span class="m">0</span>.<span class="m">003</span>;
-</span><span class='line'>...
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="bat Cleo.bat linenos:false">@rem = '--*-Perl-*--
+@echo off
+if "%OS%" == "Windows_NT" goto WinNT
+IF EXIST "%~dp0perl.exe" (
+"%~dp0perl.exe" -x -S "%0" %1 %2 %3 %4 %5 %6 %7 %8 %9
+) ELSE IF EXIST "%~dp0..\..\bin\perl.exe" (
+"%~dp0..\..\bin\perl.exe" -x -S "%0" %1 %2 %3 %4 %5 %6 %7 %8 %9
+) ELSE (
+perl -x -S "%0" %1 %2 %3 %4 %5 %6 %7 %8 %9
+)
 
+...
+
+#!/usr/bin/env perl
+#line 29
+
+use strict;
+use warnings;
+use App::Cleo;
+
+our $VERSION = 0.003;
+...
+</code></pre>
 
 <p>It seems to be a batch script with the entirety of cleo.pl pasted in the bottom. How does that work? Well first there&rsquo;s a little bit of logic to differentiate requirements on Windows NT versus other Windows systems, and some logic to deal with Perl being located in different places (relative to <code>%~dp0</code>, the directory containing the script). <code>%0</code> is the name of the script being run, and Perl is being invoked on it with different arguments. The other %number arguments are the script arguments, which are passed along to the script once again. So this is a batch script that passes itself to Perl? But what&rsquo;s Perl going to do with all of the batch garbage that comes before the actual Perl script?</p>
 
@@ -336,8 +307,6 @@ Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo.bat
 
 
 
-  
-
 
 <time datetime="2014-07-12T22:04:54+02:00" pubdate data-updated="true"></time>
         
@@ -363,24 +332,15 @@ Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo.bat
 
 <p>OK, so I guess background knowledge would be useful for the readers. <a href="http://sitemaker.umich.edu/soar/home">Soar</a> is a  cognitive architecture used for creating agents. Cognitive meaning it provides the basic faculties required for gaining and using knowledge, and agents meaning programs that make choices to accomplish a goal of some kind. Soar has its own programming language, and instead of the familiar loops and functions it has productions. Soar code looks something like this:</p>
 
-<figure class='code'><figcaption><span>Example Soar code</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nv">watch</span> <span class="mi">5</span>
-</span><span class='line'><span class="nb">source</span> somefile.txt
-</span><span class='line'><span class="nv">sp</span> <span class="k">{</span><span class="nv">some</span><span class="o">*</span>production
-</span><span class='line'>    <span class="k">(</span><span class="nv">state</span> <span class="o">&lt;</span>s<span class="o">&gt;</span> <span class="o">^</span>foo <span class="o">|</span>want greeting<span class="o">|</span><span class="k">)</span>
-</span><span class='line'><span class="nv">--</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="k">(</span><span class="o">&lt;</span><span class="nv">s</span><span class="o">&gt;</span> <span class="o">^</span>operator <span class="o">&lt;</span>o<span class="o">&gt;</span><span class="k">)</span>
-</span><span class='line'>    <span class="k">(</span><span class="o">&lt;</span><span class="nv">o</span><span class="o">&gt;</span> <span class="o">^</span>name hello-world <span class="o">^</span>greeting <span class="o">|</span>hello world<span class="o">|</span><span class="k">)</span>
-</span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="tcl Example Soar code">watch 5
+source somefile.txt
+sp {some*production
+    (state &lt;s&gt; ^foo |want greeting|)
+--&gt;
+    (&lt;s&gt; ^operator &lt;o&gt;)
+    (&lt;o&gt; ^name hello-world ^greeting |hello world|)
+}
+</code></pre>
 
 <p>The first two lines are commands; the first makes the command line interface much more verbose and the second loads another Soar file. The <code>sp {...}</code> is a Soar production, which is where the bulk of the language features are. Productions do all the work (thus soar is called a <a href="https://en.wikipedia.org/wiki/Production_system">production system</a>). Productions match the program state (<a href="https://en.wikipedia.org/wiki/Working_memory">working memory</a>) and make changes to it if the match is successful. The production above matches a state that has a <code>foo</code> attribute with a value of <code>want greeting</code>, and if that succeeds then it creates a special <code>operator</code> attribute which in turn has two more attributes. Working memory is organized like a network of attributes and values, and Soar cycles over the productions, changing memory and working towards a goal. This is accomplished efficiently through the <a href="https://en.wikipedia.org/wiki/Rete_algorithm">RETE</a> algorithm, which I&rsquo;d like to study another time.</p>
 
@@ -400,64 +360,38 @@ Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo.bat
 
 <p>Let&rsquo;s start by looking at what happens when you source a file. The code for the source command is in <code>Core/CLI/src/cli_source.cpp</code>. <code>DoSource</code> of line 80 is called, and after loading the input file into memory and doing some error checking and logging it calls <code>Source</code> of line 212. Only the first 4 lines matter for understanding the parser:</p>
 
-<figure class='code'><figcaption><span>The source command parses the input file</span><a href='https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_source.cpp'>cli_source.cpp start:212</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="kt">bool</span> <span class="n">CommandLineInterface</span><span class="o">::</span><span class="n">Source</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">buffer</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">printFileStack</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="n">soar</span><span class="o">::</span><span class="n">tokenizer</span> <span class="n">tokenizer</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">tokenizer</span><span class="p">.</span><span class="n">set_handler</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_Parser</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">tokenizer</span><span class="p">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">buffer</span><span class="p">))</span>
-</span><span class='line'>        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="c++ The source command parses the input file https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_source.cpp cli_source.cpp start:212">bool CommandLineInterface::Source(const char* buffer, bool printFileStack)
+{
+    soar::tokenizer tokenizer;
+    tokenizer.set_handler(&amp;m_Parser);
+    if (tokenizer.evaluate(buffer))
+        return true;
+</code></pre>
 
 <p>It creates a new <code>tokenizer</code> and sets its handler to <code>m_parser</code>, the main CLI parser available from <code>cli_commandLineInterface.h</code>. The parser can be passed to <code>set_handler</code> because it implements <code>tokenizer_callback</code> (declared in <code>tokenizer.h</code>) by having the <code>handle_command</code> method:</p>
 
-<figure class='code'><figcaption><span>signature for the handle_command method</span><a href='https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/shared/tokenizer.h'>tokenizer.h start:43</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'>    <span class="cm">/**</span>
-</span><span class='line'><span class="cm">     * Implement to handle commands. The words of the command are in the</span>
-</span><span class='line'><span class="cm">     * passed argv vector. The first entry in the vector is the command.</span>
-</span><span class='line'><span class="cm">     * The vector is guaranteed to never be empty, though the first command</span>
-</span><span class='line'><span class="cm">     * could be.</span>
-</span><span class='line'><span class="cm">     * @return true if the command was ok, or false if there is an error.</span>
-</span><span class='line'><span class="cm">     *         Returning false will stop parsing and cause</span>
-</span><span class='line'><span class="cm">     *         tokenizer::evaluate to return false.</span>
-</span><span class='line'><span class="cm">     */</span>
-</span><span class='line'>    <span class="k">virtual</span> <span class="kt">bool</span> <span class="n">handle_command</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">argv</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="c++ signature for the handle_command method https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/shared/tokenizer.h tokenizer.h start:43">        /**
+         * Implement to handle commands. The words of the command are in the
+         * passed argv vector. The first entry in the vector is the command.
+         * The vector is guaranteed to never be empty, though the first command
+         * could be.
+         * @return true if the command was ok, or false if there is an error.
+         *         Returning false will stop parsing and cause
+         *         tokenizer::evaluate to return false.
+         */
+        virtual bool handle_command(std::vector&lt;std::string&gt;&amp; argv) = 0;
+</code></pre>
 
 <p>Next, <code>tokenizer.h</code> tells me why I got it wrong when I tried to make my own Soar parser:</p>
 
-<figure class='code'><figcaption><span>tokenizer.h contains a Tcl parser!</span><a href='https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/shared/tokenizer.h'>tokenizer.h  start:186</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'> <span class="o">/**</span>
-</span><span class='line'>     <span class="o">*</span> <span class="n">Essentially</span> <span class="n">implements</span> <span class="n">a</span> <span class="n">simple</span> <span class="n">Tcl</span> <span class="n">parser</span><span class="p">,</span> <span class="n">with</span> <span class="n">some</span> <span class="n">exceptions</span><span class="p">.</span>
-</span><span class='line'>     <span class="o">*</span>
-</span><span class='line'>     <span class="o">*</span> <span class="n">Takes</span> <span class="n">a</span> <span class="n">string</span> <span class="n">and</span> <span class="n">farily</span> <span class="n">efficiently</span> <span class="n">converts</span> <span class="n">it</span> <span class="n">in</span> <span class="n">to</span> <span class="n">a</span> <span class="n">series</span> <span class="n">of</span>
-</span><span class='line'>     <span class="o">*</span> <span class="n">callbacks</span> <span class="n">with</span> <span class="n">arguments</span> <span class="n">separated</span> <span class="n">in</span> <span class="n">to</span> <span class="n">a</span> <span class="n">vector</span> <span class="n">of</span> <span class="n">strings</span> <span class="p">(</span><span class="n">what</span> <span class="n">Tcl</span>
-</span><span class='line'>     <span class="o">*</span> <span class="n">refers</span> <span class="n">to</span> <span class="n">as</span> <span class="s">&quot;words&quot;</span><span class="p">).</span>
-</span><span class='line'>     <span class="o">*</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="c++ tokenizer.h contains a Tcl parser! https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/shared/tokenizer.h tokenizer.h  start:186"> /**
+     * Essentially implements a simple Tcl parser, with some exceptions.
+     *
+     * Takes a string and farily efficiently converts it in to a series of
+     * callbacks with arguments separated in to a vector of strings (what Tcl
+     * refers to as "words").
+     *
+</code></pre>
 
 <p>So I&rsquo;ve had it backwards, building a Soar production parser and then as an afterthought adding methods to parse other commands. This &ldquo;tokenizer&rdquo; parses Tcl commands and enforces rules on the individual words. For instance, this checks that curly braces match within words, and follows rules of escaping and quoting inside of and outside of quoted and curly-braced sections. This would certainly make some parts of a production parser simpler!</p>
 
@@ -474,163 +408,93 @@ Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo.bat
 
 <p>How is the list of commands populated in the first place? Using the parser&rsquo;s <code>AddCommand</code> method. All of the normal Soar commands are added at runtime in <code>cli_CommandLineInterface.cpp</code>, and there are some other examples of <code>AddCommand</code> in the test code.</p>
 
-<figure class='code'><figcaption><span>The command line interface registers all of the Soar functions</span><a href='https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_CommandLineInterface.cpp'>start:40</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="n">m_Parser</span><span class="p">.</span><span class="n">AddCommand</span><span class="p">(</span><span class="k">new</span> <span class="n">cli</span><span class="o">::</span><span class="n">AddWMECommand</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">));</span>
-</span><span class='line'><span class="n">m_Parser</span><span class="p">.</span><span class="n">AddCommand</span><span class="p">(</span><span class="k">new</span> <span class="n">cli</span><span class="o">::</span><span class="n">AliasCommand</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">));</span>
-</span><span class='line'><span class="n">m_Parser</span><span class="p">.</span><span class="n">AddCommand</span><span class="p">(</span><span class="k">new</span> <span class="n">cli</span><span class="o">::</span><span class="n">AllocateCommand</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">));</span>
-</span><span class='line'><span class="n">m_Parser</span><span class="p">.</span><span class="n">AddCommand</span><span class="p">(</span><span class="k">new</span> <span class="n">cli</span><span class="o">::</span><span class="n">BreakCommand</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">));</span>
-</span><span class='line'><span class="n">m_Parser</span><span class="p">.</span><span class="n">AddCommand</span><span class="p">(</span><span class="k">new</span> <span class="n">cli</span><span class="o">::</span><span class="n">CaptureInputCommand</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">));</span>
-</span><span class='line'><span class="p">...</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="c++ The command line interface registers all of the Soar functions https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_CommandLineInterface.cpp start:40">    m_Parser.AddCommand(new cli::AddWMECommand(*this));
+    m_Parser.AddCommand(new cli::AliasCommand(*this));
+    m_Parser.AddCommand(new cli::AllocateCommand(*this));
+    m_Parser.AddCommand(new cli::BreakCommand(*this));
+    m_Parser.AddCommand(new cli::CaptureInputCommand(*this));
+    ...
+</code></pre>
 
 <p>The commands themselves are <code>ParserCommand</code> objects and are all declared in <code>cli_Commands.h</code>. The structure of a command class is given in <code>cli_parser.h</code>:</p>
 
-<figure class='code'><figcaption><span>ParserCommand class declaration</span><a href='https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_Commands.h'>start:15</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="k">class</span> <span class="nc">ParserCommand</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'><span class="k">public</span><span class="o">:</span>
-</span><span class='line'>    <span class="k">virtual</span> <span class="o">~</span><span class="n">ParserCommand</span><span class="p">()</span> <span class="p">{};</span>
-</span><span class='line'>    <span class="k">virtual</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">GetString</span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">virtual</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">GetSyntax</span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">virtual</span> <span class="kt">bool</span> <span class="n">Parse</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">argv</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="c++ ParserCommand class declaration https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_Commands.h start:15">    class ParserCommand
+    {
+    public:
+        virtual ~ParserCommand() {};
+        virtual const char* GetString() const = 0;
+        virtual const char* GetSyntax() const = 0;
+        virtual bool Parse(std::vector&lt;std::string&gt;&amp; argv) = 0;
+    };
+</code></pre>
 
 <p><code>GetString</code> is the name of the command and is used as the first word in the command invocation (<code>watch</code>, <code>sp</code>, etc.). This is used by the prefix lookup code discussed above. <code>GetSyntax</code> gives a usage statement in case the user invokes the command incorrectly. <code>Parse</code> is the meat of the command; it takes the list of command words and performs the action specified by them.</p>
 
 <p>Although the <code>Parse</code> method could directly contain the command actions, all of the <code>Parse</code> implementations simply parse the command and then call <code>DoXYZ</code>. These methods are declared in <code>cli_Cli.h</code> and are implemented in their own files (<code>cli_source.cpp</code>, <code>cli_break.cpp</code>, etc.). Here is the implemention of the <code>sp</code> command as an example:</p>
 
-<figure class='code'><figcaption><span>SPCommand</span><a href='https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_Commands.h'>cli_Commands.h start:3393</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'>   <span class="k">class</span> <span class="nc">SPCommand</span> <span class="o">:</span> <span class="k">public</span> <span class="n">cli</span><span class="o">::</span><span class="n">ParserCommand</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>    <span class="k">public</span><span class="o">:</span>
-</span><span class='line'>        <span class="n">SPCommand</span><span class="p">(</span><span class="n">cli</span><span class="o">::</span><span class="n">Cli</span><span class="o">&amp;</span> <span class="n">cli</span><span class="p">)</span> <span class="o">:</span> <span class="n">cli</span><span class="p">(</span><span class="n">cli</span><span class="p">),</span> <span class="n">ParserCommand</span><span class="p">()</span> <span class="p">{}</span>
-</span><span class='line'>        <span class="k">virtual</span> <span class="o">~</span><span class="n">SPCommand</span><span class="p">()</span> <span class="p">{}</span>
-</span><span class='line'>        <span class="k">virtual</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">GetString</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&quot;sp&quot;</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>        <span class="k">virtual</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">GetSyntax</span><span class="p">()</span> <span class="k">const</span>
-</span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>            <span class="k">return</span>
-</span><span class='line'>                <span class="s">&quot;Syntax: sp {production_body}&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">virtual</span> <span class="kt">bool</span> <span class="n">Parse</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&gt;&amp;</span><span class="n">argv</span><span class="p">)</span>
-</span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>            <span class="c1">// One argument (the stuff in the brackets, minus the brackets</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">argv</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span>
-</span><span class='line'>                <span class="k">return</span> <span class="n">cli</span><span class="p">.</span><span class="n">SetError</span><span class="p">(</span><span class="n">GetSyntax</span><span class="p">());</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">argv</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span>
-</span><span class='line'>                <span class="k">return</span> <span class="n">cli</span><span class="p">.</span><span class="n">SetError</span><span class="p">(</span><span class="n">GetSyntax</span><span class="p">());</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="k">return</span> <span class="n">cli</span><span class="p">.</span><span class="n">DoSP</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">private</span><span class="o">:</span>
-</span><span class='line'>        <span class="n">cli</span><span class="o">::</span><span class="n">Cli</span><span class="o">&amp;</span> <span class="n">cli</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">SPCommand</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">SPCommand</span><span class="o">&amp;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="c++ SPCommand https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_Commands.h cli_Commands.h start:3393">   class SPCommand : public cli::ParserCommand
+    {
+    public:
+        SPCommand(cli::Cli&amp; cli) : cli(cli), ParserCommand() {}
+        virtual ~SPCommand() {}
+        virtual const char* GetString() const { return "sp"; }
+        virtual const char* GetSyntax() const
+        {
+            return
+                "Syntax: sp {production_body}";
+        }
 
+        virtual bool Parse(std::vector&lt; std::string &gt;&amp;argv)
+        {
+            // One argument (the stuff in the brackets, minus the brackets
+            if (argv.size() &lt; 2)
+                return cli.SetError(GetSyntax());
+            if (argv.size() &gt; 2)
+                return cli.SetError(GetSyntax());
+
+            return cli.DoSP(argv[1]);
+        }
+
+    private:
+        cli::Cli&amp; cli;
+
+        SPCommand&amp; operator=(const SPCommand&amp;);
+    };
+</code></pre>
 
 <p>The <code>DoSP</code> command is in <code>cli_sp.cpp</code>. Here, some craziness comes out. We find <code>soarAlternateInput</code>, which has no documentation and relates to fuctionality that is rather unclear. Then we have the use of a global agent provided by the global <code>m_pAgentSML</code> of <code>cli_CommandLineInterface.h</code>.</p>
 
-<figure class='code'><figcaption><span>Parsing a Soar production</span><a href='https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_sp.cpp'>cli_sp.cpp start:42</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'> <span class="n">agent</span><span class="o">*</span> <span class="n">agnt</span> <span class="o">=</span> <span class="n">m_pAgentSML</span><span class="o">-&gt;</span><span class="n">GetSoarAgent</span><span class="p">();</span>
-</span><span class='line'>    <span class="n">soarAlternateInput</span><span class="p">(</span> <span class="n">agnt</span><span class="p">,</span> <span class="n">productionString</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="k">const_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="s">&quot;) &quot;</span><span class="p">),</span> <span class="nb">true</span> <span class="p">);</span>
-</span><span class='line'>    <span class="n">set_lexer_allow_ids</span><span class="p">(</span> <span class="n">agnt</span><span class="p">,</span> <span class="nb">false</span> <span class="p">);</span>
-</span><span class='line'>    <span class="n">get_lexeme</span><span class="p">(</span> <span class="n">agnt</span> <span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">production</span><span class="o">*</span> <span class="n">p</span><span class="p">;</span>
-</span><span class='line'>    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">rete_addition_result</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">p</span> <span class="o">=</span> <span class="n">parse_production</span><span class="p">(</span> <span class="n">agnt</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">rete_addition_result</span> <span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">set_lexer_allow_ids</span><span class="p">(</span> <span class="n">agnt</span><span class="p">,</span> <span class="nb">true</span> <span class="p">);</span>
-</span><span class='line'>    <span class="n">soarAlternateInput</span><span class="p">(</span> <span class="n">agnt</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">true</span> <span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="c++ Parsing a Soar production https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_sp.cpp cli_sp.cpp start:42"> agent* agnt = m_pAgentSML-&gt;GetSoarAgent();
+    soarAlternateInput( agnt, productionString.c_str(), const_cast&lt;char*&gt;(") "), true );
+    set_lexer_allow_ids( agnt, false );
+    get_lexeme( agnt );
 
+    production* p;
+    unsigned char rete_addition_result = 0;
+    p = parse_production( agnt, &amp;rete_addition_result );
+
+    set_lexer_allow_ids( agnt, true );
+    soarAlternateInput( agnt, 0, 0, true );
+</code></pre>
 
 <p>The lexer and parser files in <code>\Core\SoarKernel\src</code> work together to load a production, with the parser repeatedly calling <code>get_lexeme</code> (line 747 of <code>lexer.cpp</code>) to find the next token. After checking for comments and doing some other stuff I don&rsquo;t get yet (<code>fake_rparen_at_eol</code>) it calls a lexing method based on the current character in the buffer using <code>lexer_routines</code> as a dispatch table.</p>
 
-<figure class='code'><figcaption><span>lexer employs a dispatch table</span><a href='https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/SoarKernel/src/lexer.cpp'>lexer.cpp start:840</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'>  <span class="n">record_position_of_start_of_lexeme</span><span class="p">(</span><span class="n">thisAgent</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">thisAgent</span><span class="o">-&gt;</span><span class="n">current_char</span><span class="o">!=</span><span class="n">EOF</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">lexer_routines</span><span class="p">[</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">&gt;</span><span class="p">(</span><span class="n">thisAgent</span><span class="o">-&gt;</span><span class="n">current_char</span><span class="p">)]))(</span><span class="n">thisAgent</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'>    <span class="nf">lex_eof</span><span class="p">(</span><span class="n">thisAgent</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="c++ lexer employs a dispatch table  https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/SoarKernel/src/lexer.cpp lexer.cpp start:840">  record_position_of_start_of_lexeme(thisAgent);
+  if (thisAgent-&gt;current_char!=EOF)
+    (*(lexer_routines[static_cast&lt;unsigned char&gt;(thisAgent-&gt;current_char)]))(thisAgent);
+  else
+    lex_eof(thisAgent);
+</code></pre>
 
 <p>The explicit functionality of the tokenizer and parser are nicely separated, meaning that production tokenizing can be done context-free, or without the parser sharing knowledge with the tokenizer. However, things are actually crazier than that because the lexer is tied intimately with an agent:</p>
 
-<figure class='code'><figcaption><span>Lexer state stored in an agent</span><a href='https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/SoarKernel/src/agent.h'>agent.h start:256</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'>  <span class="cm">/* ----------------------- Lexer stuff -------------------------- */</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">lexer_source_file</span> <span class="o">*</span> <span class="n">current_file</span><span class="p">;</span> <span class="cm">/* file we&#39;re currently reading */</span>
-</span><span class='line'>  <span class="kt">int</span>                 <span class="n">current_char</span><span class="p">;</span> <span class="cm">/* holds current input character */</span>
-</span><span class='line'>  <span class="k">struct</span> <span class="n">lexeme_info</span>  <span class="n">lexeme</span><span class="p">;</span>       <span class="cm">/* holds current lexeme */</span>
-</span><span class='line'>  <span class="n">Bool</span>                <span class="n">print_prompt_flag</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="c++ Lexer state stored in an agent https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/SoarKernel/src/agent.h agent.h start:256">  /* ----------------------- Lexer stuff -------------------------- */
 
+  lexer_source_file * current_file; /* file we're currently reading */
+  int                 current_char; /* holds current input character */
+  struct lexeme_info  lexeme;       /* holds current lexeme */
+  Bool                print_prompt_flag;
+</code></pre>
 
 <p>The <code>get_lexeme</code> method requires an agent as an argument, even though the agent was provided via <code>init_lexer</code>. During tokenization, <code>get_lexeme</code> sets the <code>lexeme</code> and <code>current_char</code> fields in the agent. So even though there&rsquo;s a nice separation of parser and lexer/tokenizer, there is potential there for the parser to change the state of the lexer, the input buffer, etc. It doesn&rsquo;t look like that happens, but it&rsquo;s not a good possibility. You also have to call <code>get_lexeme</code> before calling <code>parse_production</code>, and <code>parse_production</code> adds the input production to the RETE network directly instead of returning a parsed production. There&rsquo;s severe coupling between the lexer, the agent, and the parser. This could probably be remedied easily. Ideally the lexer would need only text and return a stream of tokens with no side effects; the parser would instantiate the lexer and would have access to an agent for the RHS functions.</p>
 
@@ -638,37 +502,23 @@ Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo.bat
 
 <p><code>gp</code> is a command that generates new Soar productions by permuting values inside of square brackets in an otherwise normal-looking production. <code>gp</code> was an added mystery to me because its syntax was almost the same as that for <code>sp</code>, but it allowed syntactic variations deep in the parse tree. Here is an example <code>gp</code> statement:</p>
 
-<figure class='code'><figcaption><span>Example gp</span><a href='https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Tests/Agents/testgp.soar'>testgp.soar</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nv">gp</span> <span class="k">{</span><span class="nv">gp</span><span class="o">*</span>test1
-</span><span class='line'><span class="k">(</span><span class="nv">state</span> <span class="o">&lt;</span>s<span class="o">&gt;</span> <span class="o">^</span>operator <span class="o">&lt;</span>o<span class="o">&gt;</span> <span class="o">+</span>
-</span><span class='line'>           <span class="o">^</span><span class="nv">someflag</span> <span class="k">[</span><span class="nv">true</span> false<span class="k">])</span>   <span class="c"># some normal values</span>
-</span><span class='line'><span class="k">(</span><span class="o">&lt;</span><span class="nv">o</span><span class="o">&gt;</span> <span class="o">^</span>name foo
-</span><span class='line'>     <span class="o">^</span><span class="nv">att</span> <span class="k">[</span><span class="nv">val1</span> <span class="mf">1.3</span> <span class="o">|</span>another val<span class="o">|</span><span class="k">])</span>  <span class="c"># a value with a space, in pipes</span>
-</span><span class='line'><span class="nv">--</span><span class="o">&gt;</span>
-</span><span class='line'><span class="k">(</span><span class="o">&lt;</span><span class="nv">s</span><span class="o">&gt;</span> <span class="o">^</span>operator <span class="o">&lt;</span>o<span class="o">&gt;</span> <span class="err">=</span> <span class="mi">5</span><span class="k">)</span>
-</span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="tcl Example gp https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Tests/Agents/testgp.soar testgp.soar">gp {gp*test1
+(state &lt;s&gt; ^operator &lt;o&gt; +
+           ^someflag [true false])   # some normal values
+(&lt;o&gt; ^name foo
+     ^att [val1 1.3 |another val|])  # a value with a space, in pipes
+--&gt;
+(&lt;s&gt; ^operator &lt;o&gt; = 5)
+}
+</code></pre>
 
 <p>This turned out to be simple once I understood CLI parsing. <code>DoGP</code> is located in <code>/Core/CLI/src/cli_gp.cpp</code>. It simply looks for the special <code>[]</code> syntax in a string and generates new strings to be loaded as productions by <code>DoSP</code>. This is simple and easy, but means that there may not be an easy way to do syntax coloring for it.</p>
 
-<figure class='code'><figcaption><span>DoGP calls DoSP</span><a href='https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_gp.cpp'>cli_gp.cpp start:276</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">DoSP</span><span class="p">(</span><span class="n">generatedProduction</span><span class="p">))</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="c++ DoGP calls DoSP https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_gp.cpp cli_gp.cpp start:276">    if(!DoSP(generatedProduction))
+    {
+        return false;
+    }
+</code></pre>
 
 <h2>Conclusions</h2>
 
@@ -731,8 +581,6 @@ Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo.bat
 
 
 
-
-  
 
 
 <time datetime="2014-07-06T23:46:39+02:00" pubdate data-updated="true"></time>
@@ -806,8 +654,6 @@ Generating... C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/posix-spawn-0.3.8/lib/posi
 
 
 
-  
-
 
 <time datetime="2014-07-05T04:08:46+02:00" pubdate data-updated="true"></time>
         
@@ -860,8 +706,6 @@ Generating... C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/posix-spawn-0.3.8/lib/posi
 
 
 
-
-  
 
 
 <time datetime="2014-07-02T06:00:38+02:00" pubdate data-updated="true"></time>
@@ -986,8 +830,6 @@ echo "Now install KeyTweak by hand"
 
 
 
-  
-
 
 <time datetime="2014-01-11T00:00:00+01:00" pubdate data-updated="true"></time>
         
@@ -1009,71 +851,45 @@ echo "Now install KeyTweak by hand"
 
 <p>The context of an assignment operator will really only matter when you are storing or checking the return value. You can store the value of an assignment operator by using another asignment operator: <code>blah1 = blah2 = blah3</code>, where <code>blah1</code> is the value returned by assigning <code>blah3</code> to <code>blah2</code>. The value gets checked in other contexts too, like inside a control structure condition: <code>if(my $line = &lt;&gt;)</code>, etc. Here are examples for each combination of context and assignment operator:</p>
 
-<figure class='code'><figcaption><span>Example context/assignment combinations</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1"># scalar assignment in scalar context</span>
-</span><span class='line'><span class="nv">$thing</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$foo</span> <span class="o">=</span> <span class="s">&#39;bar&#39;</span><span class="p">);</span> <span class="c1"># assignment returns $foo as lvalue</span>
-</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># bar</span>
-</span><span class='line'><span class="c1"># scalar assignment in list context</span>
-</span><span class='line'><span class="p">(</span><span class="nv">$thing</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$foo</span> <span class="o">=</span> <span class="s">&#39;bar&#39;</span><span class="p">);</span> <span class="c1">#assignment returns ($foo), $foo is lvalue</span>
-</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># bar</span>
-</span><span class='line'><span class="c1"># list assignment in scalar context;</span>
-</span><span class='line'><span class="c1"># assignment returns number of items in RHS of list assignment</span>
-</span><span class='line'><span class="nv">$thing</span> <span class="o">=</span> <span class="p">((</span><span class="nv">$foo</span><span class="p">,</span> <span class="nv">$bar</span><span class="p">)</span> <span class="o">=</span> <span class="sx">qw(foo bar)</span><span class="p">);</span>
-</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># 2</span>
-</span><span class='line'><span class="nv">$thing</span> <span class="o">=</span> <span class="p">(()</span> <span class="o">=</span> <span class="sx">qw(foo bar)</span><span class="p">)</span>
-</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># 2</span>
-</span><span class='line'><span class="nv">$thing</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=</span> <span class="sx">qw(foo bar)</span><span class="p">;</span>
-</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># 2</span>
-</span><span class='line'><span class="c1"># list assignment in list context</span>
-</span><span class='line'><span class="c1"># assignment returns LHS list as lvalues</span>
-</span><span class='line'><span class="p">(</span><span class="nv">$thing</span><span class="p">)</span> <span class="o">=</span> <span class="p">((</span><span class="nv">$foo</span><span class="p">,</span> <span class="nv">$bar</span><span class="p">)</span> <span class="o">=</span> <span class="sx">qw(foo bar)</span><span class="p">);</span>
-</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># foo</span>
-</span><span class='line'><span class="p">(</span><span class="nv">$thing</span><span class="p">)</span> <span class="o">=</span> <span class="p">(()</span> <span class="o">=</span> <span class="sx">qw(foo bar)</span><span class="p">);</span>
-</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># nothing ($thing is undef)</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="perl Example context/assignment combinations"># scalar assignment in scalar context
+$thing = ($foo = 'bar'); # assignment returns $foo as lvalue
+say $thing; # bar
+# scalar assignment in list context
+($thing) = ($foo = 'bar'); #assignment returns ($foo), $foo is lvalue
+say $thing; # bar
+# list assignment in scalar context;
+# assignment returns number of items in RHS of list assignment
+$thing = (($foo, $bar) = qw(foo bar));
+say $thing; # 2
+$thing = (() = qw(foo bar))
+say $thing; # 2
+$thing = () = qw(foo bar);
+say $thing; # 2
+# list assignment in list context
+# assignment returns LHS list as lvalues
+($thing) = (($foo, $bar) = qw(foo bar));
+say $thing; # foo
+($thing) = (() = qw(foo bar));
+say $thing; # nothing ($thing is undef)
+</code></pre>
 
 <p>That third one is of course the goatse operator. By the way for the record I totally think it looks more like a Saturn, though my wife disagrees and everyone seems to call it goatse. Anyway, though generally list assignment in scalar context is the rarest one, there are other occurrences. Ysth mentions the <code>each</code> operator inside of a <code>while</code> loop:</p>
 
-<figure class='code'><figcaption><span>`each` operator in a `while` loop</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">while</span><span class="p">(</span><span class="k">my</span> <span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nv">$value</span><span class="p">)</span> <span class="o">=</span> <span class="nb">each</span> <span class="nv">%hash</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<p><code>perl `each` operator in a `while` loop
+while(my ($key, $value) = each %hash)
+</code></p>
 
 <p>The aggregate on the left makes this list assignment, and <code>while</code> makes it scalar context. Once the hash is out of keys, <code>each</code> returns <code>()</code> so that the assignment operator returns <code>0</code>, finishing the <code>while</code> loop.</p>
 
 <p>I was pretty happy to finally understand this area I never quite understood I didn&rsquo;t understand (though someone might still point out I don&rsquo;t know what I&rsquo;m talking about, as seems to be common with this subject). Today, though, I thought of one more usage of list assignment in scalar context that is probably used erroneously fairly often: quick and dirty parameter checking:</p>
 
-<figure class='code'><figcaption><span>Incorrect quick and dirty parameter checking</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">my</span> <span class="p">(</span><span class="nv">$input</span><span class="p">,</span> <span class="nv">$output</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@ARGV</span> <span class="ow">or</span> <span class="nb">die</span> <span class="s">&#39;Usage: script &lt;input&gt; &lt;output&gt;&#39;</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="perl Incorrect quick and dirty parameter checking">my ($input, $output) = @ARGV or die 'Usage: script &lt;input&gt; &lt;output&gt;';
+</code></pre>
 
 <p>I always thought that the assignment would return $output, probably by analogy with comma expression assignment to a scalar (<code>$stuff = qw(foo bar)</code>). However, if the user fails to provide a second parameter, the error would not be caught. This assignment will return the number of elements in @ARGV, which could be <code>1</code> instead of the required <code>2</code>. So this use is only correct when unpacking <code>@_</code> or <code>@ARGV</code> and expecting exactly one variable:</p>
 
-<figure class='code'><figcaption><span>OK quick and dirty parameter checking</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">my</span> <span class="p">(</span><span class="nv">$input</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@ARGV</span> <span class="ow">or</span> <span class="nb">die</span> <span class="s">&#39;Usage: script &lt;input&gt;&#39;</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="perl OK quick and dirty parameter checking">my ($input) = @ARGV or die 'Usage: script &lt;input&gt;';
+</code></pre>
 
 <p>This is probably obvious to Perl old-timers, but to me it was a revelation. And it doesn&rsquo;t look like I&rsquo;m the only one, either. Grepping CPAN for assignment of an array to a parenthetical with &lsquo;or&rsquo; after it turns up many mis-uses <a href="http://grep.cpan.me/?q=%5C%29%5Cs*%3D%5Cs*%40%5B%5E+%5Cr%5Cn%5D%2B%5Cs%2Bor">here</a>.</p>
 </div>
@@ -1100,8 +916,6 @@ echo "Now install KeyTweak by hand"
 
 
 
-
-  
 
 
 <time datetime="2013-08-27T00:00:00+02:00" pubdate data-updated="true"></time>
@@ -1153,8 +967,6 @@ echo "Now install KeyTweak by hand"
 
 
 
-  
-
 
 <time datetime="2013-04-15T00:00:00+02:00" pubdate data-updated="true"></time>
         
@@ -1181,90 +993,48 @@ echo "Now install KeyTweak by hand"
 
 <p>To really help myself understand the whole thing, I wrote a Perl script to illustrate it. I put in lots of comments as I worked my way through it.</p>
 
-<figure class='code'><figcaption><span>The extended Euclidian algorithm</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="mf">5.010</span><span class="p">;</span>
-</span><span class='line'><span class="c1">#start with a &gt;= b</span>
-</span><span class='line'><span class="k">my</span> <span class="nv">@nums</span> <span class="o">=</span> <span class="nb">sort</span> <span class="p">{</span><span class="nv">$b</span> <span class="sr">&lt;=&gt;</span> <span class="nv">$a</span><span class="p">}</span> <span class="nv">@ARGV</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">gcd</span><span class="p">(</span><span class="nv">@nums</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">#input: two numbers (a,b) a &gt;= b &gt; 0</span>
-</span><span class='line'><span class="c1">#output: the coefficients which which yield their GCD;</span>
-</span><span class='line'><span class="k">sub </span><span class="nf">gcd</span> <span class="p">{</span>
-</span><span class='line'> <span class="k">my</span> <span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="nv">$b</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'> <span class="c1">#base case; the GCD of x and 0 always x;</span>
-</span><span class='line'> <span class="c1">#and the coefficients will always be 1 and 0 (or anything) because</span>
-</span><span class='line'>
-</span><span class='line'> <span class="c1">#1*x + 0*0 = x</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span><span class="p">(</span><span class="nv">$b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
-</span><span class='line'>  <span class="n">say</span> <span class="s">&quot;GCD is $a&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">say</span> <span class="s">&quot;(a,b) = ($a,$b), coefficients = (1,0)&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">say</span> <span class="s">&quot;1x$a + 0x$b = $a&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-</span><span class='line'> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'> <span class="c1">#otherwise, we evaluate u and v for k = ub + vr, where r is a mod b</span>
-</span><span class='line'> <span class="c1">#gcd(b, a%b) gives the same value</span>
-</span><span class='line'> <span class="k">my</span> <span class="nv">$remainder</span> <span class="o">=</span> <span class="nv">$a</span> <span class="nv">%</span> <span class="err">$</span><span class="nv">b</span><span class="p">;</span>
-</span><span class='line'> <span class="k">my</span> <span class="p">(</span><span class="nv">$u</span><span class="p">,</span> <span class="nv">$v</span><span class="p">)</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">(</span><span class="nv">$b</span><span class="p">,</span> <span class="nv">$remainder</span><span class="p">);</span>
-</span><span class='line'> <span class="c1">#now we can find k in terms of a and b because we know r in terms a and b</span>
-</span><span class='line'> <span class="c1">#r = a - bq, where q = the whole part of a/b</span>
-</span><span class='line'> <span class="c1">#k = ub + vr = ub + v(a - bq) = va + b(u-qv)</span>
-</span><span class='line'> <span class="c1">#so the coefficient on a is v, and the coefficient on b is 1-qv</span>
-</span><span class='line'> <span class="k">my</span> <span class="nv">$x</span> <span class="o">=</span> <span class="nv">$v</span><span class="p">;</span>
-</span><span class='line'> <span class="k">my</span> <span class="nv">$q</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="nv">$a</span><span class="o">/</span><span class="nv">$b</span><span class="p">));</span>
-</span><span class='line'> <span class="k">my</span> <span class="nv">$y</span> <span class="o">=</span> <span class="nv">$u</span> <span class="o">-</span> <span class="nv">$q</span><span class="o">*</span><span class="nv">$x</span><span class="p">;</span>
-</span><span class='line'> <span class="n">say</span> <span class="s">&quot;(a,b) = ($a,$b), coefficients are ($x,$y)&quot;</span><span class="p">;</span>
-</span><span class='line'> <span class="n">say</span> <span class="s">&quot;${x}x$a + ${y}x$b = &quot;</span> <span class="o">.</span> <span class="p">(</span><span class="nv">$x</span><span class="o">*</span><span class="nv">$a</span> <span class="o">+</span> <span class="nv">$y</span><span class="o">*</span><span class="nv">$b</span><span class="p">);</span>
-</span><span class='line'> <span class="k">return</span> <span class="p">(</span><span class="nv">$x</span><span class="p">,</span> <span class="nv">$y</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="perl The extended Euclidian algorithm">use strict;
+use strict;
+use warnings;
+use 5.010;
+#start with a &gt;= b
+my @nums = sort {$b &lt;=&gt; $a} @ARGV;
 
+gcd(@nums);
+
+#input: two numbers (a,b) a &gt;= b &gt; 0
+#output: the coefficients which which yield their GCD;
+sub gcd {
+ my ($a, $b) = @_;
+
+ #base case; the GCD of x and 0 always x;
+ #and the coefficients will always be 1 and 0 (or anything) because
+
+ #1*x + 0*0 = x
+
+if($b == 0){
+  say "GCD is $a";
+  say "(a,b) = ($a,$b), coefficients = (1,0)";
+  say "1x$a + 0x$b = $a";
+  return (1, 0);
+ }
+
+ #otherwise, we evaluate u and v for k = ub + vr, where r is a mod b
+ #gcd(b, a%b) gives the same value
+ my $remainder = $a % $b;
+ my ($u, $v) = gcd($b, $remainder);
+ #now we can find k in terms of a and b because we know r in terms a and b
+ #r = a - bq, where q = the whole part of a/b
+ #k = ub + vr = ub + v(a - bq) = va + b(u-qv)
+ #so the coefficient on a is v, and the coefficient on b is 1-qv
+ my $x = $v;
+ my $q = int(($a/$b));
+ my $y = $u - $q*$x;
+ say "(a,b) = ($a,$b), coefficients are ($x,$y)";
+ say "${x}x$a + ${y}x$b = " . ($x*$a + $y*$b);
+ return ($x, $y);
+}
+</code></pre>
 
 <p>Feel free to leave a comment if you think that something could be stated more clearly. I hope it helps anyone else trying to learn how the extended Euclidian algorithm works.</p>
 </div>
@@ -1280,7 +1050,7 @@ echo "Now install KeyTweak by hand"
     
     <a href="/blog/archives">Blog Archives</a>
     
-    <a class="next" href="/index.html">Newer &rarr;</a>
+    <a class="next" href="/">Newer &rarr;</a>
     
   </div>
 </div>
@@ -1332,7 +1102,7 @@ echo "Now install KeyTweak by hand"
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Nate Glenn -
+  Copyright &copy; 2017 - Nate Glenn -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

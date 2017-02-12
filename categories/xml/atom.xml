@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Xml | Garfield Nate]]></title>
+  <title><![CDATA[Category: XML | Garfield Nate]]></title>
   <link href="http://garfieldnate.github.io/categories/xml/atom.xml" rel="self"/>
   <link href="http://garfieldnate.github.io/"/>
-  <updated>2016-12-16T17:48:31+01:00</updated>
+  <updated>2017-02-12T15:04:42+01:00</updated>
   <id>http://garfieldnate.github.io/</id>
   <author>
     <name><![CDATA[Nate Glenn]]></name>

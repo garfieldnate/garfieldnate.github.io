@@ -6,9 +6,9 @@
 </description>
     <link>http://garfieldnate.github.io/</link>
     <atom:link href="http://garfieldnate.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 16 Dec 2016 17:48:31 +0100</pubDate>
-    <lastBuildDate>Fri, 16 Dec 2016 17:48:31 +0100</lastBuildDate>
-    <generator>Jekyll v2.5.3</generator>
+    <pubDate>Sun, 12 Feb 2017 15:04:42 +0100</pubDate>
+    <lastBuildDate>Sun, 12 Feb 2017 15:04:42 +0100</lastBuildDate>
+    <generator>Jekyll v3.1.6</generator>
     
       <item>
         <title>Japan is a Great Place to be</title>
@@ -97,15 +97,15 @@ print &quot;Schedule moon-viewing party for $year/&quot; . $tsukimi-&amp;gt;mont
         
         <category>perl</category>
         
-        <category>japan</category>
+        <category>Japan</category>
         
         <category>holidays</category>
         
         <category>planner</category>
         
-        <category>html</category>
+        <category>HTML</category>
         
-        <category>css</category>
+        <category>CSS</category>
         
         <category>calendars</category>
         
@@ -203,15 +203,15 @@ print &quot;Schedule moon-viewing party for $year/&quot; . $tsukimi-&amp;gt;mont
         <guid isPermaLink="true">http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/</guid>
         
         
-        <category>octopress</category>
+        <category>Octopress</category>
         
-        <category>jekyll</category>
+        <category>Jekyll</category>
         
-        <category>ruby</category>
+        <category>Ruby</category>
         
         <category>gems</category>
         
-        <category>windows</category>
+        <category>Windows</category>
         
       </item>
     
@@ -242,19 +242,19 @@ print &quot;Schedule moon-viewing party for $year/&quot; . $tsukimi-&amp;gt;mont
         <guid isPermaLink="true">http://garfieldnate.github.io/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/</guid>
         
         
-        <category>sublime text</category>
+        <category>Sublime Text</category>
         
         <category>packages</category>
         
-        <category>tmlanguage</category>
+        <category>tmLanguage</category>
         
         <category>syntax highlighting</category>
         
-        <category>bnf</category>
+        <category>BNF</category>
         
         <category>grammar</category>
         
-        <category>soar</category>
+        <category>Soar</category>
         
       </item>
     
@@ -297,9 +297,9 @@ print &quot;Schedule moon-viewing party for $year/&quot; . $tsukimi-&amp;gt;mont
         
         <category>visualization</category>
         
-        <category>javascript</category>
+        <category>JavaScript</category>
         
-        <category>algomation</category>
+        <category>Algomation</category>
         
         <category>education</category>
         
@@ -324,9 +324,9 @@ print &quot;Schedule moon-viewing party for $year/&quot; . $tsukimi-&amp;gt;mont
         <guid isPermaLink="true">http://garfieldnate.github.io/blog/2014/11/09/the-oh-so-exotic-grocery-list/</guid>
         
         
-        <category>japan</category>
+        <category>Japan</category>
         
-        <category>kasaoka</category>
+        <category>Kasaoka</category>
         
         <category>children</category>
         
@@ -403,25 +403,25 @@ print &quot;Schedule moon-viewing party for $year/&quot; . $tsukimi-&amp;gt;mont
         
         <category>life</category>
         
-        <category>japan</category>
+        <category>Japan</category>
         
         <category>travel</category>
         
-        <category>kasaoka</category>
+        <category>Kasaoka</category>
         
-        <category>okayama</category>
+        <category>Okayama</category>
         
         <category>festival</category>
         
-        <category>yotchare</category>
+        <category>Yotchare</category>
         
         <category>dance</category>
         
-        <category>asakuchi</category>
+        <category>Asakuchi</category>
         
-        <category>yorishima park</category>
+        <category>Yorishima park</category>
         
-        <category>ooshima</category>
+        <category>Ooshima</category>
         
         <category>beach</category>
         
@@ -469,11 +469,11 @@ pdftex tex.tex
         <guid isPermaLink="true">http://garfieldnate.github.io/blog/2014/08/13/2-knuth-classics-are-freely-available/</guid>
         
         
-        <category>tex</category>
+        <category>TeX</category>
         
-        <category>metafont</category>
+        <category>Metafont</category>
         
-        <category>donald knuth</category>
+        <category>Donald Knuth</category>
         
         <category>classic</category>
         
@@ -500,7 +500,7 @@ pdftex tex.tex
         <guid isPermaLink="true">http://garfieldnate.github.io/blog/2014/08/10/five-things-we-need-to-know-about-technological-change/</guid>
         
         
-        <category>cs 404</category>
+        <category>CS 404</category>
         
         <category>technology</category>
         
@@ -529,7 +529,7 @@ pdftex tex.tex
         
         <category>creativity</category>
         
-        <category>cs 404</category>
+        <category>CS 404</category>
         
       </item>
     

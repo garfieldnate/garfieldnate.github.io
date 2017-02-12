@@ -4,12 +4,20 @@ Uses Octopress 3. See docs here:
 
 https://github.com/octopress/octopress
 
-To run an Octopress command, do:
+##Setup
 
-    set %MENTOS_TIMEOUT%=1000
-    bundle exec octopress ...
+* Install Ruby
+* Install [Bundler](http://bundler.io/)
+* run `bundler` in the project directory
 
-To generate and deploy:
+##Running Octopress/Jekyl Commands
 
-    bundle exec jekyll build (--watch doesn't work right now)
+Octopress commands are listed [here](https://github.com/octopress/octopress) and Jekyll commands are listed [here](https://jekyllrb.com/docs/usage/). Run the commands with `bundle` like so:
+
+    bundle exec octopress [command]
+    bundle exec jekyll [command]
+
+##Deploying:
+
+    bundle exec jekyll build
     bundle exec octopress deploy

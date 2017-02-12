@@ -113,8 +113,6 @@
 
 
 
-  
-
 
 <time datetime="2013-01-27T00:00:00+01:00" pubdate data-updated="true"></time>
         
@@ -130,109 +128,60 @@
 
 <p>One nice feature of Perl, introduced long before my time, is that of implicit closing. Perl closes filehandles for you when you forget (maybe on purpose). So the following is not a resource leak as a standalone script:</p>
 
-<figure class='code'><figcaption><span>Implicit close example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">open</span> <span class="k">my</span> <span class="nv">$file</span><span class="p">,</span> <span class="s">&#39;&gt;utf8&#39;</span><span class="p">,</span> <span class="s">&#39;/path/to/new/file&#39;</span>
-</span><span class='line'>    <span class="ow">or</span> <span class="nb">die</span> <span class="s">&quot;couldn&#39;t open file: $!&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="k">print</span> <span class="nv">$file</span> <span class="s">&#39;Hello!&#39;</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="perl Implicit close example">    open my $file, '&gt;utf8', '/path/to/new/file'
+        or die "couldn't open file: $!";
+    print $file 'Hello!';
+</code></pre>
 
 <p>When the script finishes, Perl will close $file for you, so you can be nice and lazy. The caveat to this is that the variable <code>$.</code> isn&rsquo;t reset as it would be with a normal close (<a href="http://perldoc.perl.org/functions/close.html">see docs here</a>). <a href="http://www.perlmonks.org/?node_id=353259"><code>$.</code></a> holds the current line number from the last file read. So if you were processing a file line-by-line and found an error, you might print an error like <code>bad value foo on line XYZ</code> using the <code>$.</code> variable for <code>XYZ</code>. I raised a question about this on <a href="http://stackoverflow.com/questions/14513477/perl-implicit-close-resets#comment20233976_14513477">StackOverflow</a>.</p>
 
 <p>Today I found another case where not explicitly closing a filehandle means trouble. I was working on testing a <a href="https://github.com/briandfoy/modulino-demo/blob/master/lib/Modulino/Demo.pm">modulino</a>-style script with flexible outputs. You can call a method to set the handle that this script prints to. In my test script, I was setting the handle to be some filehandle and then checking the contents of the file against a string. The problem? The file was always empty at run time, but contained what I expected it to when I manually inspected it. Here&rsquo;s some example broken code:</p>
 
-<figure class='code'><figcaption><span>Suffering from buffering with implicit close</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1">#ImplicitClose.pm</span>
-</span><span class='line'><span class="nb">package</span> <span class="nn">Demo::Bad::</span><span class="n">ImplicitClose</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</span><span class='line'><span class="k">sub </span><span class="nf">new</span> <span class="p">{</span>
-</span><span class='line'> <span class="k">my</span> <span class="p">(</span><span class="nv">$class</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
-</span><span class='line'> <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="p">{};</span>
-</span><span class='line'> <span class="nb">bless</span> <span class="nv">$self</span><span class="p">,</span> <span class="nv">$class</span><span class="p">;</span>
-</span><span class='line'> <span class="k">return</span> <span class="nv">$self</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">sub </span><span class="nf">output_fh</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">my</span> <span class="p">(</span> <span class="nv">$self</span><span class="p">,</span> <span class="nv">$fh</span> <span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nv">$fh</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span> <span class="nb">ref</span><span class="p">(</span><span class="nv">$fh</span><span class="p">)</span> <span class="ow">eq</span> <span class="s">&#39;GLOB&#39;</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nv">$self</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">output_fh</span><span class="p">}</span> <span class="o">=</span> <span class="nv">$fh</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>        <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nb">open</span> <span class="k">my</span> <span class="nv">$fh2</span><span class="p">,</span> <span class="s">&#39;&gt;&#39;</span><span class="p">,</span> <span class="nv">$fh</span> <span class="ow">or</span> <span class="nb">die</span> <span class="s">&quot;Couldn&#39;t open $fh&quot;</span><span class="p">;</span>
-</span><span class='line'>            <span class="nv">$self</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">output_fh</span><span class="p">}</span> <span class="o">=</span> <span class="nv">$fh2</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="nv">$self</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">output_fh</span><span class="p">};</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">sub </span><span class="nf">some_long_method</span> <span class="p">{</span>
-</span><span class='line'> <span class="k">my</span> <span class="p">(</span><span class="nv">$self</span><span class="p">,</span> <span class="nv">$text</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
-</span><span class='line'> <span class="k">print</span> <span class="p">{</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">output_fh</span><span class="p">}</span> <span class="p">}</span> <span class="nv">$text</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="mi">1</span><span class="p">;</span>
-</span><span class='line'><span class="c1">#test.pl</span>
-</span><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">autodie</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Test::</span><span class="n">More</span> <span class="n">tests</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">File::</span><span class="n">Slurp</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Demo::Bad::</span><span class="n">ImplicitClose</span><span class="p">;</span>
-</span><span class='line'><span class="k">my</span> <span class="nv">$file_name</span> <span class="o">=</span> <span class="s">&#39;file1.txt&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="c1">#make sure we pass the test from outputting something *this* run</span>
-</span><span class='line'><span class="nb">unlink</span> <span class="nv">$file_name</span> <span class="k">if</span> <span class="o">-</span><span class="n">e</span> <span class="nv">$file_name</span><span class="p">;</span>
-</span><span class='line'><span class="k">my</span> <span class="nv">$print</span> <span class="o">=</span> <span class="s">&#39;some junk&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="k">my</span> <span class="nv">$demo</span> <span class="o">=</span> <span class="nn">Demo::Bad::</span><span class="n">ImplicitClose</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">();</span>
-</span><span class='line'><span class="nv">$demo</span><span class="o">-&gt;</span><span class="n">output_fh</span><span class="p">(</span><span class="nv">$file_name</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$demo</span><span class="o">-&gt;</span><span class="n">some_long_method</span><span class="p">(</span><span class="nv">$print</span><span class="p">);</span>
-</span><span class='line'><span class="k">my</span> <span class="nv">$contents</span> <span class="o">=</span> <span class="n">read_file</span><span class="p">(</span><span class="nv">$file_name</span><span class="p">);</span>
-</span><span class='line'><span class="n">is</span><span class="p">(</span><span class="nv">$contents</span><span class="p">,</span> <span class="nv">$print</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="perl Suffering from buffering with implicit close">#ImplicitClose.pm
+package Demo::Bad::ImplicitClose;
+use strict;
+use warnings;
+sub new {
+ my ($class) = @_;
+ my $self = {};
+ bless $self, $class;
+ return $self;
+}
+sub output_fh {
+    my ( $self, $fh ) = @_;
+    if ($fh) {
+        if ( ref($fh) eq 'GLOB' ) {
+            $self-&gt;{output_fh} = $fh;
+        }
+        else {
+            open my $fh2, '&gt;', $fh or die "Couldn't open $fh";
+            $self-&gt;{output_fh} = $fh2;
+        }
+    }
+    $self-&gt;{output_fh};
+}
+sub some_long_method {
+ my ($self, $text) = @_;
+ print { $self-&gt;{output_fh} } $text;
+}
+1;
+#test.pl
+use strict;
+use warnings;
+use autodie;
+use Test::More tests =&gt; 1;
+use File::Slurp;
+use Demo::Bad::ImplicitClose;
+my $file_name = 'file1.txt';
+#make sure we pass the test from outputting something *this* run
+unlink $file_name if -e $file_name;
+my $print = 'some junk';
+my $demo = Demo::Bad::ImplicitClose-&gt;new();
+$demo-&gt;output_fh($file_name);
+$demo-&gt;some_long_method($print);
+my $contents = read_file($file_name);
+is($contents, $print);
+</code></pre>
 
 <p>If you run <code>test.pl</code>, you&rsquo;ll see that its one and only test fails:</p>
 
@@ -259,8 +208,6 @@ not ok 1
   <footer>
     <p class="meta">
       
-  
-
 <span class="byline author vcard">Posted by <span class="fn">Nate Glenn</span></span>
 
       
@@ -272,15 +219,13 @@ not ok 1
 
 
 
-  
-
 
 <time datetime="2013-01-27T00:00:00+01:00" pubdate data-updated="true"></time>
       
 
 <span class="categories">
   
-    <a class='category' href='//buffering/'>buffering</a>, <a class='category' href='//filehandles/'>filehandles</a>, <a class='category' href='//perl/'>perl</a>, <a class='category' href='//software/'>software</a>, <a class='category' href='//special-variables/'>special variables</a>
+    <a class='category' href='//perl/'>Perl</a>, <a class='category' href='//buffering/'>buffering</a>, <a class='category' href='//filehandles/'>filehandles</a>, <a class='category' href='//software/'>software</a>, <a class='category' href='//special-variables/'>special variables</a>
   
 </span>
 
@@ -368,7 +313,7 @@ not ok 1
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Nate Glenn -
+  Copyright &copy; 2017 - Nate Glenn -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

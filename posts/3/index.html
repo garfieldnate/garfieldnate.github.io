@@ -116,8 +116,6 @@
 
 
 
-  
-
 
 <time datetime="2013-04-07T00:00:00+02:00" pubdate data-updated="true"></time>
         
@@ -135,97 +133,58 @@
 
 <p>Next, I wanted to be able to run my Perl scripts. Sublime has the <kbd>ctrl+b</kbd> shortcut for running a build for the current file. What the build actually does is specified in either a build file or the project file. To create a new build file for perl, go to Tools->Build System -> New Build System. The build file I&rsquo;ve seen on different sites for Perl looks like this:</p>
 
-<figure class='code'><figcaption><span>Usual build file for Perl</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="nt">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;perl&quot;</span><span class="p">,</span> <span class="s2">&quot;$file&quot;</span><span class="p">],</span>
-</span><span class='line'>    <span class="nt">&quot;file_regex&quot;</span><span class="p">:</span> <span class="s2">&quot;.* at (.*) line ([0-9]*)&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;selector&quot;</span><span class="p">:</span> <span class="s2">&quot;source.perl&quot;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="json Usual build file for Perl">{
+    "cmd": ["perl", "$file"],
+    "file_regex": ".* at (.*) line ([0-9]*)",
+    "selector": "source.perl"
+}
+</code></pre>
 
 <p>Save this as perl.sublime-build. With this, whenever you are working on a Perl file and hit <kbd>ctrl+b</kbd>, the command &ldquo;perl -w your_file.pl&rdquo; will be run. This, however, was not good enough for me. Most of the time I am working on tests for a Perl module, so I have to run <code>perl -Ilib t/my_test_file.t</code>. I also want to be able to run individual tests as well as <a href="https://metacpan.org/module/OVID/Test-Harness-3.26/bin/prove"><code>prove</code></a> using shortcuts.</p>
 
 <p>To do this, we need to turn the module directory into a Sublime Text project. This is pretty simple. First, open the module directory in Sublime Text. Select Project->Save Project As, then choose the name of the project and save it in the top directory of the module. Paste the following simple contents into the project file:</p>
 
-<figure class='code'><figcaption><span>Perl project file</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
-</span><span class='line'> <span class="nt">&quot;folders&quot;</span><span class="p">:</span>
-</span><span class='line'> <span class="p">[</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>   <span class="nt">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;.&quot;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'> <span class="p">]</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="json Perl project file">{
+ "folders":
+ [
+  {
+   "path": "."
+  }
+ ]
+}
+</code></pre>
 
 <p>All this does is add the entire directory to the project. Next, we edit the Perl build file to reference the root of the project so we can add the top-level lib directory to our include path:</p>
 
-<figure class='code'><figcaption><span>Perl project build file</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="p">{</span>
-</span><span class='line'> <span class="s">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;perl&quot;</span><span class="p">,</span> <span class="s">&quot;-Ilib&quot;</span><span class="p">,</span> <span class="s">&quot;$file&quot;</span><span class="p">],</span>
-</span><span class='line'> <span class="s">&quot;working_dir&quot;</span><span class="p">:</span> <span class="s">&quot;$project_path&quot;</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&quot;file_regex&quot;</span><span class="p">:</span> <span class="s">&quot;.* at (.) line ([0-9])&quot;</span><span class="p">,</span>
-</span><span class='line'> <span class="s">&quot;selector&quot;</span><span class="p">:</span> <span class="s">&quot;source.perl&quot;</span><span class="p">,</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="perl Perl project build file">{
+ "cmd": ["perl", "-Ilib", "$file"],
+ "working_dir": "$project_path",
+ "file_regex": ".* at (.) line ([0-9])",
+ "selector": "source.perl",
+}
+</code></pre>
 
 <p>Great! Now we can run Perl on tests contained in module directories. This still works fine for standalone scripts, too.</p>
 
 <p>Now I&rsquo;d like to run my whole test suite using prove. By default, <kbd>ctrl+shift+b</kbd> runs a build variant with the name &ldquo;Run&rdquo;, so we&rsquo;ll just make a <code>prove</code> variant with that name. I&rsquo;d much rather give it a more descriptive name, but the Sublime shortcut requires this name. You can change the shortcut, but then you wouldn&rsquo;t be able to use the shortcut for other builds (other languages). It&rsquo;s all up to you. Here is the final build file:</p>
 
-<figure class='code'><figcaption><span>Perl project build file with variants</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
-</span><span class='line'> <span class="nt">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;perl&quot;</span><span class="p">,</span> <span class="s2">&quot;-Ilib&quot;</span><span class="p">,</span> <span class="s2">&quot;$file&quot;</span><span class="p">],</span>
-</span><span class='line'> <span class="nt">&quot;working_dir&quot;</span><span class="p">:</span> <span class="s2">&quot;$project_path&quot;</span><span class="p">,</span>
-</span><span class='line'> <span class="nt">&quot;file_regex&quot;</span><span class="p">:</span> <span class="s2">&quot;.* at (.) line ([0-9])&quot;</span><span class="p">,</span>
-</span><span class='line'> <span class="nt">&quot;selector&quot;</span><span class="p">:</span> <span class="s2">&quot;source.perl&quot;</span><span class="p">,</span>
-</span><span class='line'> <span class="nt">&quot;variants&quot;</span><span class="p">:</span> <span class="p">[</span>
-</span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>  <span class="nt">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;prove&quot;</span><span class="p">,</span> <span class="s2">&quot;-vlr&quot;</span><span class="p">,</span> <span class="s2">&quot;--merge&quot;</span><span class="p">],</span>
-</span><span class='line'>  <span class="nt">&quot;working_dir&quot;</span><span class="p">:</span> <span class="s2">&quot;$project_path&quot;</span><span class="p">,</span>
-</span><span class='line'>         <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Run&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nt">&quot;windows&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span class='line'>                 <span class="nt">&quot;cmd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;prove.bat&quot;</span><span class="p">,</span> <span class="s2">&quot;-vlr&quot;</span><span class="p">,</span> <span class="s2">&quot;--merge&quot;</span><span class="p">]</span>
-</span><span class='line'>             <span class="p">}</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">]</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="json Perl project build file with variants">{
+ "cmd": ["perl", "-Ilib", "$file"],
+ "working_dir": "$project_path",
+ "file_regex": ".* at (.) line ([0-9])",
+ "selector": "source.perl",
+ "variants": [
+        {
+  "cmd": ["prove", "-vlr", "--merge"],
+  "working_dir": "$project_path",
+         "name": "Run",
+  "windows": {
+                 "cmd": ["prove.bat", "-vlr", "--merge"]
+             }
+        }
+    ]
+}
+</code></pre>
 
 <p>Note that I needed a Windows variant for <code>prove</code> since the Sublime editor doesn&rsquo;t work the same as cmd. You could, alternatively, add &lsquo;&ldquo;shell&rdquo;:true&rsquo; to use the system&rsquo;s command shell so you don&rsquo;t need a separate command for Windows.</p>
 
@@ -263,8 +222,6 @@
 
 
 
-  
-
 
 <time datetime="2013-02-03T00:00:00+01:00" pubdate data-updated="true"></time>
         
@@ -280,93 +237,51 @@
 
 <p>My first step to trying to fix this was to delete all of the values stored in the object during the processing procedure:</p>
 
-<figure class='code'><figcaption><span>First attempt: try deleting stuff</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">delete</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">stateDatum1</span><span class="p">};</span>
-</span><span class='line'><span class="nb">delete</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">stateDatum2</span><span class="p">};</span>
-</span><span class='line'><span class="c1">#etc....</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="perl First attempt: try deleting stuff">    delete $self-&gt;{stateDatum1};
+    delete $self-&gt;{stateDatum2};
+    #etc....
+</code></pre>
 
 <p>Nothing changed. I reduced the problematic code into a small example for this post. First, the module to be tested:</p>
 
-<figure class='code'><figcaption><span>Minimum breaking example with global flip-flop operator</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">package</span> <span class="nn">Demo::Bad::</span><span class="n">GlobalFlipFlop</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">autodie</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="mf">5.010</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">sub </span><span class="nf">new</span> <span class="p">{</span>
-</span><span class='line'> <span class="k">my</span> <span class="p">(</span><span class="nv">$class</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
-</span><span class='line'> <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="p">{};</span>
-</span><span class='line'> <span class="nb">bless</span> <span class="nv">$self</span><span class="p">,</span> <span class="nv">$class</span><span class="p">;</span>
-</span><span class='line'> <span class="k">return</span> <span class="nv">$self</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">#return true if parsing succeeded, false otherwise.</span>
-</span><span class='line'><span class="k">sub </span><span class="nf">parse</span> <span class="p">{</span>
-</span><span class='line'> <span class="k">my</span> <span class="p">(</span><span class="nv">$self</span><span class="p">,</span> <span class="nv">$file</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
-</span><span class='line'> <span class="nb">open</span> <span class="k">my</span> <span class="nv">$file_in</span><span class="p">,</span> <span class="s">&#39;&lt;&#39;</span><span class="p">,</span> <span class="nv">$file</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'> <span class="k">my</span> <span class="nv">$started</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'> <span class="k">while</span><span class="p">(</span> <span class="sr">&lt;$file_in&gt;</span> <span class="p">){</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">#flip-flop</span>
-</span><span class='line'>  <span class="k">next</span> <span class="k">unless</span> <span class="sr">/^=startHere/i</span> <span class="o">..</span> <span class="mi">0</span><span class="p">;</span>    <span class="c1"># start processing</span>
-</span><span class='line'>  <span class="nv">$started</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">#continue doing something with file contents...</span>
-</span><span class='line'>  <span class="c1"># say &#39;hello:)&#39; if(/hello/);</span>
-</span><span class='line'>  <span class="c1"># say &#39;goodbye:(&#39; if(/goodbye/);</span>
-</span><span class='line'> <span class="p">}</span>
-</span><span class='line'> <span class="k">if</span><span class="p">(</span><span class="ow">not</span> <span class="nv">$started</span><span class="p">){</span>
-</span><span class='line'>  <span class="n">say</span> <span class="s">&quot;File not processed; missing &#39;=startHere&#39; line.&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">return</span><span class="p">;</span>
-</span><span class='line'> <span class="p">}</span>
-</span><span class='line'> <span class="nb">close</span> <span class="nv">$file_in</span><span class="p">;</span>
-</span><span class='line'> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="mi">1</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="perl Minimum breaking example with global flip-flop operator">package Demo::Bad::GlobalFlipFlop;
+use strict;
+use warnings;
+use autodie;
+use 5.010;
 
+sub new {
+ my ($class) = @_;
+ my $self = {};
+ bless $self, $class;
+ return $self;
+}
+
+#return true if parsing succeeded, false otherwise.
+sub parse {
+ my ($self, $file) = @_;
+ open my $file_in, '&lt;', $file;
+
+ my $started = 0;
+ while( &lt;$file_in&gt; ){
+
+  #flip-flop
+  next unless /^=startHere/i .. 0;    # start processing
+  $started = 1;
+  #continue doing something with file contents...
+  # say 'hello:)' if(/hello/);
+  # say 'goodbye:(' if(/goodbye/);
+ }
+ if(not $started){
+  say "File not processed; missing '=startHere' line.";
+  return;
+ }
+ close $file_in;
+ return 1;
+}
+
+1;
+</code></pre>
 
 <p>The main idea here is that we are processing some file and returning a boolean representing its validity. The only requirement of validity of the file is that a certain start token is found within it; everything before the start sequence is ignored. Here are valid and invalid example files:</p>
 
@@ -382,36 +297,21 @@ goodbye
 
 <p>Now, the test file:</p>
 
-<figure class='code'><figcaption><span>Test script</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">autodie</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Test::</span><span class="n">More</span> <span class="n">tests</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">File::</span><span class="n">Slurp</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Demo::Bad::</span><span class="n">GlobalFlipFlop</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="nv">$good_name</span> <span class="o">=</span> <span class="s">&#39;good_file.txt&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="k">my</span> <span class="nv">$bad_file</span> <span class="o">=</span> <span class="s">&#39;bad_file.txt&#39;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="nv">$demo</span> <span class="o">=</span> <span class="nn">Demo::Bad::</span><span class="n">GlobalFlipFlop</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">ok</span><span class="p">(</span> <span class="nv">$demo</span><span class="o">-&gt;</span><span class="n">parse</span><span class="p">(</span><span class="nv">$good_name</span><span class="p">)</span> <span class="p">);</span>
-</span><span class='line'><span class="n">ok</span><span class="p">(</span> <span class="ow">not</span> <span class="nv">$demo</span><span class="o">-&gt;</span><span class="n">parse</span><span class="p">(</span><span class="nv">$bad_file</span><span class="p">)</span> <span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="perl Test script">use strict;
+use warnings;
+use autodie;
+use Test::More tests =&gt; 2;
+use File::Slurp;
+use Demo::Bad::GlobalFlipFlop;
 
+my $good_name = 'good_file.txt';
+my $bad_file = 'bad_file.txt';
+
+my $demo = Demo::Bad::GlobalFlipFlop-&gt;new();
+
+ok( $demo-&gt;parse($good_name) );
+ok( not $demo-&gt;parse($bad_file) );
+</code></pre>
 
 <p>The output of running this file:</p>
 
@@ -431,10 +331,8 @@ not ok 2
 
 <p>The bug is in the line which matches the start token:</p>
 
-<figure class='code'><figcaption><span>Buggy line</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">next</span> <span class="k">unless</span> <span class="sr">/^=startHere/i</span> <span class="o">..</span> <span class="mi">0</span><span class="p">;</span> <span class="c1"># start processing</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="perl Buggy line">next unless /^=startHere/i .. 0; # start processing
+</code></pre>
 
 <p>The regex, flip-flop operator and 0 were clearly some sort of idiom that I was unfamiliar with. I had only ever used the flip-flop with numbers, such as <code>1..10</code>, which iterates from numbers 1 through 10. How does it work? Let&rsquo;s check <a href="http://perldoc.perl.org/perlop.html">perlop</a>:</p>
 
@@ -450,22 +348,14 @@ not ok 2
 </ul>
 
 
-<figure class='code'><figcaption><span>Manually state management fixes the problem</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">my</span> <span class="nv">$started</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="k">while</span><span class="p">(</span><span class="sr">&lt;$file_in&gt;</span><span class="p">){</span>
-</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="sr">/^=startHere/i</span><span class="p">){</span>
-</span><span class='line'>        <span class="nv">$started</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="k">next</span> <span class="k">unless</span> <span class="nv">$started</span><span class="p">;</span>
-</span><span class='line'><span class="c1">#continue processing...</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="perl Manually state management fixes the problem">my $started = 0;
+while(&lt;$file_in&gt;){
+    if(/^=startHere/i){
+        $started = 1;
+    }
+    next unless $started;
+#continue processing...
+</code></pre>
 
 <p>With this, everything works as expected:</p>
 
@@ -502,8 +392,6 @@ ok 2
 
 
 
-  
-
 
 <time datetime="2013-01-27T00:00:00+01:00" pubdate data-updated="true"></time>
         
@@ -519,109 +407,60 @@ ok 2
 
 <p>One nice feature of Perl, introduced long before my time, is that of implicit closing. Perl closes filehandles for you when you forget (maybe on purpose). So the following is not a resource leak as a standalone script:</p>
 
-<figure class='code'><figcaption><span>Implicit close example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">open</span> <span class="k">my</span> <span class="nv">$file</span><span class="p">,</span> <span class="s">&#39;&gt;utf8&#39;</span><span class="p">,</span> <span class="s">&#39;/path/to/new/file&#39;</span>
-</span><span class='line'>    <span class="ow">or</span> <span class="nb">die</span> <span class="s">&quot;couldn&#39;t open file: $!&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="k">print</span> <span class="nv">$file</span> <span class="s">&#39;Hello!&#39;</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="perl Implicit close example">    open my $file, '&gt;utf8', '/path/to/new/file'
+        or die "couldn't open file: $!";
+    print $file 'Hello!';
+</code></pre>
 
 <p>When the script finishes, Perl will close $file for you, so you can be nice and lazy. The caveat to this is that the variable <code>$.</code> isn&rsquo;t reset as it would be with a normal close (<a href="http://perldoc.perl.org/functions/close.html">see docs here</a>). <a href="http://www.perlmonks.org/?node_id=353259"><code>$.</code></a> holds the current line number from the last file read. So if you were processing a file line-by-line and found an error, you might print an error like <code>bad value foo on line XYZ</code> using the <code>$.</code> variable for <code>XYZ</code>. I raised a question about this on <a href="http://stackoverflow.com/questions/14513477/perl-implicit-close-resets#comment20233976_14513477">StackOverflow</a>.</p>
 
 <p>Today I found another case where not explicitly closing a filehandle means trouble. I was working on testing a <a href="https://github.com/briandfoy/modulino-demo/blob/master/lib/Modulino/Demo.pm">modulino</a>-style script with flexible outputs. You can call a method to set the handle that this script prints to. In my test script, I was setting the handle to be some filehandle and then checking the contents of the file against a string. The problem? The file was always empty at run time, but contained what I expected it to when I manually inspected it. Here&rsquo;s some example broken code:</p>
 
-<figure class='code'><figcaption><span>Suffering from buffering with implicit close</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1">#ImplicitClose.pm</span>
-</span><span class='line'><span class="nb">package</span> <span class="nn">Demo::Bad::</span><span class="n">ImplicitClose</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</span><span class='line'><span class="k">sub </span><span class="nf">new</span> <span class="p">{</span>
-</span><span class='line'> <span class="k">my</span> <span class="p">(</span><span class="nv">$class</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
-</span><span class='line'> <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="p">{};</span>
-</span><span class='line'> <span class="nb">bless</span> <span class="nv">$self</span><span class="p">,</span> <span class="nv">$class</span><span class="p">;</span>
-</span><span class='line'> <span class="k">return</span> <span class="nv">$self</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">sub </span><span class="nf">output_fh</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">my</span> <span class="p">(</span> <span class="nv">$self</span><span class="p">,</span> <span class="nv">$fh</span> <span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nv">$fh</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span> <span class="nb">ref</span><span class="p">(</span><span class="nv">$fh</span><span class="p">)</span> <span class="ow">eq</span> <span class="s">&#39;GLOB&#39;</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nv">$self</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">output_fh</span><span class="p">}</span> <span class="o">=</span> <span class="nv">$fh</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>        <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nb">open</span> <span class="k">my</span> <span class="nv">$fh2</span><span class="p">,</span> <span class="s">&#39;&gt;&#39;</span><span class="p">,</span> <span class="nv">$fh</span> <span class="ow">or</span> <span class="nb">die</span> <span class="s">&quot;Couldn&#39;t open $fh&quot;</span><span class="p">;</span>
-</span><span class='line'>            <span class="nv">$self</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">output_fh</span><span class="p">}</span> <span class="o">=</span> <span class="nv">$fh2</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="nv">$self</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">output_fh</span><span class="p">};</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">sub </span><span class="nf">some_long_method</span> <span class="p">{</span>
-</span><span class='line'> <span class="k">my</span> <span class="p">(</span><span class="nv">$self</span><span class="p">,</span> <span class="nv">$text</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
-</span><span class='line'> <span class="k">print</span> <span class="p">{</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">output_fh</span><span class="p">}</span> <span class="p">}</span> <span class="nv">$text</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="mi">1</span><span class="p">;</span>
-</span><span class='line'><span class="c1">#test.pl</span>
-</span><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">autodie</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Test::</span><span class="n">More</span> <span class="n">tests</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">File::</span><span class="n">Slurp</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Demo::Bad::</span><span class="n">ImplicitClose</span><span class="p">;</span>
-</span><span class='line'><span class="k">my</span> <span class="nv">$file_name</span> <span class="o">=</span> <span class="s">&#39;file1.txt&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="c1">#make sure we pass the test from outputting something *this* run</span>
-</span><span class='line'><span class="nb">unlink</span> <span class="nv">$file_name</span> <span class="k">if</span> <span class="o">-</span><span class="n">e</span> <span class="nv">$file_name</span><span class="p">;</span>
-</span><span class='line'><span class="k">my</span> <span class="nv">$print</span> <span class="o">=</span> <span class="s">&#39;some junk&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="k">my</span> <span class="nv">$demo</span> <span class="o">=</span> <span class="nn">Demo::Bad::</span><span class="n">ImplicitClose</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">();</span>
-</span><span class='line'><span class="nv">$demo</span><span class="o">-&gt;</span><span class="n">output_fh</span><span class="p">(</span><span class="nv">$file_name</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$demo</span><span class="o">-&gt;</span><span class="n">some_long_method</span><span class="p">(</span><span class="nv">$print</span><span class="p">);</span>
-</span><span class='line'><span class="k">my</span> <span class="nv">$contents</span> <span class="o">=</span> <span class="n">read_file</span><span class="p">(</span><span class="nv">$file_name</span><span class="p">);</span>
-</span><span class='line'><span class="n">is</span><span class="p">(</span><span class="nv">$contents</span><span class="p">,</span> <span class="nv">$print</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="perl Suffering from buffering with implicit close">#ImplicitClose.pm
+package Demo::Bad::ImplicitClose;
+use strict;
+use warnings;
+sub new {
+ my ($class) = @_;
+ my $self = {};
+ bless $self, $class;
+ return $self;
+}
+sub output_fh {
+    my ( $self, $fh ) = @_;
+    if ($fh) {
+        if ( ref($fh) eq 'GLOB' ) {
+            $self-&gt;{output_fh} = $fh;
+        }
+        else {
+            open my $fh2, '&gt;', $fh or die "Couldn't open $fh";
+            $self-&gt;{output_fh} = $fh2;
+        }
+    }
+    $self-&gt;{output_fh};
+}
+sub some_long_method {
+ my ($self, $text) = @_;
+ print { $self-&gt;{output_fh} } $text;
+}
+1;
+#test.pl
+use strict;
+use warnings;
+use autodie;
+use Test::More tests =&gt; 1;
+use File::Slurp;
+use Demo::Bad::ImplicitClose;
+my $file_name = 'file1.txt';
+#make sure we pass the test from outputting something *this* run
+unlink $file_name if -e $file_name;
+my $print = 'some junk';
+my $demo = Demo::Bad::ImplicitClose-&gt;new();
+$demo-&gt;output_fh($file_name);
+$demo-&gt;some_long_method($print);
+my $contents = read_file($file_name);
+is($contents, $print);
+</code></pre>
 
 <p>If you run <code>test.pl</code>, you&rsquo;ll see that its one and only test fails:</p>
 
@@ -666,8 +505,6 @@ not ok 1
 
 
 
-
-  
 
 
 <time datetime="2013-01-20T00:00:00+01:00" pubdate data-updated="true"></time>
@@ -730,8 +567,6 @@ Result: PASS
 
 
 
-  
-
 
 <time datetime="2012-08-17T00:00:00+02:00" pubdate data-updated="true"></time>
         
@@ -785,8 +620,6 @@ Result: PASS
 
 
 
-
-  
 
 
 <time datetime="2012-06-29T00:00:00+02:00" pubdate data-updated="true"></time>
@@ -887,8 +720,6 @@ public &lt;greet&gt; = &lt;greeting&gt; [&lt;person&gt;] [i am &lt;person&gt;];
 
 
 
-  
-
 
 <time datetime="2012-05-11T00:00:00+02:00" pubdate data-updated="true"></time>
         
@@ -922,269 +753,139 @@ public &lt;greet&gt; = &lt;greeting&gt; [&lt;person&gt;] [i am &lt;person&gt;];
 
 <p>The <code>01</code> and <code>03</code> indicate the number of verb frames, <code>08</code>, <code>02</code>, <code>22</code>, and <code>09</code> are frame numbers. The <code>00</code>&rsquo;s and <code>01</code> that follow the frame numbers indicate which words in the synset the numbers apply to. <code>00</code> means the frame is applicable to all members. The <code>01</code> in the second entry means that frame 9 is only for the word <code>sun</code>, and not for the second word, <code>sunbathe</code>.<br />There are two methods provided by JAWS to get frames. They are both contained in the <a href="http://lyle.smu.edu/~tspell/jaws/doc/edu/smu/tspell/wordnet/VerbSynset.html"><code>VerbSynset</code></a> class:</p>
 
-<figure class='code'><figcaption><span>Methods available in VerbSynset for retrieving verb frames</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="cm">/**</span>
-</span><span class='line'><span class="cm">  * Returns the sentence frames (if any) associated with this verb meaning.</span>
-</span><span class='line'><span class="cm">  * Sentence frames are examples of how the verb can be used / applied, and</span>
-</span><span class='line'><span class="cm">  * all the frames returned by this method apply to all word forms in the</span>
-</span><span class='line'><span class="cm">  * synset.</span>
-</span><span class='line'><span class="cm">  *</span>
-</span><span class='line'><span class="cm">  * @return Sentence frames associated with all word forms in this synset.</span>
-</span><span class='line'><span class="cm">  * @see</span>
-</span><span class='line'><span class="cm">  *         Format of Lexicographer Files (&quot;Verb Frames&quot;)</span>
-</span><span class='line'><span class="cm">  */</span>
-</span><span class='line'> <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getSentenceFrames</span><span class="o">();</span>
-</span><span class='line'>
-</span><span class='line'> <span class="cm">/**</span>
-</span><span class='line'><span class="cm">  * Returns the sentence frames (if any) that are specific to a particular</span>
-</span><span class='line'><span class="cm">  * word form within this synset, where sentence frames are examples of</span>
-</span><span class='line'><span class="cm">  * how the word form can be used / applied.</span>
-</span><span class='line'><span class="cm">  *</span>
-</span><span class='line'><span class="cm">  * @param  wordForm Word form for which to return sentence frames.</span>
-</span><span class='line'><span class="cm">  * @return Sentence frames that are specific to the word form.</span>
-</span><span class='line'><span class="cm">  * @see</span>
-</span><span class='line'><span class="cm">  *         Format of Lexicographer Files (&quot;Verb Frames&quot;)</span>
-</span><span class='line'><span class="cm">  */</span>
-</span><span class='line'> <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getSentenceFrames</span><span class="o">(</span><span class="n">String</span> <span class="n">wordForm</span><span class="o">);</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="java Methods available in VerbSynset for retrieving verb frames"> /**
+  * Returns the sentence frames (if any) associated with this verb meaning.
+  * Sentence frames are examples of how the verb can be used / applied, and
+  * all the frames returned by this method apply to all word forms in the
+  * synset.
+  *
+  * @return Sentence frames associated with all word forms in this synset.
+  * @see
+  *         Format of Lexicographer Files ("Verb Frames")
+  */
+ public String[] getSentenceFrames();
 
+ /**
+  * Returns the sentence frames (if any) that are specific to a particular
+  * word form within this synset, where sentence frames are examples of
+  * how the word form can be used / applied.
+  *
+  * @param  wordForm Word form for which to return sentence frames.
+  * @return Sentence frames that are specific to the word form.
+  * @see
+  *         Format of Lexicographer Files ("Verb Frames")
+  */
+ public String[] getSentenceFrames(String wordForm);
+</code></pre>
 
 <p>Keep in mind that the VerbSynset class is completely divorced from the actual orthographic representation of a word, since a synset may belong to several different words. The first method returns all of the frames that apply to every word in the synset, or to all of the frames marked with a 00 in the data.verb file as shown above. The second method returns only the frames which are marked as being specific to a single orthographic representation, specified by the one argument for the method. The return values are complementary and each is incomplete by itself. However, given only the synset offset or only the word to look up, JAWS is returning as much information as is possible. If you know both the synset number and the orthographic representation of a word you need frames for (and I don&rsquo;t see why you wouldn&rsquo;t), then the getWordFramesComplete method in the program below demonstrates how to get all of the available frames:</p>
 
-<figure class='code'><figcaption><span>Retrieve all available verb frames for a given orthography/synset combination</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
-<span class='line-number'>90</span>
-<span class='line-number'>91</span>
-<span class='line-number'>92</span>
-<span class='line-number'>93</span>
-<span class='line-number'>94</span>
-<span class='line-number'>95</span>
-<span class='line-number'>96</span>
-<span class='line-number'>97</span>
-<span class='line-number'>98</span>
-<span class='line-number'>99</span>
-<span class='line-number'>100</span>
-<span class='line-number'>101</span>
-<span class='line-number'>102</span>
-<span class='line-number'>103</span>
-<span class='line-number'>104</span>
-<span class='line-number'>105</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">edu</span><span class="o">.</span><span class="na">byu</span><span class="o">.</span><span class="na">xnlsoar</span><span class="o">.</span><span class="na">test</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.Synset</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.SynsetType</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.VerbSynset</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.WordNetDatabase</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.impl.file.SampleFrameFactory</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.impl.file.SynsetFactory</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">edu.smu.tspell.wordnet.impl.file.SynsetPointer</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DemoFrames</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'> <span class="kd">private</span> <span class="kd">static</span> <span class="n">WordNetDatabase</span> <span class="n">database</span><span class="o">;</span>
-</span><span class='line'> <span class="kd">private</span> <span class="kd">static</span> <span class="n">SynsetFactory</span> <span class="n">synsetFactory</span><span class="o">;</span>
-</span><span class='line'> <span class="c1">//initialize everything here</span>
-</span><span class='line'> <span class="kd">static</span><span class="o">{</span>
-</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">&quot;wordnet.database.dir&quot;</span><span class="o">,</span> <span class="s">&quot;./lib/3.0/dict&quot;</span><span class="o">);</span>
-</span><span class='line'>  <span class="n">database</span> <span class="o">=</span> <span class="n">WordNetDatabase</span><span class="o">.</span><span class="na">getFileInstance</span><span class="o">();</span>
-</span><span class='line'>  <span class="n">synsetFactory</span> <span class="o">=</span> <span class="n">SynsetFactory</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
-</span><span class='line'> <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'> <span class="cm">/**</span>
-</span><span class='line'><span class="cm">  *</span>
-</span><span class='line'><span class="cm">  * @param synsetOffset Synset number to look up frames for</span>
-</span><span class='line'><span class="cm">  * @return Array of frames for the synset; only returns frames</span>
-</span><span class='line'><span class="cm">  * which apply to every word in the synset</span>
-</span><span class='line'><span class="cm">  * frames</span>
-</span><span class='line'><span class="cm">  */</span>
-</span><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="nf">getGeneralSynsetFrames</span><span class="o">(</span><span class="kt">int</span> <span class="n">synsetOffset</span><span class="o">){</span>
-</span><span class='line'>  <span class="n">SynsetPointer</span> <span class="n">sp</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">SynsetPointer</span><span class="o">(</span><span class="n">SynsetType</span><span class="o">.</span><span class="na">VERB</span><span class="o">,</span> <span class="n">synsetOffset</span><span class="o">);</span>
-</span><span class='line'>  <span class="n">VerbSynset</span> <span class="n">vSynset</span> <span class="o">=</span> <span class="o">(</span><span class="n">VerbSynset</span><span class="o">)</span> <span class="n">synsetFactory</span><span class="o">.</span><span class="na">getSynset</span><span class="o">(</span><span class="n">sp</span><span class="o">);</span>
-</span><span class='line'>  <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">frames</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;();</span>
-</span><span class='line'>  <span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">vSynset</span><span class="o">.</span><span class="na">getSentenceFrames</span><span class="o">())</span>
-</span><span class='line'>   <span class="n">frames</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">frames</span><span class="o">;</span>
-</span><span class='line'> <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'> <span class="cm">/**</span>
-</span><span class='line'><span class="cm">  *</span>
-</span><span class='line'><span class="cm">  * @param lemma Base form of the word you want to look up</span>
-</span><span class='line'><span class="cm">  * @return Array of frames for the lemma; only returns those</span>
-</span><span class='line'><span class="cm">  * that are specific to a particular word form within each synset.</span>
-</span><span class='line'><span class="cm">  * frames</span>
-</span><span class='line'><span class="cm">  */</span>
-</span><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="nf">getWordFramesSpecific</span><span class="o">(</span><span class="n">String</span> <span class="n">lemma</span><span class="o">){</span>
-</span><span class='line'>  <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">frames</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;();</span>
-</span><span class='line'>  <span class="n">Synset</span><span class="o">[]</span> <span class="n">synsets</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getSynsets</span><span class="o">(</span><span class="n">lemma</span><span class="o">,</span><span class="n">SynsetType</span><span class="o">.</span><span class="na">VERB</span><span class="o">);</span>
-</span><span class='line'>  <span class="k">for</span><span class="o">(</span><span class="n">Synset</span> <span class="n">synset</span> <span class="o">:</span> <span class="n">synsets</span><span class="o">){</span>
-</span><span class='line'>   <span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span> <span class="o">:</span> <span class="o">((</span><span class="n">VerbSynset</span><span class="o">)</span> <span class="n">synset</span><span class="o">).</span><span class="na">getSentenceFrames</span><span class="o">(</span><span class="n">lemma</span><span class="o">))</span>
-</span><span class='line'>    <span class="n">frames</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">frames</span><span class="o">;</span>
-</span><span class='line'> <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'> <span class="cm">/**</span>
-</span><span class='line'><span class="cm">  * This one is more difficult to understand...</span>
-</span><span class='line'><span class="cm">  * @param lemma Base form of the word you want to look up</span>
-</span><span class='line'><span class="cm">  * @return Array of frames for the lemma; only returns those</span>
-</span><span class='line'><span class="cm">  * that match every word in each of the synsets that contain this word.</span>
-</span><span class='line'><span class="cm">  */</span>
-</span><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="nf">getWordFramesGeneral</span><span class="o">(</span><span class="n">String</span> <span class="n">lemma</span><span class="o">){</span>
-</span><span class='line'>  <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">frames</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;();</span>
-</span><span class='line'>  <span class="n">Synset</span><span class="o">[]</span> <span class="n">synsets</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getSynsets</span><span class="o">(</span><span class="n">lemma</span><span class="o">,</span><span class="n">SynsetType</span><span class="o">.</span><span class="na">VERB</span><span class="o">);</span>
-</span><span class='line'>  <span class="k">for</span><span class="o">(</span><span class="n">Synset</span> <span class="n">synset</span> <span class="o">:</span> <span class="n">synsets</span><span class="o">){</span>
-</span><span class='line'>   <span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span> <span class="o">:</span> <span class="o">((</span><span class="n">VerbSynset</span><span class="o">)</span> <span class="n">synset</span><span class="o">).</span><span class="na">getSentenceFrames</span><span class="o">())</span>
-</span><span class='line'>    <span class="n">frames</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">frames</span><span class="o">;</span>
-</span><span class='line'> <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'> <span class="cm">/**</span>
-</span><span class='line'><span class="cm">  * This method is the best. It returns all possible frames</span>
-</span><span class='line'><span class="cm">  * given a synset number and the accompanying word.</span>
-</span><span class='line'><span class="cm">  * @param lemma Base form of the word you want to look up</span>
-</span><span class='line'><span class="cm">  * @param synsetOffset Synset number to look up frames for</span>
-</span><span class='line'><span class="cm">  * @return Array of frames for the synset; returns all frames</span>
-</span><span class='line'><span class="cm">  * for this word within this synset.</span>
-</span><span class='line'><span class="cm">  * frames</span>
-</span><span class='line'><span class="cm">  */</span>
-</span><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="nf">getWordFramesComplete</span><span class="o">(</span><span class="n">String</span> <span class="n">lemma</span><span class="o">,</span> <span class="kt">int</span> <span class="n">synsetOffset</span><span class="o">){</span>
-</span><span class='line'>  <span class="n">SynsetPointer</span> <span class="n">sp</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">SynsetPointer</span><span class="o">(</span><span class="n">SynsetType</span><span class="o">.</span><span class="na">VERB</span><span class="o">,</span> <span class="n">synsetOffset</span><span class="o">);</span>
-</span><span class='line'>  <span class="n">VerbSynset</span> <span class="n">vSynset</span> <span class="o">=</span> <span class="o">(</span><span class="n">VerbSynset</span><span class="o">)</span> <span class="n">synsetFactory</span><span class="o">.</span><span class="na">getSynset</span><span class="o">(</span><span class="n">sp</span><span class="o">);</span>
-</span><span class='line'>  <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">frames</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;();</span>
-</span><span class='line'>  <span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">vSynset</span><span class="o">.</span><span class="na">getSentenceFrames</span><span class="o">(</span><span class="n">lemma</span><span class="o">))</span>
-</span><span class='line'>   <span class="n">frames</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
-</span><span class='line'>  <span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">vSynset</span><span class="o">.</span><span class="na">getSentenceFrames</span><span class="o">())</span>
-</span><span class='line'>   <span class="n">frames</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">frames</span><span class="o">;</span>
-</span><span class='line'> <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'> <span class="cm">/**</span>
-</span><span class='line'><span class="cm">  * Prints out several different queries for the frames of &quot;fax&quot;</span>
-</span><span class='line'><span class="cm">  */</span>
-</span><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">offset</span> <span class="o">=</span> <span class="mi">104147</span><span class="o">;</span><span class="c1">//the synset meaning &quot;expose one&#39;s body to the sun&quot;</span>
-</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getGeneralSynsetFrames</span><span class="o">(</span><span class="n">offset</span><span class="o">));</span><span class="c1">//returns 2 frames</span>
-</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getWordFramesSpecific</span><span class="o">(</span><span class="s">&quot;sun&quot;</span><span class="o">));</span><span class="c1">//returns 1 frame</span>
-</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getWordFramesGeneral</span><span class="o">(</span><span class="s">&quot;sun&quot;</span><span class="o">));</span><span class="c1">//returns 3 frames</span>
-</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getWordFramesComplete</span><span class="o">(</span><span class="s">&quot;sunbathe&quot;</span><span class="o">,</span><span class="n">offset</span><span class="o">));</span><span class="c1">//returns 2 frames</span>
-</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getWordFramesComplete</span><span class="o">(</span><span class="s">&quot;sun&quot;</span><span class="o">,</span><span class="n">offset</span><span class="o">));</span><span class="c1">//returns 3 frames (different from before)</span>
-</span><span class='line'> <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="java Retrieve all available verb frames for a given orthography/synset combination">package edu.byu.xnlsoar.test;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.smu.tspell.wordnet.Synset;
+import edu.smu.tspell.wordnet.SynsetType;
+import edu.smu.tspell.wordnet.VerbSynset;
+import edu.smu.tspell.wordnet.WordNetDatabase;
+import edu.smu.tspell.wordnet.impl.file.SampleFrameFactory;
+import edu.smu.tspell.wordnet.impl.file.SynsetFactory;
+import edu.smu.tspell.wordnet.impl.file.SynsetPointer;
+
+public class DemoFrames {
+
+ private static WordNetDatabase database;
+ private static SynsetFactory synsetFactory;
+ //initialize everything here
+ static{
+  System.setProperty("wordnet.database.dir", "./lib/3.0/dict");
+  database = WordNetDatabase.getFileInstance();
+  synsetFactory = SynsetFactory.getInstance();
+ }
+
+ /**
+  *
+  * @param synsetOffset Synset number to look up frames for
+  * @return Array of frames for the synset; only returns frames
+  * which apply to every word in the synset
+  * frames
+  */
+ public static List&lt;string&gt; getGeneralSynsetFrames(int synsetOffset){
+  SynsetPointer sp = new SynsetPointer(SynsetType.VERB, synsetOffset);
+  VerbSynset vSynset = (VerbSynset) synsetFactory.getSynset(sp);
+  List&lt;string&gt; frames = new ArrayList&lt;string&gt;();
+  for(String s : vSynset.getSentenceFrames())
+   frames.add(s);
+  return frames;
+ }
+
+ /**
+  *
+  * @param lemma Base form of the word you want to look up
+  * @return Array of frames for the lemma; only returns those
+  * that are specific to a particular word form within each synset.
+  * frames
+  */
+ public static List&lt;string&gt; getWordFramesSpecific(String lemma){
+  List&lt;string&gt; frames = new ArrayList&lt;string&gt;();
+  Synset[] synsets = database.getSynsets(lemma,SynsetType.VERB);
+  for(Synset synset : synsets){
+   for(String s : ((VerbSynset) synset).getSentenceFrames(lemma))
+    frames.add(s);
+  }
+  return frames;
+ }
+
+ /**
+  * This one is more difficult to understand...
+  * @param lemma Base form of the word you want to look up
+  * @return Array of frames for the lemma; only returns those
+  * that match every word in each of the synsets that contain this word.
+  */
+ public static List&lt;string&gt; getWordFramesGeneral(String lemma){
+  List&lt;string&gt; frames = new ArrayList&lt;string&gt;();
+  Synset[] synsets = database.getSynsets(lemma,SynsetType.VERB);
+  for(Synset synset : synsets){
+   for(String s : ((VerbSynset) synset).getSentenceFrames())
+    frames.add(s);
+  }
+  return frames;
+ }
+
+ /**
+  * This method is the best. It returns all possible frames
+  * given a synset number and the accompanying word.
+  * @param lemma Base form of the word you want to look up
+  * @param synsetOffset Synset number to look up frames for
+  * @return Array of frames for the synset; returns all frames
+  * for this word within this synset.
+  * frames
+  */
+ public static List&lt;string&gt; getWordFramesComplete(String lemma, int synsetOffset){
+  SynsetPointer sp = new SynsetPointer(SynsetType.VERB, synsetOffset);
+  VerbSynset vSynset = (VerbSynset) synsetFactory.getSynset(sp);
+  List&lt;string&gt; frames = new ArrayList&lt;string&gt;();
+  for(String s : vSynset.getSentenceFrames(lemma))
+   frames.add(s);
+  for(String s : vSynset.getSentenceFrames())
+   frames.add(s);
+  return frames;
+ }
+
+ /**
+  * Prints out several different queries for the frames of "fax"
+  */
+ public static void main(String[] args) {
+  int offset = 104147;//the synset meaning "expose one's body to the sun"
+  System.out.println(getGeneralSynsetFrames(offset));//returns 2 frames
+  System.out.println(getWordFramesSpecific("sun"));//returns 1 frame
+  System.out.println(getWordFramesGeneral("sun"));//returns 3 frames
+  System.out.println(getWordFramesComplete("sunbathe",offset));//returns 2 frames
+  System.out.println(getWordFramesComplete("sun",offset));//returns 3 frames (different from before)
+ }
+}
+</code></pre>
 
 <p><code>getWordFramesComplete</code> calls both of the available methods in JAWS, retrieving both frames that apply to all words in a synset and the frames that are specific to a single word in the synset.</p>
 </div>
@@ -1211,8 +912,6 @@ public &lt;greet&gt; = &lt;greeting&gt; [&lt;person&gt;] [i am &lt;person&gt;];
 
 
 
-
-  
 
 
 <time datetime="2011-12-30T00:00:00+01:00" pubdate data-updated="true"></time>
@@ -1273,8 +972,6 @@ public &lt;greet&gt; = &lt;greeting&gt; [&lt;person&gt;] [i am &lt;person&gt;];
 
 
 
-
-  
 
 
 <time datetime="2011-11-06T00:00:00+01:00" pubdate data-updated="true"></time>
@@ -1349,8 +1046,6 @@ public &lt;greet&gt; = &lt;greeting&gt; [&lt;person&gt;] [i am &lt;person&gt;];
 
 
 
-  
-
 
 <time datetime="2011-11-06T00:00:00+01:00" pubdate data-updated="true"></time>
         
@@ -1382,88 +1077,47 @@ public &lt;greet&gt; = &lt;greeting&gt; [&lt;person&gt;] [i am &lt;person&gt;];
 
 <p>To use GoSen in an Eclipse project, add gosen-1.0beta.jar to the project build path. You also need to have the dictionary directory somewhere, along with the dictionary.xml file. This code will get you started:</p>
 
-<figure class='code'><figcaption><span>Tokenizing with GoSen</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">edu</span><span class="o">.</span><span class="na">byu</span><span class="o">.</span><span class="na">xnlsoar</span><span class="o">.</span><span class="na">jp</span><span class="o">.</span><span class="na">lexacc</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">edu.byu.xnlsoar.utils.Constants</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">net.java.sen.SenFactory</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">net.java.sen.StringTagger</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">net.java.sen.dictionary.Morpheme</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">net.java.sen.dictionary.Token</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GoSenInterface</span> <span class="o">{</span>
-</span><span class='line'> <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">token</span><span class="o">&gt;</span> <span class="nf">tokenize</span><span class="o">(</span><span class="n">String</span> <span class="n">sentence</span><span class="o">){</span>
-</span><span class='line'>  <span class="n">StringTagger</span> <span class="n">tagger</span> <span class="o">=</span> <span class="n">SenFactory</span><span class="o">.</span><span class="na">getStringTagger</span><span class="o">(</span><span class="n">Constants</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&quot;GOSEN_DICT_CONFIG&quot;</span><span class="o">));</span>
-</span><span class='line'>  <span class="k">try</span> <span class="o">{</span>
-</span><span class='line'>   <span class="k">return</span> <span class="n">tagger</span><span class="o">.</span><span class="na">analyze</span><span class="o">(</span><span class="n">sentence</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>   <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-</span><span class='line'>   <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(-</span><span class="mi">1</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>  <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-</span><span class='line'> <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
-</span><span class='line'>  <span class="n">String</span> <span class="n">sentence</span> <span class="o">=</span> <span class="s">&quot;やっぱり日本語情報処理って簡単に出来ちゃうんだもんな。&quot;</span><span class="o">;</span>
-</span><span class='line'>  <span class="n">GoSenInterface</span> <span class="n">dict</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">GoSenInterface</span><span class="o">();</span>
-</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;tokenizing &quot;</span> <span class="o">+</span> <span class="n">sentence</span><span class="o">);</span>
-</span><span class='line'>  <span class="n">List</span><span class="o">&lt;</span><span class="n">token</span><span class="o">&gt;</span> <span class="n">tokens</span> <span class="o">=</span> <span class="n">dict</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="n">sentence</span><span class="o">);</span>
-</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">tokens</span><span class="o">);</span>
-</span><span class='line'>  <span class="n">Morpheme</span> <span class="n">m</span><span class="o">;</span>
-</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;surface, lemma, POS, conjugation&quot;</span><span class="o">);</span>
-</span><span class='line'>  <span class="k">for</span><span class="o">(</span><span class="n">Token</span> <span class="n">t</span> <span class="o">:</span> <span class="n">tokens</span><span class="o">){</span>
-</span><span class='line'>   <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">t</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span><span class="o">);</span>
-</span><span class='line'>   <span class="n">m</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="na">getMorpheme</span><span class="o">();</span>
-</span><span class='line'>   <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">getBasicForm</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span><span class="o">);</span>
-</span><span class='line'>   <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">getPartOfSpeech</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span><span class="o">);</span>
-</span><span class='line'>   <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">getConjugationalType</span><span class="o">());</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'> <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="java Tokenizing with GoSen">package edu.byu.xnlsoar.jp.lexacc;
+import java.io.IOException;
+import java.util.List;
 
+import edu.byu.xnlsoar.utils.Constants;
+
+import net.java.sen.SenFactory;
+import net.java.sen.StringTagger;
+import net.java.sen.dictionary.Morpheme;
+import net.java.sen.dictionary.Token;
+
+public class GoSenInterface {
+ public List&lt;token&gt; tokenize(String sentence){
+  StringTagger tagger = SenFactory.getStringTagger(Constants.getProperty("GOSEN_DICT_CONFIG"));
+  try {
+   return tagger.analyze(sentence);
+  } catch (IOException e) {
+   e.printStackTrace();
+   System.exit(-1);
+  }
+  return null;
+ }
+
+ public static void main(String[] args){
+  String sentence = "やっぱり日本語情報処理って簡単に出来ちゃうんだもんな。";
+  GoSenInterface dict = new GoSenInterface();
+  System.out.println("tokenizing " + sentence);
+  List&lt;token&gt; tokens = dict.tokenize(sentence);
+  System.out.println(tokens);
+  Morpheme m;
+  System.out.println("surface, lemma, POS, conjugation");
+  for(Token t : tokens){
+   System.out.print(t + ", ");
+   m = t.getMorpheme();
+   System.out.print(m.getBasicForm() + ", ");
+   System.out.print(m.getPartOfSpeech() + ", ");
+   System.out.println(m.getConjugationalType());
+  }
+ }
+}
+</code></pre>
 
 <p>If you run that you will get:</p>
 
@@ -1553,7 +1207,7 @@ surface, lemma, POS, conjugation
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Nate Glenn -
+  Copyright &copy; 2017 - Nate Glenn -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

@@ -1,13 +1,16 @@
 source 'https://rubygems.org'
 
 group :development do
-    gem 'jekyll', '~> 2.0'
-    gem 'octopress', '~> 3.0.0.rc'
+    gem 'jekyll', '~> 3.0'
+    gem 'pygments.rb'
+    gem 'jekyll-paginate'
+    gem 'octopress', '~> 3.0'
     gem 'octopress-image-tag'
     gem 'octopress-date-format'
     gem 'octopress-codeblock'
     gem 'octopress-quote-tag'
     gem 'octopress-linkblog'
+    gem 'octopress-hooks', '~> 2.6.2'
     # other versions cause "jekyll serve" to fail
     gem 'listen', '2.7.8'
     # for compatibility with 'listen' version

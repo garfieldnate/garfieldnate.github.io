@@ -113,8 +113,6 @@
 
 
 
-  
-
 
 <time datetime="2014-01-11T00:00:00+01:00" pubdate data-updated="true"></time>
         
@@ -136,71 +134,45 @@
 
 <p>The context of an assignment operator will really only matter when you are storing or checking the return value. You can store the value of an assignment operator by using another asignment operator: <code>blah1 = blah2 = blah3</code>, where <code>blah1</code> is the value returned by assigning <code>blah3</code> to <code>blah2</code>. The value gets checked in other contexts too, like inside a control structure condition: <code>if(my $line = &lt;&gt;)</code>, etc. Here are examples for each combination of context and assignment operator:</p>
 
-<figure class='code'><figcaption><span>Example context/assignment combinations</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1"># scalar assignment in scalar context</span>
-</span><span class='line'><span class="nv">$thing</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$foo</span> <span class="o">=</span> <span class="s">&#39;bar&#39;</span><span class="p">);</span> <span class="c1"># assignment returns $foo as lvalue</span>
-</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># bar</span>
-</span><span class='line'><span class="c1"># scalar assignment in list context</span>
-</span><span class='line'><span class="p">(</span><span class="nv">$thing</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$foo</span> <span class="o">=</span> <span class="s">&#39;bar&#39;</span><span class="p">);</span> <span class="c1">#assignment returns ($foo), $foo is lvalue</span>
-</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># bar</span>
-</span><span class='line'><span class="c1"># list assignment in scalar context;</span>
-</span><span class='line'><span class="c1"># assignment returns number of items in RHS of list assignment</span>
-</span><span class='line'><span class="nv">$thing</span> <span class="o">=</span> <span class="p">((</span><span class="nv">$foo</span><span class="p">,</span> <span class="nv">$bar</span><span class="p">)</span> <span class="o">=</span> <span class="sx">qw(foo bar)</span><span class="p">);</span>
-</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># 2</span>
-</span><span class='line'><span class="nv">$thing</span> <span class="o">=</span> <span class="p">(()</span> <span class="o">=</span> <span class="sx">qw(foo bar)</span><span class="p">)</span>
-</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># 2</span>
-</span><span class='line'><span class="nv">$thing</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=</span> <span class="sx">qw(foo bar)</span><span class="p">;</span>
-</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># 2</span>
-</span><span class='line'><span class="c1"># list assignment in list context</span>
-</span><span class='line'><span class="c1"># assignment returns LHS list as lvalues</span>
-</span><span class='line'><span class="p">(</span><span class="nv">$thing</span><span class="p">)</span> <span class="o">=</span> <span class="p">((</span><span class="nv">$foo</span><span class="p">,</span> <span class="nv">$bar</span><span class="p">)</span> <span class="o">=</span> <span class="sx">qw(foo bar)</span><span class="p">);</span>
-</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># foo</span>
-</span><span class='line'><span class="p">(</span><span class="nv">$thing</span><span class="p">)</span> <span class="o">=</span> <span class="p">(()</span> <span class="o">=</span> <span class="sx">qw(foo bar)</span><span class="p">);</span>
-</span><span class='line'><span class="n">say</span> <span class="nv">$thing</span><span class="p">;</span> <span class="c1"># nothing ($thing is undef)</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="perl Example context/assignment combinations"># scalar assignment in scalar context
+$thing = ($foo = 'bar'); # assignment returns $foo as lvalue
+say $thing; # bar
+# scalar assignment in list context
+($thing) = ($foo = 'bar'); #assignment returns ($foo), $foo is lvalue
+say $thing; # bar
+# list assignment in scalar context;
+# assignment returns number of items in RHS of list assignment
+$thing = (($foo, $bar) = qw(foo bar));
+say $thing; # 2
+$thing = (() = qw(foo bar))
+say $thing; # 2
+$thing = () = qw(foo bar);
+say $thing; # 2
+# list assignment in list context
+# assignment returns LHS list as lvalues
+($thing) = (($foo, $bar) = qw(foo bar));
+say $thing; # foo
+($thing) = (() = qw(foo bar));
+say $thing; # nothing ($thing is undef)
+</code></pre>
 
 <p>That third one is of course the goatse operator. By the way for the record I totally think it looks more like a Saturn, though my wife disagrees and everyone seems to call it goatse. Anyway, though generally list assignment in scalar context is the rarest one, there are other occurrences. Ysth mentions the <code>each</code> operator inside of a <code>while</code> loop:</p>
 
-<figure class='code'><figcaption><span>`each` operator in a `while` loop</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">while</span><span class="p">(</span><span class="k">my</span> <span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nv">$value</span><span class="p">)</span> <span class="o">=</span> <span class="nb">each</span> <span class="nv">%hash</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<p><code>perl `each` operator in a `while` loop
+while(my ($key, $value) = each %hash)
+</code></p>
 
 <p>The aggregate on the left makes this list assignment, and <code>while</code> makes it scalar context. Once the hash is out of keys, <code>each</code> returns <code>()</code> so that the assignment operator returns <code>0</code>, finishing the <code>while</code> loop.</p>
 
 <p>I was pretty happy to finally understand this area I never quite understood I didn&rsquo;t understand (though someone might still point out I don&rsquo;t know what I&rsquo;m talking about, as seems to be common with this subject). Today, though, I thought of one more usage of list assignment in scalar context that is probably used erroneously fairly often: quick and dirty parameter checking:</p>
 
-<figure class='code'><figcaption><span>Incorrect quick and dirty parameter checking</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">my</span> <span class="p">(</span><span class="nv">$input</span><span class="p">,</span> <span class="nv">$output</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@ARGV</span> <span class="ow">or</span> <span class="nb">die</span> <span class="s">&#39;Usage: script &lt;input&gt; &lt;output&gt;&#39;</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="perl Incorrect quick and dirty parameter checking">my ($input, $output) = @ARGV or die 'Usage: script &lt;input&gt; &lt;output&gt;';
+</code></pre>
 
 <p>I always thought that the assignment would return $output, probably by analogy with comma expression assignment to a scalar (<code>$stuff = qw(foo bar)</code>). However, if the user fails to provide a second parameter, the error would not be caught. This assignment will return the number of elements in @ARGV, which could be <code>1</code> instead of the required <code>2</code>. So this use is only correct when unpacking <code>@_</code> or <code>@ARGV</code> and expecting exactly one variable:</p>
 
-<figure class='code'><figcaption><span>OK quick and dirty parameter checking</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">my</span> <span class="p">(</span><span class="nv">$input</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@ARGV</span> <span class="ow">or</span> <span class="nb">die</span> <span class="s">&#39;Usage: script &lt;input&gt;&#39;</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="perl OK quick and dirty parameter checking">my ($input) = @ARGV or die 'Usage: script &lt;input&gt;';
+</code></pre>
 
 <p>This is probably obvious to Perl old-timers, but to me it was a revelation. And it doesn&rsquo;t look like I&rsquo;m the only one, either. Grepping CPAN for assignment of an array to a parenthetical with &lsquo;or&rsquo; after it turns up many mis-uses <a href="http://grep.cpan.me/?q=%5C%29%5Cs*%3D%5Cs*%40%5B%5E+%5Cr%5Cn%5D%2B%5Cs%2Bor">here</a>.</p>
 </div>
@@ -209,8 +181,6 @@
   <footer>
     <p class="meta">
       
-  
-
 <span class="byline author vcard">Posted by <span class="fn">Nate Glenn</span></span>
 
       
@@ -222,15 +192,13 @@
 
 
 
-  
-
 
 <time datetime="2014-01-11T00:00:00+01:00" pubdate data-updated="true"></time>
       
 
 <span class="categories">
   
-    <a class='category' href='//context/'>context</a>, <a class='category' href='//list/'>list</a>, <a class='category' href='//list-assignment/'>list assignment</a>, <a class='category' href='//parameter-checking/'>parameter checking</a>, <a class='category' href='//perl/'>perl</a>, <a class='category' href='//scalar/'>scalar</a>, <a class='category' href='//scalar-context/'>scalar context</a>
+    <a class='category' href='//perl/'>Perl</a>, <a class='category' href='//context/'>context</a>, <a class='category' href='//list/'>list</a>, <a class='category' href='//list-assignment/'>list assignment</a>, <a class='category' href='//parameter-checking/'>parameter checking</a>, <a class='category' href='//scalar/'>scalar</a>, <a class='category' href='//scalar-context/'>scalar context</a>
   
 </span>
 
@@ -318,7 +286,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Nate Glenn -
+  Copyright &copy; 2017 - Nate Glenn -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

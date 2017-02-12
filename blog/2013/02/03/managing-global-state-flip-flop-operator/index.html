@@ -113,8 +113,6 @@
 
 
 
-  
-
 
 <time datetime="2013-02-03T00:00:00+01:00" pubdate data-updated="true"></time>
         
@@ -130,93 +128,51 @@
 
 <p>My first step to trying to fix this was to delete all of the values stored in the object during the processing procedure:</p>
 
-<figure class='code'><figcaption><span>First attempt: try deleting stuff</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">delete</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">stateDatum1</span><span class="p">};</span>
-</span><span class='line'><span class="nb">delete</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">stateDatum2</span><span class="p">};</span>
-</span><span class='line'><span class="c1">#etc....</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="perl First attempt: try deleting stuff">    delete $self-&gt;{stateDatum1};
+    delete $self-&gt;{stateDatum2};
+    #etc....
+</code></pre>
 
 <p>Nothing changed. I reduced the problematic code into a small example for this post. First, the module to be tested:</p>
 
-<figure class='code'><figcaption><span>Minimum breaking example with global flip-flop operator</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nb">package</span> <span class="nn">Demo::Bad::</span><span class="n">GlobalFlipFlop</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">autodie</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="mf">5.010</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">sub </span><span class="nf">new</span> <span class="p">{</span>
-</span><span class='line'> <span class="k">my</span> <span class="p">(</span><span class="nv">$class</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
-</span><span class='line'> <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="p">{};</span>
-</span><span class='line'> <span class="nb">bless</span> <span class="nv">$self</span><span class="p">,</span> <span class="nv">$class</span><span class="p">;</span>
-</span><span class='line'> <span class="k">return</span> <span class="nv">$self</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">#return true if parsing succeeded, false otherwise.</span>
-</span><span class='line'><span class="k">sub </span><span class="nf">parse</span> <span class="p">{</span>
-</span><span class='line'> <span class="k">my</span> <span class="p">(</span><span class="nv">$self</span><span class="p">,</span> <span class="nv">$file</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
-</span><span class='line'> <span class="nb">open</span> <span class="k">my</span> <span class="nv">$file_in</span><span class="p">,</span> <span class="s">&#39;&lt;&#39;</span><span class="p">,</span> <span class="nv">$file</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'> <span class="k">my</span> <span class="nv">$started</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'> <span class="k">while</span><span class="p">(</span> <span class="sr">&lt;$file_in&gt;</span> <span class="p">){</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">#flip-flop</span>
-</span><span class='line'>  <span class="k">next</span> <span class="k">unless</span> <span class="sr">/^=startHere/i</span> <span class="o">..</span> <span class="mi">0</span><span class="p">;</span>    <span class="c1"># start processing</span>
-</span><span class='line'>  <span class="nv">$started</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">#continue doing something with file contents...</span>
-</span><span class='line'>  <span class="c1"># say &#39;hello:)&#39; if(/hello/);</span>
-</span><span class='line'>  <span class="c1"># say &#39;goodbye:(&#39; if(/goodbye/);</span>
-</span><span class='line'> <span class="p">}</span>
-</span><span class='line'> <span class="k">if</span><span class="p">(</span><span class="ow">not</span> <span class="nv">$started</span><span class="p">){</span>
-</span><span class='line'>  <span class="n">say</span> <span class="s">&quot;File not processed; missing &#39;=startHere&#39; line.&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">return</span><span class="p">;</span>
-</span><span class='line'> <span class="p">}</span>
-</span><span class='line'> <span class="nb">close</span> <span class="nv">$file_in</span><span class="p">;</span>
-</span><span class='line'> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="mi">1</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="perl Minimum breaking example with global flip-flop operator">package Demo::Bad::GlobalFlipFlop;
+use strict;
+use warnings;
+use autodie;
+use 5.010;
 
+sub new {
+ my ($class) = @_;
+ my $self = {};
+ bless $self, $class;
+ return $self;
+}
+
+#return true if parsing succeeded, false otherwise.
+sub parse {
+ my ($self, $file) = @_;
+ open my $file_in, '&lt;', $file;
+
+ my $started = 0;
+ while( &lt;$file_in&gt; ){
+
+  #flip-flop
+  next unless /^=startHere/i .. 0;    # start processing
+  $started = 1;
+  #continue doing something with file contents...
+  # say 'hello:)' if(/hello/);
+  # say 'goodbye:(' if(/goodbye/);
+ }
+ if(not $started){
+  say "File not processed; missing '=startHere' line.";
+  return;
+ }
+ close $file_in;
+ return 1;
+}
+
+1;
+</code></pre>
 
 <p>The main idea here is that we are processing some file and returning a boolean representing its validity. The only requirement of validity of the file is that a certain start token is found within it; everything before the start sequence is ignored. Here are valid and invalid example files:</p>
 
@@ -232,36 +188,21 @@ goodbye
 
 <p>Now, the test file:</p>
 
-<figure class='code'><figcaption><span>Test script</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="n">autodie</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Test::</span><span class="n">More</span> <span class="n">tests</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">File::</span><span class="n">Slurp</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nn">Demo::Bad::</span><span class="n">GlobalFlipFlop</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="nv">$good_name</span> <span class="o">=</span> <span class="s">&#39;good_file.txt&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="k">my</span> <span class="nv">$bad_file</span> <span class="o">=</span> <span class="s">&#39;bad_file.txt&#39;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">my</span> <span class="nv">$demo</span> <span class="o">=</span> <span class="nn">Demo::Bad::</span><span class="n">GlobalFlipFlop</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">ok</span><span class="p">(</span> <span class="nv">$demo</span><span class="o">-&gt;</span><span class="n">parse</span><span class="p">(</span><span class="nv">$good_name</span><span class="p">)</span> <span class="p">);</span>
-</span><span class='line'><span class="n">ok</span><span class="p">(</span> <span class="ow">not</span> <span class="nv">$demo</span><span class="o">-&gt;</span><span class="n">parse</span><span class="p">(</span><span class="nv">$bad_file</span><span class="p">)</span> <span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="perl Test script">use strict;
+use warnings;
+use autodie;
+use Test::More tests =&gt; 2;
+use File::Slurp;
+use Demo::Bad::GlobalFlipFlop;
 
+my $good_name = 'good_file.txt';
+my $bad_file = 'bad_file.txt';
+
+my $demo = Demo::Bad::GlobalFlipFlop-&gt;new();
+
+ok( $demo-&gt;parse($good_name) );
+ok( not $demo-&gt;parse($bad_file) );
+</code></pre>
 
 <p>The output of running this file:</p>
 
@@ -281,10 +222,8 @@ not ok 2
 
 <p>The bug is in the line which matches the start token:</p>
 
-<figure class='code'><figcaption><span>Buggy line</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">next</span> <span class="k">unless</span> <span class="sr">/^=startHere/i</span> <span class="o">..</span> <span class="mi">0</span><span class="p">;</span> <span class="c1"># start processing</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="perl Buggy line">next unless /^=startHere/i .. 0; # start processing
+</code></pre>
 
 <p>The regex, flip-flop operator and 0 were clearly some sort of idiom that I was unfamiliar with. I had only ever used the flip-flop with numbers, such as <code>1..10</code>, which iterates from numbers 1 through 10. How does it work? Let&rsquo;s check <a href="http://perldoc.perl.org/perlop.html">perlop</a>:</p>
 
@@ -300,22 +239,14 @@ not ok 2
 </ul>
 
 
-<figure class='code'><figcaption><span>Manually state management fixes the problem</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">my</span> <span class="nv">$started</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="k">while</span><span class="p">(</span><span class="sr">&lt;$file_in&gt;</span><span class="p">){</span>
-</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="sr">/^=startHere/i</span><span class="p">){</span>
-</span><span class='line'>        <span class="nv">$started</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="k">next</span> <span class="k">unless</span> <span class="nv">$started</span><span class="p">;</span>
-</span><span class='line'><span class="c1">#continue processing...</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="perl Manually state management fixes the problem">my $started = 0;
+while(&lt;$file_in&gt;){
+    if(/^=startHere/i){
+        $started = 1;
+    }
+    next unless $started;
+#continue processing...
+</code></pre>
 
 <p>With this, everything works as expected:</p>
 
@@ -333,8 +264,6 @@ ok 2
   <footer>
     <p class="meta">
       
-  
-
 <span class="byline author vcard">Posted by <span class="fn">Nate Glenn</span></span>
 
       
@@ -346,15 +275,13 @@ ok 2
 
 
 
-  
-
 
 <time datetime="2013-02-03T00:00:00+01:00" pubdate data-updated="true"></time>
       
 
 <span class="categories">
   
-    <a class='category' href='//bug/'>bug</a>, <a class='category' href='//flip-flop/'>flip-flop</a>, <a class='category' href='//idiom/'>idiom</a>, <a class='category' href='//perl/'>perl</a>, <a class='category' href='//perlop/'>perlop</a>, <a class='category' href='//testing/'>testing</a>
+    <a class='category' href='//perl/'>Perl</a>, <a class='category' href='//bug/'>bug</a>, <a class='category' href='//flip-flop/'>flip-flop</a>, <a class='category' href='//idiom/'>idiom</a>, <a class='category' href='//perlop/'>perlop</a>, <a class='category' href='//testing/'>testing</a>
   
 </span>
 
@@ -442,7 +369,7 @@ ok 2
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Nate Glenn -
+  Copyright &copy; 2017 - Nate Glenn -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

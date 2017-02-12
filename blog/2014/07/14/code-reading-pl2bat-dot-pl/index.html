@@ -113,8 +113,6 @@
 
 
 
-  
-
 
 <time datetime="2014-07-14T08:42:07+02:00" pubdate data-updated="true"></time>
         
@@ -141,52 +139,29 @@ Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo.bat
 
 <p>Hmm, cleo.bat. That&rsquo;s not in the <a href="https://metacpan.org/source/THALJEF/App-Cleo-0.004/bin">distribution</a>! Let&rsquo;s take a look:</p>
 
-<figure class='code'><figcaption><span>Cleo.bat linenos:false</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='bat'><span class='line'><span class="p">@</span>rem <span class="o">=</span> &#39;--*-Perl-*--
-</span><span class='line'><span class="p">@</span><span class="k">echo</span> <span class="k">off</span>
-</span><span class='line'><span class="k">if</span> <span class="s2">&quot;%OS%&quot;</span> <span class="o">==</span> <span class="s2">&quot;Windows_NT&quot;</span> <span class="k">goto</span> <span class="nl">WinNT</span>
-</span><span class='line'><span class="k">IF</span> <span class="k">EXIST</span> <span class="s2">&quot;%~dp0perl.exe&quot;</span> (
-</span><span class='line'><span class="s2">&quot;%~dp0perl.exe&quot;</span> -x -S <span class="s2">&quot;%0&quot;</span> <span class="nv">%1</span> <span class="nv">%2</span> <span class="nv">%3</span> <span class="nv">%4</span> <span class="nv">%5</span> <span class="nv">%6</span> <span class="nv">%7</span> <span class="nv">%8</span> <span class="nv">%9</span>
-</span><span class='line'>) <span class="k">ELSE</span> <span class="k">IF</span> <span class="k">EXIST</span> <span class="s2">&quot;%~dp0..\..\bin\perl.exe&quot;</span> (
-</span><span class='line'><span class="s2">&quot;%~dp0..\..\bin\perl.exe&quot;</span> -x -S <span class="s2">&quot;%0&quot;</span> <span class="nv">%1</span> <span class="nv">%2</span> <span class="nv">%3</span> <span class="nv">%4</span> <span class="nv">%5</span> <span class="nv">%6</span> <span class="nv">%7</span> <span class="nv">%8</span> <span class="nv">%9</span>
-</span><span class='line'>) <span class="k">ELSE</span> (
-</span><span class='line'>perl -x -S <span class="s2">&quot;%0&quot;</span> <span class="nv">%1</span> <span class="nv">%2</span> <span class="nv">%3</span> <span class="nv">%4</span> <span class="nv">%5</span> <span class="nv">%6</span> <span class="nv">%7</span> <span class="nv">%8</span> <span class="nv">%9</span>
-</span><span class='line'>)
-</span><span class='line'>
-</span><span class='line'>...
-</span><span class='line'>
-</span><span class='line'>#!<span class="n">/usr/bin/env</span> perl
-</span><span class='line'>#line <span class="m">29</span>
-</span><span class='line'>
-</span><span class='line'>use strict;
-</span><span class='line'>use warnings;
-</span><span class='line'>use App<span class="c">::Cleo;</span>
-</span><span class='line'>
-</span><span class='line'>our $VERSION <span class="o">=</span> <span class="m">0</span>.<span class="m">003</span>;
-</span><span class='line'>...
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="bat Cleo.bat linenos:false">@rem = '--*-Perl-*--
+@echo off
+if "%OS%" == "Windows_NT" goto WinNT
+IF EXIST "%~dp0perl.exe" (
+"%~dp0perl.exe" -x -S "%0" %1 %2 %3 %4 %5 %6 %7 %8 %9
+) ELSE IF EXIST "%~dp0..\..\bin\perl.exe" (
+"%~dp0..\..\bin\perl.exe" -x -S "%0" %1 %2 %3 %4 %5 %6 %7 %8 %9
+) ELSE (
+perl -x -S "%0" %1 %2 %3 %4 %5 %6 %7 %8 %9
+)
 
+...
+
+#!/usr/bin/env perl
+#line 29
+
+use strict;
+use warnings;
+use App::Cleo;
+
+our $VERSION = 0.003;
+...
+</code></pre>
 
 <p>It seems to be a batch script with the entirety of cleo.pl pasted in the bottom. How does that work? Well first there&rsquo;s a little bit of logic to differentiate requirements on Windows NT versus other Windows systems, and some logic to deal with Perl being located in different places (relative to <code>%~dp0</code>, the directory containing the script). <code>%0</code> is the name of the script being run, and Perl is being invoked on it with different arguments. The other %number arguments are the script arguments, which are passed along to the script once again. So this is a batch script that passes itself to Perl? But what&rsquo;s Perl going to do with all of the batch garbage that comes before the actual Perl script?</p>
 
@@ -206,8 +181,6 @@ Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo.bat
   <footer>
     <p class="meta">
       
-  
-
 <span class="byline author vcard">Posted by <span class="fn">Nate Glenn</span></span>
 
       
@@ -219,15 +192,13 @@ Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo.bat
 
 
 
-  
-
 
 <time datetime="2014-07-14T08:42:07+02:00" pubdate data-updated="true"></time>
       
 
 <span class="categories">
   
-    <a class='category' href='//batch/'>batch</a>, <a class='category' href='//code-reading/'>code reading</a>, <a class='category' href='//distributions/'>distributions</a>, <a class='category' href='//perl/'>perl</a>, <a class='category' href='//pl2bat-dot-pl/'>pl2bat.pl</a>
+    <a class='category' href='//perl/'>Perl</a>, <a class='category' href='//batch/'>batch</a>, <a class='category' href='//code-reading/'>code reading</a>, <a class='category' href='//distributions/'>distributions</a>, <a class='category' href='//pl2bat-dot-pl/'>pl2bat.pl</a>
   
 </span>
 
@@ -315,7 +286,7 @@ Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo.bat
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Nate Glenn -
+  Copyright &copy; 2017 - Nate Glenn -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

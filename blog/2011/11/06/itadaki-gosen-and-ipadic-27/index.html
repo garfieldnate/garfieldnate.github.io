@@ -113,8 +113,6 @@
 
 
 
-  
-
 
 <time datetime="2011-11-06T00:00:00+01:00" pubdate data-updated="true"></time>
         
@@ -146,88 +144,47 @@
 
 <p>To use GoSen in an Eclipse project, add gosen-1.0beta.jar to the project build path. You also need to have the dictionary directory somewhere, along with the dictionary.xml file. This code will get you started:</p>
 
-<figure class='code'><figcaption><span>Tokenizing with GoSen</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">edu</span><span class="o">.</span><span class="na">byu</span><span class="o">.</span><span class="na">xnlsoar</span><span class="o">.</span><span class="na">jp</span><span class="o">.</span><span class="na">lexacc</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">edu.byu.xnlsoar.utils.Constants</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">net.java.sen.SenFactory</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">net.java.sen.StringTagger</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">net.java.sen.dictionary.Morpheme</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">net.java.sen.dictionary.Token</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GoSenInterface</span> <span class="o">{</span>
-</span><span class='line'> <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">token</span><span class="o">&gt;</span> <span class="nf">tokenize</span><span class="o">(</span><span class="n">String</span> <span class="n">sentence</span><span class="o">){</span>
-</span><span class='line'>  <span class="n">StringTagger</span> <span class="n">tagger</span> <span class="o">=</span> <span class="n">SenFactory</span><span class="o">.</span><span class="na">getStringTagger</span><span class="o">(</span><span class="n">Constants</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&quot;GOSEN_DICT_CONFIG&quot;</span><span class="o">));</span>
-</span><span class='line'>  <span class="k">try</span> <span class="o">{</span>
-</span><span class='line'>   <span class="k">return</span> <span class="n">tagger</span><span class="o">.</span><span class="na">analyze</span><span class="o">(</span><span class="n">sentence</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>   <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-</span><span class='line'>   <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(-</span><span class="mi">1</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>  <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-</span><span class='line'> <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
-</span><span class='line'>  <span class="n">String</span> <span class="n">sentence</span> <span class="o">=</span> <span class="s">&quot;やっぱり日本語情報処理って簡単に出来ちゃうんだもんな。&quot;</span><span class="o">;</span>
-</span><span class='line'>  <span class="n">GoSenInterface</span> <span class="n">dict</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">GoSenInterface</span><span class="o">();</span>
-</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;tokenizing &quot;</span> <span class="o">+</span> <span class="n">sentence</span><span class="o">);</span>
-</span><span class='line'>  <span class="n">List</span><span class="o">&lt;</span><span class="n">token</span><span class="o">&gt;</span> <span class="n">tokens</span> <span class="o">=</span> <span class="n">dict</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="n">sentence</span><span class="o">);</span>
-</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">tokens</span><span class="o">);</span>
-</span><span class='line'>  <span class="n">Morpheme</span> <span class="n">m</span><span class="o">;</span>
-</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;surface, lemma, POS, conjugation&quot;</span><span class="o">);</span>
-</span><span class='line'>  <span class="k">for</span><span class="o">(</span><span class="n">Token</span> <span class="n">t</span> <span class="o">:</span> <span class="n">tokens</span><span class="o">){</span>
-</span><span class='line'>   <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">t</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span><span class="o">);</span>
-</span><span class='line'>   <span class="n">m</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="na">getMorpheme</span><span class="o">();</span>
-</span><span class='line'>   <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">getBasicForm</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span><span class="o">);</span>
-</span><span class='line'>   <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">getPartOfSpeech</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span><span class="o">);</span>
-</span><span class='line'>   <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">getConjugationalType</span><span class="o">());</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'> <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="java Tokenizing with GoSen">package edu.byu.xnlsoar.jp.lexacc;
+import java.io.IOException;
+import java.util.List;
 
+import edu.byu.xnlsoar.utils.Constants;
+
+import net.java.sen.SenFactory;
+import net.java.sen.StringTagger;
+import net.java.sen.dictionary.Morpheme;
+import net.java.sen.dictionary.Token;
+
+public class GoSenInterface {
+ public List&lt;token&gt; tokenize(String sentence){
+  StringTagger tagger = SenFactory.getStringTagger(Constants.getProperty("GOSEN_DICT_CONFIG"));
+  try {
+   return tagger.analyze(sentence);
+  } catch (IOException e) {
+   e.printStackTrace();
+   System.exit(-1);
+  }
+  return null;
+ }
+
+ public static void main(String[] args){
+  String sentence = "やっぱり日本語情報処理って簡単に出来ちゃうんだもんな。";
+  GoSenInterface dict = new GoSenInterface();
+  System.out.println("tokenizing " + sentence);
+  List&lt;token&gt; tokens = dict.tokenize(sentence);
+  System.out.println(tokens);
+  Morpheme m;
+  System.out.println("surface, lemma, POS, conjugation");
+  for(Token t : tokens){
+   System.out.print(t + ", ");
+   m = t.getMorpheme();
+   System.out.print(m.getBasicForm() + ", ");
+   System.out.print(m.getPartOfSpeech() + ", ");
+   System.out.println(m.getConjugationalType());
+  }
+ }
+}
+</code></pre>
 
 <p>If you run that you will get:</p>
 
@@ -258,8 +215,6 @@ surface, lemma, POS, conjugation
   <footer>
     <p class="meta">
       
-  
-
 <span class="byline author vcard">Posted by <span class="fn">Nate Glenn</span></span>
 
       
@@ -271,15 +226,13 @@ surface, lemma, POS, conjugation
 
 
 
-  
-
 
 <time datetime="2011-11-06T00:00:00+01:00" pubdate data-updated="true"></time>
       
 
 <span class="categories">
   
-    <a class='category' href='//japanese/'>japanese</a>, <a class='category' href='//java-code/'>java code</a>, <a class='category' href='//morphology/'>morphology</a>, <a class='category' href='//nlp/'>nlp</a>
+    <a class='category' href='//japanese/'>Japanese</a>, <a class='category' href='//java-code/'>Java code</a>, <a class='category' href='//nlp/'>NLP</a>, <a class='category' href='//morphology/'>morphology</a>
   
 </span>
 
@@ -367,7 +320,7 @@ surface, lemma, POS, conjugation
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Nate Glenn -
+  Copyright &copy; 2017 - Nate Glenn -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
