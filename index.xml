@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Nate Glenn&#39;s Blog on Nate Glenn&#39;s Blog</title>
-    <link>http://garfieldnate.github.io/</link>
+    <link>https://garfieldnate.github.io/</link>
     <description>Recent content in Nate Glenn&#39;s Blog on Nate Glenn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -15,10 +15,10 @@
         
           <item>
             <title>I Live in Germany Now</title>
-            <link>http://garfieldnate.github.io/blog/2017/02/12/i-live-in-germany-now/</link>
+            <link>https://garfieldnate.github.io/blog/2017/02/12/i-live-in-germany-now/</link>
             <pubDate>Sun, 12 Feb 2017 13:30:00 +0000</pubDate>
             <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-            <guid>http://garfieldnate.github.io/blog/2017/02/12/i-live-in-germany-now/</guid>
+            <guid>https://garfieldnate.github.io/blog/2017/02/12/i-live-in-germany-now/</guid>
             <description>&lt;p&gt;As of three and a half months ago, my wife and I live in Düsseldorf, Germany! This has been a whirlwind for us, and I have experienced emotional highs and lows as I adjust to a new (better) job and sometimes pine away for Japan.&lt;/p&gt;
 
 &lt;p&gt;Last year it became clear to me that my job in Japan was crushing me and that I had to move on before I no longer could. For several months I searched only for remote jobs because I didn&amp;rsquo;t want to move. A combination of factors prevented this from working out, and we decided we would move (almost) anywhere in the world for a good job. Long story short, I now work at Trivago&amp;rsquo;s central headquarters on a mix of full-stack dev and data science.&lt;/p&gt;
@@ -54,10 +54,10 @@
         
           <item>
             <title>Japan is a Great Place to be</title>
-            <link>http://garfieldnate.github.io/blog/2015/12/13/japan-is-a-great-place-to-be/</link>
+            <link>https://garfieldnate.github.io/blog/2015/12/13/japan-is-a-great-place-to-be/</link>
             <pubDate>Sun, 13 Dec 2015 16:06:51 +0000</pubDate>
             <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-            <guid>http://garfieldnate.github.io/blog/2015/12/13/japan-is-a-great-place-to-be/</guid>
+            <guid>https://garfieldnate.github.io/blog/2015/12/13/japan-is-a-great-place-to-be/</guid>
             <description>&lt;p&gt;So, it happened again: you meet up with some gaijin friends, and it turns into a big Japan-bashing fest. Every thing that&amp;rsquo;s been bugging them for the past several months comes flooding out, and the back-and-forth between gaijin experiencing similar issues brings the criticism to an uncomfortable peak. The evening has become less of pleasurable conversation and more of a giant therapy session.&lt;/p&gt;
 
 &lt;p&gt;To be sure, living in a foreign country, even a 1st world country, can be a frustrating experience. Technology followed a slightly different path of advancement, and you find yourself loving convenience stores and pay-by-phone vending machines but hating the lack of insulation. Being a foreigner, you have to jump through extra hoops to do basic things like getting an apartment, opening a bank account, or getting a job. And with such a different culture, you find yourself unsure of when to be insulted or to laugh, how to make a joke instead of insulting, or how to correctly navigate a myriad of other &amp;ldquo;simple&amp;rdquo; social situations.&lt;/p&gt;
@@ -97,10 +97,10 @@ P.S. Good restaurant food in the US is often very expensive, especially after ti
         
           <item>
             <title>My Dream Planner, Come True! (Almost)</title>
-            <link>http://garfieldnate.github.io/blog/2015/10/25/my-dream-planner-come-true-almost/</link>
+            <link>https://garfieldnate.github.io/blog/2015/10/25/my-dream-planner-come-true-almost/</link>
             <pubDate>Sun, 25 Oct 2015 19:23:49 +0000</pubDate>
             <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-            <guid>http://garfieldnate.github.io/blog/2015/10/25/my-dream-planner-come-true-almost/</guid>
+            <guid>https://garfieldnate.github.io/blog/2015/10/25/my-dream-planner-come-true-almost/</guid>
             <description>&lt;p&gt;I say almost because I haven&amp;rsquo;t printed it yet. But I have a &lt;a href=&#34;https://github.com/garfieldnate/Personal-Planner/releases&#34;&gt;PDF&lt;/a&gt;!&lt;/p&gt;
 
 &lt;p&gt;When I was in college I had a favorite planner. It was the perfect size for my hand, and just had lines for each day, with one week visible in a two-page spread. It had a space in the front for schedules, and some blank pages in the back for notes and adresses. Nice and simple. I looked forward to buying it every year, and the last one I bought I also laminated and rebound so it would last longer.&lt;/p&gt;
@@ -157,10 +157,10 @@ P.S. Good restaurant food in the US is often very expensive, especially after ti
         
           <item>
             <title>Hacking Through an Octopress Update</title>
-            <link>http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/</link>
+            <link>https://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/</link>
             <pubDate>Mon, 20 Jul 2015 22:10:27 +0000</pubDate>
             <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-            <guid>http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/</guid>
+            <guid>https://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/</guid>
             <description>
 
 &lt;p&gt;A while back I watched a neat presentation from Justin Searls called &lt;a href=&#34;http://blog.testdouble.com/posts/2014-12-02-the-social-coding-contract.html&#34;&gt;The Social Coding Contract&lt;/a&gt;. He has lots of good things to say, but there was one comment that really hit home: my Jekyll blog was easy to setup 6 months ago, but now it&amp;rsquo;s impossible to maintain. Heh. Most of my trouble could have been avoided with more careful management of dependencies, but alas I am not a Ruby person and I did not realize that &lt;code&gt;bundle update&lt;/code&gt; would completely sink my publishing abilities for 4 months. When I update Perl modules, &lt;code&gt;cpan&lt;/code&gt; runs their tests on my machine and refuses to install unless they pass. &lt;code&gt;bundle&lt;/code&gt; just installs them!&lt;/p&gt;
@@ -246,10 +246,10 @@ P.S. Good restaurant food in the US is often very expensive, especially after ti
         
           <item>
             <title>Notes on Writing a Syntax Highlighter for Sublime Text</title>
-            <link>http://garfieldnate.github.io/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/</link>
+            <link>https://garfieldnate.github.io/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/</link>
             <pubDate>Sun, 15 Mar 2015 22:59:35 +0000</pubDate>
             <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-            <guid>http://garfieldnate.github.io/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/</guid>
+            <guid>https://garfieldnate.github.io/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/</guid>
             <description>&lt;p&gt;I recently released the &lt;a href=&#34;http://garfieldnate.github.io/Sublime-Soar-Tools/&#34;&gt;Soar Tools&lt;/a&gt; package for Sublime Text, and I took a few notes that might help the next author. Sublime Text is pretty awesome in a lot of ways, but the documentation is more tutorial + forums than it is a thorough explanation. I mainly followed the directions &lt;a href=&#34;http://sublime-text-unofficial-documentation.readthedocs.org/en/latest/extensibility/syntaxdefs.html&#34;&gt;here&lt;/a&gt;. My tips are as follows:&lt;/p&gt;
 
 &lt;ul&gt;
@@ -282,10 +282,10 @@ P.S. Good restaurant food in the US is often very expensive, especially after ti
         
           <item>
             <title>My New Toy: Algomation</title>
-            <link>http://garfieldnate.github.io/blog/2015/01/06/my-new-toy-algomation/</link>
+            <link>https://garfieldnate.github.io/blog/2015/01/06/my-new-toy-algomation/</link>
             <pubDate>Tue, 06 Jan 2015 20:20:34 +0000</pubDate>
             <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-            <guid>http://garfieldnate.github.io/blog/2015/01/06/my-new-toy-algomation/</guid>
+            <guid>https://garfieldnate.github.io/blog/2015/01/06/my-new-toy-algomation/</guid>
             <description>&lt;p&gt;Lately I&amp;rsquo;ve been losing sleep trying to understand an algorithm I read about in an &lt;a href=&#34;http://www.inf.upol.cz/trnecka/fka/addintent.pdf&#34;&gt;academic publication&lt;/a&gt;. Part of the problem was that the &lt;a href=&#34;https://en.wikipedia.org/wiki/Analogical_modeling&#34;&gt;application&lt;/a&gt; I was applying it to required a sort of reversal, which was confusing. But a bigger part of the problem was that I just couldn&amp;rsquo;t &amp;ldquo;see&amp;rdquo; it. I&amp;rsquo;d lay in bed, trying to imagine working with ping-pong balls on a string, or marbles on fishing line, or anything I could really get my &amp;ldquo;mind&amp;rsquo;s hands&amp;rdquo; on.&lt;/p&gt;
 
 &lt;p&gt;A few days ago I thought to myself, &amp;ldquo;there has to be a better way; there has to be a tool to help me do this.&amp;rdquo; In my life time I&amp;rsquo;ve done very little visual work, all of it bad, and I know I can&amp;rsquo;t be alone. But after taking Robert Sedgewick&amp;rsquo;s &lt;a href=&#34;https://www.coursera.org/course/algs4partI&#34;&gt;algorithms&lt;/a&gt; course and seeing all of the lovely visualizations from his lab, I knew there must be tools out there for visualizing algorithms, at least for educational use. Surprisingly, I didn&amp;rsquo;t find too many quick ways to do this, but one recently created service fit the bill.&lt;/p&gt;
@@ -318,10 +318,10 @@ P.S. Good restaurant food in the US is often very expensive, especially after ti
         
           <item>
             <title>The Oh So Exotic Grocery List</title>
-            <link>http://garfieldnate.github.io/blog/2014/11/09/the-oh-so-exotic-grocery-list/</link>
+            <link>https://garfieldnate.github.io/blog/2014/11/09/the-oh-so-exotic-grocery-list/</link>
             <pubDate>Sun, 09 Nov 2014 13:59:26 +0000</pubDate>
             <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-            <guid>http://garfieldnate.github.io/blog/2014/11/09/the-oh-so-exotic-grocery-list/</guid>
+            <guid>https://garfieldnate.github.io/blog/2014/11/09/the-oh-so-exotic-grocery-list/</guid>
             <description>&lt;p&gt;Since Erika is working and I am not, I try to take care of the apartment by shopping for food, cleaning and cooking as much as possible. I wrote out a list of everything that was needed and headed to Hallow&amp;rsquo;s to do the week&amp;rsquo;s shopping.&lt;/p&gt;
 
 &lt;p&gt;While I was picking out some tofu for mabodofu, two little 7 or 8-year-old girls ran up to me and started talking excitedly. I felt a little weird; a grown man talking to little girls at the super market might be considered a little creepy in the US. They asked me if I would be their friend and I thought &amp;ldquo;what the heck, sure, we&amp;rsquo;re friends&amp;rdquo; thinking that would be the end of it. They ran off excitedly and I resumed my shopping.&lt;/p&gt;
@@ -340,10 +340,10 @@ P.S. Good restaurant food in the US is often very expensive, especially after ti
         
           <item>
             <title>Yotchare!</title>
-            <link>http://garfieldnate.github.io/blog/2014/09/07/yotchare/</link>
+            <link>https://garfieldnate.github.io/blog/2014/09/07/yotchare/</link>
             <pubDate>Sun, 07 Sep 2014 21:59:33 +0000</pubDate>
             <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-            <guid>http://garfieldnate.github.io/blog/2014/09/07/yotchare/</guid>
+            <guid>https://garfieldnate.github.io/blog/2014/09/07/yotchare/</guid>
             <description>&lt;p&gt;I haven&amp;rsquo;t written as much lately as I should have, so here are some things that happened in August.&lt;/p&gt;
 
 &lt;p&gt;The most important Kasaoka event in August was the Yotchare festival. Summer in Japan is when most of the festivities happen, and students get August off of school. Kasaoka has a parade where everyone dances the Yotchare, or their choreographed version of it. A thousand people gathered on main street, and 30-40 groups danced down the street. A camera crew from the local Kasaoka TV station was there.&lt;/p&gt;
@@ -351,14 +351,14 @@ P.S. Good restaurant food in the US is often very expensive, especially after ti
 &lt;p&gt;Erika and I had originally planned on participating with KIEA (the international organization in town), but we didn&amp;rsquo;t make it to the practices. We drove downtown with Misao&amp;rsquo;s family and walked along the street watching the performances. Misao took us to the back of the parade where the groups start, and suddenly we were pushed out with the rest of the members from KIEA and had to figure out the dance, while of course being recorded and broadcasted live. Misao was nice enough to lend Erika a kimono for the event, but I was especially embarassed because I was wearing a junkie t-shirt, cargo shorts, and my sandals with holes in them (as if being tall and blonde don&amp;rsquo;t make me stand out enough!). Most of the rest of the group were wearing either a nice kimono or nice traditional dress from their country (looked mostly like India or Thailand?). We did manage to figure out the dance, though, and the KIEA group won the 一生懸命で賞, or the &amp;ldquo;you did it with all your might&amp;rdquo; prize!&lt;/p&gt;
 
 &lt;figure class=&#34;center&#34;&gt;
-    &lt;img src=&#34;http://garfieldnate.github.io/images/content_images/yottyare-1.jpg&#34;/&gt; &lt;figcaption&gt;
+    &lt;img src=&#34;https://garfieldnate.github.io/images/content_images/yottyare-1.jpg&#34;/&gt; &lt;figcaption&gt;
             &lt;h4&gt;KIEA doing the Yotchare dance&lt;/h4&gt;
         &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
 &lt;figure class=&#34;center&#34;&gt;
-    &lt;img src=&#34;http://garfieldnate.github.io/images/content_images/yottyare-2.jpg&#34;/&gt; &lt;figcaption&gt;
+    &lt;img src=&#34;https://garfieldnate.github.io/images/content_images/yottyare-2.jpg&#34;/&gt; &lt;figcaption&gt;
             &lt;h4&gt;Here you can see a few of the many people taking pictures of us. Those giant lights are for the news crew.&lt;/h4&gt;
         &lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -378,7 +378,7 @@ P.S. Good restaurant food in the US is often very expensive, especially after ti
 &lt;p&gt;Later in the month was the annual fireworks festival, done in every city across Japan around the same time. This event is also attended by many wearing kimono and geta. They actually distributed a complete program for the show, describing the size of every firework that was to be ignited every minute of the show, and who paid for it. I had to make a quick trip back to the apartment because I forgot my &lt;a href=&#34;https://en.wikipedia.org/wiki/Phonophobia&#34;&gt;earplugs&lt;/a&gt;!&lt;/p&gt;
 
 &lt;figure class=&#34;center&#34;&gt;
-    &lt;img src=&#34;http://garfieldnate.github.io/images/content_images/August-2014-fireworks.jpg&#34;/&gt; &lt;figcaption&gt;
+    &lt;img src=&#34;https://garfieldnate.github.io/images/content_images/August-2014-fireworks.jpg&#34;/&gt; &lt;figcaption&gt;
             &lt;h4&gt;Kasaoka fireworks&lt;/h4&gt;
         &lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -387,7 +387,7 @@ P.S. Good restaurant food in the US is often very expensive, especially after ti
 &lt;p&gt;Bentley took me on a long bike ride to &lt;a href=&#34;https://en.wikipedia.org/wiki/Asakuchi,_Okayama&#34;&gt;Asakuchi&lt;/a&gt;. It has a nice beach and an interesting formation of three islands:&lt;/p&gt;
 
 &lt;figure class=&#34;center&#34;&gt;
-    &lt;img src=&#34;http://garfieldnate.github.io/images/content_images/mittsu-shima.jpg&#34;/&gt; &lt;figcaption&gt;
+    &lt;img src=&#34;https://garfieldnate.github.io/images/content_images/mittsu-shima.jpg&#34;/&gt; &lt;figcaption&gt;
             &lt;h4&gt;mitsu shima (three-island)&lt;/h4&gt;
         &lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -396,14 +396,14 @@ P.S. Good restaurant food in the US is often very expensive, especially after ti
 &lt;p&gt;The view from Yorishima park is also amazing, if you can get there:&lt;/p&gt;
 
 &lt;figure class=&#34;center&#34;&gt;
-    &lt;img src=&#34;http://garfieldnate.github.io/images/content_images/bentley-climbing.jpg&#34;/&gt; &lt;figcaption&gt;
+    &lt;img src=&#34;https://garfieldnate.github.io/images/content_images/bentley-climbing.jpg&#34;/&gt; &lt;figcaption&gt;
             &lt;h4&gt;Bentley climbing the mountain to Yorishima park. Erika thinks this would make a nice Nike advertisement.&lt;/h4&gt;
         &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
 &lt;figure class=&#34;center&#34;&gt;
-    &lt;img src=&#34;http://garfieldnate.github.io/images/content_images/yorishima-view.jpg&#34;/&gt; &lt;figcaption&gt;
+    &lt;img src=&#34;https://garfieldnate.github.io/images/content_images/yorishima-view.jpg&#34;/&gt; &lt;figcaption&gt;
             &lt;h4&gt;The view of Asakuchi from Yorishima park&lt;/h4&gt;
         &lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -412,7 +412,7 @@ P.S. Good restaurant food in the US is often very expensive, especially after ti
 &lt;p&gt;Erika and I went back to eat at the cafe and take pictures later:&lt;/p&gt;
 
 &lt;figure class=&#34;center&#34;&gt;
-    &lt;img src=&#34;http://garfieldnate.github.io/images/content_images/erika-ooshima.jpg&#34;/&gt; &lt;figcaption&gt;
+    &lt;img src=&#34;https://garfieldnate.github.io/images/content_images/erika-ooshima.jpg&#34;/&gt; &lt;figcaption&gt;
             &lt;h4&gt;Erika in front of a view of the ocean from Oshima&lt;/h4&gt;
         &lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -421,7 +421,7 @@ P.S. Good restaurant food in the US is often very expensive, especially after ti
 &lt;p&gt;We celebrated Misao&amp;rsquo;s birthday at her daughter&amp;rsquo;s, house:&lt;/p&gt;
 
 &lt;figure class=&#34;center&#34;&gt;
-    &lt;img src=&#34;http://garfieldnate.github.io/images/content_images/misao-birthday.jpg&#34;/&gt; &lt;figcaption&gt;
+    &lt;img src=&#34;https://garfieldnate.github.io/images/content_images/misao-birthday.jpg&#34;/&gt; &lt;figcaption&gt;
             &lt;h4&gt;Misao and her birthday cake(s). The TV is playing a YouTube party with a hundred gaijin.&lt;/h4&gt;
         &lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -432,7 +432,7 @@ P.S. Good restaurant food in the US is often very expensive, especially after ti
 &lt;p&gt;We went to eat Indian food in Fukuyama, and on the way found a super nice library. They have this neat water-themed architecture:&lt;/p&gt;
 
 &lt;figure class=&#34;center&#34;&gt;
-    &lt;img src=&#34;http://garfieldnate.github.io/images/content_images/erika-fukuyama-library.jpg&#34;/&gt; &lt;figcaption&gt;
+    &lt;img src=&#34;https://garfieldnate.github.io/images/content_images/erika-fukuyama-library.jpg&#34;/&gt; &lt;figcaption&gt;
             &lt;h4&gt;Erika at the Fukuyama library.&lt;/h4&gt;
         &lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -443,7 +443,7 @@ P.S. Good restaurant food in the US is often very expensive, especially after ti
 &lt;p&gt;Also, a random picture from Fukuyama for my fire-fighting uncle:&lt;/p&gt;
 
 &lt;figure class=&#34;center&#34;&gt;
-    &lt;img src=&#34;http://garfieldnate.github.io/images/content_images/fukuyama-fire-hydrant.jpg&#34;/&gt; &lt;figcaption&gt;
+    &lt;img src=&#34;https://garfieldnate.github.io/images/content_images/fukuyama-fire-hydrant.jpg&#34;/&gt; &lt;figcaption&gt;
             &lt;h4&gt;A decorated Fukuyama fire hydrant with a fire-lady on it&lt;/h4&gt;
         &lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -454,7 +454,7 @@ P.S. Good restaurant food in the US is often very expensive, especially after ti
 &lt;p&gt;Lastly, we got a new bookshelf for our apartment! We love it. Hopefully, carrying it home in the rain will be the most dangerous thing I ever do in Japan!&lt;/p&gt;
 
 &lt;figure class=&#34;center&#34;&gt;
-    &lt;img src=&#34;http://garfieldnate.github.io/images/content_images/bookshelf-bike.jpg&#34;/&gt; 
+    &lt;img src=&#34;https://garfieldnate.github.io/images/content_images/bookshelf-bike.jpg&#34;/&gt; 
 &lt;/figure&gt;
 
 </description>
@@ -466,10 +466,10 @@ P.S. Good restaurant food in the US is often very expensive, especially after ti
         
           <item>
             <title>Knuth Classics are Freely Available</title>
-            <link>http://garfieldnate.github.io/blog/2014/08/13/knuth-classics-are-freely-available/</link>
+            <link>https://garfieldnate.github.io/blog/2014/08/13/knuth-classics-are-freely-available/</link>
             <pubDate>Wed, 13 Aug 2014 12:50:29 +0000</pubDate>
             <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-            <guid>http://garfieldnate.github.io/blog/2014/08/13/knuth-classics-are-freely-available/</guid>
+            <guid>https://garfieldnate.github.io/blog/2014/08/13/knuth-classics-are-freely-available/</guid>
             <description>&lt;p&gt;Donald Knuth wrote TeX in C/WEB. WEB is his system for writing literate programs which become both source code and typeset documents explaining the program&amp;rsquo;s operation. Some of his programs have been published: &lt;a href=&#34;http://www.goodreads.com/book/show/499934.Computers_Typesetting_Volume_B&#34;&gt;TeX: The Program&lt;/a&gt; and &lt;a href=&#34;http://www.goodreads.com/book/show/1746886.Computers_Typesetting_Volume_D&#34;&gt;Metafont: The Program&lt;/a&gt;. Others have not: I don&amp;rsquo;t believe Bibtex was published in book form, for example.&lt;/p&gt;
 
 &lt;p&gt;All of these works are available online, though you have to generate the PDF yourself. The TeX live distribution (included in MikTeX, among others) comes with Knuth&amp;rsquo;s WEB system for doing this. If you want a copy of TeX: The Program and you have TeX live, you can download some WEB programs from &lt;a href=&#34;http://tug.org/texlive/devsrc/Build/source/texk/web2c/&#34;&gt;http://tug.org/texlive/devsrc/Build/source/texk/web2c/&lt;/a&gt; and convert them yourselves. Let&amp;rsquo;s do TeX as an example. Download tex.web and tex.ch. Then do this:&lt;/p&gt;
@@ -511,10 +511,10 @@ pdftex tex.tex
       
         <item>
           <title>Linklog: Five Things We Need to Know About Technological Change</title>
-          <link>http://garfieldnate.github.io/link/2014-08-10-five-things-we-need-to-know-about-technological-change/</link>
+          <link>https://garfieldnate.github.io/link/2014-08-10-five-things-we-need-to-know-about-technological-change/</link>
           <pubDate>Sun, 10 Aug 2014 22:28:41 +0000</pubDate>
           <author>Niel Postman</author>
-          <guid>http://garfieldnate.github.io/link/2014-08-10-five-things-we-need-to-know-about-technological-change/</guid>
+          <guid>https://garfieldnate.github.io/link/2014-08-10-five-things-we-need-to-know-about-technological-change/</guid>
           <description>
 
 &lt;h3 id=&#34;niel-postman-five-things-we-need-to-know-about-technological-change-http-www-cs-ucdavis-edu-rogaway-classes-188-materials-postman-pdf&#34;&gt;&lt;a href=&#34;http://www.cs.ucdavis.edu/~rogaway/classes/188/materials/postman.pdf&#34;&gt;Niel Postman: Five Things We Need to Know About Technological Change&lt;/a&gt;&lt;/h3&gt;
@@ -533,10 +533,10 @@ pdftex tex.tex
       
         <item>
           <title>Linklog: Schools Kill Creativity</title>
-          <link>http://garfieldnate.github.io/link/2014-08-08-schools-kill-creativity/</link>
+          <link>https://garfieldnate.github.io/link/2014-08-08-schools-kill-creativity/</link>
           <pubDate>Fri, 08 Aug 2014 22:12:22 +0000</pubDate>
           <author>Ken Robinson</author>
-          <guid>http://garfieldnate.github.io/link/2014-08-08-schools-kill-creativity/</guid>
+          <guid>https://garfieldnate.github.io/link/2014-08-08-schools-kill-creativity/</guid>
           <description>
 
 &lt;h3 id=&#34;ken-robinson-says-schools-kill-creativity-http-www-ted-com-talks-ken-robinson-says-schools-kill-creativity&#34;&gt;&lt;a href=&#34;http://www.ted.com/talks/ken_robinson_says_schools_kill_creativity&#34;&gt;Ken Robinson Says Schools Kill Creativity&lt;/a&gt;&lt;/h3&gt;
@@ -552,10 +552,10 @@ pdftex tex.tex
         
           <item>
             <title>Refactoring the Soar Lexer</title>
-            <link>http://garfieldnate.github.io/blog/2014/07/27/refactoring-the-soar-lexer/</link>
+            <link>https://garfieldnate.github.io/blog/2014/07/27/refactoring-the-soar-lexer/</link>
             <pubDate>Sun, 27 Jul 2014 19:51:53 +0000</pubDate>
             <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-            <guid>http://garfieldnate.github.io/blog/2014/07/27/refactoring-the-soar-lexer/</guid>
+            <guid>https://garfieldnate.github.io/blog/2014/07/27/refactoring-the-soar-lexer/</guid>
             <description>
 
 &lt;p&gt;After my &lt;a href=&#34;blog/2014/7/13/code-reading-the-soar-parser&#34;&gt;last writeup&lt;/a&gt; on how &lt;a href=&#34;https://github.com/SoarGroup/Soar&#34;&gt;Soar&lt;/a&gt; parses Soar code, I decided to dive in and try and refactor it, starting with the lexer (and here&amp;rsquo;s the resulting &lt;a href=&#34;https://github.com/SoarGroup/Soar/pull/178&#34;&gt;PR&lt;/a&gt;). I haven&amp;rsquo;t worked with C/C++ in a while, and a good part of the code I changed was close to my age, so it was an interesting learning experience for me.&lt;/p&gt;
@@ -590,10 +590,10 @@ pdftex tex.tex
         
           <item>
             <title>Random Slice of Culture: Unicode Proposals</title>
-            <link>http://garfieldnate.github.io/blog/2014/07/14/random-slice-of-culture-unicode-proposals/</link>
+            <link>https://garfieldnate.github.io/blog/2014/07/14/random-slice-of-culture-unicode-proposals/</link>
             <pubDate>Mon, 14 Jul 2014 20:35:28 +0000</pubDate>
             <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-            <guid>http://garfieldnate.github.io/blog/2014/07/14/random-slice-of-culture-unicode-proposals/</guid>
+            <guid>https://garfieldnate.github.io/blog/2014/07/14/random-slice-of-culture-unicode-proposals/</guid>
             <description>&lt;p&gt;So a couple of weeks ago I had a casual use for &lt;a href=&#34;https://en.wikipedia.org/wiki/Hentaigana&#34;&gt;hentaigana&lt;/a&gt; and went looking to see if there were Unicode code points. Alas, there were none, but through Wikipedia I found that there was a &lt;a href=&#34;http://std.dkuug.dk/jtc1/sc2/wg2/docs/n3698.pdf&#34;&gt;proposal&lt;/a&gt; to include it. The proposal document includes relevant uses such as transcribing old documents, restaurant names and documents on calligraphy. Unfortunately the proposal hasn&amp;rsquo;t been accepted yet, but it did lead to an interesting discovery.&lt;/p&gt;
 
 &lt;p&gt;The containing directory has &lt;em&gt;all&lt;/em&gt; of the Unicode proposals, some of them labeled urgent because characters have become common use. For example, &lt;a href=&#34;n4584A&#34;&gt;http://std.dkuug.dk/JTC1/SC2/WG2/docs/n4584A.pdf&lt;/a&gt; calls for the addition of several Chinese characters for scientific use, such as 鎶, which is used for the new(ish) element Copernicum, some other weird-looking ones. &lt;a href=&#34;n4583&#34;&gt;http://std.dkuug.dk/JTC1/SC2/WG2/docs/n4583.pdf&lt;/a&gt; is a request for special Chinese characters that were used by a Russian mission in Beijing to transcribe Slavonic sounds. &lt;a href=&#34;n3734&#34;&gt;http://std.dkuug.dk/jtc1/sc2/wg2/docs/n3734.pdf&lt;/a&gt; requests an Arabic character used in Urdu for a specific Indian calendar.&lt;/p&gt;
@@ -610,10 +610,10 @@ pdftex tex.tex
         
           <item>
             <title>Code Reading: pl2bat.pl</title>
-            <link>http://garfieldnate.github.io/blog/2014/07/13/code-reading-pl2bat.pl/</link>
+            <link>https://garfieldnate.github.io/blog/2014/07/13/code-reading-pl2bat.pl/</link>
             <pubDate>Sun, 13 Jul 2014 23:42:07 +0000</pubDate>
             <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-            <guid>http://garfieldnate.github.io/blog/2014/07/13/code-reading-pl2bat.pl/</guid>
+            <guid>https://garfieldnate.github.io/blog/2014/07/13/code-reading-pl2bat.pl/</guid>
             <description>&lt;p&gt;When you install a Perl distribution from CPAN that comes with an executable script, Perl adds it to your path so it can be treated like any other command line program. On a *nix system, all that needs to be done for this to work is to set the script to be executable. Windows doesn&amp;rsquo;t have executable script files with shebang lines like *nix, however, so Perl generates a batch file.&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s see how this works. First, let&amp;rsquo;s pick a distribution that comes with an executable script. The &lt;code&gt;App::&lt;/code&gt; namespace is a great place to look for that.&lt;/p&gt;
@@ -710,10 +710,10 @@ our $VERSION = 0.003;
         
           <item>
             <title>Code Reading: The Soar Parser</title>
-            <link>http://garfieldnate.github.io/blog/2014/07/12/code-reading-the-soar-parser/</link>
+            <link>https://garfieldnate.github.io/blog/2014/07/12/code-reading-the-soar-parser/</link>
             <pubDate>Sat, 12 Jul 2014 13:04:54 +0000</pubDate>
             <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-            <guid>http://garfieldnate.github.io/blog/2014/07/12/code-reading-the-soar-parser/</guid>
+            <guid>https://garfieldnate.github.io/blog/2014/07/12/code-reading-the-soar-parser/</guid>
             <description>
 
 &lt;p&gt;I&amp;rsquo;ve thought for a while that it would be fun to write a series of &amp;ldquo;code reading&amp;rdquo; posts, where I try to read and understand how some large program works and explain my findings.&lt;/p&gt;

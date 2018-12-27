@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pl2bat.pl on Nate Glenn&#39;s Blog</title>
-    <link>http://garfieldnate.github.io/categories/pl2bat.pl/</link>
+    <link>https://garfieldnate.github.io/categories/pl2bat.pl/</link>
     <description>Recent content in Pl2bat.pl on Nate Glenn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -10,15 +10,15 @@
     <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
     <lastBuildDate>Sun, 13 Jul 2014 23:42:07 +0000</lastBuildDate>
     
-	<atom:link href="http://garfieldnate.github.io/categories/pl2bat.pl/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://garfieldnate.github.io/categories/pl2bat.pl/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Code Reading: pl2bat.pl</title>
-      <link>http://garfieldnate.github.io/blog/2014/07/13/code-reading-pl2bat.pl/</link>
+      <link>https://garfieldnate.github.io/blog/2014/07/13/code-reading-pl2bat.pl/</link>
       <pubDate>Sun, 13 Jul 2014 23:42:07 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2014/07/13/code-reading-pl2bat.pl/</guid>
+      <guid>https://garfieldnate.github.io/blog/2014/07/13/code-reading-pl2bat.pl/</guid>
       <description>When you install a Perl distribution from CPAN that comes with an executable script, Perl adds it to your path so it can be treated like any other command line program. On a *nix system, all that needs to be done for this to work is to set the script to be executable. Windows doesn&amp;rsquo;t have executable script files with shebang lines like *nix, however, so Perl generates a batch file.</description>
     </item>
     

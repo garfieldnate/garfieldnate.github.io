@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Cs 404 on Nate Glenn&#39;s Blog</title>
-    <link>http://garfieldnate.github.io/categories/cs-404/</link>
+    <link>https://garfieldnate.github.io/categories/cs-404/</link>
     <description>Recent content in Cs 404 on Nate Glenn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -10,24 +10,24 @@
     <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
     <lastBuildDate>Sun, 10 Aug 2014 22:28:41 +0000</lastBuildDate>
     
-	<atom:link href="http://garfieldnate.github.io/categories/cs-404/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://garfieldnate.github.io/categories/cs-404/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Five Things We Need to Know About Technological Change</title>
-      <link>http://garfieldnate.github.io/link/2014-08-10-five-things-we-need-to-know-about-technological-change/</link>
+      <link>https://garfieldnate.github.io/link/2014-08-10-five-things-we-need-to-know-about-technological-change/</link>
       <pubDate>Sun, 10 Aug 2014 22:28:41 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/link/2014-08-10-five-things-we-need-to-know-about-technological-change/</guid>
+      <guid>https://garfieldnate.github.io/link/2014-08-10-five-things-we-need-to-know-about-technological-change/</guid>
       <description>Niel Postman: Five Things We Need to Know About Technological Change  To a man with a hammer, everything looks like a nail. We may extend that truism:&amp;hellip; To a person with a computer, everything looks like data&amp;hellip; every technology has a prejudice. Like language itself, it predisposes us to favor and value certain perspectives and accomplishments. In a culture without writing, human memory is of the greatest importance, as are the proverbs, sayings and songs which contain the accumulated oral wisdom of centuries.</description>
     </item>
     
     <item>
       <title>Schools Kill Creativity</title>
-      <link>http://garfieldnate.github.io/link/2014-08-08-schools-kill-creativity/</link>
+      <link>https://garfieldnate.github.io/link/2014-08-08-schools-kill-creativity/</link>
       <pubDate>Fri, 08 Aug 2014 22:12:22 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/link/2014-08-08-schools-kill-creativity/</guid>
+      <guid>https://garfieldnate.github.io/link/2014-08-08-schools-kill-creativity/</guid>
       <description>Ken Robinson Says Schools Kill Creativity First post of my new linklog; I&amp;rsquo;ll be writing responses to articles from BYU&amp;rsquo;s CS 404.
 There&amp;rsquo;s another reason schools kill creativity in my opinion: by killing intrinsic motivation. The worst culprit is literature class. I did honors/AP all through high school, and haven&amp;rsquo;t read a classic since (except Ender&amp;rsquo;s Game, which is a rather new classic). Who wants to read anything when it&amp;rsquo;s just required reading to make the grade?</description>
     </item>

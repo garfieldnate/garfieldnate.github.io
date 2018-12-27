@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Windows on Nate Glenn&#39;s Blog</title>
-    <link>http://garfieldnate.github.io/categories/windows/</link>
+    <link>https://garfieldnate.github.io/categories/windows/</link>
     <description>Recent content in Windows on Nate Glenn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -10,24 +10,24 @@
     <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
     <lastBuildDate>Mon, 20 Jul 2015 22:10:27 +0000</lastBuildDate>
     
-	<atom:link href="http://garfieldnate.github.io/categories/windows/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://garfieldnate.github.io/categories/windows/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hacking Through an Octopress Update</title>
-      <link>http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/</link>
+      <link>https://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/</link>
       <pubDate>Mon, 20 Jul 2015 22:10:27 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/</guid>
+      <guid>https://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/</guid>
       <description>A while back I watched a neat presentation from Justin Searls called The Social Coding Contract. He has lots of good things to say, but there was one comment that really hit home: my Jekyll blog was easy to setup 6 months ago, but now it&amp;rsquo;s impossible to maintain. Heh. Most of my trouble could have been avoided with more careful management of dependencies, but alas I am not a Ruby person and I did not realize that bundle update would completely sink my publishing abilities for 4 months.</description>
     </item>
     
     <item>
       <title>Using Octopress- One More Thing</title>
-      <link>http://garfieldnate.github.io/blog/2014/07/06/using-octopress-one-more-thing/</link>
+      <link>https://garfieldnate.github.io/blog/2014/07/06/using-octopress-one-more-thing/</link>
       <pubDate>Sun, 06 Jul 2014 14:46:39 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2014/07/06/using-octopress-one-more-thing/</guid>
+      <guid>https://garfieldnate.github.io/blog/2014/07/06/using-octopress-one-more-thing/</guid>
       <description>&amp;ldquo;Aiiiiyaaaa! Jacky! You did not install Ruuuubyyy. You need that to write your blog.&amp;rdquo;
 &amp;ldquo;I already install Ruby, uncle, but it still does not work. rake generate creates empty HTML file! Look, it&amp;rsquo;s broken!&amp;rdquo;
 1 2 3  &amp;gt;rake generate Generating... C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/posix-spawn-0.3.8/lib/posix/spawn.rb:162: warning: cannot close fd before spawn &amp;#39;which&amp;#39; is not recognized as an internal or external command, operable program or batch file.   Swat!
@@ -36,19 +36,19 @@
     
     <item>
       <title>Preparation: The Key to a Less Painful Windows Reinstall</title>
-      <link>http://garfieldnate.github.io/blog/2014/07/01/preparation-the-key-to-a-less-painful-windows-reinstall/</link>
+      <link>https://garfieldnate.github.io/blog/2014/07/01/preparation-the-key-to-a-less-painful-windows-reinstall/</link>
       <pubDate>Tue, 01 Jul 2014 21:00:38 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2014/07/01/preparation-the-key-to-a-less-painful-windows-reinstall/</guid>
+      <guid>https://garfieldnate.github.io/blog/2014/07/01/preparation-the-key-to-a-less-painful-windows-reinstall/</guid>
       <description>Recently I decided to work on an easy ticket in StepMania to get into the source code. It turned out that I (gasp!) actually needed to build the project on my computer, but of course I was missing required libraries: DirectX 9 and the DirectX SDK. No matter what I tried, neither of these would successfully install on my computer, and I decided that the only way to install it would be to reinstall Windows (which worked, but ugh!</description>
     </item>
     
     <item>
       <title>Packaging XML::LibXML with PAR Packer on Windows</title>
-      <link>http://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on-windows/</link>
+      <link>https://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on-windows/</link>
       <pubDate>Tue, 27 Aug 2013 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on-windows/</guid>
+      <guid>https://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on-windows/</guid>
       <description>PAR Packer is an excellent utility for delivering your Perl scripts as standalone executables. A standalone executable is highly desired in, for example, a corporate environment where everyone needs a program you wrote but you can&amp;rsquo;t expect anyone to learn how to run Perl programs.
 A recent requirement at $work was for a standalone executable. Originally, I was supposed to let my coworker work his magic (and his ActiveState PerlPacker license), but the client required an all-open-source solution.</description>
     </item>

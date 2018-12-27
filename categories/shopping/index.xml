@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Shopping on Nate Glenn&#39;s Blog</title>
-    <link>http://garfieldnate.github.io/categories/shopping/</link>
+    <link>https://garfieldnate.github.io/categories/shopping/</link>
     <description>Recent content in Shopping on Nate Glenn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -10,15 +10,15 @@
     <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
     <lastBuildDate>Sun, 09 Nov 2014 13:59:26 +0000</lastBuildDate>
     
-	<atom:link href="http://garfieldnate.github.io/categories/shopping/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://garfieldnate.github.io/categories/shopping/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>The Oh So Exotic Grocery List</title>
-      <link>http://garfieldnate.github.io/blog/2014/11/09/the-oh-so-exotic-grocery-list/</link>
+      <link>https://garfieldnate.github.io/blog/2014/11/09/the-oh-so-exotic-grocery-list/</link>
       <pubDate>Sun, 09 Nov 2014 13:59:26 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2014/11/09/the-oh-so-exotic-grocery-list/</guid>
+      <guid>https://garfieldnate.github.io/blog/2014/11/09/the-oh-so-exotic-grocery-list/</guid>
       <description>Since Erika is working and I am not, I try to take care of the apartment by shopping for food, cleaning and cooking as much as possible. I wrote out a list of everything that was needed and headed to Hallow&amp;rsquo;s to do the week&amp;rsquo;s shopping.
 While I was picking out some tofu for mabodofu, two little 7 or 8-year-old girls ran up to me and started talking excitedly. I felt a little weird; a grown man talking to little girls at the super market might be considered a little creepy in the US.</description>
     </item>

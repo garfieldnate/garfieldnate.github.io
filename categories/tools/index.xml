@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tools on Nate Glenn&#39;s Blog</title>
-    <link>http://garfieldnate.github.io/categories/tools/</link>
+    <link>https://garfieldnate.github.io/categories/tools/</link>
     <description>Recent content in Tools on Nate Glenn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -10,15 +10,15 @@
     <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
     <lastBuildDate>Sun, 06 Nov 2011 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://garfieldnate.github.io/categories/tools/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://garfieldnate.github.io/categories/tools/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>List of Japanese NLP tools</title>
-      <link>http://garfieldnate.github.io/blog/2011/11/06/list-of-japanese-nlp-tools/</link>
+      <link>https://garfieldnate.github.io/blog/2011/11/06/list-of-japanese-nlp-tools/</link>
       <pubDate>Sun, 06 Nov 2011 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2011/11/06/list-of-japanese-nlp-tools/</guid>
+      <guid>https://garfieldnate.github.io/blog/2011/11/06/list-of-japanese-nlp-tools/</guid>
       <description>I haven&amp;rsquo;t tried out all of these so I don&amp;rsquo;t have comments for everything, but hopefully this list will come in useful for someone.
 Morphological analyzers/tokenizers  Itadaki: a Japanese processing module for OpenOffice. I&amp;rsquo;ve done a tiny bit of work and issue documentation on a fork here, and someone forked that to work with a Japanese/German dictionary here. GoSen: Uses sen as a base, and is part of Itadaki; a pure Java version of ChaSen.</description>
     </item>

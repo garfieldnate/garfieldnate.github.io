@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Japanese Stackexchange Language Learning on Nate Glenn&#39;s Blog</title>
-    <link>http://garfieldnate.github.io/categories/japanese-stackexchange-language-learning/</link>
+    <link>https://garfieldnate.github.io/categories/japanese-stackexchange-language-learning/</link>
     <description>Recent content in Japanese Stackexchange Language Learning on Nate Glenn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -10,15 +10,15 @@
     <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
     <lastBuildDate>Thu, 21 Jul 2011 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://garfieldnate.github.io/categories/japanese-stackexchange-language-learning/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://garfieldnate.github.io/categories/japanese-stackexchange-language-learning/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Japanese Stackexchange</title>
-      <link>http://garfieldnate.github.io/blog/2011/07/21/japanese-stackexchange/</link>
+      <link>https://garfieldnate.github.io/blog/2011/07/21/japanese-stackexchange/</link>
       <pubDate>Thu, 21 Jul 2011 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2011/07/21/japanese-stackexchange/</guid>
+      <guid>https://garfieldnate.github.io/blog/2011/07/21/japanese-stackexchange/</guid>
       <description>Stackoverflow is one of those sites born of an idea so golden you can hardly believe nobody has ever done it before. Using a simple system of reputation, priveleges and badges, users are encouraged to post answers to on-topic questions for the benefit of the asker and the internet community at large. I go there whenever I need help with a random programming problem. Questions are usually answered quickly because people want the points, and I don&amp;rsquo;t have to feel bad about bothering anyone because asking a question gives someone the opportunity to build their reputation.</description>
     </item>
     

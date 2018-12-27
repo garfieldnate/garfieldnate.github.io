@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Alignment on Nate Glenn&#39;s Blog</title>
-    <link>http://garfieldnate.github.io/categories/alignment/</link>
+    <link>https://garfieldnate.github.io/categories/alignment/</link>
     <description>Recent content in Alignment on Nate Glenn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -10,15 +10,15 @@
     <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
     <lastBuildDate>Thu, 01 Sep 2011 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://garfieldnate.github.io/categories/alignment/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://garfieldnate.github.io/categories/alignment/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>String Allignment with Edit Operations</title>
-      <link>http://garfieldnate.github.io/blog/2011/09/01/string-allignment-with-edit-operations/</link>
+      <link>https://garfieldnate.github.io/blog/2011/09/01/string-allignment-with-edit-operations/</link>
       <pubDate>Thu, 01 Sep 2011 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2011/09/01/string-allignment-with-edit-operations/</guid>
+      <guid>https://garfieldnate.github.io/blog/2011/09/01/string-allignment-with-edit-operations/</guid>
       <description>A common way to measure the distance between two strings is using Levenshtein distance. Levenshtein distance is the minimum number of deletions, insertions, and substitutions needed to transform one string into another. Finding the distance between two strings is useful in certain applications such as spell checking (a word processor will suggest dictionary words that are close to your misspelled word). See wikipedia for more details and an example of Levenshtein distance calculation.</description>
     </item>
     

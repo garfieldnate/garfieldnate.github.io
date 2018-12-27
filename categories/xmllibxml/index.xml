@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Xmllibxml on Nate Glenn&#39;s Blog</title>
-    <link>http://garfieldnate.github.io/categories/xmllibxml/</link>
+    <link>https://garfieldnate.github.io/categories/xmllibxml/</link>
     <description>Recent content in Xmllibxml on Nate Glenn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -10,15 +10,15 @@
     <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
     <lastBuildDate>Tue, 27 Aug 2013 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://garfieldnate.github.io/categories/xmllibxml/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://garfieldnate.github.io/categories/xmllibxml/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Packaging XML::LibXML with PAR Packer on Windows</title>
-      <link>http://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on-windows/</link>
+      <link>https://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on-windows/</link>
       <pubDate>Tue, 27 Aug 2013 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on-windows/</guid>
+      <guid>https://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on-windows/</guid>
       <description>PAR Packer is an excellent utility for delivering your Perl scripts as standalone executables. A standalone executable is highly desired in, for example, a corporate environment where everyone needs a program you wrote but you can&amp;rsquo;t expect anyone to learn how to run Perl programs.
 A recent requirement at $work was for a standalone executable. Originally, I was supposed to let my coworker work his magic (and his ActiveState PerlPacker license), but the client required an all-open-source solution.</description>
     </item>

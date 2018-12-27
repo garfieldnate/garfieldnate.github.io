@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Euclid on Nate Glenn&#39;s Blog</title>
-    <link>http://garfieldnate.github.io/categories/euclid/</link>
+    <link>https://garfieldnate.github.io/categories/euclid/</link>
     <description>Recent content in Euclid on Nate Glenn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -10,15 +10,15 @@
     <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
     <lastBuildDate>Mon, 15 Apr 2013 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://garfieldnate.github.io/categories/euclid/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://garfieldnate.github.io/categories/euclid/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>The Extended Euclidian Algorithm in Perl</title>
-      <link>http://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl/</link>
+      <link>https://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl/</link>
       <pubDate>Mon, 15 Apr 2013 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl/</guid>
+      <guid>https://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl/</guid>
       <description>This week I learned about the extended Euclidian algorithm for finding a linear combination of two numbers that yields their GCD. For example, the GCD of 213 and 171 is 3, and -4*213 + 5*171 = 3. This algorithm is important in the RSA encryption scheme.
 I had quite a difficult time getting myself to fully understand how it works. I jumped between Wikipedia, my data structures textbook (don&amp;rsquo;t buy it), a YouTube video, and this excellent number theory class lecture.</description>
     </item>

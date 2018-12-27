@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Nate Glenn&#39;s Blog</title>
-    <link>http://garfieldnate.github.io/post/</link>
+    <link>https://garfieldnate.github.io/post/</link>
     <description>Recent content in Posts on Nate Glenn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -10,141 +10,141 @@
     <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
     <lastBuildDate>Sun, 12 Feb 2017 13:30:00 +0000</lastBuildDate>
     
-	<atom:link href="http://garfieldnate.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://garfieldnate.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>I Live in Germany Now</title>
-      <link>http://garfieldnate.github.io/blog/2017/02/12/i-live-in-germany-now/</link>
+      <link>https://garfieldnate.github.io/blog/2017/02/12/i-live-in-germany-now/</link>
       <pubDate>Sun, 12 Feb 2017 13:30:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2017/02/12/i-live-in-germany-now/</guid>
+      <guid>https://garfieldnate.github.io/blog/2017/02/12/i-live-in-germany-now/</guid>
       <description>As of three and a half months ago, my wife and I live in Düsseldorf, Germany! This has been a whirlwind for us, and I have experienced emotional highs and lows as I adjust to a new (better) job and sometimes pine away for Japan.
 Last year it became clear to me that my job in Japan was crushing me and that I had to move on before I no longer could.</description>
     </item>
     
     <item>
       <title>Japan is a Great Place to be</title>
-      <link>http://garfieldnate.github.io/blog/2015/12/13/japan-is-a-great-place-to-be/</link>
+      <link>https://garfieldnate.github.io/blog/2015/12/13/japan-is-a-great-place-to-be/</link>
       <pubDate>Sun, 13 Dec 2015 16:06:51 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2015/12/13/japan-is-a-great-place-to-be/</guid>
+      <guid>https://garfieldnate.github.io/blog/2015/12/13/japan-is-a-great-place-to-be/</guid>
       <description>So, it happened again: you meet up with some gaijin friends, and it turns into a big Japan-bashing fest. Every thing that&amp;rsquo;s been bugging them for the past several months comes flooding out, and the back-and-forth between gaijin experiencing similar issues brings the criticism to an uncomfortable peak. The evening has become less of pleasurable conversation and more of a giant therapy session.
 To be sure, living in a foreign country, even a 1st world country, can be a frustrating experience.</description>
     </item>
     
     <item>
       <title>My Dream Planner, Come True! (Almost)</title>
-      <link>http://garfieldnate.github.io/blog/2015/10/25/my-dream-planner-come-true-almost/</link>
+      <link>https://garfieldnate.github.io/blog/2015/10/25/my-dream-planner-come-true-almost/</link>
       <pubDate>Sun, 25 Oct 2015 19:23:49 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2015/10/25/my-dream-planner-come-true-almost/</guid>
+      <guid>https://garfieldnate.github.io/blog/2015/10/25/my-dream-planner-come-true-almost/</guid>
       <description>I say almost because I haven&amp;rsquo;t printed it yet. But I have a PDF!
 When I was in college I had a favorite planner. It was the perfect size for my hand, and just had lines for each day, with one week visible in a two-page spread. It had a space in the front for schedules, and some blank pages in the back for notes and adresses. Nice and simple. I looked forward to buying it every year, and the last one I bought I also laminated and rebound so it would last longer.</description>
     </item>
     
     <item>
       <title>Hacking Through an Octopress Update</title>
-      <link>http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/</link>
+      <link>https://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/</link>
       <pubDate>Mon, 20 Jul 2015 22:10:27 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/</guid>
+      <guid>https://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/</guid>
       <description>A while back I watched a neat presentation from Justin Searls called The Social Coding Contract. He has lots of good things to say, but there was one comment that really hit home: my Jekyll blog was easy to setup 6 months ago, but now it&amp;rsquo;s impossible to maintain. Heh. Most of my trouble could have been avoided with more careful management of dependencies, but alas I am not a Ruby person and I did not realize that bundle update would completely sink my publishing abilities for 4 months.</description>
     </item>
     
     <item>
       <title>Notes on Writing a Syntax Highlighter for Sublime Text</title>
-      <link>http://garfieldnate.github.io/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/</link>
+      <link>https://garfieldnate.github.io/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/</link>
       <pubDate>Sun, 15 Mar 2015 22:59:35 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/</guid>
+      <guid>https://garfieldnate.github.io/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/</guid>
       <description>I recently released the Soar Tools package for Sublime Text, and I took a few notes that might help the next author. Sublime Text is pretty awesome in a lot of ways, but the documentation is more tutorial + forums than it is a thorough explanation. I mainly followed the directions here. My tips are as follows:
  Don&amp;rsquo;t try to copy that BNF grammar into tmLanguage format. It&amp;rsquo;s not designed for specifying grammars, it&amp;rsquo;s designed for highlighting.</description>
     </item>
     
     <item>
       <title>My New Toy: Algomation</title>
-      <link>http://garfieldnate.github.io/blog/2015/01/06/my-new-toy-algomation/</link>
+      <link>https://garfieldnate.github.io/blog/2015/01/06/my-new-toy-algomation/</link>
       <pubDate>Tue, 06 Jan 2015 20:20:34 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2015/01/06/my-new-toy-algomation/</guid>
+      <guid>https://garfieldnate.github.io/blog/2015/01/06/my-new-toy-algomation/</guid>
       <description>Lately I&amp;rsquo;ve been losing sleep trying to understand an algorithm I read about in an academic publication. Part of the problem was that the application I was applying it to required a sort of reversal, which was confusing. But a bigger part of the problem was that I just couldn&amp;rsquo;t &amp;ldquo;see&amp;rdquo; it. I&amp;rsquo;d lay in bed, trying to imagine working with ping-pong balls on a string, or marbles on fishing line, or anything I could really get my &amp;ldquo;mind&amp;rsquo;s hands&amp;rdquo; on.</description>
     </item>
     
     <item>
       <title>The Oh So Exotic Grocery List</title>
-      <link>http://garfieldnate.github.io/blog/2014/11/09/the-oh-so-exotic-grocery-list/</link>
+      <link>https://garfieldnate.github.io/blog/2014/11/09/the-oh-so-exotic-grocery-list/</link>
       <pubDate>Sun, 09 Nov 2014 13:59:26 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2014/11/09/the-oh-so-exotic-grocery-list/</guid>
+      <guid>https://garfieldnate.github.io/blog/2014/11/09/the-oh-so-exotic-grocery-list/</guid>
       <description>Since Erika is working and I am not, I try to take care of the apartment by shopping for food, cleaning and cooking as much as possible. I wrote out a list of everything that was needed and headed to Hallow&amp;rsquo;s to do the week&amp;rsquo;s shopping.
 While I was picking out some tofu for mabodofu, two little 7 or 8-year-old girls ran up to me and started talking excitedly. I felt a little weird; a grown man talking to little girls at the super market might be considered a little creepy in the US.</description>
     </item>
     
     <item>
       <title>Yotchare!</title>
-      <link>http://garfieldnate.github.io/blog/2014/09/07/yotchare/</link>
+      <link>https://garfieldnate.github.io/blog/2014/09/07/yotchare/</link>
       <pubDate>Sun, 07 Sep 2014 21:59:33 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2014/09/07/yotchare/</guid>
+      <guid>https://garfieldnate.github.io/blog/2014/09/07/yotchare/</guid>
       <description>I haven&amp;rsquo;t written as much lately as I should have, so here are some things that happened in August.
 The most important Kasaoka event in August was the Yotchare festival. Summer in Japan is when most of the festivities happen, and students get August off of school. Kasaoka has a parade where everyone dances the Yotchare, or their choreographed version of it. A thousand people gathered on main street, and 30-40 groups danced down the street.</description>
     </item>
     
     <item>
       <title>Knuth Classics are Freely Available</title>
-      <link>http://garfieldnate.github.io/blog/2014/08/13/knuth-classics-are-freely-available/</link>
+      <link>https://garfieldnate.github.io/blog/2014/08/13/knuth-classics-are-freely-available/</link>
       <pubDate>Wed, 13 Aug 2014 12:50:29 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2014/08/13/knuth-classics-are-freely-available/</guid>
+      <guid>https://garfieldnate.github.io/blog/2014/08/13/knuth-classics-are-freely-available/</guid>
       <description>Donald Knuth wrote TeX in C/WEB. WEB is his system for writing literate programs which become both source code and typeset documents explaining the program&amp;rsquo;s operation. Some of his programs have been published: TeX: The Program and Metafont: The Program. Others have not: I don&amp;rsquo;t believe Bibtex was published in book form, for example.
 All of these works are available online, though you have to generate the PDF yourself. The TeX live distribution (included in MikTeX, among others) comes with Knuth&amp;rsquo;s WEB system for doing this.</description>
     </item>
     
     <item>
       <title>Refactoring the Soar Lexer</title>
-      <link>http://garfieldnate.github.io/blog/2014/07/27/refactoring-the-soar-lexer/</link>
+      <link>https://garfieldnate.github.io/blog/2014/07/27/refactoring-the-soar-lexer/</link>
       <pubDate>Sun, 27 Jul 2014 19:51:53 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2014/07/27/refactoring-the-soar-lexer/</guid>
+      <guid>https://garfieldnate.github.io/blog/2014/07/27/refactoring-the-soar-lexer/</guid>
       <description>After my last writeup on how Soar parses Soar code, I decided to dive in and try and refactor it, starting with the lexer (and here&amp;rsquo;s the resulting PR). I haven&amp;rsquo;t worked with C/C++ in a while, and a good part of the code I changed was close to my age, so it was an interesting learning experience for me.
 The lexer used global state stored via an agent to keep track of the current input character and lexeme as well as to remember line and column numbers.</description>
     </item>
     
     <item>
       <title>Random Slice of Culture: Unicode Proposals</title>
-      <link>http://garfieldnate.github.io/blog/2014/07/14/random-slice-of-culture-unicode-proposals/</link>
+      <link>https://garfieldnate.github.io/blog/2014/07/14/random-slice-of-culture-unicode-proposals/</link>
       <pubDate>Mon, 14 Jul 2014 20:35:28 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2014/07/14/random-slice-of-culture-unicode-proposals/</guid>
+      <guid>https://garfieldnate.github.io/blog/2014/07/14/random-slice-of-culture-unicode-proposals/</guid>
       <description>So a couple of weeks ago I had a casual use for hentaigana and went looking to see if there were Unicode code points. Alas, there were none, but through Wikipedia I found that there was a proposal to include it. The proposal document includes relevant uses such as transcribing old documents, restaurant names and documents on calligraphy. Unfortunately the proposal hasn&amp;rsquo;t been accepted yet, but it did lead to an interesting discovery.</description>
     </item>
     
     <item>
       <title>Code Reading: pl2bat.pl</title>
-      <link>http://garfieldnate.github.io/blog/2014/07/13/code-reading-pl2bat.pl/</link>
+      <link>https://garfieldnate.github.io/blog/2014/07/13/code-reading-pl2bat.pl/</link>
       <pubDate>Sun, 13 Jul 2014 23:42:07 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2014/07/13/code-reading-pl2bat.pl/</guid>
+      <guid>https://garfieldnate.github.io/blog/2014/07/13/code-reading-pl2bat.pl/</guid>
       <description>When you install a Perl distribution from CPAN that comes with an executable script, Perl adds it to your path so it can be treated like any other command line program. On a *nix system, all that needs to be done for this to work is to set the script to be executable. Windows doesn&amp;rsquo;t have executable script files with shebang lines like *nix, however, so Perl generates a batch file.</description>
     </item>
     
     <item>
       <title>Code Reading: The Soar Parser</title>
-      <link>http://garfieldnate.github.io/blog/2014/07/12/code-reading-the-soar-parser/</link>
+      <link>https://garfieldnate.github.io/blog/2014/07/12/code-reading-the-soar-parser/</link>
       <pubDate>Sat, 12 Jul 2014 13:04:54 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2014/07/12/code-reading-the-soar-parser/</guid>
+      <guid>https://garfieldnate.github.io/blog/2014/07/12/code-reading-the-soar-parser/</guid>
       <description>I&amp;rsquo;ve thought for a while that it would be fun to write a series of &amp;ldquo;code reading&amp;rdquo; posts, where I try to read and understand how some large program works and explain my findings.
 To investigate the possibility of an upcoming project, I&amp;rsquo;ve been wanting to know how Soar parses productions, and if there&amp;rsquo;s any way to retrofit it to make a parser usable by various IDE&amp;rsquo;s. I have tried to make two separate parsers for Soar code already, and it just seems to be difficult to imitate the real thing.</description>
     </item>
     
     <item>
       <title>Using Octopress- One More Thing</title>
-      <link>http://garfieldnate.github.io/blog/2014/07/06/using-octopress-one-more-thing/</link>
+      <link>https://garfieldnate.github.io/blog/2014/07/06/using-octopress-one-more-thing/</link>
       <pubDate>Sun, 06 Jul 2014 14:46:39 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2014/07/06/using-octopress-one-more-thing/</guid>
+      <guid>https://garfieldnate.github.io/blog/2014/07/06/using-octopress-one-more-thing/</guid>
       <description>&amp;ldquo;Aiiiiyaaaa! Jacky! You did not install Ruuuubyyy. You need that to write your blog.&amp;rdquo;
 &amp;ldquo;I already install Ruby, uncle, but it still does not work. rake generate creates empty HTML file! Look, it&amp;rsquo;s broken!&amp;rdquo;
 1 2 3  &amp;gt;rake generate Generating... C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/posix-spawn-0.3.8/lib/posix/spawn.rb:162: warning: cannot close fd before spawn &amp;#39;which&amp;#39; is not recognized as an internal or external command, operable program or batch file.   Swat!
@@ -153,10 +153,10 @@ To investigate the possibility of an upcoming project, I&amp;rsquo;ve been wanti
     
     <item>
       <title>July 4, 2014: Internet and a Bike Ride</title>
-      <link>http://garfieldnate.github.io/blog/2014/07/04/july-4-2014-internet-and-a-bike-ride/</link>
+      <link>https://garfieldnate.github.io/blog/2014/07/04/july-4-2014-internet-and-a-bike-ride/</link>
       <pubDate>Fri, 04 Jul 2014 19:08:46 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2014/07/04/july-4-2014-internet-and-a-bike-ride/</guid>
+      <guid>https://garfieldnate.github.io/blog/2014/07/04/july-4-2014-internet-and-a-bike-ride/</guid>
       <description>Maybe I&amp;rsquo;ll manage to keep a somewhat OK journal if I write it on my blog&amp;hellip;
 Dear journal-that-everybody-can-read,
 Today we finally got internet in our apartment, which I may explain another time. A guy showed up at 9 o&amp;rsquo;clock sharp and installed it, after which I had to call the support center for help because their installation disk didn&amp;rsquo;t work (because I have English Windows?). The internet is blazing fast, and now I can work on online classes without taking a trip to Erika&amp;rsquo;s work.</description>
@@ -164,19 +164,19 @@ Today we finally got internet in our apartment, which I may explain another time
     
     <item>
       <title>Preparation: The Key to a Less Painful Windows Reinstall</title>
-      <link>http://garfieldnate.github.io/blog/2014/07/01/preparation-the-key-to-a-less-painful-windows-reinstall/</link>
+      <link>https://garfieldnate.github.io/blog/2014/07/01/preparation-the-key-to-a-less-painful-windows-reinstall/</link>
       <pubDate>Tue, 01 Jul 2014 21:00:38 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2014/07/01/preparation-the-key-to-a-less-painful-windows-reinstall/</guid>
+      <guid>https://garfieldnate.github.io/blog/2014/07/01/preparation-the-key-to-a-less-painful-windows-reinstall/</guid>
       <description>Recently I decided to work on an easy ticket in StepMania to get into the source code. It turned out that I (gasp!) actually needed to build the project on my computer, but of course I was missing required libraries: DirectX 9 and the DirectX SDK. No matter what I tried, neither of these would successfully install on my computer, and I decided that the only way to install it would be to reinstall Windows (which worked, but ugh!</description>
     </item>
     
     <item>
       <title>List Assignment in Scalar Context</title>
-      <link>http://garfieldnate.github.io/blog/2014/01/11/list-assignment-in-scalar-context/</link>
+      <link>https://garfieldnate.github.io/blog/2014/01/11/list-assignment-in-scalar-context/</link>
       <pubDate>Sat, 11 Jan 2014 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2014/01/11/list-assignment-in-scalar-context/</guid>
+      <guid>https://garfieldnate.github.io/blog/2014/01/11/list-assignment-in-scalar-context/</guid>
       <description>(Cross-posted on blogs.perl.org)
 This week I received some special help on SO in understanding how the goatse operator works. I was very thankful for everyone&amp;rsquo;s help. These two articles were also very helpful and I recommend reading them.
 Part of my confusion over the goatse operator was not knowing the difference between list and scalar assignment operators, which both are indicated via &amp;lsquo;=&amp;rsquo;. Further confusing is the fact that each can be used in either scalar or list context, so you can have list assignment in scalar context or scalar assignment in list context.</description>
@@ -184,50 +184,50 @@ Part of my confusion over the goatse operator was not knowing the difference bet
     
     <item>
       <title>Packaging XML::LibXML with PAR Packer on Windows</title>
-      <link>http://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on-windows/</link>
+      <link>https://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on-windows/</link>
       <pubDate>Tue, 27 Aug 2013 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on-windows/</guid>
+      <guid>https://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on-windows/</guid>
       <description>PAR Packer is an excellent utility for delivering your Perl scripts as standalone executables. A standalone executable is highly desired in, for example, a corporate environment where everyone needs a program you wrote but you can&amp;rsquo;t expect anyone to learn how to run Perl programs.
 A recent requirement at $work was for a standalone executable. Originally, I was supposed to let my coworker work his magic (and his ActiveState PerlPacker license), but the client required an all-open-source solution.</description>
     </item>
     
     <item>
       <title>The Extended Euclidian Algorithm in Perl</title>
-      <link>http://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl/</link>
+      <link>https://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl/</link>
       <pubDate>Mon, 15 Apr 2013 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl/</guid>
+      <guid>https://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl/</guid>
       <description>This week I learned about the extended Euclidian algorithm for finding a linear combination of two numbers that yields their GCD. For example, the GCD of 213 and 171 is 3, and -4*213 + 5*171 = 3. This algorithm is important in the RSA encryption scheme.
 I had quite a difficult time getting myself to fully understand how it works. I jumped between Wikipedia, my data structures textbook (don&amp;rsquo;t buy it), a YouTube video, and this excellent number theory class lecture.</description>
     </item>
     
     <item>
       <title>Running Perl with Sublime Text 2</title>
-      <link>http://garfieldnate.github.io/blog/2013/04/07/running-perl-with-sublime-text-2/</link>
+      <link>https://garfieldnate.github.io/blog/2013/04/07/running-perl-with-sublime-text-2/</link>
       <pubDate>Sun, 07 Apr 2013 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2013/04/07/running-perl-with-sublime-text-2/</guid>
+      <guid>https://garfieldnate.github.io/blog/2013/04/07/running-perl-with-sublime-text-2/</guid>
       <description>I&amp;rsquo;ve been having fun trying out Sublime Text. It&amp;rsquo;s pretty, fast, and extremely extensible.
 The first thing that I wanted was to be able to work well with Perl. I installed Package Control, followed by SublimeLinter, which has the perlcritic command built in. Making this useful requires a little finagling; perlcritic is by no means a quick program (being a really thorough linter for a language which is complex to parse), and the defaults for SublimeLinter cause it run over and over again as you type.</description>
     </item>
     
     <item>
       <title>Managing Global State: the Flip-Flop Operator</title>
-      <link>http://garfieldnate.github.io/blog/2013/02/03/managing-global-state-the-flip-flop-operator/</link>
+      <link>https://garfieldnate.github.io/blog/2013/02/03/managing-global-state-the-flip-flop-operator/</link>
       <pubDate>Sun, 03 Feb 2013 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2013/02/03/managing-global-state-the-flip-flop-operator/</guid>
+      <guid>https://garfieldnate.github.io/blog/2013/02/03/managing-global-state-the-flip-flop-operator/</guid>
       <description>Today I was faced with another mysterious failing test while writing a test suite for some legacy code. I knew it had to be a problem with persisting state because this particular test only failed when processing a particular data set with the same object which was just used to process another set.
 My first step to trying to fix this was to delete all of the values stored in the object during the processing procedure:</description>
     </item>
     
     <item>
       <title>When not to use Perl&#39;s Implicit close; Suffering from Buffering</title>
-      <link>http://garfieldnate.github.io/blog/2013/01/27/when-not-to-use-perls-implicit-close-suffering-from-buffering/</link>
+      <link>https://garfieldnate.github.io/blog/2013/01/27/when-not-to-use-perls-implicit-close-suffering-from-buffering/</link>
       <pubDate>Sun, 27 Jan 2013 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2013/01/27/when-not-to-use-perls-implicit-close-suffering-from-buffering/</guid>
+      <guid>https://garfieldnate.github.io/blog/2013/01/27/when-not-to-use-perls-implicit-close-suffering-from-buffering/</guid>
       <description>This post is a quick note on a bug I had difficulty tracking down.
 One nice feature of Perl, introduced long before my time, is that of implicit closing. Perl closes filehandles for you when you forget (maybe on purpose). So the following is not a resource leak as a standalone script:
 1 2 3  open my $file, &amp;#39;&amp;gt;utf8&amp;#39;, &amp;#39;/path/to/new/file&amp;#39; or die &amp;#34;couldn&amp;#39;t open file: $!&amp;#34;; print $file &amp;#39;Hello!&amp;#39;;   When the script finishes, Perl will close $file for you, so you can be nice and lazy.</description>
@@ -235,10 +235,10 @@ One nice feature of Perl, introduced long before my time, is that of implicit cl
     
     <item>
       <title>Testing Perl Distributions with Test Subdirectories</title>
-      <link>http://garfieldnate.github.io/blog/2013/01/20/testing-perl-distributions-with-test-subdirectories/</link>
+      <link>https://garfieldnate.github.io/blog/2013/01/20/testing-perl-distributions-with-test-subdirectories/</link>
       <pubDate>Sun, 20 Jan 2013 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2013/01/20/testing-perl-distributions-with-test-subdirectories/</guid>
+      <guid>https://garfieldnate.github.io/blog/2013/01/20/testing-perl-distributions-with-test-subdirectories/</guid>
       <description>Normally I run my test suites with the prove utility:
 prove -vl --merge
 The v option turns on verbose processing, and the l option adds lib/ to the include path. provethen runs all of the tests in the t/ folder.
@@ -247,39 +247,39 @@ Today, I had a new problem. I merged multiple distributions into one (without lo
     
     <item>
       <title>Perl Tip: Don&#39;t Use a Makefile for Your Module</title>
-      <link>http://garfieldnate.github.io/blog/2012/08/17/perl-tip-dont-use-a-makefile-for-your-module/</link>
+      <link>https://garfieldnate.github.io/blog/2012/08/17/perl-tip-dont-use-a-makefile-for-your-module/</link>
       <pubDate>Fri, 17 Aug 2012 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2012/08/17/perl-tip-dont-use-a-makefile-for-your-module/</guid>
+      <guid>https://garfieldnate.github.io/blog/2012/08/17/perl-tip-dont-use-a-makefile-for-your-module/</guid>
       <description>During my internship at SoarTech, I got a chance to learn a lot more about creating Perl modules. I put together a package of scripts for converting old file formats for speech recognition grammars, and I thought it worked beautifully. Of course, to start my module I used the classic tool h2xs:
 h2xs -X -n Foo::Bar  My final code was well tested, and quick to install. I asked my co-worker to install it on his machine, and it was just as easy to use.</description>
     </item>
     
     <item>
       <title>Graphing grammar parses from CMU Sphinx 4</title>
-      <link>http://garfieldnate.github.io/blog/2012/06/29/graphing-grammar-parses-from-cmu-sphinx-4/</link>
+      <link>https://garfieldnate.github.io/blog/2012/06/29/graphing-grammar-parses-from-cmu-sphinx-4/</link>
       <pubDate>Fri, 29 Jun 2012 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2012/06/29/graphing-grammar-parses-from-cmu-sphinx-4/</guid>
+      <guid>https://garfieldnate.github.io/blog/2012/06/29/graphing-grammar-parses-from-cmu-sphinx-4/</guid>
       <description>CMU Sphinx comes with some neat grammar parsing stuff that I never knew about. It uses JSGF (as detailed here) and comes with several demos, showing how to use a basic grammar, arc weights, tags, and even getting a javascript representation of the final parse! At work I&amp;rsquo;ve been needing to do some custom processing of the grammar output, but it was more conceptually difficult than I&amp;rsquo;d planned. So after figuring out how to traverse a parse tree, I decided to write a little application to print out the parse of a given sentence.</description>
     </item>
     
     <item>
       <title>Getting WordNet Verb Frames with JAWS</title>
-      <link>http://garfieldnate.github.io/blog/2012/05/11/getting-wordnet-verb-frames-with-jaws/</link>
+      <link>https://garfieldnate.github.io/blog/2012/05/11/getting-wordnet-verb-frames-with-jaws/</link>
       <pubDate>Fri, 11 May 2012 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2012/05/11/getting-wordnet-verb-frames-with-jaws/</guid>
+      <guid>https://garfieldnate.github.io/blog/2012/05/11/getting-wordnet-verb-frames-with-jaws/</guid>
       <description>I love using JAWS to access WordNet. It has a rather extensive API, runs quickly, and doesn&amp;rsquo;t require too much configuration. All you have to do isdownload the Jaws binary jar and WordNet, and then specify to JAWS where the WordNet files are (I will demonstrate this later).
 One thing that did take a while to figure out was how to get verb frames from it. A verb frame is an indication of how the verb may be used.</description>
     </item>
     
     <item>
       <title>Review: The Development of Language Processing Strategies: A Cross-linguistic Study Between Japanese and English</title>
-      <link>http://garfieldnate.github.io/blog/2011/12/30/review-the-development-of-language-processing-strategies-a-cross-linguistic-study-between-japanese-and-english/</link>
+      <link>https://garfieldnate.github.io/blog/2011/12/30/review-the-development-of-language-processing-strategies-a-cross-linguistic-study-between-japanese-and-english/</link>
       <pubDate>Fri, 30 Dec 2011 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2011/12/30/review-the-development-of-language-processing-strategies-a-cross-linguistic-study-between-japanese-and-english/</guid>
+      <guid>https://garfieldnate.github.io/blog/2011/12/30/review-the-development-of-language-processing-strategies-a-cross-linguistic-study-between-japanese-and-english/</guid>
       <description>by Reiko Mazuka
 My rating: 4 of 5 stars
 This is basically an updated version of Mazuka&amp;rsquo;s PHD thesis. This book is a significant work on human sentence processing involving data from a head final and a head initial language.
@@ -288,10 +288,10 @@ Mazuka presents data on sentence processing experiments with English speaking ad
     
     <item>
       <title>Itadaki GoSen and IPADIC 2.7</title>
-      <link>http://garfieldnate.github.io/blog/2011/11/06/itadaki-gosen-and-ipadic-2.7/</link>
+      <link>https://garfieldnate.github.io/blog/2011/11/06/itadaki-gosen-and-ipadic-2.7/</link>
       <pubDate>Sun, 06 Nov 2011 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2011/11/06/itadaki-gosen-and-ipadic-2.7/</guid>
+      <guid>https://garfieldnate.github.io/blog/2011/11/06/itadaki-gosen-and-ipadic-2.7/</guid>
       <description>Update3: I&amp;rsquo;ve forked the Itadaki project on GitHub to keep track of it better.
 Update2: I made an executable JAR for GoSen that runs the ReadingProcessorDemo. It requires Java 6; just unzip the contents of this zip file to your computer and click on the jar file.
 Update1: The IPADIC dictionary is no longer available from its original location. It has been replaced by the NAIST dictionary. I have edited the following post to reflect the needed changes.</description>
@@ -299,57 +299,57 @@ Update1: The IPADIC dictionary is no longer available from its original location
     
     <item>
       <title>List of Japanese NLP tools</title>
-      <link>http://garfieldnate.github.io/blog/2011/11/06/list-of-japanese-nlp-tools/</link>
+      <link>https://garfieldnate.github.io/blog/2011/11/06/list-of-japanese-nlp-tools/</link>
       <pubDate>Sun, 06 Nov 2011 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2011/11/06/list-of-japanese-nlp-tools/</guid>
+      <guid>https://garfieldnate.github.io/blog/2011/11/06/list-of-japanese-nlp-tools/</guid>
       <description>I haven&amp;rsquo;t tried out all of these so I don&amp;rsquo;t have comments for everything, but hopefully this list will come in useful for someone.
 Morphological analyzers/tokenizers  Itadaki: a Japanese processing module for OpenOffice. I&amp;rsquo;ve done a tiny bit of work and issue documentation on a fork here, and someone forked that to work with a Japanese/German dictionary here. GoSen: Uses sen as a base, and is part of Itadaki; a pure Java version of ChaSen.</description>
     </item>
     
     <item>
       <title>CS 240 Web Crawler at BYU</title>
-      <link>http://garfieldnate.github.io/blog/2011/11/03/cs-240-web-crawler-at-byu/</link>
+      <link>https://garfieldnate.github.io/blog/2011/11/03/cs-240-web-crawler-at-byu/</link>
       <pubDate>Thu, 03 Nov 2011 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2011/11/03/cs-240-web-crawler-at-byu/</guid>
+      <guid>https://garfieldnate.github.io/blog/2011/11/03/cs-240-web-crawler-at-byu/</guid>
       <description>I recently polished off the web crawler project for CS 240 at BYU. It&amp;rsquo;s probably the most talked-about project in the CS major, and the cause of so many students retaking the class.
 The specification for the web crawler assignment can be found here. Basically, given a start URL, the crawler finds every link on a page, follows them, downloads the pages, and indexes each of the words on a page, as long as they are not in a given stop words file; then it follows the links from that page, and so on.</description>
     </item>
     
     <item>
       <title>String Allignment with Edit Operations</title>
-      <link>http://garfieldnate.github.io/blog/2011/09/01/string-allignment-with-edit-operations/</link>
+      <link>https://garfieldnate.github.io/blog/2011/09/01/string-allignment-with-edit-operations/</link>
       <pubDate>Thu, 01 Sep 2011 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2011/09/01/string-allignment-with-edit-operations/</guid>
+      <guid>https://garfieldnate.github.io/blog/2011/09/01/string-allignment-with-edit-operations/</guid>
       <description>A common way to measure the distance between two strings is using Levenshtein distance. Levenshtein distance is the minimum number of deletions, insertions, and substitutions needed to transform one string into another. Finding the distance between two strings is useful in certain applications such as spell checking (a word processor will suggest dictionary words that are close to your misspelled word). See wikipedia for more details and an example of Levenshtein distance calculation.</description>
     </item>
     
     <item>
       <title>Distributional Statistics of Log Values in Linear Domain</title>
-      <link>http://garfieldnate.github.io/blog/2011/08/17/distributional-statistics-of-log-values-in-linear-domain/</link>
+      <link>https://garfieldnate.github.io/blog/2011/08/17/distributional-statistics-of-log-values-in-linear-domain/</link>
       <pubDate>Wed, 17 Aug 2011 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2011/08/17/distributional-statistics-of-log-values-in-linear-domain/</guid>
+      <guid>https://garfieldnate.github.io/blog/2011/08/17/distributional-statistics-of-log-values-in-linear-domain/</guid>
       <description>Quite a long title, sorry. Basically, I had a bunch of log values (and they needed to stay logarithmic to avoid underflow) and I wanted to compute distributional statistics on them, like mean, variance and kurtosis. I wasn&amp;rsquo;t sure if it would be valid to compute these kinds of statistics on the numbers as is, so I created a class to do all of the calculations in linear space. I&amp;rsquo;ll post the result here, though there may be bugs (tell me if you find some!</description>
     </item>
     
     <item>
       <title>Parsing in a Cognitive Modeller</title>
-      <link>http://garfieldnate.github.io/blog/2011/07/29/parsing-in-a-cognitive-modeller/</link>
+      <link>https://garfieldnate.github.io/blog/2011/07/29/parsing-in-a-cognitive-modeller/</link>
       <pubDate>Fri, 29 Jul 2011 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2011/07/29/parsing-in-a-cognitive-modeller/</guid>
+      <guid>https://garfieldnate.github.io/blog/2011/07/29/parsing-in-a-cognitive-modeller/</guid>
       <description>A colleague of mine recently expressed interest in the research I am doing for an honors thesis. &amp;ldquo;Syntactic parsing in a cognitive modeling system&amp;rdquo; isn&amp;rsquo;t exactly a crystal clear expression of my work, after all. I embarrassed myself by throwing out a few cursory statements before trailing off and ending with a &amp;ldquo;it&amp;rsquo;s kind of hard to explain&amp;rdquo;. Why can&amp;rsquo;t I explain my own work? Partly because I don&amp;rsquo;t explain it very often and therefore I&amp;rsquo;m bad at it.</description>
     </item>
     
     <item>
       <title>How to say &#34;P.S. You Suck&#34; in Japanese</title>
-      <link>http://garfieldnate.github.io/blog/2011/07/24/how-to-say-p.s.-you-suck-in-japanese/</link>
+      <link>https://garfieldnate.github.io/blog/2011/07/24/how-to-say-p.s.-you-suck-in-japanese/</link>
       <pubDate>Sun, 24 Jul 2011 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2011/07/24/how-to-say-p.s.-you-suck-in-japanese/</guid>
+      <guid>https://garfieldnate.github.io/blog/2011/07/24/how-to-say-p.s.-you-suck-in-japanese/</guid>
       <description>This post will focus on two very interesting vocabulary items in Japanese; I call them &amp;ldquo;p.s. you suck&amp;rdquo; suffixes, though I&amp;rsquo;m sure there is a better word to describe them.
 Adding a め to a noun insults the noun it is suffixed to:
  馬鹿め！[&amp;ldquo;baka-me&amp;rdquo;, idiot!] この小娘め！[&amp;ldquo;kono komusume-me!&amp;rdquo;, stupid girl!] 太郎め！ [&amp;ldquo;Tarou-me!&amp;rdquo;, dang Tarou!]  The verb [&amp;ldquo;yagaru&amp;rdquo;] attaches to the base II or connective form of verbs and adds the same feeling as the め suffix:</description>
@@ -357,19 +357,19 @@ Adding a め to a noun insults the noun it is suffixed to:
     
     <item>
       <title>Japanese Stackexchange</title>
-      <link>http://garfieldnate.github.io/blog/2011/07/21/japanese-stackexchange/</link>
+      <link>https://garfieldnate.github.io/blog/2011/07/21/japanese-stackexchange/</link>
       <pubDate>Thu, 21 Jul 2011 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2011/07/21/japanese-stackexchange/</guid>
+      <guid>https://garfieldnate.github.io/blog/2011/07/21/japanese-stackexchange/</guid>
       <description>Stackoverflow is one of those sites born of an idea so golden you can hardly believe nobody has ever done it before. Using a simple system of reputation, priveleges and badges, users are encouraged to post answers to on-topic questions for the benefit of the asker and the internet community at large. I go there whenever I need help with a random programming problem. Questions are usually answered quickly because people want the points, and I don&amp;rsquo;t have to feel bad about bothering anyone because asking a question gives someone the opportunity to build their reputation.</description>
     </item>
     
     <item>
       <title>Some Quốc Ngữ History</title>
-      <link>http://garfieldnate.github.io/blog/2011/06/10/some-qu%E1%BB%91c-ng%E1%BB%AF-history/</link>
+      <link>https://garfieldnate.github.io/blog/2011/06/10/some-qu%E1%BB%91c-ng%E1%BB%AF-history/</link>
       <pubDate>Fri, 10 Jun 2011 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2011/06/10/some-qu%E1%BB%91c-ng%E1%BB%AF-history/</guid>
+      <guid>https://garfieldnate.github.io/blog/2011/06/10/some-qu%E1%BB%91c-ng%E1%BB%AF-history/</guid>
       <description>I had the privelege of studying Vietnamese for 2 semesters at my university. During the course of my studies, I had to learn the system of writing Vietnamese known as Quốc Ngữ. Seeing as how the older writing system (Chữ Nôm), which employed Chinese characters, was used up until the beginning of the 20th century, I could not understand why the spelling of such a new system was so irregular. Recently, however, I began reading An Introduction to Vietnamese Literature (Duran and Huan, 1985), which contains a section on the evolution of the quoc ngu system.</description>
     </item>
     

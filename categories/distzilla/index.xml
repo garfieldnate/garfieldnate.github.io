@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Distzilla on Nate Glenn&#39;s Blog</title>
-    <link>http://garfieldnate.github.io/categories/distzilla/</link>
+    <link>https://garfieldnate.github.io/categories/distzilla/</link>
     <description>Recent content in Distzilla on Nate Glenn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -10,15 +10,15 @@
     <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
     <lastBuildDate>Sun, 20 Jan 2013 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://garfieldnate.github.io/categories/distzilla/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://garfieldnate.github.io/categories/distzilla/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Testing Perl Distributions with Test Subdirectories</title>
-      <link>http://garfieldnate.github.io/blog/2013/01/20/testing-perl-distributions-with-test-subdirectories/</link>
+      <link>https://garfieldnate.github.io/blog/2013/01/20/testing-perl-distributions-with-test-subdirectories/</link>
       <pubDate>Sun, 20 Jan 2013 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2013/01/20/testing-perl-distributions-with-test-subdirectories/</guid>
+      <guid>https://garfieldnate.github.io/blog/2013/01/20/testing-perl-distributions-with-test-subdirectories/</guid>
       <description>Normally I run my test suites with the prove utility:
 prove -vl --merge
 The v option turns on verbose processing, and the l option adds lib/ to the include path. provethen runs all of the tests in the t/ folder.

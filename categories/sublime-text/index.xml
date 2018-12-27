@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sublime Text on Nate Glenn&#39;s Blog</title>
-    <link>http://garfieldnate.github.io/categories/sublime-text/</link>
+    <link>https://garfieldnate.github.io/categories/sublime-text/</link>
     <description>Recent content in Sublime Text on Nate Glenn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -10,25 +10,25 @@
     <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
     <lastBuildDate>Sun, 15 Mar 2015 22:59:35 +0000</lastBuildDate>
     
-	<atom:link href="http://garfieldnate.github.io/categories/sublime-text/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://garfieldnate.github.io/categories/sublime-text/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Notes on Writing a Syntax Highlighter for Sublime Text</title>
-      <link>http://garfieldnate.github.io/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/</link>
+      <link>https://garfieldnate.github.io/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/</link>
       <pubDate>Sun, 15 Mar 2015 22:59:35 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/</guid>
+      <guid>https://garfieldnate.github.io/blog/2015/03/15/notes-on-writing-a-syntax-highlighter-for-sublime-text/</guid>
       <description>I recently released the Soar Tools package for Sublime Text, and I took a few notes that might help the next author. Sublime Text is pretty awesome in a lot of ways, but the documentation is more tutorial + forums than it is a thorough explanation. I mainly followed the directions here. My tips are as follows:
  Don&amp;rsquo;t try to copy that BNF grammar into tmLanguage format. It&amp;rsquo;s not designed for specifying grammars, it&amp;rsquo;s designed for highlighting.</description>
     </item>
     
     <item>
       <title>Running Perl with Sublime Text 2</title>
-      <link>http://garfieldnate.github.io/blog/2013/04/07/running-perl-with-sublime-text-2/</link>
+      <link>https://garfieldnate.github.io/blog/2013/04/07/running-perl-with-sublime-text-2/</link>
       <pubDate>Sun, 07 Apr 2013 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2013/04/07/running-perl-with-sublime-text-2/</guid>
+      <guid>https://garfieldnate.github.io/blog/2013/04/07/running-perl-with-sublime-text-2/</guid>
       <description>I&amp;rsquo;ve been having fun trying out Sublime Text. It&amp;rsquo;s pretty, fast, and extremely extensible.
 The first thing that I wanted was to be able to work well with Perl. I installed Package Control, followed by SublimeLinter, which has the perlcritic command built in. Making this useful requires a little finagling; perlcritic is by no means a quick program (being a really thorough linter for a language which is complex to parse), and the defaults for SublimeLinter cause it run over and over again as you type.</description>
     </item>

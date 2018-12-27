@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Devops on Nate Glenn&#39;s Blog</title>
-    <link>http://garfieldnate.github.io/categories/devops/</link>
+    <link>https://garfieldnate.github.io/categories/devops/</link>
     <description>Recent content in Devops on Nate Glenn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -10,15 +10,15 @@
     <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
     <lastBuildDate>Tue, 01 Jul 2014 21:00:38 +0000</lastBuildDate>
     
-	<atom:link href="http://garfieldnate.github.io/categories/devops/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://garfieldnate.github.io/categories/devops/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Preparation: The Key to a Less Painful Windows Reinstall</title>
-      <link>http://garfieldnate.github.io/blog/2014/07/01/preparation-the-key-to-a-less-painful-windows-reinstall/</link>
+      <link>https://garfieldnate.github.io/blog/2014/07/01/preparation-the-key-to-a-less-painful-windows-reinstall/</link>
       <pubDate>Tue, 01 Jul 2014 21:00:38 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2014/07/01/preparation-the-key-to-a-less-painful-windows-reinstall/</guid>
+      <guid>https://garfieldnate.github.io/blog/2014/07/01/preparation-the-key-to-a-less-painful-windows-reinstall/</guid>
       <description>Recently I decided to work on an easy ticket in StepMania to get into the source code. It turned out that I (gasp!) actually needed to build the project on my computer, but of course I was missing required libraries: DirectX 9 and the DirectX SDK. No matter what I tried, neither of these would successfully install on my computer, and I decided that the only way to install it would be to reinstall Windows (which worked, but ugh!</description>
     </item>
     

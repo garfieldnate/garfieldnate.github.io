@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Wordnet on Nate Glenn&#39;s Blog</title>
-    <link>http://garfieldnate.github.io/categories/wordnet/</link>
+    <link>https://garfieldnate.github.io/categories/wordnet/</link>
     <description>Recent content in Wordnet on Nate Glenn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -10,15 +10,15 @@
     <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
     <lastBuildDate>Fri, 11 May 2012 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://garfieldnate.github.io/categories/wordnet/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://garfieldnate.github.io/categories/wordnet/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Getting WordNet Verb Frames with JAWS</title>
-      <link>http://garfieldnate.github.io/blog/2012/05/11/getting-wordnet-verb-frames-with-jaws/</link>
+      <link>https://garfieldnate.github.io/blog/2012/05/11/getting-wordnet-verb-frames-with-jaws/</link>
       <pubDate>Fri, 11 May 2012 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2012/05/11/getting-wordnet-verb-frames-with-jaws/</guid>
+      <guid>https://garfieldnate.github.io/blog/2012/05/11/getting-wordnet-verb-frames-with-jaws/</guid>
       <description>I love using JAWS to access WordNet. It has a rather extensive API, runs quickly, and doesn&amp;rsquo;t require too much configuration. All you have to do isdownload the Jaws binary jar and WordNet, and then specify to JAWS where the WordNet files are (I will demonstrate this later).
 One thing that did take a while to figure out was how to get verb frames from it. A verb frame is an indication of how the verb may be used.</description>
     </item>

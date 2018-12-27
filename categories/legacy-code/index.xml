@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Legacy Code on Nate Glenn&#39;s Blog</title>
-    <link>http://garfieldnate.github.io/categories/legacy-code/</link>
+    <link>https://garfieldnate.github.io/categories/legacy-code/</link>
     <description>Recent content in Legacy Code on Nate Glenn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -10,15 +10,15 @@
     <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
     <lastBuildDate>Sun, 27 Jul 2014 19:51:53 +0000</lastBuildDate>
     
-	<atom:link href="http://garfieldnate.github.io/categories/legacy-code/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://garfieldnate.github.io/categories/legacy-code/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Refactoring the Soar Lexer</title>
-      <link>http://garfieldnate.github.io/blog/2014/07/27/refactoring-the-soar-lexer/</link>
+      <link>https://garfieldnate.github.io/blog/2014/07/27/refactoring-the-soar-lexer/</link>
       <pubDate>Sun, 27 Jul 2014 19:51:53 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2014/07/27/refactoring-the-soar-lexer/</guid>
+      <guid>https://garfieldnate.github.io/blog/2014/07/27/refactoring-the-soar-lexer/</guid>
       <description>After my last writeup on how Soar parses Soar code, I decided to dive in and try and refactor it, starting with the lexer (and here&amp;rsquo;s the resulting PR). I haven&amp;rsquo;t worked with C/C++ in a while, and a good part of the code I changed was close to my age, so it was an interesting learning experience for me.
 The lexer used global state stored via an agent to keep track of the current input character and lexeme as well as to remember line and column numbers.</description>
     </item>

@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Classic on Nate Glenn&#39;s Blog</title>
-    <link>http://garfieldnate.github.io/categories/classic/</link>
+    <link>https://garfieldnate.github.io/categories/classic/</link>
     <description>Recent content in Classic on Nate Glenn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -10,15 +10,15 @@
     <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
     <lastBuildDate>Wed, 13 Aug 2014 12:50:29 +0000</lastBuildDate>
     
-	<atom:link href="http://garfieldnate.github.io/categories/classic/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://garfieldnate.github.io/categories/classic/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Knuth Classics are Freely Available</title>
-      <link>http://garfieldnate.github.io/blog/2014/08/13/knuth-classics-are-freely-available/</link>
+      <link>https://garfieldnate.github.io/blog/2014/08/13/knuth-classics-are-freely-available/</link>
       <pubDate>Wed, 13 Aug 2014 12:50:29 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2014/08/13/knuth-classics-are-freely-available/</guid>
+      <guid>https://garfieldnate.github.io/blog/2014/08/13/knuth-classics-are-freely-available/</guid>
       <description>Donald Knuth wrote TeX in C/WEB. WEB is his system for writing literate programs which become both source code and typeset documents explaining the program&amp;rsquo;s operation. Some of his programs have been published: TeX: The Program and Metafont: The Program. Others have not: I don&amp;rsquo;t believe Bibtex was published in book form, for example.
 All of these works are available online, though you have to generate the PDF yourself. The TeX live distribution (included in MikTeX, among others) comes with Knuth&amp;rsquo;s WEB system for doing this.</description>
     </item>

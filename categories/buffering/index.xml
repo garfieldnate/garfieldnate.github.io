@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Buffering on Nate Glenn&#39;s Blog</title>
-    <link>http://garfieldnate.github.io/categories/buffering/</link>
+    <link>https://garfieldnate.github.io/categories/buffering/</link>
     <description>Recent content in Buffering on Nate Glenn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -10,15 +10,15 @@
     <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
     <lastBuildDate>Sun, 27 Jan 2013 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://garfieldnate.github.io/categories/buffering/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://garfieldnate.github.io/categories/buffering/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>When not to use Perl&#39;s Implicit close; Suffering from Buffering</title>
-      <link>http://garfieldnate.github.io/blog/2013/01/27/when-not-to-use-perls-implicit-close-suffering-from-buffering/</link>
+      <link>https://garfieldnate.github.io/blog/2013/01/27/when-not-to-use-perls-implicit-close-suffering-from-buffering/</link>
       <pubDate>Sun, 27 Jan 2013 00:00:00 +0000</pubDate>
       <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
-      <guid>http://garfieldnate.github.io/blog/2013/01/27/when-not-to-use-perls-implicit-close-suffering-from-buffering/</guid>
+      <guid>https://garfieldnate.github.io/blog/2013/01/27/when-not-to-use-perls-implicit-close-suffering-from-buffering/</guid>
       <description>This post is a quick note on a bug I had difficulty tracking down.
 One nice feature of Perl, introduced long before my time, is that of implicit closing. Perl closes filehandles for you when you forget (maybe on purpose). So the following is not a resource leak as a standalone script:
 1 2 3  open my $file, &amp;#39;&amp;gt;utf8&amp;#39;, &amp;#39;/path/to/new/file&amp;#39; or die &amp;#34;couldn&amp;#39;t open file: $!&amp;#34;; print $file &amp;#39;Hello!&amp;#39;;   When the script finishes, Perl will close $file for you, so you can be nice and lazy.</description>
