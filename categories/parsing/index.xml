@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Parsing on Nate Glenn&#39;s Blog</title>
+    <link>http://garfieldnate.github.io/categories/parsing/</link>
+    <description>Recent content in Parsing on Nate Glenn&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <managingEditor>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</managingEditor>
+    <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
+    <lastBuildDate>Sat, 12 Jul 2014 13:04:54 +0000</lastBuildDate>
+    
+	<atom:link href="http://garfieldnate.github.io/categories/parsing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Code Reading: The Soar Parser</title>
+      <link>http://garfieldnate.github.io/blog/2014/07/12/code-reading-the-soar-parser/</link>
+      <pubDate>Sat, 12 Jul 2014 13:04:54 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2014/07/12/code-reading-the-soar-parser/</guid>
+      <description>I&amp;rsquo;ve thought for a while that it would be fun to write a series of &amp;ldquo;code reading&amp;rdquo; posts, where I try to read and understand how some large program works and explain my findings.
+To investigate the possibility of an upcoming project, I&amp;rsquo;ve been wanting to know how Soar parses productions, and if there&amp;rsquo;s any way to retrofit it to make a parser usable by various IDE&amp;rsquo;s. I have tried to make two separate parsers for Soar code already, and it just seems to be difficult to imitate the real thing.</description>
+    </item>
+    
+    <item>
+      <title>Graphing grammar parses from CMU Sphinx 4</title>
+      <link>http://garfieldnate.github.io/blog/2012/06/29/graphing-grammar-parses-from-cmu-sphinx-4/</link>
+      <pubDate>Fri, 29 Jun 2012 00:00:00 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2012/06/29/graphing-grammar-parses-from-cmu-sphinx-4/</guid>
+      <description>CMU Sphinx comes with some neat grammar parsing stuff that I never knew about. It uses JSGF (as detailed here) and comes with several demos, showing how to use a basic grammar, arc weights, tags, and even getting a javascript representation of the final parse! At work I&amp;rsquo;ve been needing to do some custom processing of the grammar output, but it was more conceptually difficult than I&amp;rsquo;d planned. So after figuring out how to traverse a parse tree, I decided to write a little application to print out the parse of a given sentence.</description>
+    </item>
+    
+    <item>
+      <title>Parsing in a Cognitive Modeller</title>
+      <link>http://garfieldnate.github.io/blog/2011/07/29/parsing-in-a-cognitive-modeller/</link>
+      <pubDate>Fri, 29 Jul 2011 00:00:00 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2011/07/29/parsing-in-a-cognitive-modeller/</guid>
+      <description>A colleague of mine recently expressed interest in the research I am doing for an honors thesis. &amp;ldquo;Syntactic parsing in a cognitive modeling system&amp;rdquo; isn&amp;rsquo;t exactly a crystal clear expression of my work, after all. I embarrassed myself by throwing out a few cursory statements before trailing off and ending with a &amp;ldquo;it&amp;rsquo;s kind of hard to explain&amp;rdquo;. Why can&amp;rsquo;t I explain my own work? Partly because I don&amp;rsquo;t explain it very often and therefore I&amp;rsquo;m bad at it.</description>
+    </item>
+    
+  </channel>
+</rss>

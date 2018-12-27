@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sentence Processing on Nate Glenn&#39;s Blog</title>
+    <link>http://garfieldnate.github.io/categories/sentence-processing/</link>
+    <description>Recent content in Sentence Processing on Nate Glenn&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <managingEditor>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</managingEditor>
+    <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
+    <lastBuildDate>Fri, 30 Dec 2011 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://garfieldnate.github.io/categories/sentence-processing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Review: The Development of Language Processing Strategies: A Cross-linguistic Study Between Japanese and English</title>
+      <link>http://garfieldnate.github.io/blog/2011/12/30/review-the-development-of-language-processing-strategies-a-cross-linguistic-study-between-japanese-and-english/</link>
+      <pubDate>Fri, 30 Dec 2011 00:00:00 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2011/12/30/review-the-development-of-language-processing-strategies-a-cross-linguistic-study-between-japanese-and-english/</guid>
+      <description>by Reiko Mazuka
+My rating: 4 of 5 stars
+This is basically an updated version of Mazuka&amp;rsquo;s PHD thesis. This book is a significant work on human sentence processing involving data from a head final and a head initial language.
+Mazuka presents data on sentence processing experiments with English speaking adults and Japanese speaking children and adults. She shows that sentence processing strategies are the same in children and adults (though their ability differs with age), and that sentence processing strategies differ cross-linguistically.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Notes on Writing a Syntax Highlighter for Sublime Text">
+    <meta name="author" content="Nathan Glenn">
+
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <title>Notes on Writing a Syntax Highlighter for Sublime Text &middot; Nate Glenn&#39;s Blog</title>
+
+   	
+    
+        <link rel="stylesheet" href="http://garfieldnate.github.io//css/theme/superhero.css">
+    
+
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/solid.js" integrity="sha384-F4BRNf3onawQt7LDHDJm/hwm3wBtbLIfGk1VSB/3nn3E+7Rox1YpYcKJMsmHBJIl" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/regular.js" integrity="sha384-V+AkgA1cZ+p3DRK63AHCaXvO68V7B5eHoxl7QVN21zftbkFn/sGAIVR7vmQL3Zhp" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/brands.js" integrity="sha384-VLgz+MgaFCnsFLiBwE3ItNouuqbWV2ZnIqfsA6QRHksEAQfgbcoaQ4PP0ZeS0zS5" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/fontawesome.js" integrity="sha384-treYPdjUrP4rW5q82SnECO7TPVAz4bpas16yuE9F5o7CeBn2YYw1yr5oC8s8Mf8t" crossorigin="anonymous"></script>
+
+   	
+   	<link rel="stylesheet" href="http://garfieldnate.github.io//css/style.css">
+
+
+    
+    <script src="http://garfieldnate.github.io//js/jquery.min-2.1.4.js"></script>
+    <script src="http://garfieldnate.github.io//js/bootstrap.min-3.3.5.js"></script>
+    <script type="text/javascript" src="http://garfieldnate.github.io//js/jquery.githubRepoWidget.min.js"></script>
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Nate Glenn&#39;s Blog" />
+</head>
+<body lang="en-US">
+    
+    
+<div class="container">
+    <div class="row">
+        <div class="navbar navbar-default " role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://garfieldnate.github.io/">Nate Glenn&#39;s Blog</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://garfieldnate.github.io/">Home</a></li>
+                    <li><a href="http://garfieldnate.github.io//about/">About</a></li>
+                    <li><a href="http://garfieldnate.github.io//post/">Archive</a></li>
+                    <li><a href="http://garfieldnate.github.io//resume/resume-en.html">Resume</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<h3>Notes on Writing a Syntax Highlighter for Sublime Text</h3>
+				<span class="label label-primary">March 15, 2015</span> in
+				
+					
+					<a href="/categories/sublime-text">Sublime Text</a>
+				
+					 , 
+					<a href="/categories/packages">packages</a>
+				
+					 , 
+					<a href="/categories/tmlanguage">tmLanguage</a>
+				
+					 , 
+					<a href="/categories/syntax-highlighting">syntax highlighting</a>
+				
+					 , 
+					<a href="/categories/bnf">BNF</a>
+				
+					 , 
+					<a href="/categories/grammar">grammar</a>
+				
+					 , 
+					<a href="/categories/soar">Soar</a>
+				
+				
+			</small>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<br>
+			<p>I recently released the <a href="http://garfieldnate.github.io/Sublime-Soar-Tools/">Soar Tools</a> package for Sublime Text, and I took a few notes that might help the next author. Sublime Text is pretty awesome in a lot of ways, but the documentation is more tutorial + forums than it is a thorough explanation. I mainly followed the directions <a href="http://sublime-text-unofficial-documentation.readthedocs.org/en/latest/extensibility/syntaxdefs.html">here</a>. My tips are as follows:</p>
+
+<ul>
+<li>Don&rsquo;t try to copy that BNF grammar into tmLanguage format. It&rsquo;s not designed for specifying grammars, it&rsquo;s designed for highlighting. That means that it&rsquo;s robust and will highlight while you&rsquo;re typing instead of waiting until you have a compilable program to highlight. This is a big advantage, especially for Soar, where there&rsquo;s a lot of typing to get a production sourcable. Instead of making a fully recursive grammar, pick out the few big areas that should be treated differently, such as the inside of a class or other curly-braced section, and detect them in the main <code>patterns</code> list, parsing the insides with patterns in the <code>repository</code>.</li>
+
+<li><p>Be careful about the YAML syntax. It looks simple, but you can mess it up easily. For example, <code>paterns</code> is the ONLY item that takes an array for a child. That means that you should have</p>
+
+<pre><code>patterns:
+- comment:...
+</code></pre>
+
+<p>but no other keyword will have a child starting with a dash (<code>-</code>).</p></li>
+
+<li><p>You need to write the rules in order of application. No two rules will apply to the same section of text, so it&rsquo;s first come, first served. For example, you can&rsquo;t match a JavaDoc comment block starting with <code>/**</code> in one rule and <em>then</em> match <code>@arg</code>, etc. in a separate rule. The proper way to do that is to use a <code>begin/end</code> rule with a nested <code>patterns</code> section. Put quoted strings first, and then comments. That way <code>&quot;this is a //string&quot;</code>` doesn&rsquo;t turn into half-string, half-comment.</p></li>
+
+<li><p>Regexes are for the most part Perly; lookahead (<code>(?!xyz)</code>)works, but I haven&rsquo;t tested other look-arounds. One gotcha to keep in mind is that <code>*</code> and <code>+</code> do not match greedily, unlike Perl.</p></li>
+
+<li><p><code>include:</code> sections must be inside <code>patterns:</code> sections.</p></li>
+
+<li><p>You&rsquo;ll do lots of re-loading and restarting. An error box popped up saying something strange when you converted/saved the grammar? Restart sublime after trying a fix. If you get a fail message when Sublime reloads, then you didn&rsquo;t fix it and you need to try again, with another restart. Highlighting will not work at all until you&rsquo;ve done a restart with it working. (This has apparently been improved in build 3068, but I don&rsquo;t have access as a trial user.) You changed something in one syntax file that&rsquo;s included in the rule of another? Compile/save both grammars (compile meaning turn your YAML into plist XML).</p></li>
+</ul>
+
+<p>I hope this saves the next developer some time. Overall, the biggest gotcha for me was just realizing that I wasn&rsquo;t writing a BNF-style grammar to completely validate the syntax in a file, but a list of patterns and the scopes that they create or match in. Once I understood this, actually writing the rules was not too difficult a task.</p>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<hr>
+		</div>
+	</div>
+</div>
+
+    <div class="container">
+        <div class="row col-md-12">
+            <footer>
+                <div class="pull-left">
+                    <p>
+                        &copy; 2011-2018 ~ Nathan Glenn ~ Powered By <a href="http://hugo.spf13.com">Hugo</a> - version: 0.52 ~ <a href="http://garfieldnate.github.io//license">License</a>
+                    </p>
+                </div>
+
+                
+                <div class="pull-right">
+                    
+                    
+                    
+                    
+                        <a href="https://github.com/garfieldnate" target="_blank">
+                        <i class="fab fa-github-square fa-2x"></i></a>
+                    
+                    
+                    
+                    
+                        <a href="https://www.goodreads.com/user/show/2794644-nathan-glenn" target="_blank">
+                        <i class="fab fa-goodreads fa-2x"></i></a>
+                    
+                    
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    
+    </body>
+</html>
+

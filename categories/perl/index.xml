@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Perl on Nate Glenn&#39;s Blog</title>
+    <link>http://garfieldnate.github.io/categories/perl/</link>
+    <description>Recent content in Perl on Nate Glenn&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <managingEditor>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</managingEditor>
+    <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
+    <lastBuildDate>Sun, 25 Oct 2015 19:23:49 +0000</lastBuildDate>
+    
+	<atom:link href="http://garfieldnate.github.io/categories/perl/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>My Dream Planner, Come True! (Almost)</title>
+      <link>http://garfieldnate.github.io/blog/2015/10/25/my-dream-planner-come-true-almost/</link>
+      <pubDate>Sun, 25 Oct 2015 19:23:49 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2015/10/25/my-dream-planner-come-true-almost/</guid>
+      <description>I say almost because I haven&amp;rsquo;t printed it yet. But I have a PDF!
+When I was in college I had a favorite planner. It was the perfect size for my hand, and just had lines for each day, with one week visible in a two-page spread. It had a space in the front for schedules, and some blank pages in the back for notes and adresses. Nice and simple. I looked forward to buying it every year, and the last one I bought I also laminated and rebound so it would last longer.</description>
+    </item>
+    
+    <item>
+      <title>Code Reading: pl2bat.pl</title>
+      <link>http://garfieldnate.github.io/blog/2014/07/13/code-reading-pl2bat.pl/</link>
+      <pubDate>Sun, 13 Jul 2014 23:42:07 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2014/07/13/code-reading-pl2bat.pl/</guid>
+      <description>When you install a Perl distribution from CPAN that comes with an executable script, Perl adds it to your path so it can be treated like any other command line program. On a *nix system, all that needs to be done for this to work is to set the script to be executable. Windows doesn&amp;rsquo;t have executable script files with shebang lines like *nix, however, so Perl generates a batch file.</description>
+    </item>
+    
+    <item>
+      <title>List Assignment in Scalar Context</title>
+      <link>http://garfieldnate.github.io/blog/2014/01/11/list-assignment-in-scalar-context/</link>
+      <pubDate>Sat, 11 Jan 2014 00:00:00 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2014/01/11/list-assignment-in-scalar-context/</guid>
+      <description>(Cross-posted on blogs.perl.org)
+This week I received some special help on SO in understanding how the goatse operator works. I was very thankful for everyone&amp;rsquo;s help. These two articles were also very helpful and I recommend reading them.
+Part of my confusion over the goatse operator was not knowing the difference between list and scalar assignment operators, which both are indicated via &amp;lsquo;=&amp;rsquo;. Further confusing is the fact that each can be used in either scalar or list context, so you can have list assignment in scalar context or scalar assignment in list context.</description>
+    </item>
+    
+    <item>
+      <title>Packaging XML::LibXML with PAR Packer on Windows</title>
+      <link>http://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on-windows/</link>
+      <pubDate>Tue, 27 Aug 2013 00:00:00 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2013/08/27/packaging-xmllibxml-with-par-packer-on-windows/</guid>
+      <description>PAR Packer is an excellent utility for delivering your Perl scripts as standalone executables. A standalone executable is highly desired in, for example, a corporate environment where everyone needs a program you wrote but you can&amp;rsquo;t expect anyone to learn how to run Perl programs.
+A recent requirement at $work was for a standalone executable. Originally, I was supposed to let my coworker work his magic (and his ActiveState PerlPacker license), but the client required an all-open-source solution.</description>
+    </item>
+    
+    <item>
+      <title>The Extended Euclidian Algorithm in Perl</title>
+      <link>http://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl/</link>
+      <pubDate>Mon, 15 Apr 2013 00:00:00 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2013/04/15/the-extended-euclidian-algorithm-in-perl/</guid>
+      <description>This week I learned about the extended Euclidian algorithm for finding a linear combination of two numbers that yields their GCD. For example, the GCD of 213 and 171 is 3, and -4*213 + 5*171 = 3. This algorithm is important in the RSA encryption scheme.
+I had quite a difficult time getting myself to fully understand how it works. I jumped between Wikipedia, my data structures textbook (don&amp;rsquo;t buy it), a YouTube video, and this excellent number theory class lecture.</description>
+    </item>
+    
+    <item>
+      <title>Running Perl with Sublime Text 2</title>
+      <link>http://garfieldnate.github.io/blog/2013/04/07/running-perl-with-sublime-text-2/</link>
+      <pubDate>Sun, 07 Apr 2013 00:00:00 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2013/04/07/running-perl-with-sublime-text-2/</guid>
+      <description>I&amp;rsquo;ve been having fun trying out Sublime Text. It&amp;rsquo;s pretty, fast, and extremely extensible.
+The first thing that I wanted was to be able to work well with Perl. I installed Package Control, followed by SublimeLinter, which has the perlcritic command built in. Making this useful requires a little finagling; perlcritic is by no means a quick program (being a really thorough linter for a language which is complex to parse), and the defaults for SublimeLinter cause it run over and over again as you type.</description>
+    </item>
+    
+    <item>
+      <title>Managing Global State: the Flip-Flop Operator</title>
+      <link>http://garfieldnate.github.io/blog/2013/02/03/managing-global-state-the-flip-flop-operator/</link>
+      <pubDate>Sun, 03 Feb 2013 00:00:00 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2013/02/03/managing-global-state-the-flip-flop-operator/</guid>
+      <description>Today I was faced with another mysterious failing test while writing a test suite for some legacy code. I knew it had to be a problem with persisting state because this particular test only failed when processing a particular data set with the same object which was just used to process another set.
+My first step to trying to fix this was to delete all of the values stored in the object during the processing procedure:</description>
+    </item>
+    
+    <item>
+      <title>When not to use Perl&#39;s Implicit close; Suffering from Buffering</title>
+      <link>http://garfieldnate.github.io/blog/2013/01/27/when-not-to-use-perls-implicit-close-suffering-from-buffering/</link>
+      <pubDate>Sun, 27 Jan 2013 00:00:00 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2013/01/27/when-not-to-use-perls-implicit-close-suffering-from-buffering/</guid>
+      <description>This post is a quick note on a bug I had difficulty tracking down.
+One nice feature of Perl, introduced long before my time, is that of implicit closing. Perl closes filehandles for you when you forget (maybe on purpose). So the following is not a resource leak as a standalone script:
+1 2 3  open my $file, &amp;#39;&amp;gt;utf8&amp;#39;, &amp;#39;/path/to/new/file&amp;#39; or die &amp;#34;couldn&amp;#39;t open file: $!&amp;#34;; print $file &amp;#39;Hello!&amp;#39;;   When the script finishes, Perl will close $file for you, so you can be nice and lazy.</description>
+    </item>
+    
+    <item>
+      <title>Testing Perl Distributions with Test Subdirectories</title>
+      <link>http://garfieldnate.github.io/blog/2013/01/20/testing-perl-distributions-with-test-subdirectories/</link>
+      <pubDate>Sun, 20 Jan 2013 00:00:00 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2013/01/20/testing-perl-distributions-with-test-subdirectories/</guid>
+      <description>Normally I run my test suites with the prove utility:
+prove -vl --merge
+The v option turns on verbose processing, and the l option adds lib/ to the include path. provethen runs all of the tests in the t/ folder.
+Today, I had a new problem. I merged multiple distributions into one (without losing any Git history!), and each had a test suite that I wanted to keep separate. Naturally, I moved the tests from each distribution into its own subdirectory under t/.</description>
+    </item>
+    
+    <item>
+      <title>Perl Tip: Don&#39;t Use a Makefile for Your Module</title>
+      <link>http://garfieldnate.github.io/blog/2012/08/17/perl-tip-dont-use-a-makefile-for-your-module/</link>
+      <pubDate>Fri, 17 Aug 2012 00:00:00 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2012/08/17/perl-tip-dont-use-a-makefile-for-your-module/</guid>
+      <description>During my internship at SoarTech, I got a chance to learn a lot more about creating Perl modules. I put together a package of scripts for converting old file formats for speech recognition grammars, and I thought it worked beautifully. Of course, to start my module I used the classic tool h2xs:
+h2xs -X -n Foo::Bar  My final code was well tested, and quick to install. I asked my co-worker to install it on his machine, and it was just as easy to use.</description>
+    </item>
+    
+  </channel>
+</rss>

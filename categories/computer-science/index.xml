@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Computer Science on Nate Glenn&#39;s Blog</title>
+    <link>http://garfieldnate.github.io/categories/computer-science/</link>
+    <description>Recent content in Computer Science on Nate Glenn&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <managingEditor>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</managingEditor>
+    <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
+    <lastBuildDate>Tue, 06 Jan 2015 20:20:34 +0000</lastBuildDate>
+    
+	<atom:link href="http://garfieldnate.github.io/categories/computer-science/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>My New Toy: Algomation</title>
+      <link>http://garfieldnate.github.io/blog/2015/01/06/my-new-toy-algomation/</link>
+      <pubDate>Tue, 06 Jan 2015 20:20:34 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2015/01/06/my-new-toy-algomation/</guid>
+      <description>Lately I&amp;rsquo;ve been losing sleep trying to understand an algorithm I read about in an academic publication. Part of the problem was that the application I was applying it to required a sort of reversal, which was confusing. But a bigger part of the problem was that I just couldn&amp;rsquo;t &amp;ldquo;see&amp;rdquo; it. I&amp;rsquo;d lay in bed, trying to imagine working with ping-pong balls on a string, or marbles on fishing line, or anything I could really get my &amp;ldquo;mind&amp;rsquo;s hands&amp;rdquo; on.</description>
+    </item>
+    
+    <item>
+      <title>Knuth Classics are Freely Available</title>
+      <link>http://garfieldnate.github.io/blog/2014/08/13/knuth-classics-are-freely-available/</link>
+      <pubDate>Wed, 13 Aug 2014 12:50:29 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2014/08/13/knuth-classics-are-freely-available/</guid>
+      <description>Donald Knuth wrote TeX in C/WEB. WEB is his system for writing literate programs which become both source code and typeset documents explaining the program&amp;rsquo;s operation. Some of his programs have been published: TeX: The Program and Metafont: The Program. Others have not: I don&amp;rsquo;t believe Bibtex was published in book form, for example.
+All of these works are available online, though you have to generate the PDF yourself. The TeX live distribution (included in MikTeX, among others) comes with Knuth&amp;rsquo;s WEB system for doing this.</description>
+    </item>
+    
+  </channel>
+</rss>

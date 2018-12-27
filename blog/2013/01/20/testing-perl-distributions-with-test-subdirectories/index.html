@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Testing Perl Distributions with Test Subdirectories">
+    <meta name="author" content="Nathan Glenn">
+
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <title>Testing Perl Distributions with Test Subdirectories &middot; Nate Glenn&#39;s Blog</title>
+
+   	
+    
+        <link rel="stylesheet" href="http://garfieldnate.github.io//css/theme/superhero.css">
+    
+
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/solid.js" integrity="sha384-F4BRNf3onawQt7LDHDJm/hwm3wBtbLIfGk1VSB/3nn3E+7Rox1YpYcKJMsmHBJIl" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/regular.js" integrity="sha384-V+AkgA1cZ+p3DRK63AHCaXvO68V7B5eHoxl7QVN21zftbkFn/sGAIVR7vmQL3Zhp" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/brands.js" integrity="sha384-VLgz+MgaFCnsFLiBwE3ItNouuqbWV2ZnIqfsA6QRHksEAQfgbcoaQ4PP0ZeS0zS5" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/fontawesome.js" integrity="sha384-treYPdjUrP4rW5q82SnECO7TPVAz4bpas16yuE9F5o7CeBn2YYw1yr5oC8s8Mf8t" crossorigin="anonymous"></script>
+
+   	
+   	<link rel="stylesheet" href="http://garfieldnate.github.io//css/style.css">
+
+
+    
+    <script src="http://garfieldnate.github.io//js/jquery.min-2.1.4.js"></script>
+    <script src="http://garfieldnate.github.io//js/bootstrap.min-3.3.5.js"></script>
+    <script type="text/javascript" src="http://garfieldnate.github.io//js/jquery.githubRepoWidget.min.js"></script>
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Nate Glenn&#39;s Blog" />
+</head>
+<body lang="en-US">
+    
+    
+<div class="container">
+    <div class="row">
+        <div class="navbar navbar-default " role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://garfieldnate.github.io/">Nate Glenn&#39;s Blog</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://garfieldnate.github.io/">Home</a></li>
+                    <li><a href="http://garfieldnate.github.io//about/">About</a></li>
+                    <li><a href="http://garfieldnate.github.io//post/">Archive</a></li>
+                    <li><a href="http://garfieldnate.github.io//resume/resume-en.html">Resume</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<h3>Testing Perl Distributions with Test Subdirectories</h3>
+				<span class="label label-primary">January 20, 2013</span> in
+				
+					
+					<a href="/categories/perl">Perl</a>
+				
+					 , 
+					<a href="/categories/distzilla">Dist::Zilla</a>
+				
+					 , 
+					<a href="/categories/subdirectories">subdirectories</a>
+				
+					 , 
+					<a href="/categories/software">software</a>
+				
+					 , 
+					<a href="/categories/distribution">distribution</a>
+				
+					 , 
+					<a href="/categories/testing">testing</a>
+				
+					 , 
+					<a href="/categories/prove">prove</a>
+				
+					 , 
+					<a href="/categories/modulebuild">Module::Build</a>
+				
+					 , 
+					<a href="/categories/makemaker">MakeMaker</a>
+				
+				
+			</small>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<br>
+			<p>Normally I run my test suites with the prove utility:</p>
+
+<p><code>prove -vl --merge</code></p>
+
+<p>The <code>v</code> option turns on verbose processing, and the l option adds <code>lib/</code> to the include path. <code>prove</code>then runs all of the tests in the <code>t/</code> folder.</p>
+
+<p>Today, I had a new problem. I merged multiple distributions into one (<a href="http://jasonkarns.com/blog/merge-two-git-repositories-into-one/">without losing any Git history!</a>), and each had a test suite that I wanted to keep separate. Naturally, I moved the tests from each distribution into its own subdirectory under <code>t/</code>. However, this time when I ran <code>prove -vl</code>, I got this message:</p>
+
+<pre><code>Files=0, Tests=0,  0 wallclock secs ( 0.00 usr +  0.00 sys =  0.00 CPU)
+Result: NOTESTS
+</code></pre>
+
+<p>Dubious&hellip; Well, I needed to know how to test with subdirectories in the <code>t/</code> folder, so I looked at the <a href="https://metacpan.org/module/prove">prove</a> documentation and found the <code>-r</code> option. The <code>r</code> stands for &ldquo;recurse&rdquo;, meaning that the test files would be found by recursing into the directories of the distribution (starting at the top in the root of the distribution). That turned out to be exactly what I needed!</p>
+
+<pre><code>prove -vlr
+t/parser/01-testParser.t
+...
+All tests successful.
+Files=28, Tests=1815, 211 wallclock secs ( 0.92 usr + 0.28 sys = 1.20 CPU)
+Result: PASS
+</code></pre>
+
+<p>Woohoo!</p>
+
+<p>Also, both <code>MakeMaker</code>and <code>Module::Build</code> recurse in the same way during module testing. If you use <code>Dist::Zilla</code>, then you&rsquo;ll probably have the plugins <code>[MakeMaker]</code> and <code>[ModuleBuild]</code>. Using these, <code>dzil test</code> will recurse in the same way.</p>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<hr>
+		</div>
+	</div>
+</div>
+
+    <div class="container">
+        <div class="row col-md-12">
+            <footer>
+                <div class="pull-left">
+                    <p>
+                        &copy; 2011-2018 ~ Nathan Glenn ~ Powered By <a href="http://hugo.spf13.com">Hugo</a> - version: 0.52 ~ <a href="http://garfieldnate.github.io//license">License</a>
+                    </p>
+                </div>
+
+                
+                <div class="pull-right">
+                    
+                    
+                    
+                    
+                        <a href="https://github.com/garfieldnate" target="_blank">
+                        <i class="fab fa-github-square fa-2x"></i></a>
+                    
+                    
+                    
+                    
+                        <a href="https://www.goodreads.com/user/show/2794644-nathan-glenn" target="_blank">
+                        <i class="fab fa-goodreads fa-2x"></i></a>
+                    
+                    
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    
+    </body>
+</html>
+

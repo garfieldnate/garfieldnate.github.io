@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gems on Nate Glenn&#39;s Blog</title>
+    <link>http://garfieldnate.github.io/categories/gems/</link>
+    <description>Recent content in Gems on Nate Glenn&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <managingEditor>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</managingEditor>
+    <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
+    <lastBuildDate>Mon, 20 Jul 2015 22:10:27 +0000</lastBuildDate>
+    
+	<atom:link href="http://garfieldnate.github.io/categories/gems/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hacking Through an Octopress Update</title>
+      <link>http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/</link>
+      <pubDate>Mon, 20 Jul 2015 22:10:27 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2015/07/20/hacking-through-an-octopress-update/</guid>
+      <description>A while back I watched a neat presentation from Justin Searls called The Social Coding Contract. He has lots of good things to say, but there was one comment that really hit home: my Jekyll blog was easy to setup 6 months ago, but now it&amp;rsquo;s impossible to maintain. Heh. Most of my trouble could have been avoided with more careful management of dependencies, but alas I am not a Ruby person and I did not realize that bundle update would completely sink my publishing abilities for 4 months.</description>
+    </item>
+    
+  </channel>
+</rss>

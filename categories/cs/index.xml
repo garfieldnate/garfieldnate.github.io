@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cs on Nate Glenn&#39;s Blog</title>
+    <link>http://garfieldnate.github.io/categories/cs/</link>
+    <description>Recent content in Cs on Nate Glenn&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <managingEditor>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</managingEditor>
+    <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
+    <lastBuildDate>Thu, 03 Nov 2011 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://garfieldnate.github.io/categories/cs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>CS 240 Web Crawler at BYU</title>
+      <link>http://garfieldnate.github.io/blog/2011/11/03/cs-240-web-crawler-at-byu/</link>
+      <pubDate>Thu, 03 Nov 2011 00:00:00 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2011/11/03/cs-240-web-crawler-at-byu/</guid>
+      <description>I recently polished off the web crawler project for CS 240 at BYU. It&amp;rsquo;s probably the most talked-about project in the CS major, and the cause of so many students retaking the class.
+The specification for the web crawler assignment can be found here. Basically, given a start URL, the crawler finds every link on a page, follows them, downloads the pages, and indexes each of the words on a page, as long as they are not in a given stop words file; then it follows the links from that page, and so on.</description>
+    </item>
+    
+  </channel>
+</rss>

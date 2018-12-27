@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Knuth Classics are Freely Available">
+    <meta name="author" content="Nathan Glenn">
+
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <title>Knuth Classics are Freely Available &middot; Nate Glenn&#39;s Blog</title>
+
+   	
+    
+        <link rel="stylesheet" href="http://garfieldnate.github.io//css/theme/superhero.css">
+    
+
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/solid.js" integrity="sha384-F4BRNf3onawQt7LDHDJm/hwm3wBtbLIfGk1VSB/3nn3E+7Rox1YpYcKJMsmHBJIl" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/regular.js" integrity="sha384-V+AkgA1cZ+p3DRK63AHCaXvO68V7B5eHoxl7QVN21zftbkFn/sGAIVR7vmQL3Zhp" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/brands.js" integrity="sha384-VLgz+MgaFCnsFLiBwE3ItNouuqbWV2ZnIqfsA6QRHksEAQfgbcoaQ4PP0ZeS0zS5" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/fontawesome.js" integrity="sha384-treYPdjUrP4rW5q82SnECO7TPVAz4bpas16yuE9F5o7CeBn2YYw1yr5oC8s8Mf8t" crossorigin="anonymous"></script>
+
+   	
+   	<link rel="stylesheet" href="http://garfieldnate.github.io//css/style.css">
+
+
+    
+    <script src="http://garfieldnate.github.io//js/jquery.min-2.1.4.js"></script>
+    <script src="http://garfieldnate.github.io//js/bootstrap.min-3.3.5.js"></script>
+    <script type="text/javascript" src="http://garfieldnate.github.io//js/jquery.githubRepoWidget.min.js"></script>
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Nate Glenn&#39;s Blog" />
+</head>
+<body lang="en-US">
+    
+    
+<div class="container">
+    <div class="row">
+        <div class="navbar navbar-default " role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://garfieldnate.github.io/">Nate Glenn&#39;s Blog</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://garfieldnate.github.io/">Home</a></li>
+                    <li><a href="http://garfieldnate.github.io//about/">About</a></li>
+                    <li><a href="http://garfieldnate.github.io//post/">Archive</a></li>
+                    <li><a href="http://garfieldnate.github.io//resume/resume-en.html">Resume</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<h3>Knuth Classics are Freely Available</h3>
+				<span class="label label-primary">August 13, 2014</span> in
+				
+					
+					<a href="/categories/tex">TeX</a>
+				
+					 , 
+					<a href="/categories/metafont">Metafont</a>
+				
+					 , 
+					<a href="/categories/donald-knuth">Donald Knuth</a>
+				
+					 , 
+					<a href="/categories/classic">classic</a>
+				
+					 , 
+					<a href="/categories/computer-science">computer science</a>
+				
+					 , 
+					<a href="/categories/code-reading">code reading</a>
+				
+					 , 
+					<a href="/categories/literate-programming">literate programming</a>
+				
+				
+			</small>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<br>
+			<p>Donald Knuth wrote TeX in C/WEB. WEB is his system for writing literate programs which become both source code and typeset documents explaining the program&rsquo;s operation. Some of his programs have been published: <a href="http://www.goodreads.com/book/show/499934.Computers_Typesetting_Volume_B">TeX: The Program</a> and <a href="http://www.goodreads.com/book/show/1746886.Computers_Typesetting_Volume_D">Metafont: The Program</a>. Others have not: I don&rsquo;t believe Bibtex was published in book form, for example.</p>
+
+<p>All of these works are available online, though you have to generate the PDF yourself. The TeX live distribution (included in MikTeX, among others) comes with Knuth&rsquo;s WEB system for doing this. If you want a copy of TeX: The Program and you have TeX live, you can download some WEB programs from <a href="http://tug.org/texlive/devsrc/Build/source/texk/web2c/">http://tug.org/texlive/devsrc/Build/source/texk/web2c/</a> and convert them yourselves. Let&rsquo;s do TeX as an example. Download tex.web and tex.ch. Then do this:</p>
+
+<pre><code>weave tex.web tex.ch tex.tex
+pdftex tex.tex
+</code></pre>
+
+<p>Voila! One Knuth classic ready for reading. <code>weave</code> was available on my path because I have MikTeX installed on my computer. I did hit one snag- the first time I downloaded one of these files, I viewed it in the browser and then copied and pasted the entire thing into a text editor and saved it. This turned all of the newlines into Windows-style CRLF&rsquo;s, and <code>weave</code> would die with the unhelpful message, <code>read operation failed</code>. The WEB system only works with Unix-style newlines, so make sure you download the file as-is if you are on Windows. The change file is also required for whatever reason, so if you don&rsquo;t want it, just create a dummy change file containing <code>%</code> (a single empty comment).</p>
+
+<p>Overall I&rsquo;m pretty happy that it was so easy to generate these documents from such old sources. I wonder how difficult it will be to build the executables.</p>
+
+<hr />
+
+<p>Available programs:</p>
+
+<ul>
+<li>bibtex</li>
+<li>dvicopy</li>
+<li>dvitype</li>
+<li>gftodvi</li>
+<li>gftopk</li>
+<li>gftype</li>
+<li>mf (Metafont)</li>
+<li>mft (older Metafont?)</li>
+<li>patgen</li>
+<li>pktogf</li>
+<li>pktype</li>
+<li>pltotf</li>
+<li>pooltype</li>
+<li>tangle</li>
+<li>weave</li>
+</ul>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<hr>
+		</div>
+	</div>
+</div>
+
+    <div class="container">
+        <div class="row col-md-12">
+            <footer>
+                <div class="pull-left">
+                    <p>
+                        &copy; 2011-2018 ~ Nathan Glenn ~ Powered By <a href="http://hugo.spf13.com">Hugo</a> - version: 0.52 ~ <a href="http://garfieldnate.github.io//license">License</a>
+                    </p>
+                </div>
+
+                
+                <div class="pull-right">
+                    
+                    
+                    
+                    
+                        <a href="https://github.com/garfieldnate" target="_blank">
+                        <i class="fab fa-github-square fa-2x"></i></a>
+                    
+                    
+                    
+                    
+                        <a href="https://www.goodreads.com/user/show/2794644-nathan-glenn" target="_blank">
+                        <i class="fab fa-goodreads fa-2x"></i></a>
+                    
+                    
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    
+    </body>
+</html>
+

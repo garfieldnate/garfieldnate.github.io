@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Graphing grammar parses from CMU Sphinx 4">
+    <meta name="author" content="Nathan Glenn">
+
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <title>Graphing grammar parses from CMU Sphinx 4 &middot; Nate Glenn&#39;s Blog</title>
+
+   	
+    
+        <link rel="stylesheet" href="http://garfieldnate.github.io//css/theme/superhero.css">
+    
+
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/solid.js" integrity="sha384-F4BRNf3onawQt7LDHDJm/hwm3wBtbLIfGk1VSB/3nn3E+7Rox1YpYcKJMsmHBJIl" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/regular.js" integrity="sha384-V+AkgA1cZ+p3DRK63AHCaXvO68V7B5eHoxl7QVN21zftbkFn/sGAIVR7vmQL3Zhp" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/brands.js" integrity="sha384-VLgz+MgaFCnsFLiBwE3ItNouuqbWV2ZnIqfsA6QRHksEAQfgbcoaQ4PP0ZeS0zS5" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/fontawesome.js" integrity="sha384-treYPdjUrP4rW5q82SnECO7TPVAz4bpas16yuE9F5o7CeBn2YYw1yr5oC8s8Mf8t" crossorigin="anonymous"></script>
+
+   	
+   	<link rel="stylesheet" href="http://garfieldnate.github.io//css/style.css">
+
+
+    
+    <script src="http://garfieldnate.github.io//js/jquery.min-2.1.4.js"></script>
+    <script src="http://garfieldnate.github.io//js/bootstrap.min-3.3.5.js"></script>
+    <script type="text/javascript" src="http://garfieldnate.github.io//js/jquery.githubRepoWidget.min.js"></script>
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Nate Glenn&#39;s Blog" />
+</head>
+<body lang="en-US">
+    
+    
+<div class="container">
+    <div class="row">
+        <div class="navbar navbar-default " role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://garfieldnate.github.io/">Nate Glenn&#39;s Blog</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://garfieldnate.github.io/">Home</a></li>
+                    <li><a href="http://garfieldnate.github.io//about/">About</a></li>
+                    <li><a href="http://garfieldnate.github.io//post/">Archive</a></li>
+                    <li><a href="http://garfieldnate.github.io//resume/resume-en.html">Resume</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<h3>Graphing grammar parses from CMU Sphinx 4</h3>
+				<span class="label label-primary">June 29, 2012</span> in
+				
+					
+					<a href="/categories/java">java</a>
+				
+					 , 
+					<a href="/categories/grammar">grammar</a>
+				
+					 , 
+					<a href="/categories/graphviz">GraphViz</a>
+				
+					 , 
+					<a href="/categories/parsing">parsing</a>
+				
+					 , 
+					<a href="/categories/graph">graph</a>
+				
+					 , 
+					<a href="/categories/cmu-sphinx">CMU sphinx</a>
+				
+				
+			</small>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<br>
+			<p>CMU Sphinx comes with some neat grammar parsing stuff that I never knew about. It uses JSGF (as detailed <a href="http://cmusphinx.sourceforge.net/sphinx4/javadoc/edu/cmu/sphinx/jsgf/JSGFGrammar.html">here</a>) and comes with several demos, showing how to use a basic grammar, arc weights, tags, and even getting a <a href="http://cmusphinx.sourceforge.net/sphinx4/src/apps/edu/cmu/sphinx/demo/jsapi/tags/README.html">javascript representation</a> of the final parse! At work I&rsquo;ve been needing to do some custom processing of the grammar output, but it was more conceptually difficult than I&rsquo;d planned. So after figuring out how to traverse a parse tree, I decided to write a little application to print out the parse of a given sentence. The eclipse project for it can be found <a href="https://sites.google.com/site/complingfiles/files/ParsePrinter.zip?attredirects=0&amp;amp;d=1">here</a>.</p>
+
+<p>Given this small gramamar:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">#JSGF V1.0;
+grammar sidTests ;
+
+public &lt;greet&gt; = &lt;greeting&gt; [&lt;person&gt;] [i am &lt;person&gt;];
+
+&lt;greeting&gt; = konnichiwa {language:japanese} | hello {language:english} | guten tag {language:german};
+
+&lt;person&gt; = john {gender:man} | martha {gender:female} | kelly;</code></pre></td></tr></table>
+</div>
+</div>
+<p>If we parse the sentence &ldquo;konnichiwa kelly i am john&rdquo;, the program outputs the following:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">digraph {
+ &#34;greet-2147483647&#34; [label=&#34;greet&#34; color=magenta];
+ &#34;greet-2147483647&#34; -&gt; &#34;(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )-2147483646&#34;;
+ &#34;(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )-2147483646&#34; [label=&#34;(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )&#34; color=green];
+ &#34;(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )-2147483646&#34; -&gt; &#34;greeting-2147483645&#34;;
+ &#34;greeting-2147483645&#34; [label=&#34;greeting&#34; color=magenta];
+ &#34;greeting-2147483645&#34; -&gt; &#34;konnichiwa {language:japanese}-2147483644&#34;;
+ &#34;konnichiwa {language:japanese}-2147483644&#34; [label=&#34;konnichiwa {language:japanese}&#34; color=green];
+ &#34;konnichiwa {language:japanese}-2147483644&#34; -&gt; &#34;language:japanese-2147483643&#34;;
+ &#34;language:japanese-2147483643&#34; [label=&#34;{language:japanese}&#34; color=red];
+ &#34;language:japanese-2147483643&#34; -&gt; &#34;konnichiwa-2147483642&#34;;
+ &#34;konnichiwa-2147483642&#34; [label=&#34;konnichiwa&#34; color=cadetblue shape=box];
+ &#34;(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )-2147483646&#34; -&gt; &#34;(&lt;sidTests.person&gt; = kelly)-2147483641&#34;;
+ &#34;(&lt;sidTests.person&gt; = kelly)-2147483641&#34; [label=&#34;(&lt;sidTests.person&gt; = kelly)&#34; color=green];
+ &#34;(&lt;sidTests.person&gt; = kelly)-2147483641&#34; -&gt; &#34;person-2147483640&#34;;
+ &#34;person-2147483640&#34; [label=&#34;person&#34; color=magenta];
+ &#34;person-2147483640&#34; -&gt; &#34;kelly-2147483639&#34;;
+ &#34;kelly-2147483639&#34; [label=&#34;kelly&#34; color=green];
+ &#34;kelly-2147483639&#34; -&gt; &#34;kelly-2147483638&#34;;
+ &#34;kelly-2147483638&#34; [label=&#34;kelly&#34; color=cadetblue shape=box];
+ &#34;(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )-2147483646&#34; -&gt; &#34;i am (&lt;sidTests.person&gt; = john {gender:man})-2147483637&#34;;
+ &#34;i am (&lt;sidTests.person&gt; = john {gender:man})-2147483637&#34; [label=&#34;i am (&lt;sidTests.person&gt; = john {gender:man})&#34; color=green];
+ &#34;i am (&lt;sidTests.person&gt; = john {gender:man})-2147483637&#34; -&gt; &#34;i-2147483636&#34;;
+ &#34;i-2147483636&#34; [label=&#34;i&#34; color=cadetblue shape=box];
+ &#34;i am (&lt;sidTests.person&gt; = john {gender:man})-2147483637&#34; -&gt; &#34;am-2147483635&#34;;
+ &#34;am-2147483635&#34; [label=&#34;am&#34; color=cadetblue shape=box];
+ &#34;i am (&lt;sidTests.person&gt; = john {gender:man})-2147483637&#34; -&gt; &#34;person-2147483634&#34;;
+ &#34;person-2147483634&#34; [label=&#34;person&#34; color=magenta];
+ &#34;person-2147483634&#34; -&gt; &#34;john {gender:man}-2147483633&#34;;
+ &#34;john {gender:man}-2147483633&#34; [label=&#34;john {gender:man}&#34; color=green];
+ &#34;john {gender:man}-2147483633&#34; -&gt; &#34;gender:man-2147483632&#34;;
+ &#34;gender:man-2147483632&#34; [label=&#34;{gender:man}&#34; color=red];
+ &#34;gender:man-2147483632&#34; -&gt; &#34;john-2147483631&#34;;
+ &#34;john-2147483631&#34; [label=&#34;john&#34; color=cadetblue shape=box];
+}</code></pre></td></tr></table>
+</div>
+</div>
+<p>which is all a big mess until we run it through GraphViz and see this:</p>
+
+<figure class="center">
+    <img src="/images/content_images/jsgf_parse.jpg"
+         alt="The sentence parse tree has a root node called &#39;greet&#39; and three subtrees showing the three rules that were applied: there is a &#39;greeting&#39; subtree containing &#39;konnichiwa&#39;, a &#39;person&#39; subtree containing &#39;Kelly&#39;, and a third subtree containing &#39;I&#39;, &#39;am&#39;, and a &#39;person&#39; subtree containing &#39;John&#39;. Unfortunately, if you require this alt text to know what is in the picture, I don&#39;t think dot graphs are going to help you at all. As I&#39;m writing this alt text years later, I&#39;m kicking myself for not generating the SVG instead so that blind users could inspect it themselves. Actually, I have no idea whether Graphviz is such a great tool at all from an accessibility standpoint." width="640" height="294"/> <figcaption>
+            <h4>A graph of the JSGF sentence parse</h4>
+        </figcaption>
+</figure>
+
+
+<p>A graph explaining how our sentence was parsed! I color code the parse: green is a RuleSequence, magenta is a RuleParse, light blue is a Token, red is a Tag, yellow, which there strangely aren&rsquo;t any of, would be a RuleName.</p>
+
+<p>I notice two very strange things here. First, RuleParses don&rsquo;t have anything as a direct child except for RuleSequences (RuleName is also possible but not shown). So RuleSequences will always be present and may only have one child. Second, text is treated as a sub-component of a tag instead of the other way around. So the text is tagging the tag? I don&rsquo;t know why they designed it that way, but at least now that I have a graph of the parse so I can figure out how to properly process it.</p>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<hr>
+		</div>
+	</div>
+</div>
+
+    <div class="container">
+        <div class="row col-md-12">
+            <footer>
+                <div class="pull-left">
+                    <p>
+                        &copy; 2011-2018 ~ Nathan Glenn ~ Powered By <a href="http://hugo.spf13.com">Hugo</a> - version: 0.52 ~ <a href="http://garfieldnate.github.io//license">License</a>
+                    </p>
+                </div>
+
+                
+                <div class="pull-right">
+                    
+                    
+                    
+                    
+                        <a href="https://github.com/garfieldnate" target="_blank">
+                        <i class="fab fa-github-square fa-2x"></i></a>
+                    
+                    
+                    
+                    
+                        <a href="https://www.goodreads.com/user/show/2794644-nathan-glenn" target="_blank">
+                        <i class="fab fa-goodreads fa-2x"></i></a>
+                    
+                    
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    
+    </body>
+</html>
+

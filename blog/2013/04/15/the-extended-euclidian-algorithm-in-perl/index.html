@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="The Extended Euclidian Algorithm in Perl">
+    <meta name="author" content="Nathan Glenn">
+
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <title>The Extended Euclidian Algorithm in Perl &middot; Nate Glenn&#39;s Blog</title>
+
+   	
+    
+        <link rel="stylesheet" href="http://garfieldnate.github.io//css/theme/superhero.css">
+    
+
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/solid.js" integrity="sha384-F4BRNf3onawQt7LDHDJm/hwm3wBtbLIfGk1VSB/3nn3E+7Rox1YpYcKJMsmHBJIl" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/regular.js" integrity="sha384-V+AkgA1cZ+p3DRK63AHCaXvO68V7B5eHoxl7QVN21zftbkFn/sGAIVR7vmQL3Zhp" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/brands.js" integrity="sha384-VLgz+MgaFCnsFLiBwE3ItNouuqbWV2ZnIqfsA6QRHksEAQfgbcoaQ4PP0ZeS0zS5" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/fontawesome.js" integrity="sha384-treYPdjUrP4rW5q82SnECO7TPVAz4bpas16yuE9F5o7CeBn2YYw1yr5oC8s8Mf8t" crossorigin="anonymous"></script>
+
+   	
+   	<link rel="stylesheet" href="http://garfieldnate.github.io//css/style.css">
+
+
+    
+    <script src="http://garfieldnate.github.io//js/jquery.min-2.1.4.js"></script>
+    <script src="http://garfieldnate.github.io//js/bootstrap.min-3.3.5.js"></script>
+    <script type="text/javascript" src="http://garfieldnate.github.io//js/jquery.githubRepoWidget.min.js"></script>
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Nate Glenn&#39;s Blog" />
+</head>
+<body lang="en-US">
+    
+    
+<div class="container">
+    <div class="row">
+        <div class="navbar navbar-default " role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://garfieldnate.github.io/">Nate Glenn&#39;s Blog</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://garfieldnate.github.io/">Home</a></li>
+                    <li><a href="http://garfieldnate.github.io//about/">About</a></li>
+                    <li><a href="http://garfieldnate.github.io//post/">Archive</a></li>
+                    <li><a href="http://garfieldnate.github.io//resume/resume-en.html">Resume</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<h3>The Extended Euclidian Algorithm in Perl</h3>
+				<span class="label label-primary">April 15, 2013</span> in
+				
+					
+					<a href="/categories/perl">Perl</a>
+				
+					 , 
+					<a href="/categories/number-theory">number theory</a>
+				
+					 , 
+					<a href="/categories/euclid">Euclid</a>
+				
+					 , 
+					<a href="/categories/gcd">GCD</a>
+				
+					 , 
+					<a href="/categories/math">math</a>
+				
+				
+			</small>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<br>
+			<p>This week I learned about the extended Euclidian algorithm for finding a linear combination of two numbers that yields their GCD. For example, the GCD of 213 and 171 is 3, and -4*213 + 5*171 = 3. This algorithm is important in the <a href="http://en.wikipedia.org/wiki/RSA_(algorithm)">RSA</a> encryption scheme.</p>
+
+<p>I had quite a difficult time getting myself to fully understand how it works. I jumped between <a href="http://en.wikipedia.org/wiki/Extended_euclidean_algorithm">Wikipedia</a>, my <a href="http://www.amazon.com/Data-Structures-Problem-Solving-Using/dp/0321541405/ref=sr_1_1?ie=UTF8&amp;amp;qid=1365529203&amp;amp;sr=8-1&amp;amp;keywords=data+structures+and+problem+solving+using+java">data structures textbook</a> (don&rsquo;t buy it), a <a href="http://www.youtube.com/watch?v=twlo21D9LY0">YouTube video</a>, and this excellent <a href="http://public.csusm.edu/aitken_html/m422/Handout1.pdf">number theory class lecture</a>. The lecture is the best, though I think there may be a typographical error in the recursive formula.</p>
+
+<p>The basic idea uses recursion with an easy base step. We call <code>Euclid(a,b)</code> with <code>a ≥ b</code>:</p>
+
+<ul>
+<li>The base case is when b is 0. The GCD of x and 0 is always x, and the coefficients to produce a GCD of 0 are 1 and 0 (or anything else): 1*x + 0(or anything)*0 = x. So the base case returns (1,0)</li>
+<li>Any other step starts by recursively calling <code>Euclid(b, a mod b)</code>. We know that the GCD of a and b is the same as the GCD of b and a mod b (lemma 12 in the lecture). This recursive call is guaranteed to eventually get to the base case of b = 0.</li>
+<li>After finding the coefficients for producing the GCD from b and a mod b, we can calculate the ones for producing the GCD from a and b, because a mod b can be put in terms of a and b (see the code comments for the formulas).</li>
+</ul>
+
+<p>To really help myself understand the whole thing, I wrote a Perl script to illustrate it. I put in lots of comments as I worked my way through it.</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#080;font-weight:bold">use</span> <span style="color:#0e84b5;font-weight:bold">strict</span>;
+<span style="color:#080;font-weight:bold">use</span> <span style="color:#0e84b5;font-weight:bold">strict</span>;
+<span style="color:#080;font-weight:bold">use</span> <span style="color:#0e84b5;font-weight:bold">warnings</span>;
+<span style="color:#080;font-weight:bold">use</span> <span style="color:#60e;font-weight:bold">5.010</span>;
+<span style="color:#888">#start with a &gt;= b</span>
+<span style="color:#080;font-weight:bold">my</span> <span style="color:#963">@nums</span> <span style="color:#333">=</span> <span style="color:#007020">sort</span> {<span style="color:#963">$b</span> <span style="color:#000;background-color:#fff0ff">&lt;=&gt;</span> <span style="color:#963">$a</span>} <span style="color:#963">@ARGV</span>;
+
+gcd(<span style="color:#963">@nums</span>);
+
+<span style="color:#888">#input: two numbers (a,b) a &gt;= b &gt; 0</span>
+<span style="color:#888">#output: the coefficients which which yield their GCD;</span>
+<span style="color:#080;font-weight:bold">sub</span> <span style="color:#06b;font-weight:bold">gcd</span> {
+ <span style="color:#080;font-weight:bold">my</span> (<span style="color:#963">$a</span>, <span style="color:#963">$b</span>) <span style="color:#333">=</span> <span style="color:#963">@_</span>;
+
+ <span style="color:#888">#base case; the GCD of x and 0 always x;</span>
+ <span style="color:#888">#and the coefficients will always be 1 and 0 (or anything) because</span>
+
+ <span style="color:#888">#1*x + 0*0 = x</span>
+
+<span style="color:#080;font-weight:bold">if</span>(<span style="color:#963">$b</span> <span style="color:#333">==</span> <span style="color:#00d;font-weight:bold">0</span>){
+  say <span style="background-color:#fff0f0">&#34;GCD is $a&#34;</span>;
+  say <span style="background-color:#fff0f0">&#34;(a,b) = ($a,$b), coefficients = (1,0)&#34;</span>;
+  say <span style="background-color:#fff0f0">&#34;1x$a + 0x$b = $a&#34;</span>;
+  <span style="color:#080;font-weight:bold">return</span> (<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">0</span>);
+ }
+
+ <span style="color:#888">#otherwise, we evaluate u and v for k = ub + vr, where r is a mod b</span>
+ <span style="color:#888">#gcd(b, a%b) gives the same value</span>
+ <span style="color:#080;font-weight:bold">my</span> <span style="color:#963">$remainder</span> <span style="color:#333">=</span> <span style="color:#963">$a</span> <span style="color:#963">%</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#963">b</span>;
+ <span style="color:#080;font-weight:bold">my</span> (<span style="color:#963">$u</span>, <span style="color:#963">$v</span>) <span style="color:#333">=</span> gcd(<span style="color:#963">$b</span>, <span style="color:#963">$remainder</span>);
+ <span style="color:#888">#now we can find k in terms of a and b because we know r in terms a and b</span>
+ <span style="color:#888">#r = a - bq, where q = the whole part of a/b</span>
+ <span style="color:#888">#k = ub + vr = ub + v(a - bq) = va + b(u-qv)</span>
+ <span style="color:#888">#so the coefficient on a is v, and the coefficient on b is 1-qv</span>
+ <span style="color:#080;font-weight:bold">my</span> <span style="color:#963">$x</span> <span style="color:#333">=</span> <span style="color:#963">$v</span>;
+ <span style="color:#080;font-weight:bold">my</span> <span style="color:#963">$q</span> <span style="color:#333">=</span> <span style="color:#007020">int</span>((<span style="color:#963">$a</span><span style="color:#333">/</span><span style="color:#963">$b</span>));
+ <span style="color:#080;font-weight:bold">my</span> <span style="color:#963">$y</span> <span style="color:#333">=</span> <span style="color:#963">$u</span> <span style="color:#333">-</span> <span style="color:#963">$q</span><span style="color:#333">*</span><span style="color:#963">$x</span>;
+ say <span style="background-color:#fff0f0">&#34;(a,b) = ($a,$b), coefficients are ($x,$y)&#34;</span>;
+ say <span style="background-color:#fff0f0">&#34;${x}x$a + ${y}x$b = &#34;</span> <span style="color:#333">.</span> (<span style="color:#963">$x</span><span style="color:#333">*</span><span style="color:#963">$a</span> <span style="color:#333">+</span> <span style="color:#963">$y</span><span style="color:#333">*</span><span style="color:#963">$b</span>);
+ <span style="color:#080;font-weight:bold">return</span> (<span style="color:#963">$x</span>, <span style="color:#963">$y</span>);
+}</code></pre></td></tr></table>
+</div>
+</div>
+<p>Feel free to leave a comment if you think that something could be stated more clearly. I hope it helps anyone else trying to learn how the extended Euclidian algorithm works.</p>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<hr>
+		</div>
+	</div>
+</div>
+
+    <div class="container">
+        <div class="row col-md-12">
+            <footer>
+                <div class="pull-left">
+                    <p>
+                        &copy; 2011-2018 ~ Nathan Glenn ~ Powered By <a href="http://hugo.spf13.com">Hugo</a> - version: 0.52 ~ <a href="http://garfieldnate.github.io//license">License</a>
+                    </p>
+                </div>
+
+                
+                <div class="pull-right">
+                    
+                    
+                    
+                    
+                        <a href="https://github.com/garfieldnate" target="_blank">
+                        <i class="fab fa-github-square fa-2x"></i></a>
+                    
+                    
+                    
+                    
+                        <a href="https://www.goodreads.com/user/show/2794644-nathan-glenn" target="_blank">
+                        <i class="fab fa-goodreads fa-2x"></i></a>
+                    
+                    
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    
+    </body>
+</html>
+

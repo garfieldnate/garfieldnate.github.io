@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Perl Tip: Don&#39;t Use a Makefile for Your Module">
+    <meta name="author" content="Nathan Glenn">
+
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <title>Perl Tip: Don&#39;t Use a Makefile for Your Module &middot; Nate Glenn&#39;s Blog</title>
+
+   	
+    
+        <link rel="stylesheet" href="http://garfieldnate.github.io//css/theme/superhero.css">
+    
+
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/solid.js" integrity="sha384-F4BRNf3onawQt7LDHDJm/hwm3wBtbLIfGk1VSB/3nn3E+7Rox1YpYcKJMsmHBJIl" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/regular.js" integrity="sha384-V+AkgA1cZ+p3DRK63AHCaXvO68V7B5eHoxl7QVN21zftbkFn/sGAIVR7vmQL3Zhp" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/brands.js" integrity="sha384-VLgz+MgaFCnsFLiBwE3ItNouuqbWV2ZnIqfsA6QRHksEAQfgbcoaQ4PP0ZeS0zS5" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/fontawesome.js" integrity="sha384-treYPdjUrP4rW5q82SnECO7TPVAz4bpas16yuE9F5o7CeBn2YYw1yr5oC8s8Mf8t" crossorigin="anonymous"></script>
+
+   	
+   	<link rel="stylesheet" href="http://garfieldnate.github.io//css/style.css">
+
+
+    
+    <script src="http://garfieldnate.github.io//js/jquery.min-2.1.4.js"></script>
+    <script src="http://garfieldnate.github.io//js/bootstrap.min-3.3.5.js"></script>
+    <script type="text/javascript" src="http://garfieldnate.github.io//js/jquery.githubRepoWidget.min.js"></script>
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Nate Glenn&#39;s Blog" />
+</head>
+<body lang="en-US">
+    
+    
+<div class="container">
+    <div class="row">
+        <div class="navbar navbar-default " role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://garfieldnate.github.io/">Nate Glenn&#39;s Blog</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://garfieldnate.github.io/">Home</a></li>
+                    <li><a href="http://garfieldnate.github.io//about/">About</a></li>
+                    <li><a href="http://garfieldnate.github.io//post/">Archive</a></li>
+                    <li><a href="http://garfieldnate.github.io//resume/resume-en.html">Resume</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<h3>Perl Tip: Don&#39;t Use a Makefile for Your Module</h3>
+				<span class="label label-primary">August 17, 2012</span> in
+				
+					
+					<a href="/categories/perl">Perl</a>
+				
+					 , 
+					<a href="/categories/software">software</a>
+				
+					 , 
+					<a href="/categories/distribution">distribution</a>
+				
+					 , 
+					<a href="/categories/modulebuild">Module::Build</a>
+				
+					 , 
+					<a href="/categories/makemaker">MakeMaker</a>
+				
+				
+			</small>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<br>
+			<p>During my internship at <a href="http://www.soartech.com/">SoarTech</a>, I got a chance to learn a lot more about creating Perl modules. I put together a package of scripts for converting old file formats for speech recognition grammars, and I thought it worked beautifully. Of course, to start my module I used the classic tool h2xs:</p>
+
+<pre><code>h2xs -X -n Foo::Bar
+</code></pre>
+
+<p>My final code was well tested, and quick to install. I asked my co-worker to install it on his machine, and it was just as easy to use.</p>
+
+<p>I was confident when I presented it to the company, until someone asked, &ldquo;so, these Perl scripts, they work on Windows, Mac, Linux, etc., right?&rdquo; I told them they <em>should</em>, since Perl is cross-platform. I became (a good kind of) paranoid, and asked my boss to test my code on his Mac (I was using Windows). The thing exploded when fed my script! I couldn&rsquo;t believe it! What could I have done so wrong?</p>
+
+<p>So, the next day I stayed home a bit to borrow my wife&rsquo;s Mac and do more testing. But there was a big problem: my module used <a href="http://search.cpan.org/~mschwern/ExtUtils-MakeMaker-6.62/lib/ExtUtils/MakeMaker.pm">ExtUtils::MakeMaker</a> to install itself. This has been the standard for years, and the majority of CPAN modules use this for installation. The cpan utility recognizes it, and runs installation automatically. However, <a href="http://schwern.dreamhosters.com/talks/MakeMaker_Is_DOOMED/">MakeMaker is DOOMED!</a> It requires an external tool, make, which you can find on every *nix platform, but everywhere else it has to be installed by the user. Strawberry Perl and ActiveState Perl for Windows come with a version (dmake or nmake). But on Mac, you have to install <a href="https://developer.apple.com/xcode/">XCode</a>, a whopping 4 gigabyte distribution for Mac developers.</p>
+
+<p>&hellip;</p>
+
+<p>Dangit&hellip;</p>
+
+<p>My solution was to follow <a href="http://search.cpan.org/~mschwern/">Michael Schwern</a>&rsquo;s advice and convert to using <a href="http://search.cpan.org/~leont/Module-Build-0.4002/lib/Module/Build.pm">Module::Build</a>, which does not have external dependencies. There happens to be a <a href="http://search.cpan.org/~schubiger/Module-Build-Convert-0.49/lib/Module/Build/Convert.pm">converter</a> to help you switch. When I ran it on my code, it didn&rsquo;t give a completely valid output, but the edits I did were minimal. From a user standpoint, the module will still be installed using the <code>cpan</code> utility, so nothing has changed.</p>
+
+<p>When I put new distribution, with a shiny new Build.PL file, on a Mac, I still had some failed tests, but there weren&rsquo;t intermingled with the giant BOOM that happens when the <code>cpan</code> utility can&rsquo;t find <code>make</code>. After fixing a bug or two, my module works on Windows and Mac and my boss is a happy camper.</p>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<hr>
+		</div>
+	</div>
+</div>
+
+    <div class="container">
+        <div class="row col-md-12">
+            <footer>
+                <div class="pull-left">
+                    <p>
+                        &copy; 2011-2018 ~ Nathan Glenn ~ Powered By <a href="http://hugo.spf13.com">Hugo</a> - version: 0.52 ~ <a href="http://garfieldnate.github.io//license">License</a>
+                    </p>
+                </div>
+
+                
+                <div class="pull-right">
+                    
+                    
+                    
+                    
+                        <a href="https://github.com/garfieldnate" target="_blank">
+                        <i class="fab fa-github-square fa-2x"></i></a>
+                    
+                    
+                    
+                    
+                        <a href="https://www.goodreads.com/user/show/2794644-nathan-glenn" target="_blank">
+                        <i class="fab fa-goodreads fa-2x"></i></a>
+                    
+                    
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    
+    </body>
+</html>
+

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Running Perl with Sublime Text 2">
+    <meta name="author" content="Nathan Glenn">
+
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <title>Running Perl with Sublime Text 2 &middot; Nate Glenn&#39;s Blog</title>
+
+   	
+    
+        <link rel="stylesheet" href="http://garfieldnate.github.io//css/theme/superhero.css">
+    
+
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/solid.js" integrity="sha384-F4BRNf3onawQt7LDHDJm/hwm3wBtbLIfGk1VSB/3nn3E+7Rox1YpYcKJMsmHBJIl" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/regular.js" integrity="sha384-V+AkgA1cZ+p3DRK63AHCaXvO68V7B5eHoxl7QVN21zftbkFn/sGAIVR7vmQL3Zhp" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/brands.js" integrity="sha384-VLgz+MgaFCnsFLiBwE3ItNouuqbWV2ZnIqfsA6QRHksEAQfgbcoaQ4PP0ZeS0zS5" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/fontawesome.js" integrity="sha384-treYPdjUrP4rW5q82SnECO7TPVAz4bpas16yuE9F5o7CeBn2YYw1yr5oC8s8Mf8t" crossorigin="anonymous"></script>
+
+   	
+   	<link rel="stylesheet" href="http://garfieldnate.github.io//css/style.css">
+
+
+    
+    <script src="http://garfieldnate.github.io//js/jquery.min-2.1.4.js"></script>
+    <script src="http://garfieldnate.github.io//js/bootstrap.min-3.3.5.js"></script>
+    <script type="text/javascript" src="http://garfieldnate.github.io//js/jquery.githubRepoWidget.min.js"></script>
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Nate Glenn&#39;s Blog" />
+</head>
+<body lang="en-US">
+    
+    
+<div class="container">
+    <div class="row">
+        <div class="navbar navbar-default " role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://garfieldnate.github.io/">Nate Glenn&#39;s Blog</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://garfieldnate.github.io/">Home</a></li>
+                    <li><a href="http://garfieldnate.github.io//about/">About</a></li>
+                    <li><a href="http://garfieldnate.github.io//post/">Archive</a></li>
+                    <li><a href="http://garfieldnate.github.io//resume/resume-en.html">Resume</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<h3>Running Perl with Sublime Text 2</h3>
+				<span class="label label-primary">April 7, 2013</span> in
+				
+					
+					<a href="/categories/sublime-text">Sublime Text</a>
+				
+					 , 
+					<a href="/categories/productivity">productivity</a>
+				
+					 , 
+					<a href="/categories/perl">Perl</a>
+				
+				
+			</small>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<br>
+			<p>I&rsquo;ve been having fun trying out <a href="http://www.sublimetext.com/">Sublime Text</a>. It&rsquo;s pretty, fast, and extremely extensible.</p>
+
+<p>The first thing that I wanted was to be able to work well with Perl. I installed <a href="http://wbond.net/sublime_packages/package_control">Package Control</a>, followed by <a href="https://github.com/SublimeLinter/SublimeLinter">SublimeLinter</a>, which has the <a href="http://perlcritic.com/">perlcritic</a> command built in. Making this useful requires a little finagling; perlcritic is by no means a quick program (being a really thorough linter for a language which is complex to parse), and the defaults for SublimeLinter cause it run over and over again as you type. To fix this, I edited <code>Packages/SublimeLinter/SublimeLinter.sublime-settings</code> and changed the &ldquo;sublimelinter&rdquo; setting to false. Now, in order to lint the current file, I have to press <kbd>ctrl+alt+l</kbd>. (<strong>Update:</strong> I don&rsquo;t recommend this for Sublime Text 2 because of speed problems. See <a href="https://github.com/SublimeLinter/SublimeLinter/issues/408">this issue on Github</a>. ST3 should be fine, though.)</p>
+
+<p>Next, I wanted to be able to run my Perl scripts. Sublime has the <kbd>ctrl+b</kbd> shortcut for running a build for the current file. What the build actually does is specified in either a build file or the project file. To create a new build file for perl, go to Tools-&gt;Build System -&gt; New Build System. The build file I&rsquo;ve seen on different sites for Perl looks like this:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#070">&#34;cmd&#34;</span>: [<span style="background-color:#fff0f0">&#34;perl&#34;</span>, <span style="background-color:#fff0f0">&#34;$file&#34;</span>],
+    <span style="color:#070">&#34;file_regex&#34;</span>: <span style="background-color:#fff0f0">&#34;.* at (.*) line ([0-9]*)&#34;</span>,
+    <span style="color:#070">&#34;selector&#34;</span>: <span style="background-color:#fff0f0">&#34;source.perl&#34;</span>
+}</code></pre></td></tr></table>
+</div>
+</div>
+<p>Save this as perl.sublime-build. With this, whenever you are working on a Perl file and hit <kbd>ctrl+b</kbd>, the command &ldquo;perl -w your_file.pl&rdquo; will be run. This, however, was not good enough for me. Most of the time I am working on tests for a Perl module, so I have to run <code>perl -Ilib t/my_test_file.t</code>. I also want to be able to run individual tests as well as <a href="https://metacpan.org/module/OVID/Test-Harness-3.26/bin/prove"><code>prove</code></a> using shortcuts.</p>
+
+<p>To do this, we need to turn the module directory into a Sublime Text project. This is pretty simple. First, open the module directory in Sublime Text. Select Project-&gt;Save Project As, then choose the name of the project and save it in the top directory of the module. Paste the following simple contents into the project file:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+ <span style="color:#070">&#34;folders&#34;</span>:
+ [
+  {
+   <span style="color:#070">&#34;path&#34;</span>: <span style="background-color:#fff0f0">&#34;.&#34;</span>
+  }
+ ]
+}</code></pre></td></tr></table>
+</div>
+</div>
+<p>All this does is add the entire directory to the project. Next, we edit the Perl build file to reference the root of the project so we can add the top-level lib directory to our include path:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">{
+ <span style="background-color:#fff0f0">&#34;cmd&#34;</span>: [<span style="background-color:#fff0f0">&#34;perl&#34;</span>, <span style="background-color:#fff0f0">&#34;-Ilib&#34;</span>, <span style="background-color:#fff0f0">&#34;$file&#34;</span>],
+ <span style="background-color:#fff0f0">&#34;working_dir&#34;</span>: <span style="background-color:#fff0f0">&#34;$project_path&#34;</span>,
+ <span style="background-color:#fff0f0">&#34;file_regex&#34;</span>: <span style="background-color:#fff0f0">&#34;.* at (.) line ([0-9])&#34;</span>,
+ <span style="background-color:#fff0f0">&#34;selector&#34;</span>: <span style="background-color:#fff0f0">&#34;source.perl&#34;</span>,
+}</code></pre></td></tr></table>
+</div>
+</div>
+<p>Great! Now we can run Perl on tests contained in module directories. This still works fine for standalone scripts, too.</p>
+
+<p>Now I&rsquo;d like to run my whole test suite using prove. By default, <kbd>ctrl+shift+b</kbd> runs a build variant with the name &ldquo;Run&rdquo;, so we&rsquo;ll just make a <code>prove</code> variant with that name. I&rsquo;d much rather give it a more descriptive name, but the Sublime shortcut requires this name. You can change the shortcut, but then you wouldn&rsquo;t be able to use the shortcut for other builds (other languages). It&rsquo;s all up to you. Here is the final build file:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+ <span style="color:#070">&#34;cmd&#34;</span>: [<span style="background-color:#fff0f0">&#34;perl&#34;</span>, <span style="background-color:#fff0f0">&#34;-Ilib&#34;</span>, <span style="background-color:#fff0f0">&#34;$file&#34;</span>],
+ <span style="color:#070">&#34;working_dir&#34;</span>: <span style="background-color:#fff0f0">&#34;$project_path&#34;</span>,
+ <span style="color:#070">&#34;file_regex&#34;</span>: <span style="background-color:#fff0f0">&#34;.* at (.) line ([0-9])&#34;</span>,
+ <span style="color:#070">&#34;selector&#34;</span>: <span style="background-color:#fff0f0">&#34;source.perl&#34;</span>,
+ <span style="color:#070">&#34;variants&#34;</span>: [
+        {
+  <span style="color:#070">&#34;cmd&#34;</span>: [<span style="background-color:#fff0f0">&#34;prove&#34;</span>, <span style="background-color:#fff0f0">&#34;-vlr&#34;</span>, <span style="background-color:#fff0f0">&#34;--merge&#34;</span>],
+  <span style="color:#070">&#34;working_dir&#34;</span>: <span style="background-color:#fff0f0">&#34;$project_path&#34;</span>,
+         <span style="color:#070">&#34;name&#34;</span>: <span style="background-color:#fff0f0">&#34;Run&#34;</span>,
+  <span style="color:#070">&#34;windows&#34;</span>: {
+                 <span style="color:#070">&#34;cmd&#34;</span>: [<span style="background-color:#fff0f0">&#34;prove.bat&#34;</span>, <span style="background-color:#fff0f0">&#34;-vlr&#34;</span>, <span style="background-color:#fff0f0">&#34;--merge&#34;</span>]
+             }
+        }
+    ]
+}</code></pre></td></tr></table>
+</div>
+</div>
+<p>Note that I needed a Windows variant for <code>prove</code> since the Sublime editor doesn&rsquo;t work the same as cmd. You could, alternatively, add &lsquo;&ldquo;shell&rdquo;:true&rsquo; to use the system&rsquo;s command shell so you don&rsquo;t need a separate command for Windows.</p>
+
+<p>With this build file in place, I can now press ctrl+b to run any Perl script, with it&rsquo;s project lib directory in @INC, and <kbd>ctrl+shift+b</kbd> to run prove. Voila!</p>
+
+<p>Here are the final files:</p>
+
+<ul>
+<li><a href="https://sites.google.com/site/complingfiles/files/perl-module.sublime-project?attredirects=0&amp;d=1">project file</a> (put a copy in your project root folders)</li>
+<li><a href="https://sites.google.com/site/complingfiles/files/perl.sublime-build?attredirects=0&amp;d=1">Perl build file</a> (only one is needed per ST installation)</li>
+</ul>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<hr>
+		</div>
+	</div>
+</div>
+
+    <div class="container">
+        <div class="row col-md-12">
+            <footer>
+                <div class="pull-left">
+                    <p>
+                        &copy; 2011-2018 ~ Nathan Glenn ~ Powered By <a href="http://hugo.spf13.com">Hugo</a> - version: 0.52 ~ <a href="http://garfieldnate.github.io//license">License</a>
+                    </p>
+                </div>
+
+                
+                <div class="pull-right">
+                    
+                    
+                    
+                    
+                        <a href="https://github.com/garfieldnate" target="_blank">
+                        <i class="fab fa-github-square fa-2x"></i></a>
+                    
+                    
+                    
+                    
+                        <a href="https://www.goodreads.com/user/show/2794644-nathan-glenn" target="_blank">
+                        <i class="fab fa-goodreads fa-2x"></i></a>
+                    
+                    
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    
+    </body>
+</html>
+

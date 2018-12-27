@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Refactoring the Soar Lexer">
+    <meta name="author" content="Nathan Glenn">
+
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <title>Refactoring the Soar Lexer &middot; Nate Glenn&#39;s Blog</title>
+
+   	
+    
+        <link rel="stylesheet" href="http://garfieldnate.github.io//css/theme/superhero.css">
+    
+
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/solid.js" integrity="sha384-F4BRNf3onawQt7LDHDJm/hwm3wBtbLIfGk1VSB/3nn3E+7Rox1YpYcKJMsmHBJIl" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/regular.js" integrity="sha384-V+AkgA1cZ+p3DRK63AHCaXvO68V7B5eHoxl7QVN21zftbkFn/sGAIVR7vmQL3Zhp" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/brands.js" integrity="sha384-VLgz+MgaFCnsFLiBwE3ItNouuqbWV2ZnIqfsA6QRHksEAQfgbcoaQ4PP0ZeS0zS5" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/fontawesome.js" integrity="sha384-treYPdjUrP4rW5q82SnECO7TPVAz4bpas16yuE9F5o7CeBn2YYw1yr5oC8s8Mf8t" crossorigin="anonymous"></script>
+
+   	
+   	<link rel="stylesheet" href="http://garfieldnate.github.io//css/style.css">
+
+
+    
+    <script src="http://garfieldnate.github.io//js/jquery.min-2.1.4.js"></script>
+    <script src="http://garfieldnate.github.io//js/bootstrap.min-3.3.5.js"></script>
+    <script type="text/javascript" src="http://garfieldnate.github.io//js/jquery.githubRepoWidget.min.js"></script>
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Nate Glenn&#39;s Blog" />
+</head>
+<body lang="en-US">
+    
+    
+<div class="container">
+    <div class="row">
+        <div class="navbar navbar-default " role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://garfieldnate.github.io/">Nate Glenn&#39;s Blog</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://garfieldnate.github.io/">Home</a></li>
+                    <li><a href="http://garfieldnate.github.io//about/">About</a></li>
+                    <li><a href="http://garfieldnate.github.io//post/">Archive</a></li>
+                    <li><a href="http://garfieldnate.github.io//resume/resume-en.html">Resume</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<h3>Refactoring the Soar Lexer</h3>
+				<span class="label label-primary">July 27, 2014</span> in
+				
+					
+					<a href="/categories/c&#43;&#43;">C&#43;&#43;</a>
+				
+					 , 
+					<a href="/categories/soar">Soar</a>
+				
+					 , 
+					<a href="/categories/code-reading">Code Reading</a>
+				
+					 , 
+					<a href="/categories/legacy-code">Legacy Code</a>
+				
+				
+			</small>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<br>
+			
+
+<p>After my <a href="blog/2014/7/13/code-reading-the-soar-parser">last writeup</a> on how <a href="https://github.com/SoarGroup/Soar">Soar</a> parses Soar code, I decided to dive in and try and refactor it, starting with the lexer (and here&rsquo;s the resulting <a href="https://github.com/SoarGroup/Soar/pull/178">PR</a>). I haven&rsquo;t worked with C/C++ in a while, and a good part of the code I changed was close to my age, so it was an interesting learning experience for me.</p>
+
+<p>The lexer used global state stored via an agent to keep track of the current input character and lexeme as well as to remember line and column numbers. The goal of the refactoring was of course to change that, but 30 commits later I have not yet completely separated the agent from the Lexer because all printing logic (warnings, etc.) requires an agent. The result of this is that after every change I make I have to do <code>build Tests</code> and watch the entire project be rebuilt because of the various interdependencies. Also, the lexer has none if its own tests, and so the full test suite must be run to find possible problems. The result here is that every time I make a change and need to see if it works, I start a long compile/test process running and watch more of <a href="http://www.imdb.com/title/tt1637727/">some show</a> while waiting for it to finish (you&rsquo;ve probably seen <a href="http://xkcd.com/303/">this comic</a> before). So the global state is not only difficult to work with, but it also slows development to a crawl.</p>
+
+<p>The lexer had a lot of dead code which told me the story of how it used to work. Originally it would read Soar code straight from a file; later it was retrofitted to take production strings directly as an &ldquo;alternate&rdquo;. There must have been something off about the string input, however, because besides setting <code>alternate_input_string</code>, <code>alternate_input_suffix</code> was also required, and always needed to be set to <code>&quot;) &quot;</code>. Once the production string was finished, the lexer would read the suffix. The original reason for this was long gone, but the parser still expected productions to end with an <code>R_PAREN</code> lexeme, as did other lexer clients. Later developers copied the incantation to lex a string, not knowing why it was needed, and the refactored jSoar parser implementation has the check for the parenthesis commented and marked <a href="https://github.com/soartech/jsoar/blob/master/jsoar-core/src/main/java/org/jsoar/kernel/parser/original/OriginalParserImpl.java#L2005">&ldquo;this makes no sense to me&rdquo;</a>. So the current functionality started out as an alternative for testing or something and then became the only use case, leaving dead code everywhere.</p>
+
+<p>Some of the updating work I did was already done in the [9.5] branch, but it was still interesting. There were workarounds for the old Think C and Symantech C++ compilers, between <code>THINK_C</code> and <code>__SC__</code> <code>#ifdef</code>s. I had no idea what they were and found an excellent compiler macros list project on <a href="http://sourceforge.net/p/predef/wiki/Home/">SourceForge</a>. Apparently C had no boolean variable types, either, so programmers used <code>typedef char Bool</code> and defined <code>TRUE</code> and <code>FALSE</code> manually, and part of updating to C++ code is changing those to real <code>bool</code> types.</p>
+
+<p>The value of making small, working commits was reinforced when my initial pull request broke the automated build when <code>--no-scu</code> was set. This setting causes each <code>.cpp</code> file to be compiled separately, ensuring that the build fails if a <code>#include</code> directive was forgotten somewhere. I was able to bisect the Git history and discover the problem pretty quickly.</p>
+
+<h2 id="nuggets">Nuggets:</h2>
+
+<ul>
+<li>Alex set up <a href="http://jenkins-ci.org/">Jenkins</a> <a href="https://github.com/SoarGroup/Soar/issues/169">to test pull requests</a>, so I was able to push several times and get live feedback during another build each time.</li>
+<li>The legacy spaghetti code wasn&rsquo;t too difficult to untangle and I&rsquo;m confident I can do a lot more</li>
+</ul>
+
+<h2 id="new-todo-s">New TODO&rsquo;s:</h2>
+
+<ul>
+<li>A printer or printer manager class to decouple the <code>agent</code> code from everything else in Soar (jSoar is <a href="https://github.com/soartech/jsoar/blob/master/jsoar-core/src/main/java/org/jsoar/kernel/tracing/Printer.java">way ahead</a> on that one).<br /></li>
+<li>Unit tests for the lexer, preferably data-driven to reduce the amount of required recompilation</li>
+</ul>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<hr>
+		</div>
+	</div>
+</div>
+
+    <div class="container">
+        <div class="row col-md-12">
+            <footer>
+                <div class="pull-left">
+                    <p>
+                        &copy; 2011-2018 ~ Nathan Glenn ~ Powered By <a href="http://hugo.spf13.com">Hugo</a> - version: 0.52 ~ <a href="http://garfieldnate.github.io//license">License</a>
+                    </p>
+                </div>
+
+                
+                <div class="pull-right">
+                    
+                    
+                    
+                    
+                        <a href="https://github.com/garfieldnate" target="_blank">
+                        <i class="fab fa-github-square fa-2x"></i></a>
+                    
+                    
+                    
+                    
+                        <a href="https://www.goodreads.com/user/show/2794644-nathan-glenn" target="_blank">
+                        <i class="fab fa-goodreads fa-2x"></i></a>
+                    
+                    
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    
+    </body>
+</html>
+

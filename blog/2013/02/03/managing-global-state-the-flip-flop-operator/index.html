@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Managing Global State: the Flip-Flop Operator">
+    <meta name="author" content="Nathan Glenn">
+
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <title>Managing Global State: the Flip-Flop Operator &middot; Nate Glenn&#39;s Blog</title>
+
+   	
+    
+        <link rel="stylesheet" href="http://garfieldnate.github.io//css/theme/superhero.css">
+    
+
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/solid.js" integrity="sha384-F4BRNf3onawQt7LDHDJm/hwm3wBtbLIfGk1VSB/3nn3E+7Rox1YpYcKJMsmHBJIl" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/regular.js" integrity="sha384-V+AkgA1cZ+p3DRK63AHCaXvO68V7B5eHoxl7QVN21zftbkFn/sGAIVR7vmQL3Zhp" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/brands.js" integrity="sha384-VLgz+MgaFCnsFLiBwE3ItNouuqbWV2ZnIqfsA6QRHksEAQfgbcoaQ4PP0ZeS0zS5" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/fontawesome.js" integrity="sha384-treYPdjUrP4rW5q82SnECO7TPVAz4bpas16yuE9F5o7CeBn2YYw1yr5oC8s8Mf8t" crossorigin="anonymous"></script>
+
+   	
+   	<link rel="stylesheet" href="http://garfieldnate.github.io//css/style.css">
+
+
+    
+    <script src="http://garfieldnate.github.io//js/jquery.min-2.1.4.js"></script>
+    <script src="http://garfieldnate.github.io//js/bootstrap.min-3.3.5.js"></script>
+    <script type="text/javascript" src="http://garfieldnate.github.io//js/jquery.githubRepoWidget.min.js"></script>
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Nate Glenn&#39;s Blog" />
+</head>
+<body lang="en-US">
+    
+    
+<div class="container">
+    <div class="row">
+        <div class="navbar navbar-default " role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://garfieldnate.github.io/">Nate Glenn&#39;s Blog</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://garfieldnate.github.io/">Home</a></li>
+                    <li><a href="http://garfieldnate.github.io//about/">About</a></li>
+                    <li><a href="http://garfieldnate.github.io//post/">Archive</a></li>
+                    <li><a href="http://garfieldnate.github.io//resume/resume-en.html">Resume</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<h3>Managing Global State: the Flip-Flop Operator</h3>
+				<span class="label label-primary">February 3, 2013</span> in
+				
+					
+					<a href="/categories/idiom">idiom</a>
+				
+					 , 
+					<a href="/categories/flip-flop">flip-flop</a>
+				
+					 , 
+					<a href="/categories/perl">Perl</a>
+				
+					 , 
+					<a href="/categories/bug">bug</a>
+				
+					 , 
+					<a href="/categories/testing">testing</a>
+				
+					 , 
+					<a href="/categories/perlop">perlop</a>
+				
+				
+			</small>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<br>
+			<p>Today I was faced with another mysterious failing test while writing a test suite for some legacy code. I knew it had to be a problem with persisting state because this particular test only failed when processing a particular data set with the same object which was just used to process another set.</p>
+
+<p>My first step to trying to fix this was to delete all of the values stored in the object during the processing procedure:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#007020">delete</span> <span style="color:#963">$self</span><span style="color:#333">-&gt;</span>{stateDatum1};
+<span style="color:#007020">delete</span> <span style="color:#963">$self</span><span style="color:#333">-&gt;</span>{stateDatum2};
+<span style="color:#888">#etc....</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Nothing changed. I reduced the problematic code into a small example for this post. First, the module to be tested:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#080;font-weight:bold">package</span> <span style="color:#0e84b5;font-weight:bold">Demo::Bad::GlobalFlipFlop</span>;
+<span style="color:#080;font-weight:bold">use</span> <span style="color:#0e84b5;font-weight:bold">strict</span>;
+<span style="color:#080;font-weight:bold">use</span> <span style="color:#0e84b5;font-weight:bold">warnings</span>;
+<span style="color:#080;font-weight:bold">use</span> <span style="color:#0e84b5;font-weight:bold">autodie</span>;
+<span style="color:#080;font-weight:bold">use</span> <span style="color:#60e;font-weight:bold">5.010</span>;
+
+<span style="color:#080;font-weight:bold">sub</span> <span style="color:#06b;font-weight:bold">new</span> {
+ <span style="color:#080;font-weight:bold">my</span> (<span style="color:#963">$class</span>) <span style="color:#333">=</span> <span style="color:#963">@_</span>;
+ <span style="color:#080;font-weight:bold">my</span> <span style="color:#963">$self</span> <span style="color:#333">=</span> {};
+ <span style="color:#007020">bless</span> <span style="color:#963">$self</span>, <span style="color:#963">$class</span>;
+ <span style="color:#080;font-weight:bold">return</span> <span style="color:#963">$self</span>;
+}
+
+<span style="color:#888">#return true if parsing succeeded, false otherwise.</span>
+<span style="color:#080;font-weight:bold">sub</span> <span style="color:#06b;font-weight:bold">parse</span> {
+ <span style="color:#080;font-weight:bold">my</span> (<span style="color:#963">$self</span>, <span style="color:#963">$file</span>) <span style="color:#333">=</span> <span style="color:#963">@_</span>;
+ <span style="color:#007020">open</span> <span style="color:#080;font-weight:bold">my</span> <span style="color:#963">$file_in</span>, <span style="background-color:#fff0f0">&#39;&lt;&#39;</span>, <span style="color:#963">$file</span>;
+
+ <span style="color:#080;font-weight:bold">my</span> <span style="color:#963">$started</span> <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">0</span>;
+ <span style="color:#080;font-weight:bold">while</span>( <span style="color:#000;background-color:#fff0ff">&lt;$file_in&gt;</span> ){
+
+  <span style="color:#888">#flip-flop</span>
+  <span style="color:#080;font-weight:bold">next</span> <span style="color:#080;font-weight:bold">unless</span> <span style="color:#000;background-color:#fff0ff">/^=startHere/i</span> <span style="color:#333">..</span> <span style="color:#00d;font-weight:bold">0</span>;    <span style="color:#888"># start processing</span>
+  <span style="color:#963">$started</span> <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">1</span>;
+  <span style="color:#888">#continue doing something with file contents...</span>
+  <span style="color:#888"># say &#39;hello:)&#39; if(/hello/);</span>
+  <span style="color:#888"># say &#39;goodbye:(&#39; if(/goodbye/);</span>
+ }
+ <span style="color:#080;font-weight:bold">if</span>(<span style="color:#000;font-weight:bold">not</span> <span style="color:#963">$started</span>){
+  say <span style="background-color:#fff0f0">&#34;File not processed; missing &#39;=startHere&#39; line.&#34;</span>;
+  <span style="color:#080;font-weight:bold">return</span>;
+ }
+ <span style="color:#007020">close</span> <span style="color:#963">$file_in</span>;
+ <span style="color:#080;font-weight:bold">return</span> <span style="color:#00d;font-weight:bold">1</span>;
+}
+
+<span style="color:#00d;font-weight:bold">1</span>;</code></pre></td></tr></table>
+</div>
+</div>
+<p>The main idea here is that we are processing some file and returning a boolean representing its validity. The only requirement of validity of the file is that a certain start token is found within it; everything before the start sequence is ignored. Here are valid and invalid example files:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">#good_file.txt
+=startHere
+hello
+goodbye
+
+#bad_file.txt- doesn&#39;t contain a start sequence
+hello
+goodbye</code></pre></td></tr></table>
+</div>
+</div>
+<p>Now, the test file:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#080;font-weight:bold">use</span> <span style="color:#0e84b5;font-weight:bold">strict</span>;
+<span style="color:#080;font-weight:bold">use</span> <span style="color:#0e84b5;font-weight:bold">warnings</span>;
+<span style="color:#080;font-weight:bold">use</span> <span style="color:#0e84b5;font-weight:bold">autodie</span>;
+<span style="color:#080;font-weight:bold">use</span> <span style="color:#0e84b5;font-weight:bold">Test::More</span> tests <span style="color:#333">=&gt;</span> <span style="color:#00d;font-weight:bold">2</span>;
+<span style="color:#080;font-weight:bold">use</span> <span style="color:#0e84b5;font-weight:bold">File::Slurp</span>;
+<span style="color:#080;font-weight:bold">use</span> <span style="color:#0e84b5;font-weight:bold">Demo::Bad::GlobalFlipFlop</span>;
+
+<span style="color:#080;font-weight:bold">my</span> <span style="color:#963">$good_name</span> <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#39;good_file.txt&#39;</span>;
+<span style="color:#080;font-weight:bold">my</span> <span style="color:#963">$bad_file</span> <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#39;bad_file.txt&#39;</span>;
+
+<span style="color:#080;font-weight:bold">my</span> <span style="color:#963">$demo</span> <span style="color:#333">=</span> <span style="color:#0e84b5;font-weight:bold">Demo::Bad::GlobalFlipFlop</span><span style="color:#333">-&gt;</span><span style="color:#080;font-weight:bold">new</span>();
+
+ok( <span style="color:#963">$demo</span><span style="color:#333">-&gt;</span>parse(<span style="color:#963">$good_name</span>) );
+ok( <span style="color:#000;font-weight:bold">not</span> <span style="color:#963">$demo</span><span style="color:#333">-&gt;</span>parse(<span style="color:#963">$bad_file</span>) );</code></pre></td></tr></table>
+</div>
+</div>
+<p>The output of running this file:</p>
+
+<pre><code>&gt;perl test.pl
+1..2
+hello:)
+goodbye:(
+ok 1
+hello:)
+goodbye:(
+not ok 2
+#   Failed test at test.pl line 61.
+# Looks like you failed 1 test of 2.
+</code></pre>
+
+<p>Why did it fail the second test, which involves checking that an invalid file is considered invalid?</p>
+
+<p>The bug is in the line which matches the start token:</p>
+
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#080;font-weight:bold">next</span> <span style="color:#080;font-weight:bold">unless</span> <span style="color:#000;background-color:#fff0ff">/^=startHere/i</span> <span style="color:#333">..</span> <span style="color:#00d;font-weight:bold">0</span>; <span style="color:#888"># start processing</span></code></pre></td></tr></table>
+</div>
+</div>
+
+<p>The regex, flip-flop operator and 0 were clearly some sort of idiom that I was unfamiliar with. I had only ever used the flip-flop with numbers, such as <code>1..10</code>, which iterates from numbers 1 through 10. How does it work? Let&rsquo;s check <a href="http://perldoc.perl.org/perlop.html">perlop</a>:</p>
+
+<pre><code>&gt; Each &quot;..&quot; operator maintains its own boolean state, even across calls to a subroutine that contains it. It is false as long as its left operand is false. Once the left operand is true, the range operator stays true until the right operand is true *AFTER* which the range operator becomes false again.
+</code></pre>
+
+<p>The mysterious line thus worked like this:</p>
+
+<ul>
+<li>Skip lines of the input file until the left side, a match for the start token, is true</li>
+<li>Don&rsquo;t skip lines again until the right side, <code>0</code>, is evaluated as true (which never happens).</li>
+<li>The state of this flip-flop operator is stored between subsequent calls to the subroutine. It&rsquo;s a hidden global variable! Usually flip-flop operators are used in contexts that are guaranteed a reset after iteration (such as <code>1..10</code>). Not so here! I replaced the offending code with some that keeps state for me:</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#080;font-weight:bold">my</span> <span style="color:#963">$started</span> <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">0</span>;
+<span style="color:#080;font-weight:bold">while</span>(<span style="color:#000;background-color:#fff0ff">&lt;$file_in&gt;</span>){
+    <span style="color:#080;font-weight:bold">if</span>(<span style="color:#000;background-color:#fff0ff">/^=startHere/i</span>){
+        <span style="color:#963">$started</span> <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">1</span>;
+    }
+    <span style="color:#080;font-weight:bold">next</span> <span style="color:#080;font-weight:bold">unless</span> <span style="color:#963">$started</span>;
+<span style="color:#888">#continue processing...</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>With this, everything works as expected:</p>
+
+<pre><code>&gt;perl test.pl
+1..2
+ok 1
+File not processed; missing '=startHere' line.
+ok 2
+</code></pre>
+
+<p>Note that this bug only presented itself to me because I changed the legacy standalone script to be its own module, creating the possibility of storing state between subroutine calls.</p>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<hr>
+		</div>
+	</div>
+</div>
+
+    <div class="container">
+        <div class="row col-md-12">
+            <footer>
+                <div class="pull-left">
+                    <p>
+                        &copy; 2011-2018 ~ Nathan Glenn ~ Powered By <a href="http://hugo.spf13.com">Hugo</a> - version: 0.52 ~ <a href="http://garfieldnate.github.io//license">License</a>
+                    </p>
+                </div>
+
+                
+                <div class="pull-right">
+                    
+                    
+                    
+                    
+                        <a href="https://github.com/garfieldnate" target="_blank">
+                        <i class="fab fa-github-square fa-2x"></i></a>
+                    
+                    
+                    
+                    
+                        <a href="https://www.goodreads.com/user/show/2794644-nathan-glenn" target="_blank">
+                        <i class="fab fa-goodreads fa-2x"></i></a>
+                    
+                    
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    
+    </body>
+</html>
+

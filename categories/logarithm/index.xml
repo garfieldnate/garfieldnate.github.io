@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Logarithm on Nate Glenn&#39;s Blog</title>
+    <link>http://garfieldnate.github.io/categories/logarithm/</link>
+    <description>Recent content in Logarithm on Nate Glenn&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <managingEditor>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</managingEditor>
+    <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
+    <lastBuildDate>Wed, 17 Aug 2011 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://garfieldnate.github.io/categories/logarithm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Distributional Statistics of Log Values in Linear Domain</title>
+      <link>http://garfieldnate.github.io/blog/2011/08/17/distributional-statistics-of-log-values-in-linear-domain/</link>
+      <pubDate>Wed, 17 Aug 2011 00:00:00 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2011/08/17/distributional-statistics-of-log-values-in-linear-domain/</guid>
+      <description>Quite a long title, sorry. Basically, I had a bunch of log values (and they needed to stay logarithmic to avoid underflow) and I wanted to compute distributional statistics on them, like mean, variance and kurtosis. I wasn&amp;rsquo;t sure if it would be valid to compute these kinds of statistics on the numbers as is, so I created a class to do all of the calculations in linear space. I&amp;rsquo;ll post the result here, though there may be bugs (tell me if you find some!</description>
+    </item>
+    
+  </channel>
+</rss>

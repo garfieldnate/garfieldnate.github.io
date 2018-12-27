@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Code Reading: pl2bat.pl">
+    <meta name="author" content="Nathan Glenn">
+
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <title>Code Reading: pl2bat.pl &middot; Nate Glenn&#39;s Blog</title>
+
+   	
+    
+        <link rel="stylesheet" href="http://garfieldnate.github.io//css/theme/superhero.css">
+    
+
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/solid.js" integrity="sha384-F4BRNf3onawQt7LDHDJm/hwm3wBtbLIfGk1VSB/3nn3E+7Rox1YpYcKJMsmHBJIl" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/regular.js" integrity="sha384-V+AkgA1cZ+p3DRK63AHCaXvO68V7B5eHoxl7QVN21zftbkFn/sGAIVR7vmQL3Zhp" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/brands.js" integrity="sha384-VLgz+MgaFCnsFLiBwE3ItNouuqbWV2ZnIqfsA6QRHksEAQfgbcoaQ4PP0ZeS0zS5" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/fontawesome.js" integrity="sha384-treYPdjUrP4rW5q82SnECO7TPVAz4bpas16yuE9F5o7CeBn2YYw1yr5oC8s8Mf8t" crossorigin="anonymous"></script>
+
+   	
+   	<link rel="stylesheet" href="http://garfieldnate.github.io//css/style.css">
+
+
+    
+    <script src="http://garfieldnate.github.io//js/jquery.min-2.1.4.js"></script>
+    <script src="http://garfieldnate.github.io//js/bootstrap.min-3.3.5.js"></script>
+    <script type="text/javascript" src="http://garfieldnate.github.io//js/jquery.githubRepoWidget.min.js"></script>
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Nate Glenn&#39;s Blog" />
+</head>
+<body lang="en-US">
+    
+    
+<div class="container">
+    <div class="row">
+        <div class="navbar navbar-default " role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://garfieldnate.github.io/">Nate Glenn&#39;s Blog</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://garfieldnate.github.io/">Home</a></li>
+                    <li><a href="http://garfieldnate.github.io//about/">About</a></li>
+                    <li><a href="http://garfieldnate.github.io//post/">Archive</a></li>
+                    <li><a href="http://garfieldnate.github.io//resume/resume-en.html">Resume</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<h3>Code Reading: pl2bat.pl</h3>
+				<span class="label label-primary">July 13, 2014</span> in
+				
+					
+					<a href="/categories/code-reading">code reading</a>
+				
+					 , 
+					<a href="/categories/perl">Perl</a>
+				
+					 , 
+					<a href="/categories/batch">batch</a>
+				
+					 , 
+					<a href="/categories/pl2bat.pl">pl2bat.pl</a>
+				
+					 , 
+					<a href="/categories/distributions">distributions</a>
+				
+				
+			</small>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<br>
+			<p>When you install a Perl distribution from CPAN that comes with an executable script, Perl adds it to your path so it can be treated like any other command line program. On a *nix system, all that needs to be done for this to work is to set the script to be executable. Windows doesn&rsquo;t have executable script files with shebang lines like *nix, however, so Perl generates a batch file.</p>
+
+<p>Let&rsquo;s see how this works. First, let&rsquo;s pick a distribution that comes with an executable script. The <code>App::</code> namespace is a great place to look for that.</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-console" data-lang="console"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-console" data-lang="console">cpan App::Cleo
+...
+Running make install
+Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\lib\App\Cleo.pm
+Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo
+Installing C:\dev\strawberry-perl-5.18.2.2-64bit-portable\perl\site\bin\cleo.bat
+...</code></pre></td></tr></table>
+</div>
+</div>
+<p>Hmm, cleo.bat. That&rsquo;s not in the <a href="https://metacpan.org/source/THALJEF/App-Cleo-0.004/bin">distribution</a>! Let&rsquo;s take a look:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-console" data-lang="console"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-console" data-lang="console">@rem = &#39;--*-Perl-*--
+@echo off
+if &#34;%OS%&#34; == &#34;Windows_NT&#34; goto WinNT
+IF EXIST &#34;%~dp0perl.exe&#34; (
+&#34;%~dp0perl.exe&#34; -x -S &#34;%0&#34; %1 %2 %3 %4 %5 %6 %7 %8 %9
+) ELSE IF EXIST &#34;%~dp0..\..\bin\perl.exe&#34; (
+&#34;%~dp0..\..\bin\perl.exe&#34; -x -S &#34;%0&#34; %1 %2 %3 %4 %5 %6 %7 %8 %9
+) ELSE (
+perl -x -S &#34;%0&#34; %1 %2 %3 %4 %5 %6 %7 %8 %9
+)
+
+...
+
+#!/usr/bin/env perl
+#line 29
+
+use strict;
+use warnings;
+use App::Cleo;
+
+our $VERSION = 0.003;
+...</code></pre></td></tr></table>
+</div>
+</div>
+<p>It seems to be a batch script with the entirety of cleo.pl pasted in the bottom. How does that work? Well first there&rsquo;s a little bit of logic to differentiate requirements on Windows NT versus other Windows systems, and some logic to deal with Perl being located in different places (relative to <code>%~dp0</code>, the directory containing the script). <code>%0</code> is the name of the script being run, and Perl is being invoked on it with different arguments. The other %number arguments are the script arguments, which are passed along to the script once again. So this is a batch script that passes itself to Perl? But what&rsquo;s Perl going to do with all of the batch garbage that comes before the actual Perl script?</p>
+
+<p>The magic here is in the <code>-x</code> switch. From <a href="http://perldoc.perl.org/perlrun.html">perlrun</a>:</p>
+
+<blockquote>
+<p>tells Perl that the program is embedded in a larger chunk of unrelated text, such as in a mail message. Leading garbage will be discarded until the first line that starts with #! and contains the string &ldquo;perl&rdquo;. Any meaningful switches on that line will be applied.</p>
+</blockquote>
+
+<p>Ooh! That&rsquo;s an interesting feature. I wonder if anyone still uses it for emailed scripts.</p>
+
+<p>So the batch script calls Perl on itself, and Perl skips all of the batch syntax and goes straight to the shebang line (<code>#!/usr/bin/env perl</code>) and runs the original <a href="https://metacpan.org/source/THALJEF/App-Cleo-0.004/bin/cleo">cleo</a> Perl script.</p>
+
+<p>The mechanism used to create this is is <a href="https://metacpan.org/pod/distribution/perl/win32/bin/pl2bat.pl">pl2bat.pl</a>, and you&rsquo;ll find interesting history, motivation and gotchas in the documentation there. Thanks to pl2bat, CPAN author scripts are installed on Windows and added to the path. I can just open my cmd and type <code>cleo</code> to start the app.</p>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<hr>
+		</div>
+	</div>
+</div>
+
+    <div class="container">
+        <div class="row col-md-12">
+            <footer>
+                <div class="pull-left">
+                    <p>
+                        &copy; 2011-2018 ~ Nathan Glenn ~ Powered By <a href="http://hugo.spf13.com">Hugo</a> - version: 0.52 ~ <a href="http://garfieldnate.github.io//license">License</a>
+                    </p>
+                </div>
+
+                
+                <div class="pull-right">
+                    
+                    
+                    
+                    
+                        <a href="https://github.com/garfieldnate" target="_blank">
+                        <i class="fab fa-github-square fa-2x"></i></a>
+                    
+                    
+                    
+                    
+                        <a href="https://www.goodreads.com/user/show/2794644-nathan-glenn" target="_blank">
+                        <i class="fab fa-goodreads fa-2x"></i></a>
+                    
+                    
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    
+    </body>
+</html>
+

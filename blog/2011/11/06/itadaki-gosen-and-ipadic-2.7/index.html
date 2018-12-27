@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Itadaki GoSen and IPADIC 2.7">
+    <meta name="author" content="Nathan Glenn">
+
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <title>Itadaki GoSen and IPADIC 2.7 &middot; Nate Glenn&#39;s Blog</title>
+
+   	
+    
+        <link rel="stylesheet" href="http://garfieldnate.github.io//css/theme/superhero.css">
+    
+
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/solid.js" integrity="sha384-F4BRNf3onawQt7LDHDJm/hwm3wBtbLIfGk1VSB/3nn3E+7Rox1YpYcKJMsmHBJIl" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/regular.js" integrity="sha384-V+AkgA1cZ+p3DRK63AHCaXvO68V7B5eHoxl7QVN21zftbkFn/sGAIVR7vmQL3Zhp" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/brands.js" integrity="sha384-VLgz+MgaFCnsFLiBwE3ItNouuqbWV2ZnIqfsA6QRHksEAQfgbcoaQ4PP0ZeS0zS5" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/fontawesome.js" integrity="sha384-treYPdjUrP4rW5q82SnECO7TPVAz4bpas16yuE9F5o7CeBn2YYw1yr5oC8s8Mf8t" crossorigin="anonymous"></script>
+
+   	
+   	<link rel="stylesheet" href="http://garfieldnate.github.io//css/style.css">
+
+
+    
+    <script src="http://garfieldnate.github.io//js/jquery.min-2.1.4.js"></script>
+    <script src="http://garfieldnate.github.io//js/bootstrap.min-3.3.5.js"></script>
+    <script type="text/javascript" src="http://garfieldnate.github.io//js/jquery.githubRepoWidget.min.js"></script>
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Nate Glenn&#39;s Blog" />
+</head>
+<body lang="en-US">
+    
+    
+<div class="container">
+    <div class="row">
+        <div class="navbar navbar-default " role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://garfieldnate.github.io/">Nate Glenn&#39;s Blog</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://garfieldnate.github.io/">Home</a></li>
+                    <li><a href="http://garfieldnate.github.io//about/">About</a></li>
+                    <li><a href="http://garfieldnate.github.io//post/">Archive</a></li>
+                    <li><a href="http://garfieldnate.github.io//resume/resume-en.html">Resume</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<h3>Itadaki GoSen and IPADIC 2.7</h3>
+				<span class="label label-primary">November 6, 2011</span> in
+				
+					
+					<a href="/categories/java-code">Java code</a>
+				
+					 , 
+					<a href="/categories/morphology">morphology</a>
+				
+					 , 
+					<a href="/categories/japanese">Japanese</a>
+				
+					 , 
+					<a href="/categories/nlp">NLP</a>
+				
+				
+			</small>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<br>
+			<p><strong>Update3: I&rsquo;ve forked the Itadaki project on <a href="https://github.com/garfieldnate/Itadaki">GitHub</a> to keep track of it better.</strong></p>
+
+<p><strong>Update2: I made an executable JAR for GoSen that runs the ReadingProcessorDemo. It requires Java 6; just unzip the contents of <a href="https://sites.google.com/site/complingfiles/files/gosen.7z?attredirects=0&amp;d=1">this zip file</a> to your computer and click on the jar file.</strong></p>
+
+<p><strong>Update1: The IPADIC dictionary is no longer available from its original location. It has been replaced by the <a href="http://sourceforge.jp/projects/naist-jdic/">NAIST</a> dictionary. I have edited the following post to reflect the needed changes.</strong></p>
+
+<p>Itadaki is a software suite for processing Japanese in OpenOffice. GoSen, part of the Itadaki project, is a pure Java morphological analysis tool for Japanese, and I have found it extremely useful in my research. Unfortunately, the page for this project went down recently, making the tools harder to find. Itadaki is still available through Google code <a href="http://code.google.com/p/itadaki/">here</a>, but I can&rsquo;t find a separate installment of GoSen. The old GoSen website can still be accessed through the way-back-machine<a href="http://web.archive.org/web/20080108030419/http://itadaki.org/wiki/index.php/Itadaki"> here</a>. The other problem is that GoSen hasn&rsquo;t been updated since 2007, and in it&rsquo;s current release cannot handle the latest release of IPADIC. I&rsquo;ll describe how to fix it in this post.</p>
+
+<p>Why does it matter that we can&rsquo;t use the latest version of IPADIC? Well, here&rsquo;s an example. I am using GoSen in my thesis work right now, and I put in a sentence which included a negative, past tense verb, such as 行かなかった. It analyzed it as な being used for negation, and かった being the past tense of the verb かう. That is indeed a problem! Using the newer IPADIC fixed it for me, though. To do that, download <a href="http://neu101.up.seesaa.net/etc/gosen-t001.zip">this</a> modified version of GoSen. The explanation for the fix is <a href="http://neu101.seesaa.net/article/182625342.html">here</a>. Basically, a change in the new IPADIC versions to work better with MeCab adds a bunch of commas that break GoSen.</p>
+
+<p><strong>Edit: Once you&rsquo;ve downloaded and unzipped GoSen, run ant in the top directory to build an executable JAR file. Note that if you want javadoc, you&rsquo;ll have to change build.xml so that the javadoc command has &lsquo;encoding=&ldquo;utf-8&rdquo;&rsquo;. Next, you must download the IPADIC dictionary from its legacy repository, <a href="http://sourceforge.jp/projects/ipadic/downloads/24435/ipadic-2.7.0.tar.gz/">here</a>. Unpack the contents into testdata/dictionary. Change testdata/dictionary/build.xml so that the value of &ldquo;ipadic.version&rdquo; is &ldquo;2.7.0&rdquo; (the version that you downloaded). Now run ant in this directory to build the dictionary. [If you had errors, you may have forgotten to run ant in the top level directory first.]</strong></p>
+
+<p>Then, to run a demo and see what amazing things GoSen can do, copy the dictionary.xml file from the testdata/dictionary directory to the dictionary/dictionary directory, go back to the root directory of GoSen, and then run <code>java -cp bin examples.ReadingProcessorDemo testData/dictionary/dictionary.xml</code>. The GoSen site says to run using the testdata folder, but that means you&rsquo;ll have to download the dictionary twice, which is dumb. When you run the above command, you&rsquo;ll get this GUI:</p>
+
+<figure class="center">
+    <img src="/images/content_images/gosen.gif" width="209" height="320"/> 
+</figure>
+
+
+<p>Notice that it tokenizes the sentence, gives readings, and allows you to choose among alternatives analyses. It also gives information on part of speech and inflection.</p>
+
+<p>To use GoSen in an Eclipse project, add gosen-1.0beta.jar to the project build path. You also need to have the dictionary directory somewhere, along with the dictionary.xml file. This code will get you started:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#080;font-weight:bold">package</span> <span style="color:#0e84b5;font-weight:bold">edu.byu.xnlsoar.jp.lexacc</span><span style="color:#333">;</span>
+<span style="color:#080;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">java.io.IOException</span><span style="color:#333">;</span>
+<span style="color:#080;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">java.util.List</span><span style="color:#333">;</span>
+
+<span style="color:#080;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">edu.byu.xnlsoar.utils.Constants</span><span style="color:#333">;</span>
+
+<span style="color:#080;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">net.java.sen.SenFactory</span><span style="color:#333">;</span>
+<span style="color:#080;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">net.java.sen.StringTagger</span><span style="color:#333">;</span>
+<span style="color:#080;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">net.java.sen.dictionary.Morpheme</span><span style="color:#333">;</span>
+<span style="color:#080;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">net.java.sen.dictionary.Token</span><span style="color:#333">;</span>
+
+<span style="color:#080;font-weight:bold">public</span> <span style="color:#080;font-weight:bold">class</span> <span style="color:#b06;font-weight:bold">GoSenInterface</span> <span style="color:#333">{</span>
+ <span style="color:#080;font-weight:bold">public</span> List<span style="color:#333">&lt;</span>token<span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">tokenize</span><span style="color:#333">(</span>String sentence<span style="color:#333">){</span>
+  StringTagger tagger <span style="color:#333">=</span> SenFactory<span style="color:#333">.</span><span style="color:#00c">getStringTagger</span><span style="color:#333">(</span>Constants<span style="color:#333">.</span><span style="color:#00c">getProperty</span><span style="color:#333">(</span><span style="background-color:#fff0f0">&#34;GOSEN_DICT_CONFIG&#34;</span><span style="color:#333">));</span>
+  <span style="color:#080;font-weight:bold">try</span> <span style="color:#333">{</span>
+   <span style="color:#080;font-weight:bold">return</span> tagger<span style="color:#333">.</span><span style="color:#00c">analyze</span><span style="color:#333">(</span>sentence<span style="color:#333">);</span>
+  <span style="color:#333">}</span> <span style="color:#080;font-weight:bold">catch</span> <span style="color:#333">(</span>IOException e<span style="color:#333">)</span> <span style="color:#333">{</span>
+   e<span style="color:#333">.</span><span style="color:#00c">printStackTrace</span><span style="color:#333">();</span>
+   System<span style="color:#333">.</span><span style="color:#00c">exit</span><span style="color:#333">(-</span>1<span style="color:#333">);</span>
+  <span style="color:#333">}</span>
+  <span style="color:#080;font-weight:bold">return</span> <span style="color:#080;font-weight:bold">null</span><span style="color:#333">;</span>
+ <span style="color:#333">}</span>
+
+ <span style="color:#080;font-weight:bold">public</span> <span style="color:#080;font-weight:bold">static</span> <span style="color:#339;font-weight:bold">void</span> <span style="color:#06b;font-weight:bold">main</span><span style="color:#333">(</span>String<span style="color:#333">[]</span> args<span style="color:#333">){</span>
+  String sentence <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;やっぱり日本語情報処理って簡単に出来ちゃうんだもんな。&#34;</span><span style="color:#333">;</span>
+  GoSenInterface dict <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> GoSenInterface<span style="color:#333">();</span>
+  System<span style="color:#333">.</span><span style="color:#00c">out</span><span style="color:#333">.</span><span style="color:#00c">println</span><span style="color:#333">(</span><span style="background-color:#fff0f0">&#34;tokenizing &#34;</span> <span style="color:#333">+</span> sentence<span style="color:#333">);</span>
+  List<span style="color:#333">&lt;</span>token<span style="color:#333">&gt;</span> tokens <span style="color:#333">=</span> dict<span style="color:#333">.</span><span style="color:#00c">tokenize</span><span style="color:#333">(</span>sentence<span style="color:#333">);</span>
+  System<span style="color:#333">.</span><span style="color:#00c">out</span><span style="color:#333">.</span><span style="color:#00c">println</span><span style="color:#333">(</span>tokens<span style="color:#333">);</span>
+  Morpheme m<span style="color:#333">;</span>
+  System<span style="color:#333">.</span><span style="color:#00c">out</span><span style="color:#333">.</span><span style="color:#00c">println</span><span style="color:#333">(</span><span style="background-color:#fff0f0">&#34;surface, lemma, POS, conjugation&#34;</span><span style="color:#333">);</span>
+  <span style="color:#080;font-weight:bold">for</span><span style="color:#333">(</span>Token t <span style="color:#333">:</span> tokens<span style="color:#333">){</span>
+   System<span style="color:#333">.</span><span style="color:#00c">out</span><span style="color:#333">.</span><span style="color:#00c">print</span><span style="color:#333">(</span>t <span style="color:#333">+</span> <span style="background-color:#fff0f0">&#34;, &#34;</span><span style="color:#333">);</span>
+   m <span style="color:#333">=</span> t<span style="color:#333">.</span><span style="color:#00c">getMorpheme</span><span style="color:#333">();</span>
+   System<span style="color:#333">.</span><span style="color:#00c">out</span><span style="color:#333">.</span><span style="color:#00c">print</span><span style="color:#333">(</span>m<span style="color:#333">.</span><span style="color:#00c">getBasicForm</span><span style="color:#333">()</span> <span style="color:#333">+</span> <span style="background-color:#fff0f0">&#34;, &#34;</span><span style="color:#333">);</span>
+   System<span style="color:#333">.</span><span style="color:#00c">out</span><span style="color:#333">.</span><span style="color:#00c">print</span><span style="color:#333">(</span>m<span style="color:#333">.</span><span style="color:#00c">getPartOfSpeech</span><span style="color:#333">()</span> <span style="color:#333">+</span> <span style="background-color:#fff0f0">&#34;, &#34;</span><span style="color:#333">);</span>
+   System<span style="color:#333">.</span><span style="color:#00c">out</span><span style="color:#333">.</span><span style="color:#00c">println</span><span style="color:#333">(</span>m<span style="color:#333">.</span><span style="color:#00c">getConjugationalType</span><span style="color:#333">());</span>
+  <span style="color:#333">}</span>
+ <span style="color:#333">}</span>
+<span style="color:#333">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>If you run that you will get:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-no-highlight" data-lang="no-highlight"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-no-highlight" data-lang="no-highlight">tokenizing やっぱり日本語情報処理って簡単に出来ちゃうんだもんな。
+[やっぱり, 日本語, 情報処理, って, 簡単, に, 出来, ちゃう, ん, だ, もん, な, 。]
+surface, lemma, POS, conjugation
+やっぱり, やっぱり, 副詞-一般, *
+日本語, 日本語, 名詞-一般, *
+情報処理, 情報処理, 名詞-一般, *
+って, って, 助詞-格助詞-連語, *
+簡単, 簡単, 名詞-形容動詞語幹, *
+に, に, 助詞-副詞化, *
+出来, 出来る, 動詞-自立, 一段
+ちゃう, ちゃう, 動詞-非自立, 五段・ワ行促音便
+ん, ん, 名詞-非自立-一般, *
+だ, だ, 助動詞, 特殊・ダ
+もん, もん, 名詞-非自立-一般, *
+な, だ, 助動詞, 特殊・ダ
+。, 。, 記号-句点, *</code></pre></td></tr></table>
+</div>
+</div>
+<p>You have plenty of other options while processing, like grabbing alternate readings, etc. Notice that it got one wrong here: ちゃう is a contraction of てしまう, not a verb whose lemma is ちゃう. It doesn&rsquo;t seem to work on contractions because every token needs a surface form. So this might not work well on informal registers such as tweets or blogs unless some pre-preprocessing is done.</p>
+
+<p>Feel free to leave any questions or comments.</p>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<hr>
+		</div>
+	</div>
+</div>
+
+    <div class="container">
+        <div class="row col-md-12">
+            <footer>
+                <div class="pull-left">
+                    <p>
+                        &copy; 2011-2018 ~ Nathan Glenn ~ Powered By <a href="http://hugo.spf13.com">Hugo</a> - version: 0.52 ~ <a href="http://garfieldnate.github.io//license">License</a>
+                    </p>
+                </div>
+
+                
+                <div class="pull-right">
+                    
+                    
+                    
+                    
+                        <a href="https://github.com/garfieldnate" target="_blank">
+                        <i class="fab fa-github-square fa-2x"></i></a>
+                    
+                    
+                    
+                    
+                        <a href="https://www.goodreads.com/user/show/2794644-nathan-glenn" target="_blank">
+                        <i class="fab fa-goodreads fa-2x"></i></a>
+                    
+                    
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    
+    </body>
+</html>
+

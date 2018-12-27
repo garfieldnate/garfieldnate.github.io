@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Nate Glenn&#39;s Blog</title>
+    <link>http://garfieldnate.github.io/categories/python/</link>
+    <description>Recent content in Python on Nate Glenn&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <managingEditor>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</managingEditor>
+    <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
+    <lastBuildDate>Sun, 06 Jul 2014 14:46:39 +0000</lastBuildDate>
+    
+	<atom:link href="http://garfieldnate.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using Octopress- One More Thing</title>
+      <link>http://garfieldnate.github.io/blog/2014/07/06/using-octopress-one-more-thing/</link>
+      <pubDate>Sun, 06 Jul 2014 14:46:39 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2014/07/06/using-octopress-one-more-thing/</guid>
+      <description>&amp;ldquo;Aiiiiyaaaa! Jacky! You did not install Ruuuubyyy. You need that to write your blog.&amp;rdquo;
+&amp;ldquo;I already install Ruby, uncle, but it still does not work. rake generate creates empty HTML file! Look, it&amp;rsquo;s broken!&amp;rdquo;
+1 2 3  &amp;gt;rake generate Generating... C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/posix-spawn-0.3.8/lib/posix/spawn.rb:162: warning: cannot close fd before spawn &amp;#39;which&amp;#39; is not recognized as an internal or external command, operable program or batch file.   Swat!
+&amp;ldquo;Ow! What was dat for?</description>
+    </item>
+    
+  </channel>
+</rss>

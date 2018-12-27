@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Scalar Context on Nate Glenn&#39;s Blog</title>
+    <link>http://garfieldnate.github.io/categories/scalar-context/</link>
+    <description>Recent content in Scalar Context on Nate Glenn&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <managingEditor>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</managingEditor>
+    <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
+    <lastBuildDate>Sat, 11 Jan 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://garfieldnate.github.io/categories/scalar-context/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>List Assignment in Scalar Context</title>
+      <link>http://garfieldnate.github.io/blog/2014/01/11/list-assignment-in-scalar-context/</link>
+      <pubDate>Sat, 11 Jan 2014 00:00:00 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2014/01/11/list-assignment-in-scalar-context/</guid>
+      <description>(Cross-posted on blogs.perl.org)
+This week I received some special help on SO in understanding how the goatse operator works. I was very thankful for everyone&amp;rsquo;s help. These two articles were also very helpful and I recommend reading them.
+Part of my confusion over the goatse operator was not knowing the difference between list and scalar assignment operators, which both are indicated via &amp;lsquo;=&amp;rsquo;. Further confusing is the fact that each can be used in either scalar or list context, so you can have list assignment in scalar context or scalar assignment in list context.</description>
+    </item>
+    
+  </channel>
+</rss>

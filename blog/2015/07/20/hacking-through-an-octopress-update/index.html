@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Hacking Through an Octopress Update">
+    <meta name="author" content="Nathan Glenn">
+
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <title>Hacking Through an Octopress Update &middot; Nate Glenn&#39;s Blog</title>
+
+   	
+    
+        <link rel="stylesheet" href="http://garfieldnate.github.io//css/theme/superhero.css">
+    
+
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/solid.js" integrity="sha384-F4BRNf3onawQt7LDHDJm/hwm3wBtbLIfGk1VSB/3nn3E+7Rox1YpYcKJMsmHBJIl" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/regular.js" integrity="sha384-V+AkgA1cZ+p3DRK63AHCaXvO68V7B5eHoxl7QVN21zftbkFn/sGAIVR7vmQL3Zhp" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/brands.js" integrity="sha384-VLgz+MgaFCnsFLiBwE3ItNouuqbWV2ZnIqfsA6QRHksEAQfgbcoaQ4PP0ZeS0zS5" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/fontawesome.js" integrity="sha384-treYPdjUrP4rW5q82SnECO7TPVAz4bpas16yuE9F5o7CeBn2YYw1yr5oC8s8Mf8t" crossorigin="anonymous"></script>
+
+   	
+   	<link rel="stylesheet" href="http://garfieldnate.github.io//css/style.css">
+
+
+    
+    <script src="http://garfieldnate.github.io//js/jquery.min-2.1.4.js"></script>
+    <script src="http://garfieldnate.github.io//js/bootstrap.min-3.3.5.js"></script>
+    <script type="text/javascript" src="http://garfieldnate.github.io//js/jquery.githubRepoWidget.min.js"></script>
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Nate Glenn&#39;s Blog" />
+</head>
+<body lang="en-US">
+    
+    
+<div class="container">
+    <div class="row">
+        <div class="navbar navbar-default " role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://garfieldnate.github.io/">Nate Glenn&#39;s Blog</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://garfieldnate.github.io/">Home</a></li>
+                    <li><a href="http://garfieldnate.github.io//about/">About</a></li>
+                    <li><a href="http://garfieldnate.github.io//post/">Archive</a></li>
+                    <li><a href="http://garfieldnate.github.io//resume/resume-en.html">Resume</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<h3>Hacking Through an Octopress Update</h3>
+				<span class="label label-primary">July 20, 2015</span> in
+				
+					
+					<a href="/categories/octopress">Octopress</a>
+				
+					 , 
+					<a href="/categories/jekyll">Jekyll</a>
+				
+					 , 
+					<a href="/categories/ruby">Ruby</a>
+				
+					 , 
+					<a href="/categories/gems">gems</a>
+				
+					 , 
+					<a href="/categories/windows">Windows</a>
+				
+				
+			</small>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<br>
+			
+
+<p>A while back I watched a neat presentation from Justin Searls called <a href="http://blog.testdouble.com/posts/2014-12-02-the-social-coding-contract.html">The Social Coding Contract</a>. He has lots of good things to say, but there was one comment that really hit home: my Jekyll blog was easy to setup 6 months ago, but now it&rsquo;s impossible to maintain. Heh. Most of my trouble could have been avoided with more careful management of dependencies, but alas I am not a Ruby person and I did not realize that <code>bundle update</code> would completely sink my publishing abilities for 4 months. When I update Perl modules, <code>cpan</code> runs their tests on my machine and refuses to install unless they pass. <code>bundle</code> just installs them!</p>
+
+<p>I think I ran into every possible problem, which was actually a good learning experience. Like <a href="{{ root_url }}blog/2014/07/07/using-octopress-one-more-thing/">uncle</a> said, that&rsquo;s what I get for using Windows! Some of the problems were my being a noob, and others were problems with various ruby modules. Honestly I don&rsquo;t think that anyone with this many problems should even be using the platform, but gosh darnit I wanted it to work. And while I was at it, I updated to Octopress 3.0, which I believe will be much more manageable (I can freeze the gem version, instead of having to track Git commits). Here&rsquo;s to the next person struggling with Octopress or Jekyll on Windows:</p>
+
+<h3 id="problems">Problems</h3>
+
+<ul>
+<li><code>jekyll serve</code> exits silently
+
+<ul>
+<li>See <a href="https://github.com/jekyll/jekyll/issues/2320">https://github.com/jekyll/jekyll/issues/2320</a></li>
+<li>Solve by specifying <code>gem 'listen', '2.7.8'</code> in your Gemfile. I tried 2.7.6 first, but ran into other problems.</li>
+<li>Don&rsquo;t forget to delete Gemfile.lock when changing your gem versions</li>
+</ul></li>
+<li><code>Build Warning: Layout 'nil' requested in atom.xml does not exist</code>
+
+<ul>
+<li><a href="https://github.com/jekyll/jekyll/issues/2712">https://github.com/jekyll/jekyll/issues/2712</a></li>
+<li>The layout specified in the YAML front matter in the given file apparently says <code>nil</code>, meaning don&rsquo;t use any template in the _layouts folder.</li>
+<li>The correct way to specify it is <code>null</code></li>
+</ul></li>
+<li>When trying to <a href="http://jekyll-windows.juthilo.com/3-syntax-highlighting/">install Pygments</a> you get <code>LookupError: unknown encoding: cp65001</code>
+
+<ul>
+<li>Python doesn&rsquo;t normally accept cp65001 as utf-8, but they&rsquo;re close enough, probably</li>
+<li>Do <code>set PYTHONIOENCODING=utf-8</code> before running <code>python -m pip install pygments</code>; if that doesn&rsquo;t work (it broke for me on a Japanese computer), set the code page to ascii via <code>chcp 437</code> instead.</li>
+</ul></li>
+<li><code>Error:  undefined method '[]' for nil:NilClass</code> in pygments_code.rb
+
+<ul>
+<li>This is caused by Pygments returning nil; it will do this if the system call to Python takes too long. Maybe your machine is busy, or maybe it&rsquo;s just slow like mine.</li>
+<li>To solve this, do <code>set MENTOS_TIMEOUT=100</code> so it won&rsquo;t time out. Then delete <code>.pygments-cache</code>, which will have saved that nil result.</li>
+<li>See <a href="https://github.com/tmm1/pygments.rb/issues/78">https://github.com/tmm1/pygments.rb/issues/78</a>, <a href="https://github.com/jekyll/jekyll/pull/2148">https://github.com/jekyll/jekyll/pull/2148</a> and <a href="https://github.com/octopress/octopress/issues/128">https://github.com/octopress/octopress/issues/128</a></li>
+</ul></li>
+<li><code>celluloid/calls.rb:48:in 'check': wrong number of arguments (2 for 1) (ArgumentError)</code>
+
+<ul>
+<li>The version of listen that we need (2.7.8) doesn&rsquo;t work with celluloid 17 or higher.</li>
+<li>Specify <code>gem 'celluloid', '0.16.0'</code> in your Gemfile to fix.</li>
+<li>See <a href="https://github.com/celluloid/celluloid/issues/619">https://github.com/celluloid/celluloid/issues/619</a> and <a href="https://talk.jekyllrb.com/t/error-while-trying-to-run-jekyll-serve/933/6">https://talk.jekyllrb.com/t/error-while-trying-to-run-jekyll-serve/933/6</a></li>
+</ul></li>
+<li>When you run <code>octopress deploy</code>, you get <code>error : src refspec master doesn't match any</code>
+
+<ul>
+<li>In my case, I had deployed once with the wrong branch name and was trying to redeploy to the correct branch. The result of a deploy is cached and currently the branch is not changed properly.</li>
+<li>Fix the problem by deleting <code>.deploy</code> and redeploying</li>
+<li>See <a href="https://github.com/octopress/deploy/issues/64">https://github.com/octopress/deploy/issues/64</a></li>
+</ul></li>
+<li><code>octopress deploy</code> does not first run a build; you must do <code>jekyll build</code> first.</li>
+<li><code>octopress new draft Title</code>, etc. gives <code>cannot load such file: octopress/draft</code>.
+
+<ul>
+<li>I don&rsquo;t know why this is happening yet</li>
+<li>For now the fix is to run <code>bundle exec octopress new draft Title</code></li>
+<li>See <a href="https://github.com/octopress/octopress/issues/102">https://github.com/octopress/octopress/issues/102</a></li>
+<li>&ldquo;Such file&rdquo; is a very Japanese expression, by the way: そのようなファイル</li>
+</ul></li>
+<li>linklog entries don&rsquo;t work properly (I don&rsquo;t think they ever have).
+
+<ul>
+<li>The functionality is supposed to be in Octopress 3.0, but I just don&rsquo;t see it.</li>
+<li>You can do it yourself manually by following the directions here: <a href="http://www.candlerblog.com/2012/01/30/octopress-linked-list/">http://www.candlerblog.com/2012/01/30/octopress-linked-list/</a>
+
+<ul>
+<li>I chose not to; I didn&rsquo;t like the way it looked, and I&rsquo;d rather wait for an update. It&rsquo;s not a show-stopper.</li>
+</ul></li>
+<li>See <a href="https://github.com/imathis/octopress/issues/418">https://github.com/imathis/octopress/issues/418</a></li>
+</ul></li>
+<li>Regenerating appears to take forever, so I just have to restart every time. That&rsquo;s annoying. Unfortunately I don&rsquo;t currently have any solution to that. It&rsquo;s also not a show-stopper.</li>
+</ul>
+
+<p>After smoothing out all of the real errors, the (currently) permanent workarounds I need are 1) to set <code>MENTOS_TIMEOUT</code> to a large number and 2) to run commands with <code>bundle exec</code>.</p>
+
+<p>Hope this helps!</p>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<hr>
+		</div>
+	</div>
+</div>
+
+    <div class="container">
+        <div class="row col-md-12">
+            <footer>
+                <div class="pull-left">
+                    <p>
+                        &copy; 2011-2018 ~ Nathan Glenn ~ Powered By <a href="http://hugo.spf13.com">Hugo</a> - version: 0.52 ~ <a href="http://garfieldnate.github.io//license">License</a>
+                    </p>
+                </div>
+
+                
+                <div class="pull-right">
+                    
+                    
+                    
+                    
+                        <a href="https://github.com/garfieldnate" target="_blank">
+                        <i class="fab fa-github-square fa-2x"></i></a>
+                    
+                    
+                    
+                    
+                        <a href="https://www.goodreads.com/user/show/2794644-nathan-glenn" target="_blank">
+                        <i class="fab fa-goodreads fa-2x"></i></a>
+                    
+                    
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    
+    </body>
+</html>
+

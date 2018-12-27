@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sociology on Nate Glenn&#39;s Blog</title>
+    <link>http://garfieldnate.github.io/categories/sociology/</link>
+    <description>Recent content in Sociology on Nate Glenn&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <managingEditor>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</managingEditor>
+    <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
+    <lastBuildDate>Sun, 10 Aug 2014 22:28:41 +0000</lastBuildDate>
+    
+	<atom:link href="http://garfieldnate.github.io/categories/sociology/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Five Things We Need to Know About Technological Change</title>
+      <link>http://garfieldnate.github.io/link/2014-08-10-five-things-we-need-to-know-about-technological-change/</link>
+      <pubDate>Sun, 10 Aug 2014 22:28:41 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/link/2014-08-10-five-things-we-need-to-know-about-technological-change/</guid>
+      <description>Niel Postman: Five Things We Need to Know About Technological Change  To a man with a hammer, everything looks like a nail. We may extend that truism:&amp;hellip; To a person with a computer, everything looks like data&amp;hellip; every technology has a prejudice. Like language itself, it predisposes us to favor and value certain perspectives and accomplishments. In a culture without writing, human memory is of the greatest importance, as are the proverbs, sayings and songs which contain the accumulated oral wisdom of centuries.</description>
+    </item>
+    
+  </channel>
+</rss>

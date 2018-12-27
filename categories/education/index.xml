@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Education on Nate Glenn&#39;s Blog</title>
+    <link>http://garfieldnate.github.io/categories/education/</link>
+    <description>Recent content in Education on Nate Glenn&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <managingEditor>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</managingEditor>
+    <webMaster>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</webMaster>
+    <lastBuildDate>Tue, 06 Jan 2015 20:20:34 +0000</lastBuildDate>
+    
+	<atom:link href="http://garfieldnate.github.io/categories/education/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>My New Toy: Algomation</title>
+      <link>http://garfieldnate.github.io/blog/2015/01/06/my-new-toy-algomation/</link>
+      <pubDate>Tue, 06 Jan 2015 20:20:34 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/blog/2015/01/06/my-new-toy-algomation/</guid>
+      <description>Lately I&amp;rsquo;ve been losing sleep trying to understand an algorithm I read about in an academic publication. Part of the problem was that the application I was applying it to required a sort of reversal, which was confusing. But a bigger part of the problem was that I just couldn&amp;rsquo;t &amp;ldquo;see&amp;rdquo; it. I&amp;rsquo;d lay in bed, trying to imagine working with ping-pong balls on a string, or marbles on fishing line, or anything I could really get my &amp;ldquo;mind&amp;rsquo;s hands&amp;rdquo; on.</description>
+    </item>
+    
+    <item>
+      <title>Schools Kill Creativity</title>
+      <link>http://garfieldnate.github.io/link/2014-08-08-schools-kill-creativity/</link>
+      <pubDate>Fri, 08 Aug 2014 22:12:22 +0000</pubDate>
+      <author>garfieldnate &lt;at&gt; gmail &lt;dot&gt; com (Nathan Glenn)</author>
+      <guid>http://garfieldnate.github.io/link/2014-08-08-schools-kill-creativity/</guid>
+      <description>Ken Robinson Says Schools Kill Creativity First post of my new linklog; I&amp;rsquo;ll be writing responses to articles from BYU&amp;rsquo;s CS 404.
+There&amp;rsquo;s another reason schools kill creativity in my opinion: by killing intrinsic motivation. The worst culprit is literature class. I did honors/AP all through high school, and haven&amp;rsquo;t read a classic since (except Ender&amp;rsquo;s Game, which is a rather new classic). Who wants to read anything when it&amp;rsquo;s just required reading to make the grade?</description>
+    </item>
+    
+  </channel>
+</rss>

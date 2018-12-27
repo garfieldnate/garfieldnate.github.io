@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="String Allignment with Edit Operations">
+    <meta name="author" content="Nathan Glenn">
+
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <title>String Allignment with Edit Operations &middot; Nate Glenn&#39;s Blog</title>
+
+   	
+    
+        <link rel="stylesheet" href="http://garfieldnate.github.io//css/theme/superhero.css">
+    
+
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/solid.js" integrity="sha384-F4BRNf3onawQt7LDHDJm/hwm3wBtbLIfGk1VSB/3nn3E+7Rox1YpYcKJMsmHBJIl" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/regular.js" integrity="sha384-V+AkgA1cZ+p3DRK63AHCaXvO68V7B5eHoxl7QVN21zftbkFn/sGAIVR7vmQL3Zhp" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/brands.js" integrity="sha384-VLgz+MgaFCnsFLiBwE3ItNouuqbWV2ZnIqfsA6QRHksEAQfgbcoaQ4PP0ZeS0zS5" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/fontawesome.js" integrity="sha384-treYPdjUrP4rW5q82SnECO7TPVAz4bpas16yuE9F5o7CeBn2YYw1yr5oC8s8Mf8t" crossorigin="anonymous"></script>
+
+   	
+   	<link rel="stylesheet" href="http://garfieldnate.github.io//css/style.css">
+
+
+    
+    <script src="http://garfieldnate.github.io//js/jquery.min-2.1.4.js"></script>
+    <script src="http://garfieldnate.github.io//js/bootstrap.min-3.3.5.js"></script>
+    <script type="text/javascript" src="http://garfieldnate.github.io//js/jquery.githubRepoWidget.min.js"></script>
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Nate Glenn&#39;s Blog" />
+</head>
+<body lang="en-US">
+    
+    
+<div class="container">
+    <div class="row">
+        <div class="navbar navbar-default " role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://garfieldnate.github.io/">Nate Glenn&#39;s Blog</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://garfieldnate.github.io/">Home</a></li>
+                    <li><a href="http://garfieldnate.github.io//about/">About</a></li>
+                    <li><a href="http://garfieldnate.github.io//post/">Archive</a></li>
+                    <li><a href="http://garfieldnate.github.io//resume/resume-en.html">Resume</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<h3>String Allignment with Edit Operations</h3>
+				<span class="label label-primary">September 1, 2011</span> in
+				
+					
+					<a href="/categories/levenshtein">Levenshtein</a>
+				
+					 , 
+					<a href="/categories/java-code">Java code</a>
+				
+					 , 
+					<a href="/categories/sequence">sequence</a>
+				
+					 , 
+					<a href="/categories/alignment">alignment</a>
+				
+					 , 
+					<a href="/categories/nlp">NLP</a>
+				
+					 , 
+					<a href="/categories/strings">Strings</a>
+				
+				
+			</small>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<br>
+			<p>A common way to measure the distance between two strings is using Levenshtein distance. Levenshtein distance is the minimum number of deletions, insertions, and substitutions needed to transform one string into another. Finding the distance between two strings is useful in certain applications such as spell checking (a word processor will suggest dictionary words that are close to your misspelled word). See <a href="http://en.wikipedia.org/wiki/Levenshtein_distance">wikipedia</a> for more details and an example of Levenshtein distance calculation.</p>
+
+<p>Another related and also important operation is to find the minimum edit alignment; that is, once the minimum edit distance between the two strings is found, output the sequence of operations that can be used to change the one string into the other. For example, if we let C mean &ldquo;correct&rdquo;, S mean &ldquo;substitution&rdquo;, D mean &ldquo;deletion&rdquo; and I mean &ldquo;insertion&rdquo;, then the edit alignment between the characters in &ldquo;construction&rdquo; and &ldquo;distortions&rdquo; would be ISSCCISSCCCCD. Here is an explanation of the alignment:</p>
+
+<ul>
+<li>I: Insert a &ldquo;c&rdquo; -&gt;cdistortions</li>
+<li>S: Substitute &ldquo;d&rdquo; for &ldquo;o&rdquo; -&gt;coistortions</li>
+<li>S: Substitute &ldquo;i&rdquo; for &ldquo;n&rdquo; -&gt; constortions</li>
+<li>CC: Leave the &ldquo;st&rdquo; alone</li>
+<li>I: Insert &ldquo;r&rdquo; -&gt; constrortion</li>
+<li>S: Substitute &ldquo;u&rdquo; for &ldquo;o&rdquo; -&gt; contrurtion</li>
+<li>S: Substitute &ldquo;c&rdquo; for &ldquo;r&rdquo; -&gt; constructions</li>
+<li>CCCC: Leave &ldquo;tion&rdquo; alone</li>
+<li>D: delete &ldquo;s&rdquo; -&gt; construction</li>
+</ul>
+
+<p>This sort of an allignment operation is commonly used in grading the output of machine translation and speech recognition systems, though the operations are done at the word level instead of the character level. When I needed a quick piece of code to do the alignment in my own application, though, there was none to be found on the internet! So I made my own and am posting it here. The logic for determining the proper string of edit operations is taken from a StackOverflow answer <a href="http://stackoverflow.com/questions/5849139/levenshtein-distance-inferring-the-edit-operations-from-the-matrix/5861206#5861206">here</a>. And now the code:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">121
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">122
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">123
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">124
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">125
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">126
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">127
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">128
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">129
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">130
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">131
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">132
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">133
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">134
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">135
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">136
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">137
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">138
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">139
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">140
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">141
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">142
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">143
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">144
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">145
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">146
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">147
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#888">/**
+</span><span style="color:#888"> * @return List of Operations representing allignment between list1 and
+</span><span style="color:#888"> * list2. The allignment represents operations to change list2 into list1.
+</span><span style="color:#888"> */</span>
+
+<span style="color:#080;font-weight:bold">public</span> <span style="color:#080;font-weight:bold">static</span> List <span style="color:#06b;font-weight:bold">levenshteinAllignment</span><span style="color:#333">(</span>Object<span style="color:#333">[]</span> list1<span style="color:#333">,</span> Object<span style="color:#333">[]</span> list2<span style="color:#333">)</span> <span style="color:#333">{</span>
+    <span style="color:#339;font-weight:bold">int</span><span style="color:#333">[][]</span> distanceMatrix <span style="color:#333">=</span> getDistanceMatrix<span style="color:#333">(</span>list1<span style="color:#333">,</span> list2<span style="color:#333">);</span>
+    List ops<span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> ArrayList<span style="color:#333">(</span>
+            list1<span style="color:#333">.</span><span style="color:#00c">length</span> <span style="color:#333">&gt;</span> list2<span style="color:#333">.</span><span style="color:#00c">length</span> <span style="color:#333">?</span> list1<span style="color:#333">.</span><span style="color:#00c">length</span> <span style="color:#333">:</span> list2<span style="color:#333">.</span><span style="color:#00c">length</span><span style="color:#333">);</span>
+    <span style="color:#888">//think of distance chart as going from bottom left to top right;
+</span><span style="color:#888"></span>    <span style="color:#888">//current position coordinates; start at top right.
+</span><span style="color:#888"></span>    <span style="color:#339;font-weight:bold">int</span> row <span style="color:#333">=</span> list1<span style="color:#333">.</span><span style="color:#00c">length</span><span style="color:#333">;</span>
+    <span style="color:#339;font-weight:bold">int</span> col <span style="color:#333">=</span> list2<span style="color:#333">.</span><span style="color:#00c">length</span><span style="color:#333">;</span>
+    <span style="color:#888">//could have moved to current position from three others; store their scores here.
+</span><span style="color:#888"></span>    <span style="color:#339;font-weight:bold">int</span> diag<span style="color:#333">;</span>
+    <span style="color:#339;font-weight:bold">int</span> left<span style="color:#333">;</span>
+    <span style="color:#339;font-weight:bold">int</span> below<span style="color:#333">;</span>
+    <span style="color:#339;font-weight:bold">int</span> current<span style="color:#333">;</span>
+
+    <span style="color:#080;font-weight:bold">while</span> <span style="color:#333">(</span>row <span style="color:#333">!=</span> 0 <span style="color:#333">||</span> col <span style="color:#333">!=</span> 0<span style="color:#333">)</span> <span style="color:#333">{</span>
+        diag <span style="color:#333">=</span> getVal<span style="color:#333">(</span>row<span style="color:#333">-</span>1<span style="color:#333">,</span>col<span style="color:#333">-</span>1<span style="color:#333">,</span>distanceMatrix<span style="color:#333">);</span>
+        left <span style="color:#333">=</span> getVal<span style="color:#333">(</span>row<span style="color:#333">,</span>col<span style="color:#333">-</span>1<span style="color:#333">,</span>distanceMatrix<span style="color:#333">);</span>
+        below <span style="color:#333">=</span> getVal<span style="color:#333">(</span>row<span style="color:#333">-</span>1<span style="color:#333">,</span>col<span style="color:#333">,</span>distanceMatrix<span style="color:#333">);</span>
+        current <span style="color:#333">=</span> distanceMatrix<span style="color:#333">[</span>row<span style="color:#333">][</span>col<span style="color:#333">];</span>
+
+<span style="color:#888">//      if the value in the diagonal cell (going up+left) is smaller or equal to the
+</span><span style="color:#888">//      values found in the other two cells
+</span><span style="color:#888"></span>
+<span style="color:#888">//      AND
+</span><span style="color:#888">//      if this is same or 1 minus the value of the current cell
+</span><span style="color:#888"></span>        <span style="color:#080;font-weight:bold">if</span><span style="color:#333">(</span>diag <span style="color:#333">&lt;=</span> left <span style="color:#333">&amp;&amp;</span> diag <span style="color:#333">&lt;=</span> below <span style="color:#333">&amp;&amp;</span> <span style="color:#333">(</span>diag <span style="color:#333">==</span> current <span style="color:#333">||</span> diag <span style="color:#333">==</span> current <span style="color:#333">-</span> 1<span style="color:#333">)){</span>
+<span style="color:#888">//      then  &#34;take the diagonal cell&#34;
+</span><span style="color:#888">//      if the value of the diagonal cell is one less than the current cell:
+</span><span style="color:#888"></span>            <span style="color:#080;font-weight:bold">if</span><span style="color:#333">(</span>diag <span style="color:#333">==</span> current <span style="color:#333">-</span> 1<span style="color:#333">)</span>
+<span style="color:#888">//          Add a SUBSTITUTION operation (from the letters corresponding to
+</span><span style="color:#888">//          the _current_ cell)
+</span><span style="color:#888"></span>                ops<span style="color:#333">.</span><span style="color:#00c">add</span><span style="color:#333">(</span><span style="color:#080;font-weight:bold">new</span> Operation<span style="color:#333">(</span>Operation<span style="color:#333">.</span><span style="color:#00c">Type</span><span style="color:#333">.</span><span style="color:#00c">SUBSTITUTION</span><span style="color:#333">,</span>list1<span style="color:#333">[</span>row<span style="color:#333">-</span>1<span style="color:#333">],</span>list2<span style="color:#333">[</span>col<span style="color:#333">-</span>1<span style="color:#333">]));</span>
+            <span style="color:#080;font-weight:bold">else</span>
+<span style="color:#888">//              otherwise: do not add an operation this was a no-operation.
+</span><span style="color:#888"></span>                ops<span style="color:#333">.</span><span style="color:#00c">add</span><span style="color:#333">(</span><span style="color:#080;font-weight:bold">new</span> Operation<span style="color:#333">(</span>Operation<span style="color:#333">.</span><span style="color:#00c">Type</span><span style="color:#333">.</span><span style="color:#00c">CORRECT</span><span style="color:#333">,</span>list1<span style="color:#333">[</span>row<span style="color:#333">-</span>1<span style="color:#333">]));</span>
+            <span style="color:#888">//move diagonally
+</span><span style="color:#888"></span>            row<span style="color:#333">--;</span>
+            col<span style="color:#333">--;</span>
+        <span style="color:#333">}</span>
+<span style="color:#888">//      elseif the value in the cell to the left is smaller or equal to the value of the cell below current cell
+</span><span style="color:#888">//      AND
+</span><span style="color:#888">//      if this value is same or 1 minus the value of the current cell
+</span><span style="color:#888"></span>        <span style="color:#080;font-weight:bold">else</span> <span style="color:#080;font-weight:bold">if</span><span style="color:#333">(</span>left <span style="color:#333">&lt;</span> below <span style="color:#333">&amp;&amp;</span> <span style="color:#333">(</span>left <span style="color:#333">==</span> current <span style="color:#333">||</span> left <span style="color:#333">==</span> current <span style="color:#333">-</span> 1<span style="color:#333">)){</span>
+<span style="color:#888">//          add an INSERTION of the cell to the left
+</span><span style="color:#888"></span>            ops<span style="color:#333">.</span><span style="color:#00c">add</span><span style="color:#333">(</span><span style="color:#080;font-weight:bold">new</span> Operation<span style="color:#333">(</span>Operation<span style="color:#333">.</span><span style="color:#00c">Type</span><span style="color:#333">.</span><span style="color:#00c">INSERTION</span><span style="color:#333">,</span>list2<span style="color:#333">[</span>col<span style="color:#333">-</span>1<span style="color:#333">]));</span>
+            <span style="color:#888">//move left
+</span><span style="color:#888"></span>            col<span style="color:#333">--;</span>
+        <span style="color:#333">}</span>
+        <span style="color:#080;font-weight:bold">else</span><span style="color:#333">{</span>
+<span style="color:#888">//          take the cell below, add
+</span><span style="color:#888">//          Add a DELETION operation
+</span><span style="color:#888"></span>            ops<span style="color:#333">.</span><span style="color:#00c">add</span><span style="color:#333">(</span><span style="color:#080;font-weight:bold">new</span> Operation<span style="color:#333">(</span>Operation<span style="color:#333">.</span><span style="color:#00c">Type</span><span style="color:#333">.</span><span style="color:#00c">DELETION</span><span style="color:#333">,</span>list1<span style="color:#333">[</span>row<span style="color:#333">-</span>1<span style="color:#333">]));</span>
+            <span style="color:#888">//move down
+</span><span style="color:#888"></span>            row<span style="color:#333">--;</span>
+        <span style="color:#333">}</span>
+    <span style="color:#333">}</span>
+    Collections<span style="color:#333">.</span><span style="color:#00c">reverse</span><span style="color:#333">(</span>ops<span style="color:#333">);</span>
+    <span style="color:#080;font-weight:bold">return</span> ops<span style="color:#333">;</span>
+<span style="color:#333">}</span>
+<span style="color:#080;font-weight:bold">private</span> <span style="color:#080;font-weight:bold">static</span> <span style="color:#339;font-weight:bold">int</span> <span style="color:#06b;font-weight:bold">getVal</span><span style="color:#333">(</span><span style="color:#339;font-weight:bold">int</span> row<span style="color:#333">,</span> <span style="color:#339;font-weight:bold">int</span> col<span style="color:#333">,</span> <span style="color:#339;font-weight:bold">int</span><span style="color:#333">[][]</span> distanceMatrix<span style="color:#333">){</span>
+    <span style="color:#080;font-weight:bold">if</span><span style="color:#333">(</span>row <span style="color:#333">&lt;</span> 0 <span style="color:#333">||</span> row <span style="color:#333">&gt;</span> distanceMatrix<span style="color:#333">.</span><span style="color:#00c">length</span><span style="color:#333">)</span>
+        <span style="color:#080;font-weight:bold">return</span> Integer<span style="color:#333">.</span><span style="color:#00c">MAX_VALUE</span><span style="color:#333">;</span>
+    <span style="color:#080;font-weight:bold">if</span><span style="color:#333">(</span>col <span style="color:#333">&lt;</span> 0 <span style="color:#333">||</span> col <span style="color:#333">&gt;</span> distanceMatrix<span style="color:#333">.</span><span style="color:#00c">length</span><span style="color:#333">)</span>
+        <span style="color:#080;font-weight:bold">return</span> Integer<span style="color:#333">.</span><span style="color:#00c">MAX_VALUE</span><span style="color:#333">;</span>
+    <span style="color:#080;font-weight:bold">else</span> <span style="color:#080;font-weight:bold">return</span> distanceMatrix<span style="color:#333">[</span>row<span style="color:#333">][</span>col<span style="color:#333">];</span>
+<span style="color:#333">}</span>
+<span style="color:#080;font-weight:bold">public</span> <span style="color:#080;font-weight:bold">static</span> <span style="color:#080;font-weight:bold">class</span> <span style="color:#b06;font-weight:bold">Operation</span><span style="color:#333">{</span>
+    <span style="color:#080;font-weight:bold">private</span> Type type<span style="color:#333">;</span>
+    <span style="color:#080;font-weight:bold">private</span> Object object1<span style="color:#333">;</span>
+    <span style="color:#080;font-weight:bold">private</span> Object object2<span style="color:#333">;</span>
+    <span style="color:#080;font-weight:bold">public</span> <span style="color:#080;font-weight:bold">enum</span> Type<span style="color:#333">{</span>
+        CORRECT<span style="color:#333">,</span>SUBSTITUTION<span style="color:#333">,</span>DELETION<span style="color:#333">,</span>INSERTION
+    <span style="color:#333">}</span>
+    <span style="color:#080;font-weight:bold">public</span> <span style="color:#06b;font-weight:bold">Operation</span><span style="color:#333">(</span>Type t<span style="color:#333">,</span> Object o1<span style="color:#333">){</span>
+        type <span style="color:#333">=</span> t<span style="color:#333">;</span>
+        object1 <span style="color:#333">=</span> o1<span style="color:#333">;</span>
+        object2 <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">null</span><span style="color:#333">;</span>
+    <span style="color:#333">}</span>
+    <span style="color:#080;font-weight:bold">public</span> <span style="color:#06b;font-weight:bold">Operation</span><span style="color:#333">(</span>Type t<span style="color:#333">,</span> Object o1<span style="color:#333">,</span> Object o2<span style="color:#333">){</span>
+        type <span style="color:#333">=</span> t<span style="color:#333">;</span>
+        object1 <span style="color:#333">=</span> o1<span style="color:#333">;</span>
+        object2 <span style="color:#333">=</span> o2<span style="color:#333">;</span>
+    <span style="color:#333">}</span>
+    <span style="color:#555;font-weight:bold">@Override</span>
+    <span style="color:#080;font-weight:bold">public</span> String <span style="color:#06b;font-weight:bold">toString</span><span style="color:#333">(){</span>
+        <span style="color:#080;font-weight:bold">if</span><span style="color:#333">(</span>type <span style="color:#333">==</span> Type<span style="color:#333">.</span><span style="color:#00c">SUBSTITUTION</span><span style="color:#333">)</span>
+            <span style="color:#080;font-weight:bold">return</span> <span style="background-color:#fff0f0">&#34;Substitution: &#34;</span> <span style="color:#333">+</span> object1<span style="color:#333">.</span><span style="color:#00c">toString</span><span style="color:#333">()</span> <span style="color:#333">+</span> <span style="background-color:#fff0f0">&#34; -&gt; &#34;</span> <span style="color:#333">+</span> object2<span style="color:#333">.</span><span style="color:#00c">toString</span><span style="color:#333">();</span>
+        <span style="color:#080;font-weight:bold">if</span><span style="color:#333">(</span>type <span style="color:#333">==</span> Type<span style="color:#333">.</span><span style="color:#00c">CORRECT</span><span style="color:#333">)</span>
+            <span style="color:#080;font-weight:bold">return</span> <span style="background-color:#fff0f0">&#34;Correct:      &#34;</span> <span style="color:#333">+</span> object1<span style="color:#333">.</span><span style="color:#00c">toString</span><span style="color:#333">();</span>
+        <span style="color:#080;font-weight:bold">if</span><span style="color:#333">(</span>type <span style="color:#333">==</span> Type<span style="color:#333">.</span><span style="color:#00c">DELETION</span><span style="color:#333">)</span>
+            <span style="color:#080;font-weight:bold">return</span> <span style="background-color:#fff0f0">&#34;Deletion:     &#34;</span> <span style="color:#333">+</span> object1<span style="color:#333">.</span><span style="color:#00c">toString</span><span style="color:#333">();</span>
+        <span style="color:#080;font-weight:bold">if</span><span style="color:#333">(</span>type <span style="color:#333">==</span> Type<span style="color:#333">.</span><span style="color:#00c">INSERTION</span><span style="color:#333">)</span>
+            <span style="color:#080;font-weight:bold">return</span> <span style="background-color:#fff0f0">&#34;Insertion:    &#34;</span> <span style="color:#333">+</span> object1<span style="color:#333">.</span><span style="color:#00c">toString</span><span style="color:#333">();</span>
+        <span style="color:#080;font-weight:bold">return</span> <span style="color:#080;font-weight:bold">null</span><span style="color:#333">;</span>
+    <span style="color:#333">}</span>
+<span style="color:#333">}</span>
+
+<span style="color:#888">/**
+</span><span style="color:#888"> *
+</span><span style="color:#888"> * @param array of objects to compare
+</span><span style="color:#888"> * @param array of objects to compare
+</span><span style="color:#888"> * @return Levenshtein distance between arrays.
+</span><span style="color:#888"> * This method uses the equals(Object o) method to compare the
+</span><span style="color:#888"> * objects in the two arrays, returning the Levenshtein distance between them.
+</span><span style="color:#888"> */</span>
+<span style="color:#080;font-weight:bold">public</span> <span style="color:#080;font-weight:bold">static</span> <span style="color:#339;font-weight:bold">int</span> <span style="color:#06b;font-weight:bold">levenshteinDistance</span><span style="color:#333">(</span>Object<span style="color:#333">[]</span> list1<span style="color:#333">,</span> Object<span style="color:#333">[]</span> list2<span style="color:#333">)</span> <span style="color:#333">{</span>
+    <span style="color:#339;font-weight:bold">int</span><span style="color:#333">[][]</span> distance <span style="color:#333">=</span> getDistanceMatrix<span style="color:#333">(</span>list1<span style="color:#333">,</span> list2<span style="color:#333">);</span>
+    <span style="color:#080;font-weight:bold">return</span> distance<span style="color:#333">[</span>list1<span style="color:#333">.</span><span style="color:#00c">length</span><span style="color:#333">][</span>list2<span style="color:#333">.</span><span style="color:#00c">length</span><span style="color:#333">];</span>
+<span style="color:#333">}</span>
+
+<span style="color:#888">/**
+</span><span style="color:#888"> *
+</span><span style="color:#888"> * @param list1
+</span><span style="color:#888"> * @param list2
+</span><span style="color:#888"> * @return A completely filled distance matrix; movement from [i-1][j]
+</span><span style="color:#888"> *         represents insertion, from [i][j-1] represents deletion, and from
+</span><span style="color:#888"> *         [i-1][j-1] represents substitution or no operation.
+</span><span style="color:#888"> */</span>
+<span style="color:#080;font-weight:bold">private</span> <span style="color:#080;font-weight:bold">static</span> <span style="color:#339;font-weight:bold">int</span><span style="color:#333">[][]</span> <span style="color:#06b;font-weight:bold">getDistanceMatrix</span><span style="color:#333">(</span>Object<span style="color:#333">[]</span> list1<span style="color:#333">,</span> Object<span style="color:#333">[]</span> list2<span style="color:#333">)</span> <span style="color:#333">{</span>
+    <span style="color:#339;font-weight:bold">int</span><span style="color:#333">[][]</span> distanceMatrix <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> <span style="color:#339;font-weight:bold">int</span><span style="color:#333">[</span>list1<span style="color:#333">.</span><span style="color:#00c">length</span> <span style="color:#333">+</span> 1<span style="color:#333">][</span>list2<span style="color:#333">.</span><span style="color:#00c">length</span> <span style="color:#333">+</span> 1<span style="color:#333">];</span>
+
+    <span style="color:#080;font-weight:bold">for</span> <span style="color:#333">(</span><span style="color:#339;font-weight:bold">int</span> i <span style="color:#333">=</span> 0<span style="color:#333">;</span> i <span style="color:#333">&lt;=</span> list1<span style="color:#333">.</span><span style="color:#00c">length</span><span style="color:#333">;</span> i<span style="color:#333">++)</span>
+        distanceMatrix<span style="color:#333">[</span>i<span style="color:#333">][</span>0<span style="color:#333">]</span> <span style="color:#333">=</span> i<span style="color:#333">;</span>
+    <span style="color:#080;font-weight:bold">for</span> <span style="color:#333">(</span><span style="color:#339;font-weight:bold">int</span> j <span style="color:#333">=</span> 0<span style="color:#333">;</span> j <span style="color:#333">&lt;=</span> list2<span style="color:#333">.</span><span style="color:#00c">length</span><span style="color:#333">;</span> j<span style="color:#333">++)</span>
+        distanceMatrix<span style="color:#333">[</span>0<span style="color:#333">][</span>j<span style="color:#333">]</span> <span style="color:#333">=</span> j<span style="color:#333">;</span>
+
+    <span style="color:#080;font-weight:bold">for</span> <span style="color:#333">(</span><span style="color:#339;font-weight:bold">int</span> i <span style="color:#333">=</span> 1<span style="color:#333">;</span> i <span style="color:#333">&lt;=</span> list1<span style="color:#333">.</span><span style="color:#00c">length</span><span style="color:#333">;</span> i<span style="color:#333">++)</span>
+        <span style="color:#080;font-weight:bold">for</span> <span style="color:#333">(</span><span style="color:#339;font-weight:bold">int</span> j <span style="color:#333">=</span> 1<span style="color:#333">;</span> j <span style="color:#333">&lt;=</span> list2<span style="color:#333">.</span><span style="color:#00c">length</span><span style="color:#333">;</span> j<span style="color:#333">++)</span>
+            distanceMatrix<span style="color:#333">[</span>i<span style="color:#333">][</span>j<span style="color:#333">]</span> <span style="color:#333">=</span> minimum<span style="color:#333">(</span>distanceMatrix<span style="color:#333">[</span>i <span style="color:#333">-</span> 1<span style="color:#333">][</span>j<span style="color:#333">]</span> <span style="color:#333">+</span> 1<span style="color:#333">,</span><span style="color:#888">// insertion
+</span><span style="color:#888"></span>                    distanceMatrix<span style="color:#333">[</span>i<span style="color:#333">][</span>j <span style="color:#333">-</span> 1<span style="color:#333">]</span> <span style="color:#333">+</span> 1<span style="color:#333">,</span><span style="color:#888">// deletion
+</span><span style="color:#888"></span>                    distanceMatrix<span style="color:#333">[</span>i <span style="color:#333">-</span> 1<span style="color:#333">][</span>j <span style="color:#333">-</span> 1<span style="color:#333">]</span><span style="color:#888">// substitution or correct
+</span><span style="color:#888"></span>                            <span style="color:#333">+</span> <span style="color:#333">((</span>list1<span style="color:#333">[</span>i <span style="color:#333">-</span> 1<span style="color:#333">].</span><span style="color:#00c">equals</span><span style="color:#333">(</span>list2<span style="color:#333">[</span>j <span style="color:#333">-</span> 1<span style="color:#333">]))</span> <span style="color:#333">?</span> 0 <span style="color:#333">:</span> 1<span style="color:#333">));</span>
+    <span style="color:#080;font-weight:bold">return</span> distanceMatrix<span style="color:#333">;</span>
+<span style="color:#333">}</span>
+
+<span style="color:#888">/**
+</span><span style="color:#888"> * Same as Math.min, but returns the minimum of three arguments instead of
+</span><span style="color:#888"> * two.
+</span><span style="color:#888"> */</span>
+<span style="color:#080;font-weight:bold">private</span> <span style="color:#080;font-weight:bold">static</span> <span style="color:#339;font-weight:bold">int</span> <span style="color:#06b;font-weight:bold">minimum</span><span style="color:#333">(</span><span style="color:#339;font-weight:bold">int</span> a<span style="color:#333">,</span> <span style="color:#339;font-weight:bold">int</span> b<span style="color:#333">,</span> <span style="color:#339;font-weight:bold">int</span> c<span style="color:#333">)</span> <span style="color:#333">{</span>
+    <span style="color:#080;font-weight:bold">return</span> Math<span style="color:#333">.</span><span style="color:#00c">min</span><span style="color:#333">(</span>Math<span style="color:#333">.</span><span style="color:#00c">min</span><span style="color:#333">(</span>a<span style="color:#333">,</span> b<span style="color:#333">),</span> c<span style="color:#333">);</span>
+<span style="color:#333">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>For word level alignment, you can call it on Strings using the split function like so:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#080;font-weight:bold">for</span><span style="color:#333">(</span>Operation o <span style="color:#333">:</span> levenshteinAllignment<span style="color:#333">(</span>
+            <span style="background-color:#fff0f0">&#34;What My house gleams with the light of the moon and your face&#34;</span>
+                    <span style="color:#333">.</span><span style="color:#00c">split</span><span style="color:#333">(</span><span style="background-color:#fff0f0">&#34; &#34;</span><span style="color:#333">),</span>
+            <span style="background-color:#fff0f0">&#34;Your house with the light of the the moon and my face&#34;</span>
+                    <span style="color:#333">.</span><span style="color:#00c">split</span><span style="color:#333">(</span><span style="background-color:#fff0f0">&#34; &#34;</span><span style="color:#333">))</span>
+        <span style="color:#333">)</span>
+            System<span style="color:#333">.</span><span style="color:#00c">out</span><span style="color:#333">.</span><span style="color:#00c">println</span><span style="color:#333">(</span>o<span style="color:#333">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>And the output would be:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-no-highlight" data-lang="no-highlight"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-no-highlight" data-lang="no-highlight">    Deletion:     What
+    Substitution: My -&gt; Your
+    Correct:      house
+    Deletion:     gleams
+    Correct:      with
+    Correct:      the
+    Correct:      light
+    Correct:      of
+    Correct:      the
+    Insertion:    the
+    Correct:      moon
+    Correct:      and
+    Substitution: your -&gt; my
+    Correct:      face</code></pre></td></tr></table>
+</div>
+</div>
+<p>Feel free to use and edit this as you like. Many applications disregard the strings that are correct and only output the edit operations, and that should be an easy edit.</p>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<hr>
+		</div>
+	</div>
+</div>
+
+    <div class="container">
+        <div class="row col-md-12">
+            <footer>
+                <div class="pull-left">
+                    <p>
+                        &copy; 2011-2018 ~ Nathan Glenn ~ Powered By <a href="http://hugo.spf13.com">Hugo</a> - version: 0.52 ~ <a href="http://garfieldnate.github.io//license">License</a>
+                    </p>
+                </div>
+
+                
+                <div class="pull-right">
+                    
+                    
+                    
+                    
+                        <a href="https://github.com/garfieldnate" target="_blank">
+                        <i class="fab fa-github-square fa-2x"></i></a>
+                    
+                    
+                    
+                    
+                        <a href="https://www.goodreads.com/user/show/2794644-nathan-glenn" target="_blank">
+                        <i class="fab fa-goodreads fa-2x"></i></a>
+                    
+                    
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    
+    </body>
+</html>
+

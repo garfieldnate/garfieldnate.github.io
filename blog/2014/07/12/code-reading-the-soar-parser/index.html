@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Code Reading: The Soar Parser">
+    <meta name="author" content="Nathan Glenn">
+
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <title>Code Reading: The Soar Parser &middot; Nate Glenn&#39;s Blog</title>
+
+   	
+    
+        <link rel="stylesheet" href="http://garfieldnate.github.io//css/theme/superhero.css">
+    
+
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/solid.js" integrity="sha384-F4BRNf3onawQt7LDHDJm/hwm3wBtbLIfGk1VSB/3nn3E+7Rox1YpYcKJMsmHBJIl" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/regular.js" integrity="sha384-V+AkgA1cZ+p3DRK63AHCaXvO68V7B5eHoxl7QVN21zftbkFn/sGAIVR7vmQL3Zhp" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/brands.js" integrity="sha384-VLgz+MgaFCnsFLiBwE3ItNouuqbWV2ZnIqfsA6QRHksEAQfgbcoaQ4PP0ZeS0zS5" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/fontawesome.js" integrity="sha384-treYPdjUrP4rW5q82SnECO7TPVAz4bpas16yuE9F5o7CeBn2YYw1yr5oC8s8Mf8t" crossorigin="anonymous"></script>
+
+   	
+   	<link rel="stylesheet" href="http://garfieldnate.github.io//css/style.css">
+
+
+    
+    <script src="http://garfieldnate.github.io//js/jquery.min-2.1.4.js"></script>
+    <script src="http://garfieldnate.github.io//js/bootstrap.min-3.3.5.js"></script>
+    <script type="text/javascript" src="http://garfieldnate.github.io//js/jquery.githubRepoWidget.min.js"></script>
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Nate Glenn&#39;s Blog" />
+</head>
+<body lang="en-US">
+    
+    
+<div class="container">
+    <div class="row">
+        <div class="navbar navbar-default " role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://garfieldnate.github.io/">Nate Glenn&#39;s Blog</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://garfieldnate.github.io/">Home</a></li>
+                    <li><a href="http://garfieldnate.github.io//about/">About</a></li>
+                    <li><a href="http://garfieldnate.github.io//post/">Archive</a></li>
+                    <li><a href="http://garfieldnate.github.io//resume/resume-en.html">Resume</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<h3>Code Reading: The Soar Parser</h3>
+				<span class="label label-primary">July 12, 2014</span> in
+				
+					
+					<a href="/categories/soar">Soar</a>
+				
+					 , 
+					<a href="/categories/parsing">parsing</a>
+				
+					 , 
+					<a href="/categories/c&#43;&#43;">C&#43;&#43;</a>
+				
+					 , 
+					<a href="/categories/code-reading">code reading</a>
+				
+				
+			</small>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<br>
+			
+
+<p>I&rsquo;ve thought for a while that it would be fun to write a series of &ldquo;code reading&rdquo; posts, where I try to read and understand how some large program works and explain my findings.</p>
+
+<p>To investigate the possibility of an upcoming project, I&rsquo;ve been wanting to know how Soar parses productions, and if there&rsquo;s any way to retrofit it to make a parser usable by various IDE&rsquo;s. I have tried to make <a href="https://github.com/garfieldnate/Soar-Production">two</a> <a href="https://github.com/garfieldnate/Java-Soar-Parser">separate</a> parsers for Soar code already, and it just seems to be difficult to imitate the real thing. If you&rsquo;d like to follow along, you can view or download the code on GitHub:</p>
+
+
+<div class="github-widget" data-repo="SoarGroup/Soar" style="margin-bottom: 1em;"></div>
+
+
+<p>Disclaimer: My &ldquo;critiques&rdquo; of the code are areas that I think can use some contributions or TLC. Soar was written and is maintained by programmers and researchers far greater than I, and I am not dismissing the hard work and craft that went into its construction. The Soar code has evolved over 20-30 years in an academic environment, and I expect it to have a few rough edges.</p>
+
+<h2 id="step-0-some-background-knowledge">Step 0: Some Background Knowledge</h2>
+
+<p>OK, so I guess background knowledge would be useful for the readers. <a href="http://sitemaker.umich.edu/soar/home">Soar</a> is a  cognitive architecture used for creating agents. Cognitive meaning it provides the basic faculties required for gaining and using knowledge, and agents meaning programs that make choices to accomplish a goal of some kind. Soar has its own programming language, and instead of the familiar loops and functions it has productions. Soar code looks something like this:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tcl" data-lang="tcl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tcl" data-lang="tcl"><span style="color:#963">watch</span> <span style="color:#00d;font-weight:bold">5</span>
+<span style="color:#007020">source</span> somefile.txt
+<span style="color:#963">sp</span> <span style="color:#080;font-weight:bold">{</span><span style="color:#963">some</span><span style="color:#333">*</span>production
+    <span style="color:#080;font-weight:bold">(</span><span style="color:#963">state</span> <span style="color:#333">&lt;</span>s<span style="color:#333">&gt;</span> <span style="color:#333">^</span>foo <span style="color:#333">|</span>want greeting<span style="color:#333">|</span><span style="color:#080;font-weight:bold">)</span>
+<span style="color:#963">--</span><span style="color:#333">&gt;</span>
+    <span style="color:#080;font-weight:bold">(</span><span style="color:#333">&lt;</span><span style="color:#963">s</span><span style="color:#333">&gt;</span> <span style="color:#333">^</span>operator <span style="color:#333">&lt;</span>o<span style="color:#333">&gt;</span><span style="color:#080;font-weight:bold">)</span>
+    <span style="color:#080;font-weight:bold">(</span><span style="color:#333">&lt;</span><span style="color:#963">o</span><span style="color:#333">&gt;</span> <span style="color:#333">^</span>name hello-world <span style="color:#333">^</span>greeting <span style="color:#333">|</span>hello world<span style="color:#333">|</span><span style="color:#080;font-weight:bold">)</span>
+<span style="color:#080;font-weight:bold">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>The first two lines are commands; the first makes the command line interface much more verbose and the second loads another Soar file. The <code>sp {...}</code> is a Soar production, which is where the bulk of the language features are. Productions do all the work (thus soar is called a <a href="https://en.wikipedia.org/wiki/Production_system">production system</a>). Productions match the program state (<a href="https://en.wikipedia.org/wiki/Working_memory">working memory</a>) and make changes to it if the match is successful. The production above matches a state that has a <code>foo</code> attribute with a value of <code>want greeting</code>, and if that succeeds then it creates a special <code>operator</code> attribute which in turn has two more attributes. Working memory is organized like a network of attributes and values, and Soar cycles over the productions, changing memory and working towards a goal. This is accomplished efficiently through the <a href="https://en.wikipedia.org/wiki/Rete_algorithm">RETE</a> algorithm, which I&rsquo;d like to study another time.</p>
+
+<p>That all might leave it unclear, but at least understand that Soar is cool because it allows you to make programs that <a href="http://sitemaker.umich.edu/soar/files/mohan.pdf">play Mario</a>, <a href="http://www.isi.edu/soar/soar-ifor-project.html">fly planes</a>, or <a href="http://www.cs.cmu.edu/afs/cs/project/soar/utc/nl/doc/nl-homepage.html">talk</a> (all of those with caveats, of course; work is ongoing).</p>
+
+<h2 id="step-1-try-to-build-it">Step 1: Try to Build It</h2>
+
+<p>The first thing I wanted was to build Soar on my own computer. After all, if I can&rsquo;t even build it, what&rsquo;s the point in trying to modify it? I&rsquo;ve always had terrible experiences trying to build C/C++ projects on Windows. This was a little better because Windows is supported and a release is provided regularly, but there were still hiccups.</p>
+
+<p>The build instructions are [here](). To do a full build you need Python, SWIG, Tcl, and a C++ compiler toolchain. The build is done via <a href="http://www.scons.org/">Scons</a>, but batch and sh files are used to do initial checking of the available tools (and it&rsquo;s easier to double-click a batch file on Windows than to call Python). My first attempt ended in an uncaught error dumping messages to the screen because I had not used the Visual Studio Prompt. Once I figured this out (and <a href="https://github.com/SoarGroup/Soar/pull/161">improved</a> the message for future users) the build died again trying to generate C# bindings. This was reported and <a href="https://github.com/SoarGroup/Soar/issues/160">fixed</a>, after which I was able to do a partial build. I had some more <a href="https://github.com/SoarGroup/Soar/issues/165">trouble</a> because I was using the wrong MSVC toolchain(!), but now it builds without any issues.</p>
+
+<p>Overall, the build system is very nice. It&rsquo;s hands-off, and just works. The maintainers are very responsive and dedicated to a working cross-platform build. I do wish there were more comments in the build scripts, since I have never used Scons and had some trouble looking through it. Also it would be nice to have the build instructions in the repository instead of on a separate website.</p>
+
+<h2 id="step-2-how-does-soar-parse-soar-code">Step 2: How does Soar parse Soar code?</h2>
+
+<p>The answer to this turned out to be more interesting than I thought. My own attempts at writing a single Soar parser didn&rsquo;t work very well because Soar actually has two parsers! Well, actually it has 76 parsers; one to split commands into constituents and then one for each of 75 possible Soar commands. <code>sp</code> is just one of many commands.</p>
+
+<p>Let&rsquo;s start by looking at what happens when you source a file. The code for the source command is in <a href="https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_source.cpp"><code>Core/CLI/src/cli_source.cpp</code></a>. <code>DoSource</code> of line 80 is called, and after loading the input file into memory and doing some error checking and logging it calls <code>Source</code> of line 212. Only the first 4 lines matter for understanding the parser:</p>
+
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">212
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">213
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">214
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">215
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">216
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">217
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">218
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#339;font-weight:bold">bool</span> CommandLineInterface<span style="color:#333">::</span>Source(<span style="color:#080;font-weight:bold">const</span> <span style="color:#339;font-weight:bold">char</span><span style="color:#333">*</span> buffer, <span style="color:#339;font-weight:bold">bool</span> printFileStack)
+{
+    soar<span style="color:#333">::</span>tokenizer tokenizer;
+    tokenizer.set_handler(<span style="color:#333">&amp;</span>m_Parser);
+    <span style="color:#080;font-weight:bold">if</span> (tokenizer.evaluate(buffer))
+        <span style="color:#080;font-weight:bold">return</span> <span style="color:#007020">true</span>;
+</code></pre></td></tr></table>
+</div>
+</div>
+
+<p>It creates a new <code>tokenizer</code> and sets its handler to <code>m_parser</code>, the main CLI parser available from <code>cli_commandLineInterface.h</code>. The parser can be passed to <code>set_handler</code> because it implements <code>tokenizer_callback</code> (declared in <a href="https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/shared/tokenizer.h"><code>tokenizer.h</code></a>) by having the <code>handle_command</code> method:</p>
+
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#888">/**
+</span><span style="color:#888"> * Implement to handle commands. The words of the command are in the
+</span><span style="color:#888"> * passed argv vector. The first entry in the vector is the command.
+</span><span style="color:#888"> * The vector is guaranteed to never be empty, though the first command
+</span><span style="color:#888"> * could be.
+</span><span style="color:#888"> * @return true if the command was ok, or false if there is an error.
+</span><span style="color:#888"> *         Returning false will stop parsing and cause
+</span><span style="color:#888"> *         tokenizer::evaluate to return false.
+</span><span style="color:#888"> */</span>
+<span style="color:#080;font-weight:bold">virtual</span> <span style="color:#339;font-weight:bold">bool</span> <span style="color:#06b;font-weight:bold">handle_command</span>(std<span style="color:#333">::</span>vector<span style="color:#333">&lt;</span>std<span style="color:#333">::</span>string<span style="color:#333">&gt;&amp;</span> argv) <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">0</span>;
+</code></pre></td></tr></table>
+</div>
+</div>
+
+<p>Next, <a href="https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/shared/tokenizer.h"><code>tokenizer.h</code></a> tells me why I got it wrong when I tried to make my own Soar parser:</p>
+
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">186
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">187
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">188
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">189
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">190
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">191
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">192
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">193
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"> <span style="color:#888">/**
+</span><span style="color:#888">     * Essentially implements a simple Tcl parser, with some exceptions.
+</span><span style="color:#888">     *
+</span><span style="color:#888">     * Takes a string and farily efficiently converts it in to a series of
+</span><span style="color:#888">     * callbacks with arguments separated in to a vector of strings (what Tcl
+</span><span style="color:#888">     * refers to as &#34;words&#34;).
+</span><span style="color:#888">     *
+</span><span style="color:#888"></span></code></pre></td></tr></table>
+</div>
+</div>
+
+<p>So I&rsquo;ve had it backwards, building a Soar production parser and then as an afterthought adding methods to parse other commands. This &ldquo;tokenizer&rdquo; parses Tcl commands and enforces rules on the individual words. For instance, this checks that curly braces match within words, and follows rules of escaping and quoting inside of and outside of quoted and curly-braced sections. This would certainly make some parts of a production parser simpler!</p>
+
+<p>So <code>tokenizer::evaluate</code> parses individual Tcl commands and sends them to the <code>handle_command</code> routine of <code>/Core/CLI/src/cli_Parser.h</code>. This then finds a <code>ParserCommand</code> object using a prefix lookup on the first word of the command; i.e. <code>wa</code> gives you the <code>watch</code> command, <code>pr</code> gives you the <code>print</code> command, etc. The prefix search is basically this:</p>
+
+<ul>
+<li>given a command string <code>$str</code>:
+
+<ul>
+<li>make a list of all commands that start with the same letter as $str
+
+<ul>
+<li>for each next letter in $str
+
+<ul>
+<li>remove the commands that don&rsquo;t have the same letter at the same spot</li>
+</ul></li>
+<li>return the list of matching commands</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p>If more than one matching command is found, then the input is ambiguous and a warning is printed and no command is executed. Hmm, there&rsquo;s a TODO note there about using a simpler lookup mechanism.</p>
+
+<p>How is the list of commands populated in the first place? Using the parser&rsquo;s <code>AddCommand</code> method. All of the normal Soar commands are added at runtime in <a href="https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_CommandLineInterface.cpp"><code>cli_CommandLineInterface.cpp</code></a>, and there are some other examples of <code>AddCommand</code> in the test code.</p>
+
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">m_Parser.AddCommand(<span style="color:#080;font-weight:bold">new</span> cli<span style="color:#333">::</span>AddWMECommand(<span style="color:#333">*</span><span style="color:#080;font-weight:bold">this</span>));
+m_Parser.AddCommand(<span style="color:#080;font-weight:bold">new</span> cli<span style="color:#333">::</span>AliasCommand(<span style="color:#333">*</span><span style="color:#080;font-weight:bold">this</span>));
+m_Parser.AddCommand(<span style="color:#080;font-weight:bold">new</span> cli<span style="color:#333">::</span>AllocateCommand(<span style="color:#333">*</span><span style="color:#080;font-weight:bold">this</span>));
+m_Parser.AddCommand(<span style="color:#080;font-weight:bold">new</span> cli<span style="color:#333">::</span>BreakCommand(<span style="color:#333">*</span><span style="color:#080;font-weight:bold">this</span>));
+m_Parser.AddCommand(<span style="color:#080;font-weight:bold">new</span> cli<span style="color:#333">::</span>CaptureInputCommand(<span style="color:#333">*</span><span style="color:#080;font-weight:bold">this</span>));
+...
+</code></pre></td></tr></table>
+</div>
+</div>
+
+<p>The commands themselves are <code>ParserCommand</code> objects and are all declared in <a href="https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_Commands.h"><code>cli_Commands.h</code></a>. The structure of a command class is given in <code>cli_parser.h</code>:</p>
+
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#080;font-weight:bold">class</span><span style="color:#f00;background-color:#faa"> </span><span style="color:#b06;font-weight:bold">ParserCommand</span>
+{
+<span style="color:#080;font-weight:bold">public</span><span style="color:#333">:</span>
+    <span style="color:#080;font-weight:bold">virtual</span> <span style="color:#333">~</span>ParserCommand() {};
+    <span style="color:#080;font-weight:bold">virtual</span> <span style="color:#080;font-weight:bold">const</span> <span style="color:#339;font-weight:bold">char</span><span style="color:#333">*</span> <span style="color:#06b;font-weight:bold">GetString</span>() <span style="color:#080;font-weight:bold">const</span> <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">0</span>;
+    <span style="color:#080;font-weight:bold">virtual</span> <span style="color:#080;font-weight:bold">const</span> <span style="color:#339;font-weight:bold">char</span><span style="color:#333">*</span> <span style="color:#06b;font-weight:bold">GetSyntax</span>() <span style="color:#080;font-weight:bold">const</span> <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">0</span>;
+    <span style="color:#080;font-weight:bold">virtual</span> <span style="color:#339;font-weight:bold">bool</span> <span style="color:#06b;font-weight:bold">Parse</span>(std<span style="color:#333">::</span>vector<span style="color:#333">&lt;</span>std<span style="color:#333">::</span>string<span style="color:#333">&gt;&amp;</span> argv) <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">0</span>;
+};
+</code></pre></td></tr></table>
+</div>
+</div>
+
+<p><code>GetString</code> is the name of the command and is used as the first word in the command invocation (<code>watch</code>, <code>sp</code>, etc.). This is used by the prefix lookup code discussed above. <code>GetSyntax</code> gives a usage statement in case the user invokes the command incorrectly. <code>Parse</code> is the meat of the command; it takes the list of command words and performs the action specified by them.</p>
+
+<p>Although the <code>Parse</code> method could directly contain the command actions, all of the <code>Parse</code> implementations simply parse the command and then call <code>DoXYZ</code>. These methods are declared in <code>cli_Cli.h</code> and are implemented in their own files (<code>cli_source.cpp</code>, <code>cli_break.cpp</code>, etc.). Here is the implemention of the <code>sp</code> command as an example:</p>
+
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3393
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3394
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3395
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3396
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3397
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3398
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3399
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3400
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3401
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3402
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3403
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3404
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3405
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3406
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3407
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3408
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3409
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3410
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3411
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3412
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3413
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3414
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3415
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3416
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3417
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3418
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3419
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3420
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3421
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#080;font-weight:bold">class</span><span style="color:#f00;background-color:#faa"> </span><span style="color:#b06;font-weight:bold">SPCommand</span> <span style="color:#333">:</span> <span style="color:#080;font-weight:bold">public</span> cli<span style="color:#333">::</span>ParserCommand
+{
+<span style="color:#080;font-weight:bold">public</span><span style="color:#333">:</span>
+    SPCommand(cli<span style="color:#333">::</span>Cli<span style="color:#333">&amp;</span> cli) <span style="color:#333">:</span> cli(cli), ParserCommand() {}
+    <span style="color:#080;font-weight:bold">virtual</span> <span style="color:#333">~</span>SPCommand() {}
+    <span style="color:#080;font-weight:bold">virtual</span> <span style="color:#080;font-weight:bold">const</span> <span style="color:#339;font-weight:bold">char</span><span style="color:#333">*</span> GetString() <span style="color:#080;font-weight:bold">const</span> { <span style="color:#080;font-weight:bold">return</span> <span style="background-color:#fff0f0">&#34;sp&#34;</span>; }
+    <span style="color:#080;font-weight:bold">virtual</span> <span style="color:#080;font-weight:bold">const</span> <span style="color:#339;font-weight:bold">char</span><span style="color:#333">*</span> GetSyntax() <span style="color:#080;font-weight:bold">const</span>
+    {
+        <span style="color:#080;font-weight:bold">return</span>
+            <span style="background-color:#fff0f0">&#34;Syntax: sp {production_body}&#34;</span>;
+    }
+
+    <span style="color:#080;font-weight:bold">virtual</span> <span style="color:#339;font-weight:bold">bool</span> Parse(std<span style="color:#333">::</span>vector<span style="color:#333">&lt;</span> std<span style="color:#333">::</span>string <span style="color:#333">&gt;&amp;</span>argv)
+    {
+        <span style="color:#888">// One argument (the stuff in the brackets, minus the brackets
+</span><span style="color:#888"></span>        <span style="color:#080;font-weight:bold">if</span> (argv.size() <span style="color:#333">&lt;</span> <span style="color:#00d;font-weight:bold">2</span>)
+            <span style="color:#080;font-weight:bold">return</span> cli.SetError(GetSyntax());
+        <span style="color:#080;font-weight:bold">if</span> (argv.size() <span style="color:#333">&gt;</span> <span style="color:#00d;font-weight:bold">2</span>)
+            <span style="color:#080;font-weight:bold">return</span> cli.SetError(GetSyntax());
+
+        <span style="color:#080;font-weight:bold">return</span> cli.DoSP(argv[<span style="color:#00d;font-weight:bold">1</span>]);
+    }
+
+<span style="color:#080;font-weight:bold">private</span><span style="color:#333">:</span>
+    cli<span style="color:#333">::</span>Cli<span style="color:#333">&amp;</span> cli;
+
+    SPCommand<span style="color:#333">&amp;</span> <span style="color:#080;font-weight:bold">operator</span><span style="color:#333">=</span>(<span style="color:#080;font-weight:bold">const</span> SPCommand<span style="color:#333">&amp;</span>);
+};
+</code></pre></td></tr></table>
+</div>
+</div>
+
+<p>The <code>DoSP</code> command is in <a href="https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_sp.cpp"><code>cli_sp.cpp</code></a>. Here, some craziness comes out. We find <code>soarAlternateInput</code>, which has no documentation and relates to fuctionality that is rather unclear. Then we have the use of a global agent provided by the global <code>m_pAgentSML</code> of <code>cli_CommandLineInterface.h</code>.</p>
+
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">agent<span style="color:#333">*</span> agnt <span style="color:#333">=</span> m_pAgentSML<span style="color:#333">-&gt;</span>GetSoarAgent();
+soarAlternateInput( agnt, productionString.c_str(), <span style="color:#080;font-weight:bold">const_cast</span><span style="color:#333">&lt;</span><span style="color:#339;font-weight:bold">char</span><span style="color:#333">*&gt;</span>(<span style="background-color:#fff0f0">&#34;) &#34;</span>), <span style="color:#007020">true</span> );
+set_lexer_allow_ids( agnt, <span style="color:#007020">false</span> );
+get_lexeme( agnt );
+
+production<span style="color:#333">*</span> p;
+<span style="color:#339;font-weight:bold">unsigned</span> <span style="color:#339;font-weight:bold">char</span> rete_addition_result <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">0</span>;
+p <span style="color:#333">=</span> parse_production( agnt, <span style="color:#333">&amp;</span>rete_addition_result );
+
+set_lexer_allow_ids( agnt, <span style="color:#007020">true</span> );
+soarAlternateInput( agnt, <span style="color:#00d;font-weight:bold">0</span>, <span style="color:#00d;font-weight:bold">0</span>, <span style="color:#007020">true</span> );
+</code></pre></td></tr></table>
+</div>
+</div>
+
+<p>The lexer and parser files in <code>\Core\SoarKernel\src</code> work together to load a production, with the parser repeatedly calling <code>get_lexeme</code> (line 747 of <a href="https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/SoarKernel/src/lexer.cpp"><code>lexer.cpp</code></a>) to find the next token. After checking for comments and doing some other stuff I don&rsquo;t get yet (<code>fake_rparen_at_eol</code>) it calls a lexing method based on the current character in the buffer using <code>lexer_routines</code> as a dispatch table.</p>
+
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">840
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">841
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">842
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">843
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">844
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">845
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">record_position_of_start_of_lexeme(thisAgent);
+<span style="color:#080;font-weight:bold">if</span> (thisAgent<span style="color:#333">-&gt;</span>current_char<span style="color:#333">!=</span>EOF)
+  (<span style="color:#333">*</span>(lexer_routines[<span style="color:#080;font-weight:bold">static_cast</span><span style="color:#333">&lt;</span><span style="color:#339;font-weight:bold">unsigned</span> <span style="color:#339;font-weight:bold">char</span><span style="color:#333">&gt;</span>(thisAgent<span style="color:#333">-&gt;</span>current_char)]))(thisAgent);
+<span style="color:#080;font-weight:bold">else</span>
+  <span style="color:#06b;font-weight:bold">lex_eof</span>(thisAgent);
+</code></pre></td></tr></table>
+</div>
+</div>
+
+<p>The explicit functionality of the tokenizer and parser are nicely separated, meaning that production tokenizing can be done context-free, or without the parser sharing knowledge with the tokenizer. However, things are actually crazier than that because the lexer is tied intimately with an <a href="https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/SoarKernel/src/agent.h">agent</a>:</p>
+
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">256
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">257
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">258
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">259
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">260
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">261
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">262
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#888">/* ----------------------- Lexer stuff -------------------------- */</span>
+
+lexer_source_file <span style="color:#333">*</span> current_file; <span style="color:#888">/* file we&#39;re currently reading */</span>
+<span style="color:#339;font-weight:bold">int</span>                 current_char; <span style="color:#888">/* holds current input character */</span>
+<span style="color:#080;font-weight:bold">struct</span> lexeme_info  lexeme;       <span style="color:#888">/* holds current lexeme */</span>
+Bool                print_prompt_flag;
+</code></pre></td></tr></table>
+</div>
+</div>
+
+<p>The <code>get_lexeme</code> method requires an agent as an argument, even though the agent was provided via <code>init_lexer</code>. During tokenization, <code>get_lexeme</code> sets the <code>lexeme</code> and <code>current_char</code> fields in the agent. So even though there&rsquo;s a nice separation of parser and lexer/tokenizer, there is potential there for the parser to change the state of the lexer, the input buffer, etc. It doesn&rsquo;t look like that happens, but it&rsquo;s not a good possibility. You also have to call <code>get_lexeme</code> before calling <code>parse_production</code>, and <code>parse_production</code> adds the input production to the RETE network directly instead of returning a parsed production. There&rsquo;s severe coupling between the lexer, the agent, and the parser. This could probably be remedied easily. Ideally the lexer would need only text and return a stream of tokens with no side effects; the parser would instantiate the lexer and would have access to an agent for the RHS functions.</p>
+
+<h2 id="step-4-how-does-gp-work">Step 4: How does <code>gp</code> work?</h2>
+
+<p><code>gp</code> is a command that generates new Soar productions by permuting values inside of square brackets in an otherwise normal-looking production. <code>gp</code> was an added mystery to me because its syntax was almost the same as that for <code>sp</code>, but it allowed syntactic variations deep in the parse tree. Here is an example <code>gp</code> statement:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tcl" data-lang="tcl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tcl" data-lang="tcl"><span style="color:#963">gp</span> <span style="color:#080;font-weight:bold">{</span><span style="color:#963">gp</span><span style="color:#333">*</span>test1
+<span style="color:#080;font-weight:bold">(</span><span style="color:#963">state</span> <span style="color:#333">&lt;</span>s<span style="color:#333">&gt;</span> <span style="color:#333">^</span>operator <span style="color:#333">&lt;</span>o<span style="color:#333">&gt;</span> <span style="color:#333">+</span>
+           <span style="color:#333">^</span><span style="color:#963">someflag</span> <span style="color:#080;font-weight:bold">[</span><span style="color:#963">true</span> false<span style="color:#080;font-weight:bold">])</span>   <span style="color:#888"># some normal values
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">(</span><span style="color:#333">&lt;</span><span style="color:#963">o</span><span style="color:#333">&gt;</span> <span style="color:#333">^</span>name foo
+     <span style="color:#333">^</span><span style="color:#963">att</span> <span style="color:#080;font-weight:bold">[</span><span style="color:#963">val1</span> <span style="color:#60e;font-weight:bold">1.3</span> <span style="color:#333">|</span>another val<span style="color:#333">|</span><span style="color:#080;font-weight:bold">])</span>  <span style="color:#888"># a value with a space, in pipes
+</span><span style="color:#888"></span><span style="color:#963">--</span><span style="color:#333">&gt;</span>
+<span style="color:#080;font-weight:bold">(</span><span style="color:#333">&lt;</span><span style="color:#963">s</span><span style="color:#333">&gt;</span> <span style="color:#333">^</span>operator <span style="color:#333">&lt;</span>o<span style="color:#333">&gt;</span> <span style="color:#f00;background-color:#faa">=</span> <span style="color:#00d;font-weight:bold">5</span><span style="color:#080;font-weight:bold">)</span>
+<span style="color:#080;font-weight:bold">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>This turned out to be simple once I understood CLI parsing. <code>DoGP</code> is located in <a href="https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_gp.cpp"><code>/Core/CLI/src/cli_gp.cpp</code></a>. It simply looks for the special <code>[]</code> syntax in a string and generates new strings to be loaded as productions by <code>DoSP</code>. This is simple and easy, but means that there may not be an easy way to do syntax coloring for it.</p>
+
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">276
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">277
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">278
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">279
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">280
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#080;font-weight:bold">if</span>(<span style="color:#333">!</span>DoSP(generatedProduction))
+{
+    <span style="color:#080;font-weight:bold">return</span> <span style="color:#007020">false</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<p>Reading the Soar parser code is an awesome exercise that I plan to continue. I probably won&rsquo;t write up another post as detailed as this one, instead writing a code guide once I&rsquo;ve grokked it well enough. That will probably be a better contribution to the writers, anyway.</p>
+
+<p>Reading it was actually an interesting bit of archaeology, too. There are notes sprinkled about with author initials and dates back to at least 1994. Notes like that would not have been necessary if a version control system had been available or in use. There are also bug numbers referring to a long-gone database, references to code that doesn&rsquo;t exist anymore, and commented commented comments. I wish that project history were available prior to 2010.</p>
+
+<p>The design of the Soar parser makes a lot of sense to me now. A Tcl parser parses commands, verifying quotes, escaping, comments and brace or quote matching; a command object is located and is given the command arguments; the command object then parses the arguments and takes whatever action is required. It should be a simple process to create and register new commands in Soar.</p>
+
+<p>The parser and tokenizer for Soar productions are not difficult to understand as far as their operation goes. However, the strong coupling and use of global variables need improvement, especially if <a href="http://sourceforge.net/p/soar/mailman/message/22147559/">parallelization is a concern</a>.</p>
+
+<h3 id="low-hanging-fruits">Low-Hanging Fruits</h3>
+
+<ul>
+<li>Rename the parsers and tokenizers so they don&rsquo;t get confused:
+
+<ul>
+<li><code>Core/SoarKernel/src/lexer</code> -&gt; <code>Core/SoarKernel/src/production_tokenizer</code></li>
+<li><code>Core/SoarKernel/src/parser</code> - <code>Core/SoarKernel/src/production_parser</code></li>
+<li><code>Core/shared/tokenizer</code> -&gt; <code>Core/CLI/src/cli_tokenizer</code></li>
+<li><code>Core/CLI/src/cli_parser</code> -&gt; this one is fine</li>
+</ul></li>
+<li>add a project README containing build instructions</li>
+<li>consistency
+
+<ul>
+<li>choose tabs or spaces, but not both!</li>
+<li>put declarations at either top or bottom of file</li>
+<li>capitalize or don&rsquo;t capitalize names; camelCase or snake_case</li>
+</ul></li>
+<li>find and remove commented-out code</li>
+<li>read and grok the code, then add comments about what it does</li>
+</ul>
+
+<p>A less low-hanging fruit would be trying to address some of the many <code>TODO</code>/<code>BUGBUG</code>/<code>FIXME</code>/<code>need</code> notes sprinkled throughout. Interestingly, searching <code>FIXME</code> gives lots of results in the included Scons distribution, as well!</p>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<hr>
+		</div>
+	</div>
+</div>
+
+    <div class="container">
+        <div class="row col-md-12">
+            <footer>
+                <div class="pull-left">
+                    <p>
+                        &copy; 2011-2018 ~ Nathan Glenn ~ Powered By <a href="http://hugo.spf13.com">Hugo</a> - version: 0.52 ~ <a href="http://garfieldnate.github.io//license">License</a>
+                    </p>
+                </div>
+
+                
+                <div class="pull-right">
+                    
+                    
+                    
+                    
+                        <a href="https://github.com/garfieldnate" target="_blank">
+                        <i class="fab fa-github-square fa-2x"></i></a>
+                    
+                    
+                    
+                    
+                        <a href="https://www.goodreads.com/user/show/2794644-nathan-glenn" target="_blank">
+                        <i class="fab fa-goodreads fa-2x"></i></a>
+                    
+                    
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    
+    </body>
+</html>
+

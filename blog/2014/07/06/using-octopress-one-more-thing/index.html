@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Using Octopress- One More Thing">
+    <meta name="author" content="Nathan Glenn">
+
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <title>Using Octopress- One More Thing &middot; Nate Glenn&#39;s Blog</title>
+
+   	
+    
+        <link rel="stylesheet" href="http://garfieldnate.github.io//css/theme/superhero.css">
+    
+
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/solid.js" integrity="sha384-F4BRNf3onawQt7LDHDJm/hwm3wBtbLIfGk1VSB/3nn3E+7Rox1YpYcKJMsmHBJIl" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/regular.js" integrity="sha384-V+AkgA1cZ+p3DRK63AHCaXvO68V7B5eHoxl7QVN21zftbkFn/sGAIVR7vmQL3Zhp" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/brands.js" integrity="sha384-VLgz+MgaFCnsFLiBwE3ItNouuqbWV2ZnIqfsA6QRHksEAQfgbcoaQ4PP0ZeS0zS5" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/fontawesome.js" integrity="sha384-treYPdjUrP4rW5q82SnECO7TPVAz4bpas16yuE9F5o7CeBn2YYw1yr5oC8s8Mf8t" crossorigin="anonymous"></script>
+
+   	
+   	<link rel="stylesheet" href="http://garfieldnate.github.io//css/style.css">
+
+
+    
+    <script src="http://garfieldnate.github.io//js/jquery.min-2.1.4.js"></script>
+    <script src="http://garfieldnate.github.io//js/bootstrap.min-3.3.5.js"></script>
+    <script type="text/javascript" src="http://garfieldnate.github.io//js/jquery.githubRepoWidget.min.js"></script>
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Nate Glenn&#39;s Blog" />
+</head>
+<body lang="en-US">
+    
+    
+<div class="container">
+    <div class="row">
+        <div class="navbar navbar-default " role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://garfieldnate.github.io/">Nate Glenn&#39;s Blog</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://garfieldnate.github.io/">Home</a></li>
+                    <li><a href="http://garfieldnate.github.io//about/">About</a></li>
+                    <li><a href="http://garfieldnate.github.io//post/">Archive</a></li>
+                    <li><a href="http://garfieldnate.github.io//resume/resume-en.html">Resume</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<h3>Using Octopress- One More Thing</h3>
+				<span class="label label-primary">July 6, 2014</span> in
+				
+					
+					<a href="/categories/octopress">Octopress</a>
+				
+					 , 
+					<a href="/categories/jekyll">Jekyll</a>
+				
+					 , 
+					<a href="/categories/ruby">Ruby</a>
+				
+					 , 
+					<a href="/categories/python">Python</a>
+				
+					 , 
+					<a href="/categories/pygments.rb">Pygments.rb</a>
+				
+					 , 
+					<a href="/categories/blog">blog</a>
+				
+					 , 
+					<a href="/categories/jackie-chan-adventures">Jackie Chan Adventures</a>
+				
+					 , 
+					<a href="/categories/windows">Windows</a>
+				
+				
+			</small>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<br>
+			<p>&ldquo;Aiiiiyaaaa! Jacky! You did not install Ruuuubyyy. You need that to write your blog.&rdquo;</p>
+
+<p>&ldquo;I already install Ruby, uncle, but it still does not work. <code>rake generate</code> creates empty HTML file! Look, it&rsquo;s broken!&rdquo;</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-console" data-lang="console"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-console" data-lang="console">&gt;rake generate
+Generating... C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/posix-spawn-0.3.8/lib/posix/spawn.rb:162: warning: cannot close fd before spawn
+&#39;which&#39; is not recognized as an internal or external command, operable program or batch file.</code></pre></td></tr></table>
+</div>
+</div>
+<p>Swat!</p>
+
+<p>&ldquo;Ow! What was dat for?&rdquo;</p>
+
+<p>&ldquo;These are not eeeeerroooorrs, just warnings! Your site is empty because you forgot to install Pyyyythoooon.&rdquo;</p>
+
+<p>&ldquo;What? Python? But you said Ruby!&rdquo;</p>
+
+<p>Swat! &ldquo;Ow!&rdquo;</p>
+
+<p>&ldquo;You need Ruby <em>and</em> Python to use coooode hiiiighliiiighting on your blooooog!&rdquo;</p>
+
+<p>&ldquo;What!? I have to install Ruby <em>and</em> Python?! But I don&rsquo;t use either of those!&rdquo;</p>
+
+<p>&ldquo;One mooooore thing.&rdquo; Swat!</p>
+
+<p>&ldquo;Ow! What was that for?!&rdquo;</p>
+
+<figure>
+    <img src="/images/content_images/uncle_hits_jackie.gif"
+         alt="Uncle swats Jackie"/> <figcaption>
+            <h4>Swat!</h4>
+        </figcaption>
+</figure>
+
+
+<p>&ldquo;For using Windooooows!&rdquo;</p>
+
+<hr />
+
+<p>So, if you tried using <a href="http://octopress.org/">Octopress</a>&rsquo;s neat <a href="http://octopress.org/docs/plugins/backtick-codeblock/">backtick codeblock syntax</a> to display code on your blog, but you don&rsquo;t have Python intsalled, you will get a mostly blank website as the Pygments plugin silently fails and messes up the whole <code>generate</code> process. The warnings can safely be ignored (and will hopefully be <a href="https://github.com/tmm1/pygments.rb/pull/90">eliminated</a> soon). I put in a <a href="https://github.com/tmm1/pygments.rb/issues/130">request</a> for a message of some kind so that the process wouldn&rsquo;t fail so silently.</p>
+
+<p>Good times. Those are all on Netflix, by the way.</p>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<hr>
+		</div>
+	</div>
+</div>
+
+    <div class="container">
+        <div class="row col-md-12">
+            <footer>
+                <div class="pull-left">
+                    <p>
+                        &copy; 2011-2018 ~ Nathan Glenn ~ Powered By <a href="http://hugo.spf13.com">Hugo</a> - version: 0.52 ~ <a href="http://garfieldnate.github.io//license">License</a>
+                    </p>
+                </div>
+
+                
+                <div class="pull-right">
+                    
+                    
+                    
+                    
+                        <a href="https://github.com/garfieldnate" target="_blank">
+                        <i class="fab fa-github-square fa-2x"></i></a>
+                    
+                    
+                    
+                    
+                        <a href="https://www.goodreads.com/user/show/2794644-nathan-glenn" target="_blank">
+                        <i class="fab fa-goodreads fa-2x"></i></a>
+                    
+                    
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    
+    </body>
+</html>
+
