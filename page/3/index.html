@@ -1112,7 +1112,7 @@ public &lt;greet&gt; = &lt;greeting&gt; [&lt;person&gt;] [i am &lt;person&gt;];
 
 <figure class="center">
     <img src="/images/content_images/jsgf_parse.jpg"
-         alt="The sentence parse tree has a root node called &#39;greet&#39; and three subtrees showing the three rules that were applied: there is a &#39;greeting&#39; subtree containing &#39;konnichiwa&#39;, a &#39;person&#39; subtree containing &#39;Kelly&#39;, and a third subtree containing &#39;I&#39;, &#39;am&#39;, and a &#39;person&#39; subtree containing &#39;John&#39;. Unfortunately, if you require this alt text to know what is in the picture, I don&#39;t think dot graphs are going to help you at all. As I&#39;m writing this alt text years later, I&#39;m kicking myself for not generating the SVG instead so that blind users could inspect it themselves. Actually, I have no idea whether Graphviz is such a great tool at all from an accessibility standpoint." width="640" height="294"/> <figcaption>
+         alt="The sentence parse tree has a root node called &#39;greet&#39; and three subtrees showing the three rules that were applied: there is a &#39;greeting&#39; subtree containing &#39;konnichiwa&#39;, a &#39;person&#39; subtree containing &#39;Kelly&#39;, and a third subtree containing &#39;I&#39;, &#39;am&#39;, and a further &#39;person&#39; subtree containing &#39;John&#39;. Unfortunately, if you require this alt text to know what is in the picture, I don&#39;t think dot graphs are going to help you at all. As I&#39;m writing this alt text years later, I&#39;m kicking myself for not generating the SVG instead so that blind users could inspect it themselves. Actually, I have no idea whether Graphviz is such a great tool at all from an accessibility standpoint." width="640" height="294"/> <figcaption>
             <h4>A graph of the JSGF sentence parse</h4>
         </figcaption>
 </figure>
@@ -1590,7 +1590,8 @@ public &lt;greet&gt; = &lt;greeting&gt; [&lt;person&gt;] [i am &lt;person&gt;];
 <p>Then, to run a demo and see what amazing things GoSen can do, copy the dictionary.xml file from the testdata/dictionary directory to the dictionary/dictionary directory, go back to the root directory of GoSen, and then run <code>java -cp bin examples.ReadingProcessorDemo testData/dictionary/dictionary.xml</code>. The GoSen site says to run using the testdata folder, but that means you&rsquo;ll have to download the dictionary twice, which is dumb. When you run the above command, you&rsquo;ll get this GUI:</p>
 
 <figure class="center">
-    <img src="/images/content_images/gosen.gif" width="209" height="320"/> 
+    <img src="/images/content_images/gosen.gif"
+         alt="Screenshot of the &#39;reading processor demo&#39; tool that comes with GoSen. The window shows &#39;情報スーパーハイウェイ&#39; analyzed into consitituent words and assigned part of speech. The conrols for editing the processor&#39;s output are also open." width="209" height="320"/> 
 </figure>
 
 
