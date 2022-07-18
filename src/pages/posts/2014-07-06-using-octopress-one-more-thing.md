@@ -41,7 +41,11 @@ Swat! "Ow!"
 
 "Ow! What was that for?!"
 
-{{< figure src="/images/content_images/uncle_hits_jackie.gif" title="Swat!" alt="Uncle swats Jackie" alt="A still from 'Jackie Chan Adventures' showing uncle swatting Jackie on the head.">}}
+<ResponsiveFigure
+    class_="center"
+    src="/images/content_images/uncle_hits_jackie.gif"
+    alt="A still from 'Jackie Chan Adventures' showing uncle swatting Jackie on the head."
+    title="Will's desktop. Sure, it looks normal to us now..."/>
 
 "For using Windooooows!"
 

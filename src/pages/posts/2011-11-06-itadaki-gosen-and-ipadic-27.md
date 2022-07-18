@@ -7,6 +7,8 @@ categories:
 comments: true
 date: 2011-11-06T00:00:00Z
 title: Itadaki GoSen and IPADIC 2.7
+setup: |
+  import ResponsiveFigure from "../../components/ResponsiveFigure.astro"
 ---
 
 **Update3: I've forked the Itadaki project on [GitHub](https://github.com/garfieldnate/Itadaki) to keep track of it better.**
@@ -23,7 +25,12 @@ Why does it matter that we can't use the latest version of IPADIC? Well, here's 
 
 Then, to run a demo and see what amazing things GoSen can do, copy the dictionary.xml file from the testdata/dictionary directory to the dictionary/dictionary directory, go back to the root directory of GoSen, and then run <code>java -cp bin examples.ReadingProcessorDemo testData/dictionary/dictionary.xml</code>. The GoSen site says to run using the testdata folder, but that means you'll have to download the dictionary twice, which is dumb. When you run the above command, you'll get this GUI:
 
-{{< figure class="center" src="/images/content_images/gosen.gif" width="209" height="320" alt="Screenshot of the 'reading processor demo' tool that comes with GoSen. The window shows '情報スーパーハイウェイ' analyzed into consitituent words and assigned part of speech. The conrols for editing the processor's output are also open." >}}
+<!-- TODO: should have height 320 and width 209 -->
+<ResponsiveFigure
+    class_="center"
+    src="/images/content_images/gosen.gif"
+    alt="Screenshot of the 'reading processor demo' tool that comes with GoSen. The window shows '情報スーパーハイウェイ' analyzed into consitituent words and assigned part of speech. The conrols for editing the processor's output are also open."
+    title="Will's desktop. Sure, it looks normal to us now..."/>
 
 Notice that it tokenizes the sentence, gives readings, and allows you to choose among alternatives analyses. It also gives information on part of speech and inflection.
 

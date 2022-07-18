@@ -9,6 +9,8 @@ categories:
 comments: true
 date: 2012-06-29T00:00:00Z
 title: Graphing grammar parses from CMU Sphinx 4
+setup: |
+  import ResponsiveFigure from "../../components/ResponsiveFigure.astro"
 ---
 
 CMU Sphinx comes with some neat grammar parsing stuff that I never knew about. It uses JSGF (as detailed [here](http://cmusphinx.sourceforge.net/sphinx4/javadoc/edu/cmu/sphinx/jsgf/JSGFGrammar.html)) and comes with several demos, showing how to use a basic grammar, arc weights, tags, and even getting a [javascript representation](http://cmusphinx.sourceforge.net/sphinx4/src/apps/edu/cmu/sphinx/demo/jsapi/tags/README.html) of the final parse! At work I've been needing to do some custom processing of the grammar output, but it was more conceptually difficult than I'd planned. So after figuring out how to traverse a parse tree, I decided to write a little application to print out the parse of a given sentence. The eclipse project for it can be found [here](https://sites.google.com/site/complingfiles/files/ParsePrinter.zip?attredirects=0&amp;d=1).
@@ -68,7 +70,12 @@ digraph {
 
 which is all a big mess until we run it through GraphViz and see this:
 
-{{< figure class="center" src="/images/content_images/jsgf_parse.jpg" width="640" height="294" title="A graph of the JSGF sentence parse" alt="The sentence parse tree has a root node called 'greet' and three subtrees showing the three rules that were applied: there is a 'greeting' subtree containing 'konnichiwa', a 'person' subtree containing 'Kelly', and a third subtree containing 'I', 'am', and a further 'person' subtree containing 'John'. Unfortunately, if you require this alt text to know what is in the picture, I don't think dot graphs are going to help you at all. As I'm writing this alt text years later, I'm kicking myself for not generating the SVG instead so that blind users could inspect it themselves. Actually, I have no idea whether Graphviz is such a great tool at all from an accessibility standpoint.">}}
+<!-- TODO: width="640" height="294" -->
+<ResponsiveFigure
+    class_="center"
+    src="/images/content_images/jsgf_parse.jpg"
+    alt="The sentence parse tree has a root node called 'greet' and three subtrees showing the three rules that were applied: there is a 'greeting' subtree containing 'konnichiwa', a 'person' subtree containing 'Kelly', and a third subtree containing 'I', 'am', and a further 'person' subtree containing 'John'. Unfortunately, if you require this alt text to know what is in the picture, I don't think dot graphs are going to help you at all. As I'm writing this alt text years later, I'm kicking myself for not generating the SVG instead so that blind users could inspect it themselves. Actually, I have no idea whether Graphviz is such a great tool at all from an accessibility standpoint."
+    title="A graph of the JSGF sentence parse"/>
 
 A graph explaining how our sentence was parsed! I color code the parse: green is a RuleSequence, magenta is a RuleParse, light blue is a Token, red is a Tag, yellow, which there strangely aren't any of, would be a RuleName.
 

@@ -1,0 +1,22 @@
+---
+// Note: not actually responsive yet
+
+export interface Props {
+    alt: string;
+    src: string;
+    class_?: string;
+    title?: string;
+}
+
+const { alt, src, class_ = "center", title } = Astro.props as Props;
+---
+
+<figure class={class_}>
+    <img src={src} alt={alt}/>
+    {!!title && (
+     <figcaption>
+            <h4>{title}</h4>
+    </figcaption>
+    )}
+</figure>
+

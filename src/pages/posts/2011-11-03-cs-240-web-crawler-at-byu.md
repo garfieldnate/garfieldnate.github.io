@@ -17,9 +17,9 @@ The specification for the web crawler assignment can be found [here](http://stud
 
 First off, check your constructors! In an initialization for a templatized BST node, I had been invoking the default copy constructor. A copy constructor looks like this:
 
-{{< highlight cpp "linenos=" >}}
+```cpp
 T(const T & other)
-{{< / highlight >}}
+```
 
 In the contained object, I had only implemented the operator= construction. My class T had pointers in it, and those pointers were to objects which were allocated on the heap with the new keyword. The default copy constructor copied the pointers, and when the copy of the object of type T was deleted, so were the structures that its pointers pointed to. Since the original object pointed to the same structures, that object would then cause a segfault when destroyed because it would try to delete non-existent structures. Ouch!
 

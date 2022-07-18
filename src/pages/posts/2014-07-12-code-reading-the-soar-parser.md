@@ -13,7 +13,8 @@ I've thought for a while that it would be fun to write a series of "code reading
 
 To investigate the possibility of an upcoming project, I've been wanting to know how Soar parses productions, and if there's any way to retrofit it to make a parser usable by various IDE's. I have tried to make [two](https://github.com/garfieldnate/Soar-Production) [separate](https://github.com/garfieldnate/Java-Soar-Parser) parsers for Soar code already, and it just seems to be difficult to imitate the real thing. If you'd like to follow along, you can view or download the code on GitHub:
 
-{{< github repo="SoarGroup/Soar">}}
+TODO
+<!-- {{< github repo="SoarGroup/Soar">}} -->
 
 Disclaimer: My "critiques" of the code are areas that I think can use some contributions or TLC. Soar was written and is maintained by programmers and researchers far greater than I, and I am not dismissing the hard work and craft that went into its construction. The Soar code has evolved over 20-30 years in an academic environment, and I expect it to have a few rough edges.
 
@@ -49,18 +50,19 @@ The answer to this turned out to be more interesting than I thought. My own atte
 
 Let's start by looking at what happens when you source a file. The code for the source command is in [`Core/CLI/src/cli_source.cpp`](https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_source.cpp). `DoSource` of line 80 is called, and after loading the input file into memory and doing some error checking and logging it calls `Source` of line 212. Only the first 4 lines matter for understanding the parser:
 
-{{< highlight cpp "linenostart=212" >}}
+```cpp
+// line 212
 bool CommandLineInterface::Source(const char* buffer, bool printFileStack)
 {
     soar::tokenizer tokenizer;
     tokenizer.set_handler(&m_Parser);
     if (tokenizer.evaluate(buffer))
         return true;
-{{< / highlight >}}
-
+```
 It creates a new `tokenizer` and sets its handler to `m_parser`, the main CLI parser available from `cli_commandLineInterface.h`. The parser can be passed to `set_handler` because it implements `tokenizer_callback` (declared in [`tokenizer.h`](https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/shared/tokenizer.h)) by having the `handle_command` method:
 
-{{< highlight cpp "linenostart=43" >}}
+```cpp
+// line 43
 /**
  * Implement to handle commands. The words of the command are in the
  * passed argv vector. The first entry in the vector is the command.
@@ -71,11 +73,12 @@ It creates a new `tokenizer` and sets its handler to `m_parser`, the main CLI pa
  *         tokenizer::evaluate to return false.
  */
 virtual bool handle_command(std::vector<std::string>& argv) = 0;
-{{< / highlight >}}
+```
 
 Next, [`tokenizer.h`](https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/shared/tokenizer.h) tells me why I got it wrong when I tried to make my own Soar parser:
 
-{{< highlight cpp "linenostart=186" >}}
+```cpp
+// line 186
  /**
      * Essentially implements a simple Tcl parser, with some exceptions.
      *
@@ -83,7 +86,7 @@ Next, [`tokenizer.h`](https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd7
      * callbacks with arguments separated in to a vector of strings (what Tcl
      * refers to as "words").
      *
-{{< / highlight >}}
+```
 
 So I've had it backwards, building a Soar production parser and then as an afterthought adding methods to parse other commands. This "tokenizer" parses Tcl commands and enforces rules on the individual words. For instance, this checks that curly braces match within words, and follows rules of escaping and quoting inside of and outside of quoted and curly-braced sections. This would certainly make some parts of a production parser simpler!
 
@@ -99,18 +102,20 @@ If more than one matching command is found, then the input is ambiguous and a wa
 
 How is the list of commands populated in the first place? Using the parser's `AddCommand` method. All of the normal Soar commands are added at runtime in [`cli_CommandLineInterface.cpp`](https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_CommandLineInterface.cpp), and there are some other examples of `AddCommand` in the test code.
 
-{{< highlight cpp "linenostart=40" >}}
+```cpp
+// line 40
 m_Parser.AddCommand(new cli::AddWMECommand(*this));
 m_Parser.AddCommand(new cli::AliasCommand(*this));
 m_Parser.AddCommand(new cli::AllocateCommand(*this));
 m_Parser.AddCommand(new cli::BreakCommand(*this));
 m_Parser.AddCommand(new cli::CaptureInputCommand(*this));
 ...
-{{< / highlight >}}
+```
 
 The commands themselves are `ParserCommand` objects and are all declared in [`cli_Commands.h`](https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_Commands.h). The structure of a command class is given in `cli_parser.h`:
 
-{{< highlight cpp "linenostart=15" >}}
+```cpp
+// line 15
 class ParserCommand
 {
 public:
@@ -119,13 +124,14 @@ public:
     virtual const char* GetSyntax() const = 0;
     virtual bool Parse(std::vector<std::string>& argv) = 0;
 };
-{{< / highlight >}}
+```
 
 `GetString` is the name of the command and is used as the first word in the command invocation (`watch`, `sp`, etc.). This is used by the prefix lookup code discussed above. `GetSyntax` gives a usage statement in case the user invokes the command incorrectly. `Parse` is the meat of the command; it takes the list of command words and performs the action specified by them.
 
 Although the `Parse` method could directly contain the command actions, all of the `Parse` implementations simply parse the command and then call `DoXYZ`. These methods are declared in `cli_Cli.h` and are implemented in their own files (`cli_source.cpp`, `cli_break.cpp`, etc.). Here is the implemention of the `sp` command as an example:
 
-{{< highlight cpp "linenostart=3393" >}}
+```cpp
+// line 3393
 class SPCommand : public cli::ParserCommand
 {
 public:
@@ -154,11 +160,12 @@ private:
 
     SPCommand& operator=(const SPCommand&);
 };
-{{< / highlight >}}
+```
 
 The `DoSP` command is in [`cli_sp.cpp`](https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_sp.cpp). Here, some craziness comes out. We find `soarAlternateInput`, which has no documentation and relates to fuctionality that is rather unclear. Then we have the use of a global agent provided by the global `m_pAgentSML` of `cli_CommandLineInterface.h`.
 
-{{< highlight cpp "linenostart=42" >}}
+```cpp
+// line 42
 agent* agnt = m_pAgentSML->GetSoarAgent();
 soarAlternateInput( agnt, productionString.c_str(), const_cast<char*>(") "), true );
 set_lexer_allow_ids( agnt, false );
@@ -170,28 +177,30 @@ p = parse_production( agnt, &rete_addition_result );
 
 set_lexer_allow_ids( agnt, true );
 soarAlternateInput( agnt, 0, 0, true );
-{{< / highlight >}}
+```
 
 The lexer and parser files in `\Core\SoarKernel\src` work together to load a production, with the parser repeatedly calling `get_lexeme` (line 747 of [`lexer.cpp`](https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/SoarKernel/src/lexer.cpp)) to find the next token. After checking for comments and doing some other stuff I don't get yet (`fake_rparen_at_eol`) it calls a lexing method based on the current character in the buffer using `lexer_routines` as a dispatch table.
 
-{{< highlight cpp "linenostart=840" >}}
+```cpp
+// line 840
 record_position_of_start_of_lexeme(thisAgent);
 if (thisAgent->current_char!=EOF)
   (*(lexer_routines[static_cast<unsigned char>(thisAgent->current_char)]))(thisAgent);
 else
   lex_eof(thisAgent);
-{{< / highlight >}}
+```
 
 The explicit functionality of the tokenizer and parser are nicely separated, meaning that production tokenizing can be done context-free, or without the parser sharing knowledge with the tokenizer. However, things are actually crazier than that because the lexer is tied intimately with an [agent](https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/SoarKernel/src/agent.h):
 
-{{< highlight cpp "linenostart=256" >}}
+```cpp
+// line 256
 /* ----------------------- Lexer stuff -------------------------- */
 
 lexer_source_file * current_file; /* file we're currently reading */
 int                 current_char; /* holds current input character */
 struct lexeme_info  lexeme;       /* holds current lexeme */
 Bool                print_prompt_flag;
-{{< / highlight >}}
+```
 
 The `get_lexeme` method requires an agent as an argument, even though the agent was provided via `init_lexer`. During tokenization, `get_lexeme` sets the `lexeme` and `current_char` fields in the agent. So even though there's a nice separation of parser and lexer/tokenizer, there is potential there for the parser to change the state of the lexer, the input buffer, etc. It doesn't look like that happens, but it's not a good possibility. You also have to call `get_lexeme` before calling `parse_production`, and `parse_production` adds the input production to the RETE network directly instead of returning a parsed production. There's severe coupling between the lexer, the agent, and the parser. This could probably be remedied easily. Ideally the lexer would need only text and return a stream of tokens with no side effects; the parser would instantiate the lexer and would have access to an agent for the RHS functions.
 
@@ -212,12 +221,13 @@ gp {gp*test1
 
 This turned out to be simple once I understood CLI parsing. `DoGP` is located in [`/Core/CLI/src/cli_gp.cpp`](https://github.com/SoarGroup/Soar/blob/34b1881a57777083cd72d0dcb3d1e56a7bb59701/Core/CLI/src/cli_gp.cpp). It simply looks for the special `[]` syntax in a string and generates new strings to be loaded as productions by `DoSP`. This is simple and easy, but means that there may not be an easy way to do syntax coloring for it.
 
-{{< highlight cpp "linenostart=276" >}}
+```cpp
+// line 276
 if(!DoSP(generatedProduction))
 {
     return false;
 }
-{{< / highlight >}}
+```
 
 ## Conclusions
 

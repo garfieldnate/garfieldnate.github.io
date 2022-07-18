@@ -112,9 +112,10 @@ Why did it fail the second test, which involves checking that an invalid file is
 
 The bug is in the line which matches the start token:
 
-{{< highlight perl "linenostart=23" >}}
+```perl
+# line 23
 next unless /^=startHere/i .. 0; # start processing
-{{< / highlight >}}
+```
 
 The regex, flip-flop operator and 0 were clearly some sort of idiom that I was unfamiliar with. I had only ever used the flip-flop with numbers, such as `1..10`, which iterates from numbers 1 through 10. How does it work? Let's check [perlop](http://perldoc.perl.org/perlop.html):
 
