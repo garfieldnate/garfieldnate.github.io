@@ -1,4 +1,5 @@
 ---
+layout: "../../layouts/BlogPost.astro"
 categories:
 - Windows
 - Windows restore

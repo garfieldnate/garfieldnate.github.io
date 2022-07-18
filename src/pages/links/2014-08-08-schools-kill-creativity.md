@@ -1,4 +1,5 @@
 ---
+layout: "../../layouts/BlogPost.astro"
 categories:
 - education
 - creativity

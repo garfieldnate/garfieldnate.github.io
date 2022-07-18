@@ -1,4 +1,5 @@
 ---
+layout: "../../layouts/BlogPost.astro"
 categories:
 - Octopress
 - Jekyll
@@ -38,7 +39,7 @@ I think I ran into every possible problem, which was actually a good learning ex
     - Fix the problem by deleting `.deploy` and redeploying
     - See https://github.com/octopress/deploy/issues/64
 * `octopress deploy` does not first run a build; you must do `jekyll build` first.
-* `octopress new draft Title`, etc. gives `cannot load such file: octopress/draft`. 
+* `octopress new draft Title`, etc. gives `cannot load such file: octopress/draft`.
     - I don't know why this is happening yet
     - For now the fix is to run `bundle exec octopress new draft Title`
     - See https://github.com/octopress/octopress/issues/102

@@ -1,4 +1,5 @@
 ---
+layout: "../../layouts/BlogPost.astro"
 categories:
 - Cognitive modeling
 - Japanese

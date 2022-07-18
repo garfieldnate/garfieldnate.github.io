@@ -1,4 +1,5 @@
 ---
+layout: "../../layouts/BlogPost.astro"
 categories:
 - programming
 - perl
@@ -12,7 +13,7 @@ date: 2015-10-25T19:23:49Z
 title: My Dream Planner, Come True! (Almost)
 ---
 
-I say almost because I haven't printed it yet. But I have a [PDF](https://github.com/garfieldnate/Personal-Planner/releases)! 
+I say almost because I haven't printed it yet. But I have a [PDF](https://github.com/garfieldnate/Personal-Planner/releases)!
 
 When I was in college I had a favorite planner. It was the perfect size for my hand, and just had lines for each day, with one week visible in a two-page spread. It had a space in the front for schedules, and some blank pages in the back for notes and adresses. Nice and simple. I looked forward to buying it every year, and the last one I bought I also laminated and rebound so it would last longer.
 

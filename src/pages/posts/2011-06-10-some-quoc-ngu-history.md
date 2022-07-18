@@ -1,4 +1,5 @@
 ---
+layout: "../../layouts/BlogPost.astro"
 categories:
 - Vietnamese
 - Language Reform
@@ -7,7 +8,6 @@ categories:
 comments: true
 date: 2011-06-10T00:00:00Z
 title: Some Quốc Ngữ History
-layout: "../../layouts/BlogPost.astro"
 ---
 
 I had the privelege of studying Vietnamese for 2 semesters at my university. During the course of my studies, I had to learn the system of writing Vietnamese known as **Quốc Ngữ**. Seeing as how the older writing system (**Chữ Nôm**), which employed Chinese characters, was used up until the beginning of the 20th century, I could not understand why the spelling of such a new system was so irregular. Recently, however, I began reading *An Introduction to Vietnamese Literature* (Duran and Huan, 1985), which contains a section on the evolution of the quoc ngu system.

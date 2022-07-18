@@ -1,4 +1,5 @@
 ---
+layout: "../../layouts/BlogPost.astro"
 categories:
 - code reading
 - Perl
@@ -57,7 +58,7 @@ The magic here is in the `-x` switch. From [perlrun](http://perldoc.perl.org/per
 
 >tells Perl that the program is embedded in a larger chunk of unrelated text, such as in a mail message. Leading garbage will be discarded until the first line that starts with #! and contains the string "perl". Any meaningful switches on that line will be applied.
 
-Ooh! That's an interesting feature. I wonder if anyone still uses it for emailed scripts. 
+Ooh! That's an interesting feature. I wonder if anyone still uses it for emailed scripts.
 
 So the batch script calls Perl on itself, and Perl skips all of the batch syntax and goes straight to the shebang line (`#!/usr/bin/env perl`) and runs the original [cleo](https://metacpan.org/source/THALJEF/App-Cleo-0.004/bin/cleo) Perl script.
 
