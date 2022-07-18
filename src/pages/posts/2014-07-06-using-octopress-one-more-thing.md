@@ -12,6 +12,8 @@ categories:
 comments: true
 publishDate: 2014-07-06T14:46:39Z
 title: Using Octopress- One More Thing
+setup: |
+  import ResponsiveFigure from "../../components/ResponsiveFigure.astro"
 ---
 
 "Aiiiiyaaaa! Jacky! You did not install Ruuuubyyy. You need that to write your blog."
