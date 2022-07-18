@@ -1,5 +1,6 @@
 ---
 // Note: not actually responsive yet
+import { Picture } from "astro-imagetools/components";
 
 export interface Props {
     alt: string;
@@ -12,7 +13,10 @@ const { alt, src, class_ = "center", title } = Astro.props as Props;
 ---
 
 <figure class={class_}>
-    <img src={src} alt={alt}/>
+    <Picture src={src} alt={alt}
+        placeholder="dominantColor"
+    />
+    <!-- <img src={src} alt={alt}/> -->
     {!!title && (
      <figcaption>
             <h4>{title}</h4>

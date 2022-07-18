@@ -74,7 +74,7 @@ which is all a big mess until we run it through GraphViz and see this:
 <!-- TODO: width="640" height="294" -->
 <ResponsiveFigure
     class_="center"
-    src="/images/content_images/jsgf_parse.jpg"
+    src="/assets/blog/jsgf_parse.jpg"
     alt="The sentence parse tree has a root node called 'greet' and three subtrees showing the three rules that were applied: there is a 'greeting' subtree containing 'konnichiwa', a 'person' subtree containing 'Kelly', and a third subtree containing 'I', 'am', and a further 'person' subtree containing 'John'. Unfortunately, if you require this alt text to know what is in the picture, I don't think dot graphs are going to help you at all. As I'm writing this alt text years later, I'm kicking myself for not generating the SVG instead so that blind users could inspect it themselves. Actually, I have no idea whether Graphviz is such a great tool at all from an accessibility standpoint."
     title="A graph of the JSGF sentence parse"/>
 

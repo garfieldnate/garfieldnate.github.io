@@ -25,7 +25,7 @@ Observing the software, on the other hand, is much less complicated because all 
 
 <ResponsiveFigure
     class_="center"
-    src="/images/content_images/wills_desktop.jpg"
+    src="/assets/blog/wills_desktop.jpg"
     alt="Screenshot of Will's Mac desktop. The dock, several desktop icons, and several open windows are visible."
     title="Will's desktop. Sure, it looks normal to us now..." />
 
@@ -37,7 +37,7 @@ After years of studying the Mac, they attempt to create machines which imitate i
 
 <ResponsiveFigure
     class_="center"
-    src="/images/content_images/hardware_v_software.png"
+    src="/assets/blog/hardware_v_software.png"
     alt="Left: the inside of a computer with capacitors and other electronic parts showing. Right: the Mac desktop animating the opening or closing of a application window."
     title="The scientists study the hardware and software inside of the futuristic Mac" />
 
