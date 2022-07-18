@@ -1,4 +1,7 @@
 ---
+import dayjs from 'dayjs';
+import Date from './Date.astro';
+
 export interface Props {
     title: string;
     description: string;
@@ -11,7 +14,7 @@ const { title, description, publishDate, url } = Astro.props as Props;
 
 <article class="post-preview">
     <header>
-        <time>{publishDate}</time>
+        <Date publishDate={publishDate}/>
         <a href={url}><h1 class="title">{title}</h1></a>
     </header>
     <p>{description}</p>

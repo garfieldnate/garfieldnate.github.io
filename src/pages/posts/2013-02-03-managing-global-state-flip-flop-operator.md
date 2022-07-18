@@ -8,7 +8,7 @@ categories:
 - testing
 - perlop
 comments: true
-date: 2013-02-03T00:00:00Z
+publishDate: 2013-02-03T00:00:00Z
 title: 'Managing Global State: the Flip-Flop Operator'
 ---
 

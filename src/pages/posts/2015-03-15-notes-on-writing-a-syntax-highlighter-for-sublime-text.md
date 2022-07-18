@@ -9,7 +9,7 @@ categories:
 - grammar
 - Soar
 comments: true
-date: 2015-03-15T22:59:35Z
+publishDate: 2015-03-15T22:59:35Z
 title: Notes on Writing a Syntax Highlighter for Sublime Text
 ---
 

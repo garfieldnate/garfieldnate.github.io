@@ -7,7 +7,7 @@ categories:
 - pl2bat.pl
 - distributions
 comments: true
-date: 2014-07-13T23:42:07Z
+publishDate: 2014-07-13T23:42:07Z
 title: 'Code Reading: pl2bat.pl'
 ---
 

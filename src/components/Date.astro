@@ -1,0 +1,13 @@
+---
+import dayjs from 'dayjs';
+
+export interface Props {
+    // string specified in each page front matter
+    publishDate: string;
+}
+
+const { publishDate } = Astro.props as Props;
+---
+
+<!-- Machine readable datetime attribute, human-readable text -->
+<time datetime={dayjs(publishDate).format('YYYY-MM-DD')}>{dayjs(publishDate).format('D MMM YYYY')}</time>

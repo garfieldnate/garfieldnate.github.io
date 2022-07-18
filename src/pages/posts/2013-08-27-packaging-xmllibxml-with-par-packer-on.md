@@ -12,7 +12,7 @@ categories:
 - Par Packer
 - WxWidgets
 comments: true
-date: 2013-08-27T00:00:00Z
+publishDate: 2013-08-27T00:00:00Z
 title: Packaging XML::LibXML with PAR Packer on Windows
 ---
 

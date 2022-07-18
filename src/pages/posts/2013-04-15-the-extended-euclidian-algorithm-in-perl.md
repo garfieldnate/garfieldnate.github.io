@@ -7,7 +7,7 @@ categories:
 - GCD
 - math
 comments: true
-date: 2013-04-15T00:00:00Z
+publishDate: 2013-04-15T00:00:00Z
 title: The Extended Euclidian Algorithm in Perl
 ---
 

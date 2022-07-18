@@ -10,7 +10,7 @@ categories:
 - Jackie Chan Adventures
 - Windows
 comments: true
-date: 2014-07-06T14:46:39Z
+publishDate: 2014-07-06T14:46:39Z
 title: Using Octopress- One More Thing
 ---
 

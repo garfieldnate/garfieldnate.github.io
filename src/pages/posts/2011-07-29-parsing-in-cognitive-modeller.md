@@ -6,7 +6,7 @@ categories:
 - thesis
 - Soar
 comments: true
-date: 2011-07-29T00:00:00Z
+publishDate: 2011-07-29T00:00:00Z
 title: Parsing in a Cognitive Modeller
 setup: |
   import ResponsiveFigure from "../../components/ResponsiveFigure.astro"

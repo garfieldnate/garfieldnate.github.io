@@ -1,6 +1,6 @@
 ---
 title: "Introducing My Favorite Electronic Device"
-date: 2020-09-21T11:55:53+02:00
+publishDate: 2020-09-21T11:55:53+02:00
 draft: true
 ---
 
@@ -37,7 +37,7 @@ usb for uploading CD-based dictionaries. Only works on Japanese windows, and pai
 
 ***
 
-I received my mission call to Hiroshima, Japan when I was 18. I had already studied Japanese for a couple of years in college, and I was pretty excited to be completely immersed. I had recently changed my major to linguistics, and I was fairly obsessed with learning more. 
+I received my mission call to Hiroshima, Japan when I was 18. I had already studied Japanese for a couple of years in college, and I was pretty excited to be completely immersed. I had recently changed my major to linguistics, and I was fairly obsessed with learning more.
 
 The final purchase I made before leaving for the MTC was a Casio electronic dictionary, purchased from White Rabbit Press. I worked cleaning houses to save up close to $500 to purchase the top-of-the-line professional level XD-GW9600. It was probably the most expensive thing I had ever paid for by myself at the time. And it was worth every penny. I used it for many hours every day as a missionary learning Japanese. I used it constantly as a student not only for studying Japanese but also for looking up words in English that I didn't know. I took it with me *everywhere*, to friend's houses and classes and church and on read walks. I had some fun conversations with curious people fascinated by my personal computer with a chicken-scratch (as far as they were concerned!) interface.
 
@@ -104,7 +104,7 @@ When I was a kid I had a Garfield-themed webster's dictionary, with comics to de
 Follow up with ThaiDict about how amazing it is.
 
 
-I want to reverse it; I want to rebuild it! I want to write everything in Rust and employ special string compression algorithms and make the perfect UI and support new languages and add Jim Breen's dictionaries and make it easy to upload for everyone! I want the perfect dictionary. (I wanted to use the Mirasol screen but that's out; e-ink is too slow.). I want to understand how to do this, but I don't. I opened the thing to take a look and I'm pretty overwhelmed, plus the processors are blobbed so I can't see what they are. The screen is higher resolution than anything available today (no battery-sucking backlit LCDs, thank you very much!). I guess there's libexword already, and it supports my model. I have to start somewhere! 
+I want to reverse it; I want to rebuild it! I want to write everything in Rust and employ special string compression algorithms and make the perfect UI and support new languages and add Jim Breen's dictionaries and make it easy to upload for everyone! I want the perfect dictionary. (I wanted to use the Mirasol screen but that's out; e-ink is too slow.). I want to understand how to do this, but I don't. I opened the thing to take a look and I'm pretty overwhelmed, plus the processors are blobbed so I can't see what they are. The screen is higher resolution than anything available today (no battery-sucking backlit LCDs, thank you very much!). I guess there's libexword already, and it supports my model. I have to start somewhere!
 
 I naively thought maybe this could be like an Arduino project, but that was shot down pretty quick. My theory is that the OS is largely character based, and a separate processor pulls the fonts from memory and sends the pixels to the screen, plus supports fast scrolling and stuff.
 

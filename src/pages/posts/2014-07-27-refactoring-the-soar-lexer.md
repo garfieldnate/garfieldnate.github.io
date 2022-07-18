@@ -6,7 +6,7 @@ categories:
 - Code Reading
 - Legacy Code
 comments: true
-date: 2014-07-27T19:51:53Z
+publishDate: 2014-07-27T19:51:53Z
 title: Refactoring the Soar Lexer
 ---
 

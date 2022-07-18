@@ -7,7 +7,7 @@ categories:
 - Module::Build
 - MakeMaker
 comments: true
-date: 2012-08-17T00:00:00Z
+publishDate: 2012-08-17T00:00:00Z
 title: 'Perl Tip: Don''t Use a Makefile for Your Module'
 ---
 

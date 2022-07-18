@@ -8,7 +8,7 @@ categories:
 - debugging
 - BYU
 comments: true
-date: 2011-11-03T00:00:00Z
+publishDate: 2011-11-03T00:00:00Z
 title: CS 240 Web Crawler at BYU
 ---
 

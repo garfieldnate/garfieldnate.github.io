@@ -3,7 +3,7 @@ layout: "../../layouts/BlogPost.astro"
 categories:
 - Japanese stackexchange language learning
 comments: true
-date: 2011-07-21T00:00:00Z
+publishDate: 2011-07-21T00:00:00Z
 title: Japanese Stackexchange
 setup: |
   import ResponsiveFigure from "../../components/ResponsiveFigure.astro"

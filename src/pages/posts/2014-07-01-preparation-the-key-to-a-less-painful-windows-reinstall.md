@@ -8,7 +8,7 @@ categories:
 - devops
 - Chocolatey
 comments: true
-date: 2014-07-01T21:00:38Z
+publishDate: 2014-07-01T21:00:38Z
 title: 'Preparation: The Key to a Less Painful Windows Reinstall'
 ---
 

@@ -8,7 +8,7 @@ categories:
 - NLP
 - Strings
 comments: true
-date: 2011-09-01T00:00:00Z
+publishDate: 2011-09-01T00:00:00Z
 title: String Allignment with Edit Operations
 ---
 

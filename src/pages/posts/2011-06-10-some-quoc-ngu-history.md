@@ -6,7 +6,7 @@ categories:
 - Historical Linguistics
 - Spelling
 comments: true
-date: 2011-06-10T00:00:00Z
+publishDate: 2011-06-10T00:00:00Z
 title: Some Quốc Ngữ History
 ---
 

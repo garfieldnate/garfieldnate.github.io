@@ -9,7 +9,7 @@ categories:
 - code reading
 - literate programming
 comments: true
-date: 2014-08-13T12:50:29Z
+publishDate: 2014-08-13T12:50:29Z
 title: Knuth Classics are Freely Available
 ---
 

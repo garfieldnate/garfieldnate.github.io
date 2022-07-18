@@ -6,7 +6,7 @@ categories:
 - Ruby
 - gems
 - Windows
-date: 2015-07-20T22:10:27Z
+publishDate: 2015-07-20T22:10:27Z
 title: Hacking Through an Octopress Update
 ---
 

@@ -9,7 +9,7 @@ categories:
 - parameter checking
 - list assignment
 comments: true
-date: 2014-01-11T00:00:00Z
+publishDate: 2014-01-11T00:00:00Z
 title: List Assignment in Scalar Context
 ---
 

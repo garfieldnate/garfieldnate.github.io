@@ -13,6 +13,7 @@
     "astro": "^1.0.0-beta.72"
   },
   "dependencies": {
+    "dayjs": "^1.11.3",
     "preact": "^10.7.3"
   }
 }

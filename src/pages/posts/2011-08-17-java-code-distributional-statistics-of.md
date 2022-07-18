@@ -6,7 +6,7 @@ categories:
 - Statistics
 - Logarithm
 comments: true
-date: 2011-08-17T00:00:00Z
+publishDate: 2011-08-17T00:00:00Z
 title: Distributional Statistics of Log Values in Linear Domain
 ---
 

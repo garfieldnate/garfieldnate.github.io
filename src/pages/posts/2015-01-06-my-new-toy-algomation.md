@@ -9,7 +9,7 @@ categories:
 - education
 - computer science
 comments: true
-date: 2015-01-06T20:20:34Z
+publishDate: 2015-01-06T20:20:34Z
 title: 'My New Toy: Algomation'
 ---
 

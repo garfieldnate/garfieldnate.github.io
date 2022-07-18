@@ -6,7 +6,7 @@ categories:
 - C++
 - code reading
 comments: true
-date: 2014-07-12T13:04:54Z
+publishDate: 2014-07-12T13:04:54Z
 title: 'Code Reading: The Soar Parser'
 ---
 

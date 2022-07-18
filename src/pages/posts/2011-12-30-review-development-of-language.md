@@ -6,7 +6,7 @@ categories:
 - sentence processing
 - English
 comments: true
-date: 2011-12-30T00:00:00Z
+publishDate: 2011-12-30T00:00:00Z
 title: 'Review: The Development of Language Processing Strategies: A Cross-linguistic
   Study Between Japanese and English'
 ---

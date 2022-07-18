@@ -3,7 +3,7 @@ layout: "../../layouts/BlogPost.astro"
 categories:
 - Japan
 - life
-date: 2015-12-13T16:06:51Z
+publishDate: 2015-12-13T16:06:51Z
 title: Japan is a Great Place to be
 ---
 

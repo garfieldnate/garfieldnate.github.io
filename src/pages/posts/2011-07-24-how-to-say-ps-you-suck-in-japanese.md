@@ -3,7 +3,7 @@ layout: "../../layouts/BlogPost.astro"
 categories:
 - Japanese grammar
 comments: true
-date: 2011-07-24T00:00:00Z
+publishDate: 2011-07-24T00:00:00Z
 title: How to say "P.S. You Suck" in Japanese
 ---
 

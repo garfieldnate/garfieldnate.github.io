@@ -5,7 +5,7 @@ categories:
 - creativity
 - CS 404
 comments: true
-date: 2014-08-08T22:12:22Z
+publishDate: 2014-08-08T22:12:22Z
 title: Schools Kill Creativity
 author: Ken Robinson
 ref: http://www.ted.com/talks/ken_robinson_says_schools_kill_creativity

@@ -11,7 +11,7 @@ categories:
 - Module::Build
 - MakeMaker
 comments: true
-date: 2013-01-20T00:00:00Z
+publishDate: 2013-01-20T00:00:00Z
 title: Testing Perl Distributions with Test Subdirectories
 ---
 

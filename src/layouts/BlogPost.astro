@@ -1,5 +1,6 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
+import Date from "../components/Date.astro";
 import Header from "../components/Header.astro";
 
 export interface Props {
@@ -38,7 +39,7 @@ const {
                     />
                 )}
                 <h1 class="title">{title}</h1>
-                <time>{publishDate}</time>
+                <Date publishDate={publishDate}/>
             </header>
             <main>
                 <slot></slot>

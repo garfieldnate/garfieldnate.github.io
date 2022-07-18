@@ -7,7 +7,7 @@ categories:
 - buffering
 - special variables
 comments: true
-date: 2013-01-27T00:00:00Z
+publishDate: 2013-01-27T00:00:00Z
 title: When not to use Perl's Implicit close; Suffering from Buffering
 ---
 

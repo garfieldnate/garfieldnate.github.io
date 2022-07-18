@@ -5,7 +5,7 @@ categories:
 - Europe
 - life
 - travel
-date: 2017-02-12T13:30:00Z
+publishDate: 2017-02-12T13:30:00Z
 title: I Live in Germany Now
 ---
 

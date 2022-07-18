@@ -1,6 +1,6 @@
 ---
 title: "How I Remember Words"
-date: 2021-11-12T12:38:30+02:00
+publishDate: 2021-11-12T12:38:30+02:00
 comments: true
 draft: true
 categories:

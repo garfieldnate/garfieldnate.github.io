@@ -8,7 +8,7 @@ categories:
 - graph
 - CMU sphinx
 comments: true
-date: 2012-06-29T00:00:00Z
+publishDate: 2012-06-29T00:00:00Z
 title: Graphing grammar parses from CMU Sphinx 4
 setup: |
   import ResponsiveFigure from "../../components/ResponsiveFigure.astro"

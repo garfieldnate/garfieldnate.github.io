@@ -6,7 +6,7 @@ categories:
 - Japanese
 - NLP
 comments: true
-date: 2011-11-06T00:00:00Z
+publishDate: 2011-11-06T00:00:00Z
 title: Itadaki GoSen and IPADIC 2.7
 setup: |
   import ResponsiveFigure from "../../components/ResponsiveFigure.astro"

@@ -5,7 +5,7 @@ categories:
 - JAWS
 - WordNet
 comments: true
-date: 2012-05-11T00:00:00Z
+publishDate: 2012-05-11T00:00:00Z
 title: Getting WordNet Verb Frames with JAWS
 ---
 

@@ -2,7 +2,7 @@
 layout: "../../layouts/BlogPost.astro"
 categories: null
 comments: true
-date: 2014-07-14T20:35:28Z
+publishDate: 2014-07-14T20:35:28Z
 title: 'Random Slice of Culture: Unicode Proposals'
 ---
 
