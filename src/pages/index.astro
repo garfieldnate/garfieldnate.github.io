@@ -6,8 +6,6 @@ import BlogPostPreview from "../components/BlogPostPreview.astro";
 import config from "../config.json";
 
 let {title, description} = config;
-// let title = "Example Blog";
-// let description = "The perfect starter for your perfect blog.";
 
 // Use Astro.glob to fetch all post with associated frontmatter
 const unsortedPosts = await Astro.glob("./posts/*.md");
