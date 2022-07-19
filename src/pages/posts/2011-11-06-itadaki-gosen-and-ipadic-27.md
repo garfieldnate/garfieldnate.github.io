@@ -29,7 +29,7 @@ Then, to run a demo and see what amazing things GoSen can do, copy the dictionar
 <!-- TODO: should have height 320 and width 209 -->
 <ResponsiveFigure
     class_="center"
-    src="/assets/blog/gosen.gif"
+    src="/assets/blog/gosen.png"
     alt="Screenshot of the 'reading processor demo' tool that comes with GoSen. The window shows '情報スーパーハイウェイ' analyzed into consitituent words and assigned part of speech. The conrols for editing the processor's output are also open."
     title="Will's desktop. Sure, it looks normal to us now..."/>
 

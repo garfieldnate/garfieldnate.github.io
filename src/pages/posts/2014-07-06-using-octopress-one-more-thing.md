@@ -46,7 +46,7 @@ Swat! "Ow!"
 
 <ResponsiveFigure
     class_="center"
-    src="/assets/blog/uncle_hits_jackie.gif"
+    src="/assets/blog/uncle_hits_jackie.png"
     alt="A still from 'Jackie Chan Adventures' showing uncle swatting Jackie on the head."
     title="Will's desktop. Sure, it looks normal to us now..."/>
 
