@@ -7,9 +7,11 @@ import config from "../../config.json";
 
 let {title, description} = config;
 
-// Use Astro.glob to fetch all post with associated frontmatter
+// Use Astro.glob to fetch all posts with associated frontmatter
 const unsortedPosts = await Astro.glob("./{posts,links}/**/*.md");
-const posts = unsortedPosts.sort(function (a, b) {
+// Filter out drafts and sort newest to oldest
+// TODO: environment variable or argument for rendering drafts
+const posts = unsortedPosts.filter(doc => !doc.frontmatter.draft).sort(function (a, b) {
     return (
         new Date(b.frontmatter.publishDate).valueOf() - new Date(a.frontmatter.publishDate).valueOf()
     );
