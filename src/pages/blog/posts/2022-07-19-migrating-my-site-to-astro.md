@@ -3,7 +3,7 @@ layout: "../../../layouts/BlogPost.astro"
 title: "Migrating my Site to Astro"
 description: "Technical walkthrough and evaluation"
 publishDate: "7 Jul 2022"
-draft: true
+draft: false
 followMe:
   username: "garfieldnate"
   href: "https://github.com/garfieldnate/"

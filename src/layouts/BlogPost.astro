@@ -1,4 +1,6 @@
 ---
+import { Picture } from "astro-imagetools/components";
+
 import BaseHead from "../components/BaseHead.astro";
 import Date from "../components/Date.astro";
 import Header from "../components/Header.astro";
@@ -30,12 +32,12 @@ const {
         <article class="wrapper content">
             <header>
                 {heroImage && (
-                    <img
-                        width="720"
-                        height="420"
-                        loading="lazy"
+                    <Picture
+                        width={720}
+                        height={420}
                         src={heroImage.src}
                         alt={heroImage.alt}
+                        placeholder="blurred"
                     />
                 )}
                 <h1 class="title">{title}</h1>

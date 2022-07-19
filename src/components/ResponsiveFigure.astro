@@ -12,8 +12,10 @@ const { alt, src, class_ = "center", title } = Astro.props as Props;
 ---
 
 <figure class={class_}>
-    <Picture src={src} alt={alt}
-        placeholder="dominantColor"
+    <Picture
+        src={src}
+        alt={alt}
+        placeholder="blurred"
     />
     {!!title && (
      <figcaption>
