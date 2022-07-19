@@ -1,0 +1,97 @@
+---
+layout: "../../../layouts/BlogPost.astro"
+categories:
+- Cognitive modeling
+- parsing
+- thesis
+- Soar
+comments: true
+publishDate: 2011-07-29T00:00:00Z
+title: Parsing in a Cognitive Modeller
+description: An introduction to my undergraduate research
+setup: |
+  import ResponsiveFigure from "../../../components/ResponsiveFigure.astro"
+---
+
+A colleague of mine recently expressed interest in the research I am doing for an honors thesis. "Syntactic parsing in a cognitive modeling system" isn't exactly a crystal clear expression of my work, after all. I embarrassed myself by throwing out a few cursory statements before trailing off and ending with a "it's kind of hard to explain". Why can't I explain my own work? Partly because I don't explain it very often and therefore I'm bad at it. Another reason is that I have met with opposition to it in the past. Fellow linguists are immediately fascinated with the idea of modeling language use inside of a digital brain; computer scientists remain relatively unimpressed. "There are plenty of blazing fast parsers out there, so why build one just to act like a human? Besides, you don't even know if the computer is doing the same thing we are!" I'm going to use this and the next post to organize my thoughts and try to explain how parsing works in a cognitive modeling system, and why we would even try it in the first place.
+
+This post will address cognitive modeling, and the next will move on to parsing.
+
+Lets pretend that some crazy scientist manages to create an unstable time portal, like [Will Robinson's](http://www.imdb.com/title/tt0120738/), and that before getting to use it himself a rather valuable computer gets sucked through instead, sending it back to sometime in the 1950s. There, a curious electrical engineer finds it, and, realizing the novelty of it, shares his discovery with the scientists of his academic community. Though the origin of the machine is certainly not surmisable, they will try their darndest to figure out how it works.
+
+They go about this by studying two aspects of the machine: the hardware and the software. When they look inside, they observe the mass of wires, chips, resistors, capacitors, and a myriad of other tiny gadgets all somehow integrated into one perfect system. They measure voltage across different points in the circuitry and observe the flow of power from the battery into the other parts. They analyze samples of it to discover what material it is made of, and run a whole bunch of other tests that are not entirely clear to non-engineers.
+
+Observing the software, on the other hand, is much less complicated because all they have to do is turn it on. Let's just say Will Robinson's computer was a futuristic Mac of some sort. Then turning it on greets the scientists with a welcome screen and then Will's desktop:
+
+
+<ResponsiveFigure
+    class_="center"
+    src="/assets/blog/wills_desktop.jpg"
+    alt="Screenshot of Will's Mac desktop. The dock, several desktop icons, and several open windows are visible."
+    title="Will's desktop. Sure, it looks normal to us now..." />
+
+The scientists are intrigued by the fact that the computer can do all sorts of complicated things, like play music and videos, compress files, typeset documents and manage large spreadsheets seemingly without doing any work. Putting it in perspective, their own computers look like [this](http://www.computersciencelab.com/ComputerHistory/HistoryPt3.htm). They can surmise basically that there is one central system called *OS-X* that runs everything else, and that each of the functions run in separate programs. They learn that each of the programs run in a window, that programs are made up of more basic functions such as file management and that certain things are impossible, like creating files with "?" in the name.
+
+They also tinker around with the hardware to see how each piece affects the software. Through this they uncover the difference between the RAM and a hard drive, the basic purpose of the CPU, and also that the USB ports transmit information.
+
+After years of studying the Mac, they attempt to create machines which imitate its functions. One person creates a crude screen, another makes some memory with pathetic storage size, and others draft intricate blueprints explaining how the programs function within the machine. They don't all agree on the underlying mechanisms, so they split and pursue different theories. The end product is several schools of research attempting to build the machine by studying different aspects of it. Will they ever make an actual Macintosh themselves? Not likely, with 1950s technology. How can they even tell if they've gotten it right? They can experiment with their own machine and see if it acts somewhat like the Mac.
+
+<ResponsiveFigure
+    class_="center"
+    src="/assets/blog/hardware_v_software.png"
+    alt="Left: the inside of a computer with capacitors and other electronic parts showing. Right: the Mac desktop animating the opening or closing of a application window."
+    title="The scientists study the hardware and software inside of the futuristic Mac" />
+
+Now, what does all of this have to do with cognitive modeling?
+
+Wait, what *is* cognitive modeling? To explain that, we first need a few definitions:
+
+* [**Cognition**](https://en.wikipedia.org/wiki/Cognition): the excercise of human intelligence, including both deliberation and action, and performance of the wide variety of tasks that humans participate in.
+
+* [**Cognitive Science**](http://en.wikipedia.org/wiki/Cognitive_science): the study of minds as information processors, including how information is processed, represented, and transformed.
+
+Cognitive science attempt to explain cognition, or human intelligence, by discovering (or theorizing about) the processes and structures underlying it at the lowest level, analyzing the brain as if it were a computer. We study the mind in the same way those scientists studied the Mac: either by observing the actual brain (EEG, fMRI) or observing behavior (eye tracking, reaction time), or in some cases even observing what happens when certain parts [break](http://en.wikipedia.org/wiki/Phineas_Gage) or are damaged by [sickness](http://en.wikipedia.org/wiki/Aphasia). They've found some interesting things. For example, look at the Wikipedia article to see what what we know about different types of [memory](http://en.wikipedia.org/wiki/Memory).
+
+<ResponsiveFigure
+    class_="center"
+    src="images/content_images/biology_v_cognition.png"
+    alt="Left: Brain imaging showing active parts of the brain. Right: A chart illustrating the results of an experiment measuring the response times of a human under different stimuli."
+    title="Cognitive scientists study and imitate the physical and behavioral aspects of the human mind" />
+
+Data from these types of experiments contribute to our understanding of the mind, but we still do not completely understand the complex processes that make humans what they are. We can't try our hand at building a human, like the scientists did the Mac, either. Besides technological concerns, there are also ethical ones. Instead, scientists create computer models to simulate human activity. Although there have been many models which simulate single aspects of cognition such as hand-eye coordination or reading, general cognitive frameworks, which model human behavior overall, have also been created.
+
+These *computational cognitive models* are extremely useful to researchers because they provide a universal testing ground in which mini theories about cognition can be tested. They form what [Allen Newell](http://en.wikipedia.org/wiki/Allen_Newell) called [Unified Theories of Cognition](http://en.wikipedia.org/wiki/Unified_theory_of_cognition) (UTC). The name basically means that if a researcher has a theory of how one cognitive activity works, then it should fit within the larger, unified framework already tried and tested by the scientific community. Once the mini theory is implemented within the larger framework, experiments can be run using the resulting model, which is guaranteed to exhibit the properties of the larger framework. This has the benefit of constraining the variables in one's own model, making it both easier to design and scientifically more sound.
+
+There are several other reasons that these models are useful:
+
+* You don't have to pay the model to take your experiment, nor do you have to pay a technician to scan its brain while it carries out various tasks. Though initial programming and maintenance cost time and money, these models will carry out an infinite number of tasks for free.
+
+* Because we can step through the execution of a program, we can see exactly what the model is "thinking" at all times (akin to "think aloud protocol"), allowing true introspection into the nature of the model and the theoretical consequences of its acceptance.
+
+* Even if a model is worked out meticulously by hand, humans are error prone. Running the program on a computer guarantees accurate evaluation of the model.
+
+* Models shared by the community provide baseline results, making work from different researchers comparable and making it easier to measure the advancement of the field.
+
+* Models can be shared with other researchers easily via the internet. There are several such available frameworks, including [Soar](http://sitemaker.umich.edu/soar/home), Allen Newell's creation, and [ActR](http://act-r.psy.cmu.edu/), which is more popular and seems to draw more government funding.
+
+Like the 1950s scientists, researchers in cognition have split into different schools which study different aspects of the mind. The main split is between *symbolic* and *subsymbolic* models.
+
+* Symbolic models focus on the abstract symbol-processing capabilities of humans; we can combine physical patterns into structures and can also produce new expressions by manipulating other structures, e.g. art, language, music.
+
+* Subsymbolic models focus on the neural properties of the brain; the most widely known is *connectionism*, which models complex behavior through connections between simple nodes.
+
+And research thrives and will continue to thrive for a long time, advancing artificial intelligence, medicine, economics, and other sciences related to human behavior. Have we made a working human? No. Do we think we understand them? Yes, but not perfectly. Cognitive models are based on years and years of research and empirical backing. It's safe to say that human behavior can be modeled and even predicted at some level.
+
+Here are some of the modeling projects that use a general cognitive framework:
+
+[A bunch](http://cogent.psyc.bbk.ac.uk/) using the COGENT framework; medical diagnoses, mental rotation, towers of Hanoi.
+
+[Learning to Play Mario](http://sitemaker.umich.edu/soar/files/mohan.pdf) using Soar.
+
+[Pilot modeling](http://www.isi.edu/soar/soar-ifor-project.html) using Soar. Modeling pilot behavior for better mission planning and design.
+
+[Simulated student](http://act-r.psy.cmu.edu/publications/pubinfo.php?id=359)s using ACT-R. The authors evaluate different instructional methods on simulated students.
+
+[Eagle Eye](http://www.eagleeyemovie.com/). Oops! That's not real. Maybe some day.
+
+Language is an extremely complex phenomenon, but it too must be simulated in some way if we are to confirm the validity of our models. More on that next time.

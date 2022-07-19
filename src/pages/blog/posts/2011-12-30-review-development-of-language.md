@@ -1,0 +1,40 @@
+---
+layout: "../../../layouts/BlogPost.astro"
+categories:
+- Cognitive modeling
+- Japanese
+- sentence processing
+- English
+comments: true
+publishDate: 2011-12-30T00:00:00Z
+title: 'The Development of Language Processing Strategies: A Cross-linguistic
+  Study Between Japanese and English'
+description: Book review
+---
+
+<a href="http://www.goodreads.com/book/show/3945971-the-development-of-language-processing-strategies" style="float: left; padding-right: 20px;">
+<img src="https://images.gr-assets.com/books/1400890648l/3945971.jpg" alt="Book Cover"></a>
+
+by [Reiko Mazuka](http://www.goodreads.com/author/show/1682824.Reiko_Mazuka)
+
+My rating: [4 of 5 stars](http://www.goodreads.com/review/show/252591433)
+
+This is basically an updated version of Mazuka's PHD thesis. This book is a significant work on human sentence processing involving data from a head final and a head initial language.
+
+Mazuka presents data on sentence processing experiments with English speaking adults and Japanese speaking children and adults. She shows that sentence processing strategies are the same in children and adults (though their ability differs with age), and that sentence processing strategies differ cross-linguistically. Her experimental data include probe latency tasks (PLTs) for lexical and semantic information in English and Japanese sentences.
+
+A probe latency task involves a subject listening to a sentence and responding to questions about its contents. In lexical PLT, a subject is asked if the sentence contained the specified lexical item. In semantic PLT, the subject is asked if a sentence contained a portion which has a similar meaning to a specified word or phrase. The experimenter then carefully designs sentences which test the subjects' ability to process different types of sentences. Mazuka's experiment measure response time and also the accuracy of the subjects' responses. Her findings for cross-linguistic processing differences are as follows:
+
+English speakers showed processing differences for main and subordinate clauses, while Japanese speakers did not.
+
+English speakers showed different effects for semantic and lexical tasks, while Japanese speakers did not.
+
+In English speakers, response time for semantic probe latency tasks involving sentence-initial subordinate clauses (an LB structure) was increased, while in Japanese speakers it was greatly decreased.
+
+Japanese speaker response times to both lexical and semantic PLTs involving left-branching and coordinate structures were the same; English speakers showed much larger recency effects in LB than coordinate sentences.
+
+Hypotheses about the human language processing mechanism which assume a single processing strategy do not account for these data. Japanese speakers process LB structures efficiently, and English speakers process RB structures efficiently. This is impossible in a parser which assumes only one processing strategy, and a parser which can efficiently process both would be too powerful to account for real human data. For Japanese speakers to process LB structures as efficiently as English speakers do RB structures, processing must be done bottom-up instead of top-down. Mazuka therefore hypothesizes that Universal Grammar (UG) contains a parameter which determines whether a language is right- or left-branching (RB or LB), and that this is linked with the processing strategy by specifying whether processing should be done top-down or bottom-up. She also hypothesizes that in English, main and subordinate clauses are processed to a different semantic level at some initial encoding stage, accounting differences in English main and subordinate clause PLT tasks. This needs to be further tested in the future with PLTs involving two clause sentences beginning with an explicit subordinator in Japanese.
+
+She states that future research is required to determine the exact relationship between her experimental data and the operation of the human sentence parser as she has hypothesized.
+
+Since some languages such as German, actually branch in different directions for different types of clauses, her hypothesis needs to be revised to account for this. I'm hoping that her hypotheses can be tested in detail in some sort of a cogntive modeling system. [View all my reviews](http://www.goodreads.com/review/list/2794644-nathan-glenn)
