@@ -1,11 +1,12 @@
 ---
 layout: "../../layouts/BlogPost.astro"
-title: "Hello galaxy of possibilities!"
-description: "Take your blog to astronomical heights"
-publishDate: "12 Sep 2021"
+title: "Migrating my Site to Astro"
+description: "Technical walkthrough and evaluation"
+publishDate: "7 Jul 2022"
+draft: true
 followMe:
-  username: "bholmesdev"
-  href: "https://twitter.com/bholmesdev"
+  username: "garfieldnate"
+  href: "https://github.com/garfieldnate/"
 halfTheMeaning: 21
 heroImage:
   src: "/assets/blog/introducing-astro.jpg"

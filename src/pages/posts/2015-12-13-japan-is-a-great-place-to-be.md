@@ -5,6 +5,7 @@ categories:
 - life
 publishDate: 2015-12-13T16:06:51Z
 title: Japan is a Great Place to be
+description: Being an ex-pat is hard, but stay positive
 ---
 
 So, it happened again: you meet up with some gaijin friends, and it turns into a big Japan-bashing fest. Every thing that's been bugging them for the past several months comes flooding out, and the back-and-forth between gaijin experiencing similar issues brings the criticism to an uncomfortable peak. The evening has become less of pleasurable conversation and more of a giant therapy session.

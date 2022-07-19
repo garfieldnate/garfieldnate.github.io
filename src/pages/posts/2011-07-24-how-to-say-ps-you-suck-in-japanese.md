@@ -5,6 +5,7 @@ categories:
 comments: true
 publishDate: 2011-07-24T00:00:00Z
 title: How to say "P.S. You Suck" in Japanese
+description: You might not use it, but your favorite anime will
 ---
 
 This post will focus on two very interesting vocabulary items in Japanese; I call them "p.s. you suck" suffixes, though I'm sure there is a better word to describe them.

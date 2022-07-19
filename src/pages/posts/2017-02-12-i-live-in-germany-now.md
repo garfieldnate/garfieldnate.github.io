@@ -7,6 +7,7 @@ categories:
 - travel
 publishDate: 2017-02-12T13:30:00Z
 title: I Live in Germany Now
+description: Comparing life in Germany and Japan
 ---
 
 As of three and a half months ago, my wife and I live in Düsseldorf, Germany! This has been a whirlwind for us, and I have experienced emotional highs and lows as I adjust to a new (better) job and sometimes pine away for Japan.
@@ -17,7 +18,7 @@ So far, Trivago has been an excellent company to work for. I was initially attra
 
 We are almost through dealing with culture shock, but we still miss Japan. Some things we miss:
 
-* Japanese food. I miss artisanal ramen, soba, tofu, donburi, and the convenience of rice. In general I'm just lost when it comes time to cook. I've also had some bad experiences with MSG-packed meals.
+* Japanese food. I miss artisanal ramen, soba, tofu, donburi, and the convenience of rice. In general I'm just lost when it comes time to cook. I've also had some bad experiences with salt-packed meals.
 * Biking. My image of Europe was that there would be lots of bicycling, but Germany seems to be a land of cars. Biking is generally a sport instead of a method of transportation, which means that bikes are expensive, there's less infrastructure like parking, and it feels more dangerous when using roads.
 * Trains. The trains in Düsseldorf are very difficult to use. The ticket machines do not tell you which ticket you should buy, and you don't know if you are doing it wrong until your ticket is checked and you might be fined. The ticket machines inside the train only take coins, and sometimes they don't even work.
 * Apartments. In Germany you have to wire your own lights and install your entire kitchen. They do not generally have closets, so you have to buy more furniture.

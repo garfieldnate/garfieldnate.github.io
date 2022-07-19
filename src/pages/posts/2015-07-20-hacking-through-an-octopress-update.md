@@ -8,6 +8,7 @@ categories:
 - Windows
 publishDate: 2015-07-20T22:10:27Z
 title: Hacking Through an Octopress Update
+description: To be fair, everything sucks more on Windows
 ---
 
 A while back I watched a neat presentation from Justin Searls called [The Social Coding Contract](http://blog.testdouble.com/posts/2014-12-02-the-social-coding-contract.html). He has lots of good things to say, but there was one comment that really hit home: my Jekyll blog was easy to setup 6 months ago, but now it's impossible to maintain. Heh. Most of my trouble could have been avoided with more careful management of dependencies, but alas I am not a Ruby person and I did not realize that `bundle update` would completely sink my publishing abilities for 4 months. When I update Perl modules, `cpan` runs their tests on my machine and refuses to install unless they pass. `bundle` just installs them!

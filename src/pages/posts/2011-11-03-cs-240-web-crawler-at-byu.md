@@ -10,6 +10,7 @@ categories:
 comments: true
 publishDate: 2011-11-03T00:00:00Z
 title: CS 240 Web Crawler at BYU
+description: Advice for getting through BYU's CS rite of passage
 ---
 
 I recently polished off the web crawler project for CS 240 at BYU. It's probably the most talked-about project in the CS major, and the cause of so many students retaking the class.

@@ -8,6 +8,7 @@ categories:
 comments: true
 publishDate: 2011-08-17T00:00:00Z
 title: Distributional Statistics of Log Values in Linear Domain
+description: Aggregating logarithmic values of mean, variance, kurtosis, etc.
 ---
 
 Quite a long title, sorry. Basically, I had a bunch of log values (and they needed to stay logarithmic to avoid underflow) and I wanted to compute distributional statistics on them, like mean, variance and kurtosis. I wasn't sure if it would be valid to compute these kinds of statistics on the numbers as is, so I created a class to do all of the calculations in linear space. I'll post the result here, though there may be bugs (tell me if you find some!).

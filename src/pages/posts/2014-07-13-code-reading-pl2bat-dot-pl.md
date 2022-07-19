@@ -9,6 +9,7 @@ categories:
 comments: true
 publishDate: 2014-07-13T23:42:07Z
 title: 'Code Reading: pl2bat.pl'
+description: Looking under the hood of a ubiquitous tool
 ---
 
 When you install a Perl distribution from CPAN that comes with an executable script, Perl adds it to your path so it can be treated like any other command line program. On a *nix system, all that needs to be done for this to work is to set the script to be executable. Windows doesn't have executable script files with shebang lines like *nix, however, so Perl generates a batch file.

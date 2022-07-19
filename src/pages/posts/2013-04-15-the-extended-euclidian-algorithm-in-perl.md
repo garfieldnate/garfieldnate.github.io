@@ -25,7 +25,6 @@ To really help myself understand the whole thing, I wrote a Perl script to illus
 
 ``` perl
 use strict;
-use strict;
 use warnings;
 use 5.010;
 #start with a >= b

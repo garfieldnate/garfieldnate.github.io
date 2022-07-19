@@ -12,6 +12,7 @@ categories:
 comments: true
 publishDate: 2014-07-06T14:46:39Z
 title: Using Octopress- One More Thing
+description: It's Ruby but you also need Python
 setup: |
   import ResponsiveFigure from "../../components/ResponsiveFigure.astro"
 ---

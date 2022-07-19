@@ -26,7 +26,7 @@ I haven't tried out all of these so I don't have comments for everything, but ho
 ## Corpora
 
 * [Hypermedia Corpus](http://www.env.kitakyu-u.ac.jp/corpus/docs/index.html)
-* [TüBa-J/S](http://www.sfs.uni-tuebingen.de/en/tuebajs.shtml): Japanese treebank from universityu of Tübingen. Not as heavily annotated as I'd hoped. You have to send them an agreement to download it, but it's free.
+* [TüBa-J/S](http://www.sfs.uni-tuebingen.de/en/tuebajs.shtml): Japanese treebank from university of Tübingen. Not as heavily annotated as I'd hoped. You have to send them an agreement to download it, but it's free.
 * [GSK](http://www.gsk.or.jp/catalog_e.html): Not free, but very cheap.
 * [LDC](http://www.ldc.upenn.edu/): Expensive unless your institution is a member
 

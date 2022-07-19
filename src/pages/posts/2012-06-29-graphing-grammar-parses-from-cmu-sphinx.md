@@ -10,6 +10,7 @@ categories:
 comments: true
 publishDate: 2012-06-29T00:00:00Z
 title: Graphing grammar parses from CMU Sphinx 4
+description: View your JSGF parses using GraphViz
 setup: |
   import ResponsiveFigure from "../../components/ResponsiveFigure.astro"
 ---

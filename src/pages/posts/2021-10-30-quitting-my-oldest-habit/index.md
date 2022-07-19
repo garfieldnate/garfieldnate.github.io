@@ -3,6 +3,7 @@ title: "Quitting My Oldest Habit"
 publishDate: 2021-10-30T13:00:30+02:00
 layout: "../../../layouts/BlogPost.astro"
 comments: true
+description: How I stopped biting my nails after 30 years
 categories:
 - nails
 - guitar

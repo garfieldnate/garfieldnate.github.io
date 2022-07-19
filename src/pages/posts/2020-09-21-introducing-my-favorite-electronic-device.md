@@ -1,9 +1,11 @@
 ---
 title: "Introducing My Favorite Electronic Device"
 publishDate: 2020-09-21T11:55:53+02:00
+description: A love letter to my Japanese electronic dictionary
 draft: true
 ---
 
+the Casio Ex-Word XD-GW9600
 carried it around for my mission plus all of college and then several years before it was stolen
 comes with hole to put a charm on; makes its usage a bit noisier, but a fun customization
 startup is instant

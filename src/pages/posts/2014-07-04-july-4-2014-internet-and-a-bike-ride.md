@@ -20,6 +20,7 @@ categories:
 comments: true
 publishDate: 2014-07-04T19:08:46Z
 title: 'July 4, 2014: Internet and a Bike Ride'
+description: How was your day? Mine was great!
 ---
 
 Maybe I'll manage to keep a somewhat OK journal if I write it on my blog...

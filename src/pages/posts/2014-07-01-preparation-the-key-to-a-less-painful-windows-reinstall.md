@@ -10,6 +10,7 @@ categories:
 comments: true
 publishDate: 2014-07-01T21:00:38Z
 title: 'Preparation: The Key to a Less Painful Windows Reinstall'
+description: No files left behind
 ---
 
 Recently I decided to work on an [easy ticket](https://github.com/stepmania/stepmania/issues/196) in StepMania to get into the source code. It turned out that I (gasp!) actually needed to build the project on my computer, but of course I was missing required libraries: DirectX 9 and the DirectX SDK. No matter what I tried, neither of these would successfully install on my computer, and I decided that the only way to install it would be to reinstall Windows (which worked, but ugh!). Usually reinstalling Windows is a terrible process that can take days and leave you lost on your own computer, which is now missing all of your favorite programs and customizations. This time, I thought, I should make it as painless as possible.

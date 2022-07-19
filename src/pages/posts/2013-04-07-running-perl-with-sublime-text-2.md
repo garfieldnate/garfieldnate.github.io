@@ -7,6 +7,7 @@ categories:
 comments: true
 publishDate: 2013-04-07T00:00:00Z
 title: Running Perl with Sublime Text 2
+description: Project setup code
 ---
 
 I've been having fun trying out [Sublime Text](http://www.sublimetext.com/). It's pretty, fast, and extremely extensible.

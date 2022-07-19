@@ -11,6 +11,7 @@ categories:
 comments: true
 publishDate: 2015-01-06T20:20:34Z
 title: 'My New Toy: Algomation'
+description: Understanding an algorithm by visualizing it
 ---
 
 Lately I've been losing sleep trying to understand an algorithm I read about in an [academic publication](http://www.inf.upol.cz/trnecka/fka/addintent.pdf). Part of the problem was that the [application](https://en.wikipedia.org/wiki/Analogical_modeling) I was applying it to required a sort of reversal, which was confusing. But a bigger part of the problem was that I just couldn't "see" it. I'd lay in bed, trying to imagine working with ping-pong balls on a string, or marbles on fishing line, or anything I could really get my "mind's hands" on.
@@ -21,7 +22,7 @@ It's called [Algomation](http://www.algomation.com/). Lots of algorithms are ava
 
 Once you're registered, you can create new algorithms or fork from others' creations. Here's mine:
 
-<iframe allowfullscreen title="Animation of the addintent algorithm shown on Algomation" src="http://www.algomation.com/embeddedplayer?embedded=true&algorithm=54a68d7ea7f8e70200042664" width="900" height="556" seamless="seamless" frameborder="0" style="border:1px solid lightgray" scrolling="no"></iframe>
+(Unfortunately the site has been replaced by some Indonesian gambling den. The original Algomation is dead 😭)
 
 Granted, this is a little rough around the edges (and I have used the heck out of the feedback form); however, this is way better than imagining ping-pong balls on a string, and now I *really* understand how AddIntent works. The service is still young, and I have high hopes for this becoming an expansive library of algorithm visualizations.
 

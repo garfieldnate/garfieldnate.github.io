@@ -11,6 +11,7 @@ categories:
 comments: true
 publishDate: 2014-08-13T12:50:29Z
 title: Knuth Classics are Freely Available
+description: "Caveat: you have to compile them yourself..."
 ---
 
 Donald Knuth wrote TeX in C/WEB. WEB is his system for writing literate programs which become both source code and typeset documents explaining the program's operation. Some of his programs have been published: [TeX: The Program](http://www.goodreads.com/book/show/499934.Computers_Typesetting_Volume_B) and [Metafont: The Program](http://www.goodreads.com/book/show/1746886.Computers_Typesetting_Volume_D). Others have not: I don't believe Bibtex was published in book form, for example.

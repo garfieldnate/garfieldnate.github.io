@@ -10,6 +10,7 @@ categories:
 comments: true
 publishDate: 2011-09-01T00:00:00Z
 title: String Allignment with Edit Operations
+description: Finding the shortest transformation path between two strings
 ---
 
 A common way to measure the distance between two strings is using Levenshtein distance. Levenshtein distance is the minimum number of deletions, insertions, and substitutions needed to transform one string into another. Finding the distance between two strings is useful in certain applications such as spell checking (a word processor will suggest dictionary words that are close to your misspelled word). See [wikipedia](http://en.wikipedia.org/wiki/Levenshtein_distance) for more details and an example of Levenshtein distance calculation.

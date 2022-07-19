@@ -11,6 +11,7 @@ categories:
 - calendars
 publishDate: 2015-10-25T19:23:49Z
 title: My Dream Planner, Come True! (Almost)
+description: Generating a personal calendar in Perl
 ---
 
 I say almost because I haven't printed it yet. But I have a [PDF](https://github.com/garfieldnate/Personal-Planner/releases)!

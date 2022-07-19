@@ -11,6 +11,7 @@ categories:
 comments: true
 publishDate: 2015-03-15T22:59:35Z
 title: Notes on Writing a Syntax Highlighter for Sublime Text
+description: Gotchas I encountered while writing a Soar highlighter
 ---
 
 I recently released the [Soar Tools](http://garfieldnate.github.io/Sublime-Soar-Tools/) package for Sublime Text, and I took a few notes that might help the next author. Sublime Text is pretty awesome in a lot of ways, but the documentation is more tutorial + forums than it is a thorough explanation. I mainly followed the directions [here](http://sublime-text-unofficial-documentation.readthedocs.org/en/latest/extensibility/syntaxdefs.html). My tips are as follows:

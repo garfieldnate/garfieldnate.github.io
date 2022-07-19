@@ -8,6 +8,7 @@ categories:
 comments: true
 publishDate: 2011-11-06T00:00:00Z
 title: Itadaki GoSen and IPADIC 2.7
+description: Intro to Japanese morphological analysis
 setup: |
   import ResponsiveFigure from "../../components/ResponsiveFigure.astro"
 ---
