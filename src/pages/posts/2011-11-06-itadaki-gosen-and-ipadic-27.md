@@ -30,8 +30,7 @@ Then, to run a demo and see what amazing things GoSen can do, copy the dictionar
 <ResponsiveFigure
     class_="center"
     src="/assets/blog/gosen.png"
-    alt="Screenshot of the 'reading processor demo' tool that comes with GoSen. The window shows '情報スーパーハイウェイ' analyzed into consitituent words and assigned part of speech. The conrols for editing the processor's output are also open."
-    title="Will's desktop. Sure, it looks normal to us now..."/>
+    alt="Screenshot of the 'reading processor demo' tool that comes with GoSen. The window shows '情報スーパーハイウェイ' analyzed into consitituent words and assigned part of speech. The conrols for editing the processor's output are also open."/>
 
 Notice that it tokenizes the sentence, gives readings, and allows you to choose among alternatives analyses. It also gives information on part of speech and inflection.
 
