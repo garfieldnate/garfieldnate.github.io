@@ -1,7 +1,7 @@
 ---
 title: "Quitting My Oldest Habit"
 publishDate: 2021-10-30T13:00:30+02:00
-layout: "../../../../layouts/BlogPost.astro"
+layout: "../../../layouts/BlogPost.astro"
 comments: true
 description: How I stopped biting my nails after 30 years
 categories:
@@ -10,7 +10,7 @@ categories:
 - habits
 - nail biting
 setup: |
-  import ResponsiveFigure from "../../../../components/ResponsiveFigure.astro"
+  import ResponsiveFigure from "../../../components/ResponsiveFigure.astro"
 ---
 
 I've bitten my nails for my entire life, at least since I was 4 or 5. Over the years it caused me numerous problems, though I never thought they were a big deal: my fingers would often be sore from removing too much of the nail, I'm certain I got sick more often than I needed to from sticking my hands in my mouth constantly, and I got a serious infection on one of my fingers. I just never cared, though; trying not to bite my nails was too annoying to bother with. My mom also bites her nails, and we made some attempts to quit by putting on nasty-tasting fingernail polish. What can I say? You get used to the taste. She told me it was poison, but I guess I didn't believe her 😂.
@@ -47,7 +47,9 @@ And how are my guitar skills now? Meh, I'm okay 😄 I still enjoy it as a hobby
 
 Obligatory nail picture:
 
-<!-- Note: have to use vanilla markdown syntax for images when using relative URL's: https://github.com/RafidMuhymin/astro-imagetools/issues/101#issuecomment-1188955803 -->
-![Beauty shot of my right-hand nails; the thumb is longer on the left side than the right; the index finger has a clear slant to the right; the middle and ring fingers are rounded with no obvious slant.](./images/nails.jpg)
+<ResponsiveFigure
+    class_="center"
+    src="/assets/blog/guitar_nails.jpg"
+    alt="Beauty shot of my right-hand nails; the thumb is longer on the left side than the right; the index finger has a clear slant to the right; the middle and ring fingers are rounded with no obvious slant."/>
 
 Keep in mind that if you are shaping your nails for guitar you should NOT just copy the shape you see another guitarist use. The nail shape you use will depend on the natural shape of your nails and on your most comfortable playing position (see the William Kanengiser video above).
