@@ -115,25 +115,25 @@ BTW kudos to Casio for leaving the product page up for this long! Just in case, 
 Electonic subsystems
 
 * OS
-	- dictionary display and searching
-	- menu navigation
-		- navigation buttons
-	- memory
+    - dictionary display and searching
+    - menu navigation
+        - navigation buttons
+    - memory
 * Screen 1
-	- LED backlight
+    - LED backlight
 * Screen 2
-	- touch
+    - touch
 * Audio
-	- speakers
-	- headphone jack
-	- switch between outputs
-	- volume adjustment
-	- MP3 decoding stack
+    - speakers
+    - headphone jack
+    - switch between outputs
+    - volume adjustment
+    - MP3 decoding stack
 * power
-	- batteries
-	- detect low batteries
+    - batteries
+    - detect low batteries
 * keyboard
 * other switches and actuators
-	- piezo
-	- reset button
-	- hidden/internal button pads
+    - piezo
+    - reset button
+    - hidden/internal button pads
