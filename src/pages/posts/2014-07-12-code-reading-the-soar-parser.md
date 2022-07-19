@@ -12,10 +12,7 @@ title: 'Code Reading: The Soar Parser'
 
 I've thought for a while that it would be fun to write a series of "code reading" posts, where I try to read and understand how some large program works and explain my findings.
 
-To investigate the possibility of an upcoming project, I've been wanting to know how Soar parses productions, and if there's any way to retrofit it to make a parser usable by various IDE's. I have tried to make [two](https://github.com/garfieldnate/Soar-Production) [separate](https://github.com/garfieldnate/Java-Soar-Parser) parsers for Soar code already, and it just seems to be difficult to imitate the real thing. If you'd like to follow along, you can view or download the code on GitHub:
-
-TODO
-<!-- {{< github repo="SoarGroup/Soar">}} -->
+To investigate the possibility of an upcoming project, I've been wanting to know how Soar parses productions, and if there's any way to retrofit it to make a parser usable by various IDE's. I have tried to make [two](https://github.com/garfieldnate/Soar-Production) [separate](https://github.com/garfieldnate/Java-Soar-Parser) parsers for Soar code already, and it just seems to be difficult to imitate the real thing. If you'd like to follow along, you can view or download the code on [GitHub](https://github.com/SoarGroup/Soar/tree/34b1881a57777083cd72d0dcb3d1e56a7bb59701):
 
 Disclaimer: My "critiques" of the code are areas that I think can use some contributions or TLC. Soar was written and is maintained by programmers and researchers far greater than I, and I am not dismissing the hard work and craft that went into its construction. The Soar code has evolved over 20-30 years in an academic environment, and I expect it to have a few rough edges.
 
