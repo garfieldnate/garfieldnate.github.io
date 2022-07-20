@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Uniunihan",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eget gravida cum sociis natoque penatibus et magnis.",
+        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
+        "img_alt": "TODO",
+        "repo": "https://github.com/garfieldnate/uniunihan-db"
+    },
+    {
+        "name": "Kengdic",
+        "description": "",
+        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
+        "img_alt": "TODO",
+        "repo": "https://github.com/garfieldnate/kengdic"
+    },
+    {
+        "name": "Modern Algorithmic Toolbox",
+        "description": "",
+        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
+        "img_alt": "TODO",
+        "repo": "https://github.com/garfieldnate/Stanford-CS-168_Modern_Algorithmic_Toolbox"
+    }
+]

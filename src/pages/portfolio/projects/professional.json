@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Japanese chunker",
+        "description": "",
+        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
+        "img_alt": "TODO",
+        "repo": null
+    },
+    {
+        "name": "e-commerce exposure algorithms",
+        "description": "<a href=\"trivago.com\">trivago</a>",
+        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
+        "img_alt": "TODO",
+        "repo": ""
+    },
+    {
+        "name": "Car navigation agent",
+        "description": "",
+        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
+        "img_alt": "TODO",
+        "repo": ""
+    },
+    {
+        "name": "Japanese ⇄ Turkish translation engine",
+        "description": "",
+        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
+        "img_alt": "TODO",
+        "repo": ""
+    },
+    {
+        "name": "ITS Work in Context System",
+        "description": "",
+        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
+        "img_alt": "TODO",
+        "repo": ""
+    }
+]

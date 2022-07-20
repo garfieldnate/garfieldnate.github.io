@@ -1,0 +1,40 @@
+---
+// A two-column text layout, collapsing to one column on small screens
+export interface Props {
+    class_: string | null
+};
+
+const {
+    class_ = ""
+} = Astro.props as Props;
+---
+
+<div class={class_ + " wrapper" }>
+    <div class="column">
+        <slot name="left" />
+    </div>
+    <div class="column">
+        <slot name="right" />
+    </div>
+</div>
+
+<style>
+    .wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 0;
+    }
+
+    @media screen and (max-width: 600px) {
+
+        /* collapse two columns into one */
+        .wrapper {
+            display: block;
+        }
+    }
+
+    .column {
+        width: 100%;
+        height: auto;
+    }
+</style>

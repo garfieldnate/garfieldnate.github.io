@@ -1,0 +1,72 @@
+[
+    {
+        "name": "Weka AM",
+        "description": "",
+        "repo": "https://github.com/garfieldnate/Weka_AnalogicalModeling",
+        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
+        "img_alt": "TODO"
+    },
+    {
+        "name": "Algorithm::AM",
+        "description": "",
+        "repo": "https://github.com/garfieldnate/Algorithm-AM",
+        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
+        "img_alt": "TODO"
+    },
+    {
+        "name": "Rust ray tracer",
+        "description": "",
+        "repo": "https://github.com/garfieldnate/ray_tracer_challenge",
+        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
+        "img_alt": "TODO"
+    },
+    {
+        "name": "Tree::BK",
+        "description": "",
+        "repo": "https://github.com/garfieldnate/p5-Tree-BK",
+        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
+        "img_alt": "TODO"
+    },
+    {
+        "name": "LeXiTron Mac",
+        "description": "",
+        "repo": "https://github.com/garfieldnate/Lexitron-Mac",
+        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
+        "img_alt": "TODO"
+    },
+    {
+        "name": "LeXiTron Mac",
+        "description": "",
+        "repo": "https://github.com/garfieldnate/Lexitron-Mac",
+        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
+        "img_alt": "TODO"
+    },
+    {
+        "name": "LeXiTron Mac",
+        "description": "",
+        "repo": "https://github.com/garfieldnate/Lexitron-Mac",
+        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
+        "img_alt": "TODO"
+    },
+    {
+        "name": "LeXiTron Mac",
+        "description": "",
+        "repo": "https://github.com/garfieldnate/Lexitron-Mac",
+        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
+        "img_alt": "TODO"
+    },
+    {
+        "name": "Soar lexer",
+        "description": "",
+        "repo": "https://github.com/SoarGroup/Soar",
+        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
+        "img_alt": "TODO"
+    },
+    {
+        "name": "Sublime Soar Tools",
+        "description": "",
+        "repo": "https://github.com/garfieldnate/Sublime-Soar-Tools",
+        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
+        "img_alt": "TODO"
+    }
+]

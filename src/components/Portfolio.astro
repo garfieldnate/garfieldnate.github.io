@@ -1,0 +1,75 @@
+---
+// A two-column layout with images on the left and descriptions on the right
+// For small screens, we collapse both columns into a single column
+import { Picture } from "astro-imagetools/components";
+
+export interface Props {
+    projects: Project[]
+};
+
+interface Project {
+    // The image should have dimensions about 3:2
+    img_src: string;
+    img_alt: string;
+    name: string;
+    description: string;
+    repo: string | null;
+};
+
+const {
+    projects
+} = Astro.props as Props;
+---
+
+<div class="portfolio">
+    {projects.map(({
+    img_src,
+    img_alt,
+    name,
+    description,
+    repo }) => (
+    <h5 class="small-only">{name}</h5>
+    <div class="column">
+        <Picture src={img_src} alt={img_alt} />
+    </div>
+    <div class="column">
+        <h5 class="big-only">{name}</h5>
+        <p class="desc" set:html={description}></p>
+        {!!repo && (<a href={repo} class="repo">View Source</a>)}
+    </div>
+    ))}
+</div>
+
+<style>
+    .portfolio {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem 10%;
+    }
+
+    @media screen and (max-width: 600px) {
+
+        /* collapse two columns into one */
+        .portfolio {
+            display: block;
+        }
+
+        /* Display project name before image */
+        .big-only {
+            display: none;
+        }
+    }
+
+    @media not screen and (max-width: 600px) {
+
+        /* Display project name before description */
+        .small-only {
+            display: none;
+        }
+    }
+
+    .column {
+        width: 100%;
+        height: auto;
+    }
+</style>
