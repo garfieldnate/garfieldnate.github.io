@@ -3,6 +3,7 @@ import { Picture } from "astro-imagetools/components";
 
 import BaseHead from "../components/BaseHead.astro";
 import Date from "../components/Date.astro";
+import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 
 export interface Props {
@@ -47,6 +48,7 @@ const {
                 <slot></slot>
             </main>
         </article>
+        <Footer />
     </body>
 </html>
 

@@ -5,4 +5,5 @@ import preact from '@astrojs/preact';
 // https://astro.build/config
 export default defineConfig({
     integrations: [preact(), astroImageTools],
+    site: "https://garfieldnate.github.io"
 });
