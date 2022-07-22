@@ -1,21 +1,21 @@
 [
     {
-        "name": "Uniunihan",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eget gravida cum sociis natoque penatibus et magnis.",
+        "name": "Uniunihan-DB",
+        "description": "This project started as a method for finding classical Chinese cognates, and morphed into a learners' dictionary of Chinese, Japanese, Korean and Vietnamese.",
         "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
         "img_alt": "TODO",
         "repo": "https://github.com/garfieldnate/uniunihan-db"
     },
     {
         "name": "Kengdic",
-        "description": "",
+        "description": "A 130,000 entry Korean/English dictionary originally created by Joe Speigle. After the author's passing, I located the original data and retrofitted it with QA scripts and automated tests to help clean and validate it. I hope to make it a high quality, full-coverage, living dictionary.",
         "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
         "img_alt": "TODO",
         "repo": "https://github.com/garfieldnate/kengdic"
     },
     {
-        "name": "Modern Algorithmic Toolbox",
-        "description": "",
+        "name": "Modern Algorithmic Toolbox Assignments",
+        "description": "Highly detailed Jupyter notebooks exploring the asignments of the incredible Stanford course, <a href=\"https://web.stanford.edu/class/cs168/index.html\">The Modern Algorithm Toolbox</a>. The assignments explore topics in randomized algorithms and data analysis.",
         "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
         "img_alt": "TODO",
         "repo": "https://github.com/garfieldnate/Stanford-CS-168_Modern_Algorithmic_Toolbox"

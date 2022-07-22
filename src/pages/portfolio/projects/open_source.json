@@ -1,70 +1,49 @@
 [
     {
-        "name": "Weka AM",
-        "description": "",
+        "name": "Rust Ray Tracer",
+        "description": "Following Jamis Buck's excellent <a href=\"http://raytracerchallenge.com/\">Ray Tracer Challenge</a>, I wrote a CPU ray tracer with features including soft shadows, texture mapping, and constructive solid geometry.",
+        "repo": "https://github.com/garfieldnate/ray_tracer_challenge",
+        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
+        "img_alt": "TODO"
+    },
+    {
+        "name": "Analogical Modeling Weka Plugin",
+        "description": "The state-of-the-art implementation of <a href=\"https://en.wikipedia.org/wiki/Analogical_modeling\">analogical modeling</a>, an exemplar-based machine learning algorithm. Higher-cardinality data is processed in parallel via Java's fork/join framework and Monte Carlo simulation.",
         "repo": "https://github.com/garfieldnate/Weka_AnalogicalModeling",
         "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
         "img_alt": "TODO"
     },
     {
         "name": "Algorithm::AM",
-        "description": "",
+        "description": "A perl library for <a href=\"https://en.wikipedia.org/wiki/Analogical_modeling\">analogical modeling</a>, an exemplar-based machine learning algorithm. I rewrote the Perl code and modernized the C code of AM::Parallel, fixing tricky bugs and adding complete unit test coverage along the way.",
         "repo": "https://github.com/garfieldnate/Algorithm-AM",
         "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
         "img_alt": "TODO"
     },
     {
-        "name": "Rust ray tracer",
-        "description": "",
-        "repo": "https://github.com/garfieldnate/ray_tracer_challenge",
-        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
-        "img_alt": "TODO"
-    },
-    {
         "name": "Tree::BK",
-        "description": "",
+        "description": "Perl module implementing a Burkhard-Keller, or BK tree, a structure for efficiently performing fuzzy searches in a large collection of strings.",
         "repo": "https://github.com/garfieldnate/p5-Tree-BK",
         "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
         "img_alt": "TODO"
     },
     {
         "name": "LeXiTron Mac",
-        "description": "",
+        "description": "A distribution of the Thai Government's <a href=\"https://lexitron.nectec.or.th/\">LEXiTRON</a> Thai/English dictionary for use on Macintosh computers (three-finger click, dictionary.app, etc.).",
         "repo": "https://github.com/garfieldnate/Lexitron-Mac",
         "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
         "img_alt": "TODO"
     },
     {
-        "name": "LeXiTron Mac",
-        "description": "",
-        "repo": "https://github.com/garfieldnate/Lexitron-Mac",
-        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
-        "img_alt": "TODO"
-    },
-    {
-        "name": "LeXiTron Mac",
-        "description": "",
-        "repo": "https://github.com/garfieldnate/Lexitron-Mac",
-        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
-        "img_alt": "TODO"
-    },
-    {
-        "name": "LeXiTron Mac",
-        "description": "",
-        "repo": "https://github.com/garfieldnate/Lexitron-Mac",
-        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
-        "img_alt": "TODO"
-    },
-    {
-        "name": "Soar lexer",
-        "description": "",
+        "name": "Soar Tokenizer",
+        "description": "<a href=\"https://soar.eecs.umich.edu/\">Soar</a> is a general cognitive architecture for intelligent behavior. As an open source collaborator I updated the tokenizing component with a simpler API, as well as contributing bug fixes.",
         "repo": "https://github.com/SoarGroup/Soar",
         "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
         "img_alt": "TODO"
     },
     {
         "name": "Sublime Soar Tools",
-        "description": "",
+        "description": "A <a href=\"https://www.sublimetext.com/\">Sublime Text</a> package for developing <a href=\"https://soar.eecs.umich.edu/\">Soar</a> code. Includes support for syntax highlighting, snippets, an unit testing with SoarUnit.",
         "repo": "https://github.com/garfieldnate/Sublime-Soar-Tools",
         "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
         "img_alt": "TODO"
