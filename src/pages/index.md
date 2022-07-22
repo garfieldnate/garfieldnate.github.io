@@ -60,15 +60,18 @@ You can also find me on [GitHub](https://github.com/garfieldnate) or [LinkedIn](
 ## Portfolio
 
 ### Professional Projects
+<br/>
 
 <Portfolio projects={workProjects}/>
 
 <br/>
 ### Open Source
+<br/>
 
 <Portfolio projects={fossProjects}/>
 
 <br/>
 ### 🚧 Current Projects 👷‍♂️
+<br/>
 
 <Portfolio projects={currentProjects}/>
