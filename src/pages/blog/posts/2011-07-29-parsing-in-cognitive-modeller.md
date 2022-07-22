@@ -54,7 +54,7 @@ Cognitive science attempt to explain cognition, or human intelligence, by discov
 
 <ResponsiveFigure
     class_="center"
-    src="images/content_images/biology_v_cognition.png"
+    src="/assets/blog/biology_v_cognition.jpg"
     alt="Left: Brain imaging showing active parts of the brain. Right: A chart illustrating the results of an experiment measuring the response times of a human under different stimuli."
     title="Cognitive scientists study and imitate the physical and behavioral aspects of the human mind" />
 
