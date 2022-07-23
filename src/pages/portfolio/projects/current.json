@@ -2,22 +2,24 @@
     {
         "name": "Uniunihan-DB",
         "description": "This project started as a method for finding classical Chinese cognates, and morphed into a learners' dictionary of Chinese, Japanese, Korean and Vietnamese.",
-        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
-        "img_alt": "TODO",
+        "img_src": "/assets/portfolio/ja_chalkboard.jpg",
+        "img_alt": "A chalkboard covered in Japanese vocabulary, mostly kanji",
         "repo": "https://github.com/garfieldnate/uniunihan-db"
     },
     {
         "name": "Kengdic",
         "description": "A 130,000 entry Korean/English dictionary originally created by Joe Speigle. After the author's passing, I located the original data and retrofitted it with QA scripts and automated tests to help clean and validate it. I hope to make it a high quality, full-coverage, living dictionary.",
-        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
-        "img_alt": "TODO",
+        "img_src": "/assets/portfolio/Middle_Class_in_Joseon.jpeg",
+        "img_alt": "1850's painting of petite burgeoisie Korean men gathering with papers and writing utensils.",
         "repo": "https://github.com/garfieldnate/kengdic"
     },
     {
         "name": "Modern Algorithmic Toolbox Assignments",
-        "description": "Highly detailed Jupyter notebooks exploring the asignments of the incredible Stanford course, <a href=\"https://web.stanford.edu/class/cs168/index.html\">The Modern Algorithm Toolbox</a>. The assignments explore topics in randomized algorithms and data analysis.",
-        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
-        "img_alt": "TODO",
+        "description": "Highly detailed Jupyter notebooks exploring the asignments of the incredible Stanford course, <a href=\"https://web.stanford.edu/class/cs168/index.html\">The Modern Algorithm Toolbox</a>. The notebookss explore topics in randomized algorithms and data analysis.",
+        "img_src": "/assets/portfolio/Jupyter_logo.png",
+        "license": "https://opensource.org/licenses/bsd-license.php",
+        "copyright": "2017 Project Jupyter Contributors",
+        "img_alt": "The Jupyter project log",
         "repo": "https://github.com/garfieldnate/Stanford-CS-168_Modern_Algorithmic_Toolbox"
     }
 ]

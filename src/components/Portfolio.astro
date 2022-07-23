@@ -30,7 +30,7 @@ const {
     repo }) => (
     <h5 class="small-only">{name}</h5>
     <div class="column">
-        <Picture src={img_src} alt={img_alt} />
+        <Picture src={img_src} alt={img_alt} width={400} />
     </div>
     <div class="column">
         <h5 class="big-only">{name}</h5>
@@ -45,6 +45,7 @@ const {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 5rem 10%;
+        align-items: center;
     }
 
     @media screen and (max-width: 600px) {

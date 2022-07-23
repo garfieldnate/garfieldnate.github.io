@@ -1,37 +1,30 @@
 [
     {
-        "name": "trivago exposure algorithms",
-        "description": "As a Java developer at <a href=\"trivago.com\">trivago</a>, my team was responsible for determining the placement of hotels and advertiser deals for all searches. Our service ran billions of auctions daily, carefully balancing the interests of users, advertisers and our company, and accounting for the majority of trivago's revenue.",
-        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
-        "img_alt": "TODO",
+        "name": "trivago Exposure Algorithms",
+        "description": "As a Java developer and later engineering lead at <a href=\"https://www.trivago.com\">trivago</a>, my team was responsible for the advertiser auction and hotel ranking for all searches. Our service ran billions of auctions daily, carefully optimizing trivago's revenue while balancing the interests of users, advertisers, and our company.",
+        "img_src": "/assets/portfolio/trivago_exposure.png",
+        "img_alt": "Screenshot of trivago.com showing the hotel results and advertised prices on each hotel",
         "repo": ""
     },
     {
-        "name": "Japanese Tokenizer",
-        "description": "Most existing Japanese tokenizers output <a href=\"https://clrd.ninjal.ac.jp/bccwj/en/morphology.html\">short unit words</a>, extremely-granular morphemic units that are difficult to find in a dictionary or interpret as a learner of Japanese. For my clients' product, I wrote a tokenizer that outputs phonological words such as conjugated verbs and affixed nouns. The result is simpler for learners to digest and understand, improving the product experience.",
-        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
-        "img_alt": "TODO",
+        "name": "Japanese Segmenter",
+        "description": "Japanese text has no spaces, and being confronted by a wall of text can be really intimidating for learners. For my client's product, I used my extensive knowledge of Japanese grammar to write a segmenter that outputs recognizable words. The result is simpler for learners to digest and understand, improving the product experience.",
+        "img_src": "/assets/portfolio/ja_segmenting.jpg",
+        "img_alt": "A page of Japanese text, shown with and without highlighting of individual words",
         "repo": null
     },
     {
-        "name": "Car navigation assistant",
+        "name": "Car Navigation Assistant",
         "description": "I built an NLU agent used in Japanese cars sold in the US. The agent would respond to spoken commands such as, \"take me to John's house\" and \"where can I buy a Coke?\".",
-        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
-        "img_alt": "TODO",
+        "img_src": "/assets/portfolio/car_navi.jpg",
+        "img_alt": "A car navigation screen",
         "repo": ""
     },
     {
         "name": "Japanese ⇄ Turkish machine translation system",
-        "description": "I built a custom translation system used in a Japanese rubber factory located in Turkey. Our system handled the complex morphology of Turkish better than other state-of-the-art translation systems.",
-        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
-        "img_alt": "TODO",
+        "description": "I built a custom translation system used in a Japanese rubber factory located in Turkey. The system handled the complex morphology of Turkish better than other state-of-the-art translation systems.",
+        "img_src": "/assets/portfolio/tire_factory.jpg",
+        "img_alt": "A freshly formed tire coming out of a factory machine, still steaming",
         "repo": ""
-    },
-    {
-        "name": "ITS Work in Context System",
-        "description": "The Internationalization Tag Set is a standard for embedding document metadata containing translation instructions. Examples include links to specialized terminology, maximum phrase length, or restrictions to specified locales. For the EU-funded WICS project, I implemented the entire ITS standard as a tool for viewing translation instructions in the browser.",
-        "img_src": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png",
-        "img_alt": "TODO",
-        "repo": "https://github.com/renatb/ITS2.0-WICS-converter"
     }
 ]
