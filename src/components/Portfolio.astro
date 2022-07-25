@@ -32,7 +32,7 @@ const {
     license,
     copyright,
     repo }) => (
-    <h5 class="small-only">{name}</h5>
+    <h4 class="small-only">{name}</h4>
     <div class="column">
         <figure>
             <Picture src={img_src} alt={img_alt} width={400} />
@@ -40,7 +40,7 @@ const {
         </figure>
     </div>
     <div class="column">
-        <h5 class="big-only">{name}</h5>
+        <h4 class="big-only">{name}</h4>
         <p class="desc" set:html={description}></p>
         {!!repo && (<a href={repo} class="repo">View Source</a>)}
     </div>
