@@ -25,11 +25,20 @@
 <meta property="twitter:image" content="https://astro.build/social.png">
 
 <!-- Fonts -->
+<!-- Load google fonts in as performant a way as possible -->
+<!-- (see https://web.dev/defer-non-critical-css/) -->
+
+<!-- preconnect to location of google fonts' .woff files -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap">
+
+<!-- request stylesheet asynchronously, update the element to a normal stylesheet when the resources are loaded -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<!-- fallback for browsers that don't execute JS -->
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap"></noscript>
 
     <link rel="stylesheet" href="/assets/fd12c972.a3045897.css" />
-<link rel="stylesheet" href="/assets/df0ad7d9.a89f85d4.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
+<link rel="stylesheet" href="/assets/df0ad7d9.d98196fc.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
 </script></head>
 
     <body class="astro-37DZVIS6">
@@ -72,7 +81,7 @@ P.S. Good restaurant food in the US is often very expensive, especially after ti
 </ol><p>{begin rant}</p><p>Living in a foreign country really provides the perspective that you need to understand your own culture. I understand that Facebook might not be a good representative of an average day of conversation in the US, but it is still quite disconcerting to have your feed filled with raging of all sorts. The funny thing is that the raging comes in waves regarding particular trending topics, so that most individuals who think they are being righteous and counter-culture are really just caught up in the flow of raging. The most American thing seems to be to have an opinion and to duel with words, intelligent or not.</p><p>On top of that, in US culture we always seem to need a villain and a hero: this is reflected in every movie that comes out of Hollywood (which I do enjoy), and it is reflected constantly in political rhetoric. People blame the hicks or the rich, the Evangelicals or the gays, the politicians or the immigrants. And of course the politician playing the blame game makes themselves out to be the hero.</p><p>{end rant}</p><p>If any of this ever stresses you out (hello there, introverts and <a href="https://www.quora.com/Is-the-Seattle-Freeze-a-real-thing-that-people-have-experienced-Is-it-particularly-hard-to-make-new-friends-in-Seattle-as-opposed-to-other-cities">Seattleites</a>), Japan will be a welcome change. Controversial topics are avoided in normal conversation because contention is a Bad Thing. We can leave it to its proper time and place, where it is actually required to find a solution to an immediate problem. Japan is a nation state and they place great importance on being united, trusting eachother, and showing consideration for the feelings of others.</p><hr><p>So there you have it: in Japan I have good food and health, freedom, and peace of mind. What more could anyone ask for? You can still have your Snicker’s bar, you just have to bike to 7-Eleven to get it.</p><p>Now, I understand there are exceptions to every rule, and that there is a giant barrier to getting to this point: getting used to Japan and learning to speak Japanese. I may post on these another time.</p>
             </main>
         </article>
-        <footer class="astro-I46STNBI"><a href="/blog/rss.xml" class="astro-I46STNBI"><img src="/rss/rss-icon.svg" class="astro-I46STNBI"> RSS</a>・<a href="/license" class="astro-I46STNBI">License</a></footer>
+        <footer class="astro-OIZPJGW6"><a href="/blog/rss.xml" class="astro-OIZPJGW6"><img src="/rss/rss-icon.svg" height="15px" width="15px" class="astro-OIZPJGW6"> RSS</a>・<a href="/license" class="astro-OIZPJGW6">License</a></footer>
 
 
     

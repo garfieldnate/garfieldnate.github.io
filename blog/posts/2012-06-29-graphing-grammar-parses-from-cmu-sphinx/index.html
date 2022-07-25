@@ -25,11 +25,20 @@
 <meta property="twitter:image" content="https://astro.build/social.png">
 
 <!-- Fonts -->
+<!-- Load google fonts in as performant a way as possible -->
+<!-- (see https://web.dev/defer-non-critical-css/) -->
+
+<!-- preconnect to location of google fonts' .woff files -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap">
+
+<!-- request stylesheet asynchronously, update the element to a normal stylesheet when the resources are loaded -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<!-- fallback for browsers that don't execute JS -->
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap"></noscript>
 
     <link rel="stylesheet" href="/assets/fd12c972.a3045897.css" />
-<link rel="stylesheet" href="/assets/df0ad7d9.a89f85d4.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
+<link rel="stylesheet" href="/assets/df0ad7d9.d98196fc.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
 </script></head>
 
     <body class="astro-37DZVIS6">
@@ -109,19 +118,19 @@
     <style >
     
 
-    .astro-imagetools-picture-A4AE6C34 {
+    .astro-imagetools-picture-03AA2C54 {
       --opacity: 1;
       --z-index: 0;
     }
 
     
-            .astro-imagetools-picture-A4AE6C34 img {
+            .astro-imagetools-picture-03AA2C54 img {
               z-index: 1;
               position: relative;
             }
           
 
-    .astro-imagetools-picture-A4AE6C34::after {
+    .astro-imagetools-picture-03AA2C54::after {
       inset: 0;
       content: "";
       left: 0;
@@ -133,19 +142,19 @@
       z-index: var(--z-index);
     }
   
-        .astro-imagetools-picture-A4AE6C34 img {
+        .astro-imagetools-picture-03AA2C54 img {
           object-fit: cover;
           object-position: 50% 50%;
         }
 
-        .astro-imagetools-picture-A4AE6C34::after {
+        .astro-imagetools-picture-03AA2C54::after {
           background-size: cover;
           background-image: url("data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAJABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAIDBAj/xAAfEAEAAgEEAwEAAAAAAAAAAAABAAIRAwQSITJRcrH/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/EABURAQEAAAAAAAAAAAAAAAAAAAAR/9oADAMBAAIRAxEAPwDUe5zWnKvLOQ6WLTSsl8XsPL3LEISItuttPtVFIRtHxfp/YRCP/9k=");
           background-position: 50% 50%;
         }
       </style><picture
     
-    class="astro-imagetools-picture astro-imagetools-picture-A4AE6C34"
+    class="astro-imagetools-picture astro-imagetools-picture-03AA2C54"
     style="position: relative; display: inline-block; ; max-width: 100%; height: auto;"
     ><source
             srcset="/assets/jsgf_parse@320w.c8302887.avif 320w, /assets/jsgf_parse@673w.9b023ae2.avif 673w, /assets/jsgf_parse@956w.e4b5b144.avif 956w, /assets/jsgf_parse@1168w.901aa4d9.avif 1168w, /assets/jsgf_parse@1309w.0a29c69a.avif 1309w, /assets/jsgf_parse@1380w.f296e785.avif 1380w"
@@ -185,7 +194,7 @@
 </figure><p>A graph explaining how our sentence was parsed! I color code the parse: green is a RuleSequence, magenta is a RuleParse, light blue is a Token, red is a Tag, yellow, which there strangely aren’t any of, would be a RuleName.</p><p>I notice two very strange things here. First, RuleParses don’t have anything as a direct child except for RuleSequences (RuleName is also possible but not shown). So RuleSequences will always be present and may only have one child. Second, text is treated as a sub-component of a tag instead of the other way around. So the text is tagging the tag? I don’t know why they designed it that way, but at least now that I have a graph of the parse so I can figure out how to properly process it.</p>
             </main>
         </article>
-        <footer class="astro-I46STNBI"><a href="/blog/rss.xml" class="astro-I46STNBI"><img src="/rss/rss-icon.svg" class="astro-I46STNBI"> RSS</a>・<a href="/license" class="astro-I46STNBI">License</a></footer>
+        <footer class="astro-OIZPJGW6"><a href="/blog/rss.xml" class="astro-OIZPJGW6"><img src="/rss/rss-icon.svg" height="15px" width="15px" class="astro-OIZPJGW6"> RSS</a>・<a href="/license" class="astro-OIZPJGW6">License</a></footer>
 
 
     

@@ -26,10 +26,19 @@
 <meta property="twitter:image" content="https://astro.build/social.png">
 
 <!-- Fonts -->
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap">
+<!-- Load google fonts in as performant a way as possible -->
+<!-- (see https://web.dev/defer-non-critical-css/) -->
 
-<link rel="stylesheet" href="/assets/df0ad7d9.a89f85d4.css" />
+<!-- preconnect to location of google fonts' .woff files -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+
+<!-- request stylesheet asynchronously, update the element to a normal stylesheet when the resources are loaded -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<!-- fallback for browsers that don't execute JS -->
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap"></noscript>
+
+<link rel="stylesheet" href="/assets/df0ad7d9.d98196fc.css" />
 <link rel="stylesheet" href="/assets/94a06626.75677416.css" /></head>
 
 <body class="astro-GUMA2FKO">
@@ -67,7 +76,7 @@
                 <p>Copyright 2022 Nathan Glenn. The original work hosted on this site licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
             </section>
         </main>
-        <footer class="astro-I46STNBI"><a href="/blog/rss.xml" class="astro-I46STNBI"><img src="/rss/rss-icon.svg" class="astro-I46STNBI"> RSS</a>・<a href="/license" class="astro-I46STNBI">License</a></footer>
+        <footer class="astro-OIZPJGW6"><a href="/blog/rss.xml" class="astro-OIZPJGW6"><img src="/rss/rss-icon.svg" height="15px" width="15px" class="astro-OIZPJGW6"> RSS</a>・<a href="/license" class="astro-OIZPJGW6">License</a></footer>
 
 
     </div>
