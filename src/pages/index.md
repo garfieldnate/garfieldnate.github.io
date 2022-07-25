@@ -36,6 +36,8 @@ You can also find me on [GitHub](https://github.com/garfieldnate) or [LinkedIn](
     </div>
 </TwoColumnText>
 
+These are only some of the technologies I've used in the past. If you don't see a technology you need me for, feel free to ask anyway! I'm always looking to learn more and add more to my toolkit.
+
 ## Familiar Human Languages
 
 <TwoColumnText>
