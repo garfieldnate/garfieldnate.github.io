@@ -38,7 +38,7 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap"></noscript>
 
     <link rel="stylesheet" href="/assets/fd12c972.9c857589.css" />
-<link rel="stylesheet" href="/assets/df0ad7d9.2012b2f4.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
+<link rel="stylesheet" href="/assets/df0ad7d9.2d293382.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
 </script></head>
 
     <body class="astro-6MTULHJX">
@@ -125,7 +125,7 @@ not ok 1</p>
 </blockquote><h1 id="failed-test-at-testpl-line-68">Failed test at test.pl line 68.</h1><h1 id="got-">got: ”</h1><h1 id="expected-some-junk">expected: ‘some junk’</h1><h1 id="looks-like-you-failed-1-test-of-1">Looks like you failed 1 test of 1.</h1><p>Then, when you inspect the contents of <code>file1.txt</code>, you have:</p><p>some junk</p><p>What happened here? I was <a href="http://perl.plover.com/FAQs/Buffering.html">suffering from buffering</a>. Because neither <code>test.pl</code> nor <code>ImplicitClose.pm</code> closed the file, it was still open when I was trying to read it. Nothing had been written to it yet because the amount printed was so small that it had to wait in the buffer either until there was more to write or until the file was closed, which would flush the buffer. Implicit close wouldn’t be performed until the the filehandle’s reference count reached 0, and the <code>$demo</code> object still had a reference to it. So the test would have worked fine if I had assigned <code>undef</code> to <code>$demo</code>, or just closed the filehandle.</p><p>Watch those implicit closes.</p>
             </main>
         </article>
-        <footer class="astro-75WOMYGT"><a href="/blog/rss.xml" class="astro-75WOMYGT"><img src="/rss/rss-icon.svg" height="15px" width="15px" alt="RSS logo" class="astro-75WOMYGT"> RSS</a>・<a href="/license" class="astro-75WOMYGT">License</a></footer>
+        <footer class="astro-UAFV37XX"><a href="/blog/rss.xml" class="astro-UAFV37XX"><img src="/rss/rss-icon.svg" height="15px" width="15px" alt="RSS logo" class="astro-UAFV37XX"> RSS</a>・<a href="/license" class="astro-UAFV37XX">License</a>・<a href="https://github.com/garfieldnate/garfieldnate.github.io" class="astro-UAFV37XX">Source</a></footer>
 
 
     
