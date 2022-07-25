@@ -34,8 +34,14 @@ const { title, description } = Astro.props;
 <meta property="twitter:image" content="https://astro.build/social.png" />
 
 <!-- Fonts -->
+<!-- Load google fonts in as performant a way as possible -->
+<!-- (see https://web.dev/defer-non-critical-css/) -->
+
+<!-- preconnect to location of google fonts' .woff files -->
 <link rel="preconnect" href="https://fonts.gstatic.com" />
-<link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap"
-/>
+
+<!-- request stylesheet asynchronously, update the element to a normal stylesheet when the resources are loaded -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<!-- fallback for browsers that don't execute JS -->
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap"></noscript>
