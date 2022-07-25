@@ -27,12 +27,12 @@ You can also find me on [GitHub](https://github.com/garfieldnate) or [LinkedIn](
     </div>
     <div slot="right">
         * React/React Native
+        * Rust
         * Docker
         * Kubernetes
         * Google Cloud
         * Machine Learning
         * Language/Speech Processing
-        * TODO
     </div>
 </TwoColumnText>
 
