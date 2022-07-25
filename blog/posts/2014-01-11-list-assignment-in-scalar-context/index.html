@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="astro-37DZVIS6">
+<html lang="en" class="astro-6MTULHJX">
     <head>
         <!-- Global Metadata --><meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
@@ -37,11 +37,11 @@
 <!-- fallback for browsers that don't execute JS -->
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap"></noscript>
 
-    <link rel="stylesheet" href="/assets/fd12c972.a3045897.css" />
-<link rel="stylesheet" href="/assets/df0ad7d9.d98196fc.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
+    <link rel="stylesheet" href="/assets/fd12c972.9c857589.css" />
+<link rel="stylesheet" href="/assets/df0ad7d9.2012b2f4.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
 </script></head>
 
-    <body class="astro-37DZVIS6">
+    <body class="astro-6MTULHJX">
         <header class="wrapper astro-VQADTZVM">
     <nav class="astro-VQADTZVM">
         <a href="/" class="astro-VQADTZVM">
@@ -66,13 +66,13 @@
 </header>
 
 
-        <article class="wrapper content astro-37DZVIS6">
-            <header class="astro-37DZVIS6">
+        <article class="wrapper content astro-6MTULHJX">
+            <header class="astro-6MTULHJX">
                 
-                <h1 class="title astro-37DZVIS6">List Assignment in Scalar Context</h1>
+                <h1 class="title astro-6MTULHJX">List Assignment in Scalar Context</h1>
                 <!-- Machine readable datetime attribute, human-readable text --><time datetime="2014-01-11">11 Jan 2014</time>
             </header>
-            <main class="astro-37DZVIS6">
+            <main class="astro-6MTULHJX">
                 <p>(Cross-posted on <a href="http://blogs.perl.org/users/nate_glenn/2014/01/list-assignment-in-scalar-context.html">blogs.perl.org</a>)</p><p>This week I received some special help <a href="http://stackoverflow.com/questions/21037846/why-does-the-goatse-operator-work/21069822">on SO</a> in understanding how the goatse operator works. I was very thankful for everyone’s help. <a href="http://www.perlmonks.org/?node_id=790129">These</a> <a href="http://www.perlmonks.org/?node_id=527973">two</a> articles were also very helpful and I recommend reading them.</p><p>Part of my confusion over the goatse operator was not knowing the difference between list and scalar assignment operators, which both are indicated via ’=‘. Further confusing is the fact that each can be used in either scalar or list context, so you can have list assignment in scalar context or scalar assignment in list context.</p><p>The type of assignment is determined by what is being assigned to. As ikegami says, assignment to an aggregate is a list assignment, aggregate meaning an array, a hash, a parenthetical expression, or a my/our/local variable declared with parens.</p><p>The context of an assignment operator will really only matter when you are storing or checking the return value. You can store the value of an assignment operator by using another asignment operator: <code>blah1 = blah2 = blah3</code>, where <code>blah1</code> is the value returned by assigning <code>blah3</code> to <code>blah2</code>. The value gets checked in other contexts too, like inside a control structure condition: <code>if(my $line = &lt;&gt;)</code>, etc. Here are examples for each combination of context and assignment operator:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #8B949E"># scalar assignment in scalar context</span></span>
 <span class="line"><span style="color: #C9D1D9">$thing = ($foo = </span><span style="color: #A5D6FF">&#39;bar&#39;</span><span style="color: #C9D1D9">); </span><span style="color: #8B949E"># assignment returns $foo as lvalue</span></span>
 <span class="line"><span style="color: #79C0FF">say</span><span style="color: #C9D1D9"> $thing; </span><span style="color: #8B949E"># bar</span></span>
@@ -95,7 +95,7 @@
 <span class="line"><span style="color: #79C0FF">say</span><span style="color: #C9D1D9"> $thing; </span><span style="color: #8B949E"># nothing ($thing is undef)</span></span></code></pre><p>That third one is of course the goatse operator. By the way for the record I totally think it looks more like a Saturn, though my wife disagrees and everyone seems to call it goatse. Anyway, though generally list assignment in scalar context is the rarest one, there are other occurrences. Ysth mentions the <code>each</code> operator inside of a <code>while</code> loop:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">while</span><span style="color: #C9D1D9">(</span><span style="color: #FF7B72">my</span><span style="color: #C9D1D9"> ($key, $value) = </span><span style="color: #79C0FF">each</span><span style="color: #C9D1D9"> %hash)</span></span></code></pre><p>The aggregate on the left makes this list assignment, and <code>while</code> makes it scalar context. Once the hash is out of keys, <code>each</code> returns <code>()</code> so that the assignment operator returns <code>0</code>, finishing the <code>while</code> loop.</p><p>I was pretty happy to finally understand this area I never quite understood I didn’t understand (though someone might still point out I don’t know what I’m talking about, as seems to be common with this subject). Today, though, I thought of one more usage of list assignment in scalar context that is probably used erroneously fairly often: quick and dirty parameter checking:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">my</span><span style="color: #C9D1D9"> ($input, $output) = @ARGV </span><span style="color: #FF7B72">or</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">die</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&#39;Usage: script &lt;input&gt; &lt;output&gt;&#39;</span><span style="color: #C9D1D9">;</span></span></code></pre><p>I always thought that the assignment would return $output, probably by analogy with comma expression assignment to a scalar (<code>$stuff = qw(foo bar)</code>). However, if the user fails to provide a second parameter, the error would not be caught. This assignment will return the number of elements in @ARGV, which could be <code>1</code> instead of the required <code>2</code>. So this use is only correct when unpacking <code>@_</code> or <code>@ARGV</code> and expecting exactly one variable:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">my</span><span style="color: #C9D1D9"> ($input) = @ARGV </span><span style="color: #FF7B72">or</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">die</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&#39;Usage: script &lt;input&gt;&#39;</span><span style="color: #C9D1D9">;</span></span></code></pre><p>This is probably obvious to Perl old-timers, but to me it was a revelation. And it doesn’t look like I’m the only one, either. Grepping CPAN for assignment of an array to a parenthetical with ‘or’ after it turns up many mis-uses <a href="http://grep.cpan.me/?q=%5C%29%5Cs*%3D%5Cs*%40%5B%5E+%5Cr%5Cn%5D%2B%5Cs%2Bor">here</a>.</p>
             </main>
         </article>
-        <footer class="astro-OIZPJGW6"><a href="/blog/rss.xml" class="astro-OIZPJGW6"><img src="/rss/rss-icon.svg" height="15px" width="15px" class="astro-OIZPJGW6"> RSS</a>・<a href="/license" class="astro-OIZPJGW6">License</a></footer>
+        <footer class="astro-75WOMYGT"><a href="/blog/rss.xml" class="astro-75WOMYGT"><img src="/rss/rss-icon.svg" height="15px" width="15px" alt="RSS logo" class="astro-75WOMYGT"> RSS</a>・<a href="/license" class="astro-75WOMYGT">License</a></footer>
 
 
     

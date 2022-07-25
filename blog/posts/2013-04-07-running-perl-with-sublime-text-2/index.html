@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="astro-37DZVIS6">
+<html lang="en" class="astro-6MTULHJX">
     <head>
         <!-- Global Metadata --><meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
@@ -37,11 +37,11 @@
 <!-- fallback for browsers that don't execute JS -->
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap"></noscript>
 
-    <link rel="stylesheet" href="/assets/fd12c972.a3045897.css" />
-<link rel="stylesheet" href="/assets/df0ad7d9.d98196fc.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
+    <link rel="stylesheet" href="/assets/fd12c972.9c857589.css" />
+<link rel="stylesheet" href="/assets/df0ad7d9.2012b2f4.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
 </script></head>
 
-    <body class="astro-37DZVIS6">
+    <body class="astro-6MTULHJX">
         <header class="wrapper astro-VQADTZVM">
     <nav class="astro-VQADTZVM">
         <a href="/" class="astro-VQADTZVM">
@@ -66,13 +66,13 @@
 </header>
 
 
-        <article class="wrapper content astro-37DZVIS6">
-            <header class="astro-37DZVIS6">
+        <article class="wrapper content astro-6MTULHJX">
+            <header class="astro-6MTULHJX">
                 
-                <h1 class="title astro-37DZVIS6">Running Perl with Sublime Text 2</h1>
+                <h1 class="title astro-6MTULHJX">Running Perl with Sublime Text 2</h1>
                 <!-- Machine readable datetime attribute, human-readable text --><time datetime="2013-04-07">7 Apr 2013</time>
             </header>
-            <main class="astro-37DZVIS6">
+            <main class="astro-6MTULHJX">
                 <p>I’ve been having fun trying out <a href="http://www.sublimetext.com/">Sublime Text</a>. It’s pretty, fast, and extremely extensible.</p><p>The first thing that I wanted was to be able to work well with Perl. I installed <a href="http://wbond.net/sublime_packages/package_control">Package Control</a>, followed by <a href="https://github.com/SublimeLinter/SublimeLinter">SublimeLinter</a>, which has the <a href="http://perlcritic.com/">perlcritic</a> command built in. Making this useful requires a little finagling; perlcritic is by no means a quick program (being a really thorough linter for a language which is complex to parse), and the defaults for SublimeLinter cause it run over and over again as you type. To fix this, I edited <code>Packages/SublimeLinter/SublimeLinter.sublime-settings</code> and changed the “sublimelinter” setting to false. Now, in order to lint the current file, I have to press <kbd>ctrl+alt+l</kbd>. (<strong>Update:</strong> I don’t recommend this for Sublime Text 2 because of speed problems. See <a href="https://github.com/SublimeLinter/SublimeLinter/issues/408">this issue on Github</a>. ST3 should be fine, though.)</p><p>Next, I wanted to be able to run my Perl scripts. Sublime has the <kbd>ctrl+b</kbd> shortcut for running a build for the current file. What the build actually does is specified in either a build file or the project file. To create a new build file for perl, go to Tools->Build System -> New Build System. The build file I’ve seen on different sites for Perl looks like this:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #C9D1D9">{</span></span>
 <span class="line"><span style="color: #C9D1D9">    </span><span style="color: #79C0FF">&quot;cmd&quot;</span><span style="color: #C9D1D9">: [</span><span style="color: #A5D6FF">&quot;perl&quot;</span><span style="color: #C9D1D9">, </span><span style="color: #A5D6FF">&quot;$file&quot;</span><span style="color: #C9D1D9">],</span></span>
 <span class="line"><span style="color: #C9D1D9">    </span><span style="color: #79C0FF">&quot;file_regex&quot;</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">&quot;.* at (.*) line ([0-9]*)&quot;</span><span style="color: #C9D1D9">,</span></span>
@@ -110,7 +110,7 @@
 </ul>
             </main>
         </article>
-        <footer class="astro-OIZPJGW6"><a href="/blog/rss.xml" class="astro-OIZPJGW6"><img src="/rss/rss-icon.svg" height="15px" width="15px" class="astro-OIZPJGW6"> RSS</a>・<a href="/license" class="astro-OIZPJGW6">License</a></footer>
+        <footer class="astro-75WOMYGT"><a href="/blog/rss.xml" class="astro-75WOMYGT"><img src="/rss/rss-icon.svg" height="15px" width="15px" alt="RSS logo" class="astro-75WOMYGT"> RSS</a>・<a href="/license" class="astro-75WOMYGT">License</a></footer>
 
 
     

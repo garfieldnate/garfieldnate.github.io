@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="astro-37DZVIS6">
+<html lang="en" class="astro-6MTULHJX">
     <head>
         <!-- Global Metadata --><meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
@@ -37,11 +37,11 @@
 <!-- fallback for browsers that don't execute JS -->
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap"></noscript>
 
-    <link rel="stylesheet" href="/assets/fd12c972.a3045897.css" />
-<link rel="stylesheet" href="/assets/df0ad7d9.d98196fc.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
+    <link rel="stylesheet" href="/assets/fd12c972.9c857589.css" />
+<link rel="stylesheet" href="/assets/df0ad7d9.2012b2f4.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
 </script></head>
 
-    <body class="astro-37DZVIS6">
+    <body class="astro-6MTULHJX">
         <header class="wrapper astro-VQADTZVM">
     <nav class="astro-VQADTZVM">
         <a href="/" class="astro-VQADTZVM">
@@ -66,13 +66,13 @@
 </header>
 
 
-        <article class="wrapper content astro-37DZVIS6">
-            <header class="astro-37DZVIS6">
+        <article class="wrapper content astro-6MTULHJX">
+            <header class="astro-6MTULHJX">
                 
-                <h1 class="title astro-37DZVIS6">Notes on Writing a Syntax Highlighter for Sublime Text</h1>
+                <h1 class="title astro-6MTULHJX">Notes on Writing a Syntax Highlighter for Sublime Text</h1>
                 <!-- Machine readable datetime attribute, human-readable text --><time datetime="2015-03-15">15 Mar 2015</time>
             </header>
-            <main class="astro-37DZVIS6">
+            <main class="astro-6MTULHJX">
                 <p>I recently released the <a href="http://garfieldnate.github.io/Sublime-Soar-Tools/">Soar Tools</a> package for Sublime Text, and I took a few notes that might help the next author. Sublime Text is pretty awesome in a lot of ways, but the documentation is more tutorial + forums than it is a thorough explanation. I mainly followed the directions <a href="http://sublime-text-unofficial-documentation.readthedocs.org/en/latest/extensibility/syntaxdefs.html">here</a>. My tips are as follows:</p><ul>
 <li>
 <p>Don’t try to copy that BNF grammar into tmLanguage format. It’s not designed for specifying grammars, it’s designed for highlighting. That means that it’s robust and will highlight while you’re typing instead of waiting until you have a compilable program to highlight. This is a big advantage, especially for Soar, where there’s a lot of typing to get a production sourcable. Instead of making a fully recursive grammar, pick out the few big areas that should be treated differently, such as the inside of a class or other curly-braced section, and detect them in the main <code>patterns</code> list, parsing the insides with patterns in the <code>repository</code>.</p>
@@ -100,7 +100,7 @@ but no other keyword will have a child starting with a dash (<code>-</code>).</l
 </ul><p>I hope this saves the next developer some time. Overall, the biggest gotcha for me was just realizing that I wasn’t writing a BNF-style grammar to completely validate the syntax in a file, but a list of patterns and the scopes that they create or match in. Once I understood this, actually writing the rules was not too difficult a task.</p>
             </main>
         </article>
-        <footer class="astro-OIZPJGW6"><a href="/blog/rss.xml" class="astro-OIZPJGW6"><img src="/rss/rss-icon.svg" height="15px" width="15px" class="astro-OIZPJGW6"> RSS</a>・<a href="/license" class="astro-OIZPJGW6">License</a></footer>
+        <footer class="astro-75WOMYGT"><a href="/blog/rss.xml" class="astro-75WOMYGT"><img src="/rss/rss-icon.svg" height="15px" width="15px" alt="RSS logo" class="astro-75WOMYGT"> RSS</a>・<a href="/license" class="astro-75WOMYGT">License</a></footer>
 
 
     
