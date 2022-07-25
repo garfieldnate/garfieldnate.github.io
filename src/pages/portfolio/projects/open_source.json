@@ -41,7 +41,7 @@
         "img_src": "/assets/portfolio/Soar_logo.png",
         "img_alt": "The Soar logo",
         "copyright": "SoarGroup 2020",
-        "license": "https://opensource.org/licenses/BSD-2-Clause"
+        "license": "<a href=\"https://opensource.org/licenses/BSD-2-Clause\">BSD-2</a>"
     },
     {
         "name": "Sublime Soar Tools",

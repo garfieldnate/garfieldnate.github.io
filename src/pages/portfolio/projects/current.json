@@ -17,9 +17,9 @@
         "name": "Modern Algorithmic Toolbox Assignments",
         "description": "Highly detailed Jupyter notebooks exploring the asignments of the incredible Stanford course, <a href=\"https://web.stanford.edu/class/cs168/index.html\">The Modern Algorithm Toolbox</a>. The notebookss explore topics in randomized algorithms and data analysis.",
         "img_src": "/assets/portfolio/Jupyter_logo.png",
-        "license": "https://opensource.org/licenses/bsd-license.php",
+        "license": "<a href=\"https://opensource.org/licenses/bsd-license.php\">BSD license</a>",
         "copyright": "2017 Project Jupyter Contributors",
-        "img_alt": "The Jupyter project log",
+        "img_alt": "The Jupyter project logo",
         "repo": "https://github.com/garfieldnate/Stanford-CS-168_Modern_Algorithmic_Toolbox"
     }
 ]
