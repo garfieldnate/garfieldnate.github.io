@@ -21,7 +21,7 @@
         "repo": ""
     },
     {
-        "name": "Japanese ⇄ Turkish machine translation system",
+        "name": "Japanese ⇄ Turkish Machine Translation System",
         "description": "I built a custom translation system used in a Japanese rubber factory located in Turkey. The system handled the complex morphology of Turkish better than other state-of-the-art translation systems.",
         "img_src": "/assets/portfolio/tire_factory.jpg",
         "img_alt": "A freshly formed tire coming out of a factory machine, still steaming",
