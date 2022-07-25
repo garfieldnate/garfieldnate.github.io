@@ -19,6 +19,6 @@ Anyway, I just wanted to put in a good word for the new [Japanese stackexchange]
 <a href="http://japanese.stackexchange.com/users/24/nate-glenn">
     <ResponsiveFigure
         class_="center"
-        src="http://japanese.stackexchange.com/users/flair/24.png#center"
+        src="http://japanese.stackexchange.com/users/flair/24.png"
         alt="profile for Nate Glenn at Japanese Language and Usage, Q&A for students, teachers, and linguists wanting to discuss the finer points of the Japanese language" />
 </a>
