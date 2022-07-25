@@ -6,7 +6,6 @@ categories:
 - software
 - buffering
 - special variables
-comments: true
 publishDate: 2013-01-27T00:00:00Z
 title: When not to use Perl's Implicit close
 description: Suffering from Buffering

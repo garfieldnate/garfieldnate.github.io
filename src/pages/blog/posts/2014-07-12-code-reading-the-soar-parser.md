@@ -5,7 +5,6 @@ categories:
 - parsing
 - C++
 - code reading
-comments: true
 publishDate: 2014-07-12T13:04:54Z
 title: 'Code Reading: The Soar Parser'
 description: Digging in to a large C++ project

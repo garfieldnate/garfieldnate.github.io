@@ -7,7 +7,6 @@ categories:
 - batch
 - devops
 - Chocolatey
-comments: true
 publishDate: 2014-07-01T21:00:38Z
 title: 'Preparation: The Key to a Less Painful Windows Reinstall'
 description: No files left behind

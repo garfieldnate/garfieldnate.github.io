@@ -4,7 +4,6 @@ categories:
 - Japanese
 - NLP
 - tools
-comments: true
 publishDate: 2011-11-06T00:00:00Z
 title: List of Japanese NLP tools
 ---

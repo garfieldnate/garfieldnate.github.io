@@ -6,7 +6,6 @@ categories:
 - batch
 - pl2bat.pl
 - distributions
-comments: true
 publishDate: 2014-07-13T23:42:07Z
 title: 'Code Reading: pl2bat.pl'
 description: Looking under the hood of a ubiquitous tool

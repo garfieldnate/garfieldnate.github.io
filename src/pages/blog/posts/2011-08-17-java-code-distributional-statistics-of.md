@@ -5,7 +5,6 @@ categories:
 - Math
 - Statistics
 - Logarithm
-comments: true
 publishDate: 2011-08-17T00:00:00Z
 title: Distributional Statistics of Log Values in Linear Domain
 description: Aggregating logarithmic values of mean, variance, kurtosis, etc.

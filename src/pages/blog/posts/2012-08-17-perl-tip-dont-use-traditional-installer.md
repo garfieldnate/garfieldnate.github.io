@@ -6,7 +6,6 @@ categories:
 - distribution
 - Module::Build
 - MakeMaker
-comments: true
 publishDate: 2012-08-17T00:00:00Z
 title: 'Perl Tip: Don''t Use a Makefile for Your Module'
 description: Make isn't as universal as you think

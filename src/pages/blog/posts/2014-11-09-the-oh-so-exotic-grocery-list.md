@@ -6,7 +6,6 @@ categories:
 - children
 - shopping
 - stories
-comments: true
 publishDate: 2014-11-09T13:59:26Z
 title: The Oh So Exotic Grocery List
 ---

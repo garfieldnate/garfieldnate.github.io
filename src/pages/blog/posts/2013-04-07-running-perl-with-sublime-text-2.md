@@ -4,7 +4,6 @@ categories:
 - Sublime Text
 - productivity
 - Perl
-comments: true
 publishDate: 2013-04-07T00:00:00Z
 title: Running Perl with Sublime Text 2
 description: Project setup code

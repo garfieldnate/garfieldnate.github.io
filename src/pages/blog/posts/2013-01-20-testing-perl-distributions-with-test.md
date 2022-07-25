@@ -10,7 +10,6 @@ categories:
 - prove
 - Module::Build
 - MakeMaker
-comments: true
 publishDate: 2013-01-20T00:00:00Z
 title: Testing Perl Distributions with Test Subdirectories
 ---

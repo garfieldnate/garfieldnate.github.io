@@ -7,7 +7,6 @@ categories:
 - alignment
 - NLP
 - Strings
-comments: true
 publishDate: 2011-09-01T00:00:00Z
 title: String Allignment with Edit Operations
 description: Finding the shortest transformation path between two strings

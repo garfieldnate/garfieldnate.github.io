@@ -7,7 +7,6 @@ categories:
 - web crawler
 - debugging
 - BYU
-comments: true
 publishDate: 2011-11-03T00:00:00Z
 title: CS 240 Web Crawler at BYU
 description: Advice for getting through BYU's CS rite of passage

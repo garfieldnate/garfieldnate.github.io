@@ -8,7 +8,6 @@ categories:
 - list
 - parameter checking
 - list assignment
-comments: true
 publishDate: 2014-01-11T00:00:00Z
 title: List Assignment in Scalar Context
 description: Understanding = in Perl

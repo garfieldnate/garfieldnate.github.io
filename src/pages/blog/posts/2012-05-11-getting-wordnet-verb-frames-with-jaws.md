@@ -4,7 +4,6 @@ categories:
 - Java code
 - JAWS
 - WordNet
-comments: true
 publishDate: 2012-05-11T00:00:00Z
 title: Getting WordNet Verb Frames with JAWS
 descriptions: Instructions and examples

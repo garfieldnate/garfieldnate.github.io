@@ -4,7 +4,6 @@ categories:
 - education
 - creativity
 - CS 404
-comments: true
 publishDate: 2014-08-08T22:12:22Z
 title: Schools Kill Creativity
 author: Ken Robinson

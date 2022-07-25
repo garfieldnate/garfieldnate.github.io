@@ -6,7 +6,6 @@ categories:
 - Euclid
 - GCD
 - math
-comments: true
 publishDate: 2013-04-15T00:00:00Z
 title: The Extended Euclidian Algorithm in Perl
 ---

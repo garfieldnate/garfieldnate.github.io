@@ -8,7 +8,6 @@ categories:
 - BNF
 - grammar
 - Soar
-comments: true
 publishDate: 2015-03-15T22:59:35Z
 title: Notes on Writing a Syntax Highlighter for Sublime Text
 description: Gotchas I encountered while writing a Soar highlighter

@@ -8,7 +8,6 @@ categories:
 - Algomation
 - education
 - computer science
-comments: true
 publishDate: 2015-01-06T20:20:34Z
 title: 'My New Toy: Algomation'
 description: Understanding an algorithm by visualizing it

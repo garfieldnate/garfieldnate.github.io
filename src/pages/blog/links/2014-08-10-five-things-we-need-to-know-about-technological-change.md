@@ -6,7 +6,6 @@ categories:
 - sociology
 - culture
 - history
-comments: true
 publishDate: 2014-08-10T22:28:41Z
 author: Niel Postman
 ref: http://www.cs.ucdavis.edu/~rogaway/classes/188/materials/postman.pdf

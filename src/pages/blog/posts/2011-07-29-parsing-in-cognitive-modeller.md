@@ -5,7 +5,6 @@ categories:
 - parsing
 - thesis
 - Soar
-comments: true
 publishDate: 2011-07-29T00:00:00Z
 title: Parsing in a Cognitive Modeller
 description: An introduction to my undergraduate research

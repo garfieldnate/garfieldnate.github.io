@@ -6,7 +6,6 @@ categories:
 - Historical Linguistics
 - Spelling
 description: How Vietnamese spelling was (not) standardized
-comments: true
 publishDate: 2011-06-10T00:00:00Z
 title: Some Quốc Ngữ History
 ---

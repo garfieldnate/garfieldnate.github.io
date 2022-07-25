@@ -7,7 +7,6 @@ categories:
 - bug
 - testing
 - perlop
-comments: true
 publishDate: 2013-02-03T00:00:00Z
 title: 'Managing Global State: the Flip-Flop Operator'
 description: .. creates hidden global state 😱

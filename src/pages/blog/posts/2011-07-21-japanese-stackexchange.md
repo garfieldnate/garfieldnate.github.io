@@ -2,7 +2,6 @@
 layout: "../../../layouts/BlogPost.astro"
 categories:
 - Japanese stackexchange language learning
-comments: true
 publishDate: 2011-07-21T00:00:00Z
 title: Japanese Stackexchange
 description: Go learn some Japanese!
