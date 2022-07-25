@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html class="astro-37DZVIS6">
+    <head>
+        <!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+<!-- Primary Meta Tags -->
+<title>The Extended Euclidian Algorithm in Perl</title>
+<meta name="title" content="The Extended Euclidian Algorithm in Perl">
+<meta name="description">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://garfieldnate.github.io/blog/posts/2013-04-15-the-extended-euclidian-algorithm-in-perl/">
+<meta property="og:title" content="The Extended Euclidian Algorithm in Perl">
+<meta property="og:description">
+<meta property="og:image" content="https://astro.build/social.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://garfieldnate.github.io/blog/posts/2013-04-15-the-extended-euclidian-algorithm-in-perl/">
+<meta property="twitter:title" content="The Extended Euclidian Algorithm in Perl">
+<meta property="twitter:description">
+<meta property="twitter:image" content="https://astro.build/social.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap">
+
+    <link rel="stylesheet" href="/assets/fd12c972.a3045897.css" />
+<link rel="stylesheet" href="/assets/df0ad7d9.a89f85d4.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
+</script></head>
+
+    <body class="astro-37DZVIS6">
+        <header class="wrapper astro-VQADTZVM">
+    <nav class="astro-VQADTZVM">
+        <a href="/" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Home</span>
+        </a>
+        <a href="/#portfolio" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Portfolio</span>
+        </a>
+        <a href="/resume/resume-en.html" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Resume</span>
+        </a>
+        <a href="/blog" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Blog</span>
+        </a>
+        <a href="https://www.linkedin.com/in/nathanglenn" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">LinkedIn</span>
+        </a>
+        <a href="https://github.com/garfieldnate/" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">GitHub</span>
+        </a>
+    </nav>
+</header>
+
+
+        <article class="wrapper content astro-37DZVIS6">
+            <header class="astro-37DZVIS6">
+                
+                <h1 class="title astro-37DZVIS6">The Extended Euclidian Algorithm in Perl</h1>
+                <!-- Machine readable datetime attribute, human-readable text --><time datetime="2013-04-15">15 Apr 2013</time>
+            </header>
+            <main class="astro-37DZVIS6">
+                <p>This week I learned about the extended Euclidian algorithm for finding a linear combination of two numbers that yields their GCD. For example, the GCD of 213 and 171 is 3, and -4<em>213 + 5</em>171 = 3. This algorithm is important in the <a href="http://en.wikipedia.org/wiki/RSA_(algorithm)">RSA</a> encryption scheme.</p><p>I had quite a difficult time getting myself to fully understand how it works. I jumped between <a href="http://en.wikipedia.org/wiki/Extended_euclidean_algorithm">Wikipedia</a>, my <a href="http://www.amazon.com/Data-Structures-Problem-Solving-Using/dp/0321541405/ref=sr_1_1?ie=UTF8&qid=1365529203&sr=8-1&keywords=data+structures+and+problem+solving+using+java">data structures textbook</a> (don’t buy it), a <a href="http://www.youtube.com/watch?v=twlo21D9LY0">YouTube video</a>, and this excellent <a href="http://public.csusm.edu/aitken_html/m422/Handout1.pdf">number theory class lecture</a>. The lecture is the best, though I think there may be a typographical error in the recursive formula.</p><p>The basic idea uses recursion with an easy base step. We call <code>Euclid(a,b)</code> with <code>a ≥ b</code>:</p><ul>
+<li>The base case is when b is 0. The GCD of x and 0 is always x, and the coefficients to produce a GCD of 0 are 1 and 0 (or anything else): 1*x + 0(or anything)*0 = x. So the base case returns (1,0)</li>
+<li>Any other step starts by recursively calling <code>Euclid(b, a mod b)</code>. We know that the GCD of a and b is the same as the GCD of b and a mod b (lemma 12 in the lecture). This recursive call is guaranteed to eventually get to the base case of b = 0.</li>
+<li>After finding the coefficients for producing the GCD from b and a mod b, we can calculate the ones for producing the GCD from a and b, because a mod b can be put in terms of a and b (see the code comments for the formulas).</li>
+</ul><p>To really help myself understand the whole thing, I wrote a Perl script to illustrate it. I put in lots of comments as I worked my way through it.</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">use</span><span style="color: #C9D1D9"> strict;</span></span>
+<span class="line"><span style="color: #FF7B72">use</span><span style="color: #C9D1D9"> warnings;</span></span>
+<span class="line"><span style="color: #FF7B72">use</span><span style="color: #C9D1D9"> 5.010;</span></span>
+<span class="line"><span style="color: #8B949E">#start with a &gt;= b</span></span>
+<span class="line"><span style="color: #FF7B72">my</span><span style="color: #C9D1D9"> @nums = </span><span style="color: #79C0FF">sort</span><span style="color: #C9D1D9"> {$b </span><span style="color: #FF7B72">&lt;=&gt;</span><span style="color: #C9D1D9"> $a} @ARGV;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">gcd(@nums);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E">#input: two numbers (a,b) a &gt;= b &gt; 0</span></span>
+<span class="line"><span style="color: #8B949E">#output: the coefficients which which yield their GCD;</span></span>
+<span class="line"><span style="color: #FF7B72">sub</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">gcd</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">my</span><span style="color: #C9D1D9"> ($a, $b) = @_;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #8B949E">#base case; the GCD of x and 0 always x;</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #8B949E">#and the coefficients will always be 1 and 0 (or anything) because</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #8B949E">#1*x + 0*0 = x</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">if</span><span style="color: #C9D1D9">($b == 0){</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #79C0FF">say</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;GCD is </span><span style="color: #C9D1D9">$a</span><span style="color: #A5D6FF">&quot;</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #79C0FF">say</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;(a,b) = (</span><span style="color: #C9D1D9">$a</span><span style="color: #A5D6FF">,</span><span style="color: #C9D1D9">$b</span><span style="color: #A5D6FF">), coefficients = (1,0)&quot;</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #79C0FF">say</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;1x</span><span style="color: #C9D1D9">$a</span><span style="color: #A5D6FF"> + 0x</span><span style="color: #C9D1D9">$b</span><span style="color: #A5D6FF"> = </span><span style="color: #C9D1D9">$a</span><span style="color: #A5D6FF">&quot;</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> (1, 0);</span></span>
+<span class="line"><span style="color: #C9D1D9"> }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #8B949E">#otherwise, we evaluate u and v for k = ub + vr, where r is a mod b</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #8B949E">#gcd(b, a%b) gives the same value</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">my</span><span style="color: #C9D1D9"> $remainder = $a % $b;</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">my</span><span style="color: #C9D1D9"> ($u, $v) = gcd($b, $remainder);</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #8B949E">#now we can find k in terms of a and b because we know r in terms a and b</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #8B949E">#r = a - bq, where q = the whole part of a/b</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #8B949E">#k = ub + vr = ub + v(a - bq) = va + b(u-qv)</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #8B949E">#so the coefficient on a is v, and the coefficient on b is 1-qv</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">my</span><span style="color: #C9D1D9"> $x = $v;</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">my</span><span style="color: #C9D1D9"> $q = </span><span style="color: #79C0FF">int</span><span style="color: #C9D1D9">(($a/$b));</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">my</span><span style="color: #C9D1D9"> $y = $u - $q*$x;</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">say</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;(a,b) = (</span><span style="color: #C9D1D9">$a</span><span style="color: #A5D6FF">,</span><span style="color: #C9D1D9">$b</span><span style="color: #A5D6FF">), coefficients are (</span><span style="color: #C9D1D9">$x</span><span style="color: #A5D6FF">,</span><span style="color: #C9D1D9">$y</span><span style="color: #A5D6FF">)&quot;</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">say</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;</span><span style="color: #C9D1D9">${x}</span><span style="color: #A5D6FF">x</span><span style="color: #C9D1D9">$a</span><span style="color: #A5D6FF"> + </span><span style="color: #C9D1D9">${y}</span><span style="color: #A5D6FF">x</span><span style="color: #C9D1D9">$b</span><span style="color: #A5D6FF"> = &quot;</span><span style="color: #C9D1D9"> . ($x*$a + $y*$b);</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> ($x, $y);</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span></code></pre><p>Feel free to leave a comment if you think that something could be stated more clearly. I hope it helps anyone else trying to learn how the extended Euclidian algorithm works.</p>
+            </main>
+        </article>
+        <footer class="astro-I46STNBI"><a href="/blog/rss.xml" class="astro-I46STNBI"><img src="/rss/rss-icon.svg" class="astro-I46STNBI"> RSS</a>・<a href="/license" class="astro-I46STNBI">License</a></footer>
+
+
+    
+</body></html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html class="astro-37DZVIS6">
+    <head>
+        <!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+<!-- Primary Meta Tags -->
+<title>Getting WordNet Verb Frames with JAWS</title>
+<meta name="title" content="Getting WordNet Verb Frames with JAWS">
+<meta name="description">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://garfieldnate.github.io/blog/posts/2012-05-11-getting-wordnet-verb-frames-with-jaws/">
+<meta property="og:title" content="Getting WordNet Verb Frames with JAWS">
+<meta property="og:description">
+<meta property="og:image" content="https://astro.build/social.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://garfieldnate.github.io/blog/posts/2012-05-11-getting-wordnet-verb-frames-with-jaws/">
+<meta property="twitter:title" content="Getting WordNet Verb Frames with JAWS">
+<meta property="twitter:description">
+<meta property="twitter:image" content="https://astro.build/social.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap">
+
+    <link rel="stylesheet" href="/assets/fd12c972.a3045897.css" />
+<link rel="stylesheet" href="/assets/df0ad7d9.a89f85d4.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
+</script></head>
+
+    <body class="astro-37DZVIS6">
+        <header class="wrapper astro-VQADTZVM">
+    <nav class="astro-VQADTZVM">
+        <a href="/" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Home</span>
+        </a>
+        <a href="/#portfolio" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Portfolio</span>
+        </a>
+        <a href="/resume/resume-en.html" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Resume</span>
+        </a>
+        <a href="/blog" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Blog</span>
+        </a>
+        <a href="https://www.linkedin.com/in/nathanglenn" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">LinkedIn</span>
+        </a>
+        <a href="https://github.com/garfieldnate/" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">GitHub</span>
+        </a>
+    </nav>
+</header>
+
+
+        <article class="wrapper content astro-37DZVIS6">
+            <header class="astro-37DZVIS6">
+                
+                <h1 class="title astro-37DZVIS6">Getting WordNet Verb Frames with JAWS</h1>
+                <!-- Machine readable datetime attribute, human-readable text --><time datetime="2012-05-11">11 May 2012</time>
+            </header>
+            <main class="astro-37DZVIS6">
+                <p>I love using JAWS to access WordNet. It has a rather extensive API, runs quickly, and doesn’t require too much configuration. All you have to do is<a href="http://lyle.smu.edu/~tspell/jaws/index.html"> download the Jaws binary jar</a> and <a href="http://wordnet.princeton.edu/wordnet/download/">WordNet</a>, and then specify to JAWS where the WordNet files are (I will demonstrate this later).</p><p>One thing that did take a while to figure out was how to get verb frames from it. A verb frame is an indication of how the verb may be used. For example, the entry for the verb “fax” in WordNet contains the following frames:</p><ul>
+<li><code>Somebody ----s something to somebody</code></li>
+<li><code>Somebody ----s somebody something</code></li>
+<li><code>Somebody ----s somebody</code></li>
+<li><code>Somebody ----s something</code></li>
+<li><code>Somebody ----s</code></li>
+</ul><p>Let’s look at the WordNet file to see how frames are specified. If you open data.verb, you will see that “sun” occurs twice. The frames are listed like so:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">02112546 39 v 04 sun 0 insolate 0 solarize 0 solarise ... 01 + 08 00 | expose to the rays of the sun or affect by exposure to the sun</span></span></code></pre><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">00104147 29 v 02 sun 0 sunbathe ... 03 + 02 00 + 22 00 + 09 01 | expose one&#39;s body to the sun</span></span></code></pre><p>The <code>01</code> and <code>03</code> indicate the number of verb frames, <code>08</code>, <code>02</code>, <code>22</code>, and <code>09</code> are frame numbers. The <code>00</code>’s and <code>01</code> that follow the frame numbers indicate which words in the synset the numbers apply to. <code>00</code> means the frame is applicable to all members. The <code>01</code> in the second entry means that frame 9 is only for the word <code>sun</code>, and not for the second word, <code>sunbathe</code>.<br>There are two methods provided by JAWS to get frames. They are both contained in the <a href="http://lyle.smu.edu/~tspell/jaws/doc/edu/smu/tspell/wordnet/VerbSynset.html"><code>VerbSynset</code></a> class:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #8B949E">/**</span></span>
+<span class="line"><span style="color: #8B949E"> * Returns the sentence frames (if any) associated with this verb meaning.</span></span>
+<span class="line"><span style="color: #8B949E"> * Sentence frames are examples of how the verb can be used / applied, and</span></span>
+<span class="line"><span style="color: #8B949E"> * all the frames returned by this method apply to all word forms in the</span></span>
+<span class="line"><span style="color: #8B949E"> * synset.</span></span>
+<span class="line"><span style="color: #8B949E"> *</span></span>
+<span class="line"><span style="color: #8B949E"> * </span><span style="color: #FF7B72">@return</span><span style="color: #8B949E"> Sentence frames associated with all word forms in this synset.</span></span>
+<span class="line"><span style="color: #8B949E"> * </span><span style="color: #FF7B72">@see</span></span>
+<span class="line"><span style="color: #8B949E"> *         Format of Lexicographer Files (&quot;Verb Frames&quot;)</span></span>
+<span class="line"><span style="color: #8B949E"> */</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">String</span><span style="color: #C9D1D9">[] </span><span style="color: #D2A8FF">getSentenceFrames</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #8B949E">/**</span></span>
+<span class="line"><span style="color: #8B949E"> * Returns the sentence frames (if any) that are specific to a particular</span></span>
+<span class="line"><span style="color: #8B949E"> * word form within this synset, where sentence frames are examples of</span></span>
+<span class="line"><span style="color: #8B949E"> * how the word form can be used / applied.</span></span>
+<span class="line"><span style="color: #8B949E"> *</span></span>
+<span class="line"><span style="color: #8B949E"> * </span><span style="color: #FF7B72">@param</span><span style="color: #8B949E">  </span><span style="color: #FFA657">wordForm</span><span style="color: #8B949E"> Word form for which to return sentence frames.</span></span>
+<span class="line"><span style="color: #8B949E"> * </span><span style="color: #FF7B72">@return</span><span style="color: #8B949E"> Sentence frames that are specific to the word form.</span></span>
+<span class="line"><span style="color: #8B949E"> * </span><span style="color: #FF7B72">@see</span></span>
+<span class="line"><span style="color: #8B949E"> *         Format of Lexicographer Files (&quot;Verb Frames&quot;)</span></span>
+<span class="line"><span style="color: #8B949E"> */</span></span>
+<span class="line"><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">String</span><span style="color: #C9D1D9">[] </span><span style="color: #D2A8FF">getSentenceFrames</span><span style="color: #C9D1D9">(String wordForm);</span></span></code></pre><p>Keep in mind that the VerbSynset class is completely divorced from the actual orthographic representation of a word, since a synset may belong to several different words. The first method returns all of the frames that apply to every word in the synset, or to all of the frames marked with a 00 in the data.verb file as shown above. The second method returns only the frames which are marked as being specific to a single orthographic representation, specified by the one argument for the method. The return values are complementary and each is incomplete by itself. However, given only the synset offset or only the word to look up, JAWS is returning as much information as is possible. If you know both the synset number and the orthographic representation of a word you need frames for (and I don’t see why you wouldn’t), then the getWordFramesComplete method in the program below demonstrates how to get all of the available frames:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">package</span><span style="color: #C9D1D9"> edu.byu.xnlsoar.test;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> java.util.ArrayList;</span></span>
+<span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> java.util.List;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> edu.smu.tspell.wordnet.Synset;</span></span>
+<span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> edu.smu.tspell.wordnet.SynsetType;</span></span>
+<span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> edu.smu.tspell.wordnet.VerbSynset;</span></span>
+<span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> edu.smu.tspell.wordnet.WordNetDatabase;</span></span>
+<span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> edu.smu.tspell.wordnet.impl.file.SampleFrameFactory;</span></span>
+<span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> edu.smu.tspell.wordnet.impl.file.SynsetFactory;</span></span>
+<span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> edu.smu.tspell.wordnet.impl.file.SynsetPointer;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">class</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">DemoFrames</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">private</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">static</span><span style="color: #C9D1D9"> WordNetDatabase</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">database;</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">private</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">static</span><span style="color: #C9D1D9"> SynsetFactory</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">synsetFactory;</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #8B949E">//initialize everything here</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">static</span><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9">  System.</span><span style="color: #D2A8FF">setProperty</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">&quot;wordnet.database.dir&quot;</span><span style="color: #C9D1D9">, </span><span style="color: #A5D6FF">&quot;./lib/3.0/dict&quot;</span><span style="color: #C9D1D9">);</span></span>
+<span class="line"><span style="color: #C9D1D9">  database </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> WordNetDatabase.</span><span style="color: #D2A8FF">getFileInstance</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">  synsetFactory </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> SynsetFactory.</span><span style="color: #D2A8FF">getInstance</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9"> }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E"> /**</span></span>
+<span class="line"><span style="color: #8B949E">  *</span></span>
+<span class="line"><span style="color: #8B949E">  * </span><span style="color: #FF7B72">@param</span><span style="color: #8B949E"> </span><span style="color: #FFA657">synsetOffset</span><span style="color: #8B949E"> Synset number to look up frames for</span></span>
+<span class="line"><span style="color: #8B949E">  * </span><span style="color: #FF7B72">@return</span><span style="color: #8B949E"> Array of frames for the synset; only returns frames</span></span>
+<span class="line"><span style="color: #8B949E">  * which apply to every word in the synset</span></span>
+<span class="line"><span style="color: #8B949E">  * frames</span></span>
+<span class="line"><span style="color: #8B949E">  */</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">static</span><span style="color: #C9D1D9"> List&lt;</span><span style="color: #FF7B72">string</span><span style="color: #C9D1D9">&gt; </span><span style="color: #D2A8FF">getGeneralSynsetFrames</span><span style="color: #C9D1D9">(</span><span style="color: #FF7B72">int</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">synsetOffset</span><span style="color: #C9D1D9">){</span></span>
+<span class="line"><span style="color: #C9D1D9">  SynsetPointer</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">sp</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">SynsetPointer</span><span style="color: #C9D1D9">(SynsetType.VERB, synsetOffset);</span></span>
+<span class="line"><span style="color: #C9D1D9">  VerbSynset</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">vSynset</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> (VerbSynset) synsetFactory.</span><span style="color: #D2A8FF">getSynset</span><span style="color: #C9D1D9">(sp);</span></span>
+<span class="line"><span style="color: #C9D1D9">  List</span><span style="color: #FFA657">&lt;</span><span style="color: #FF7B72">string</span><span style="color: #FFA657">&gt; </span><span style="color: #C9D1D9">frames</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> ArrayList&lt;</span><span style="color: #FF7B72">string</span><span style="color: #C9D1D9">&gt;();</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">for</span><span style="color: #C9D1D9">(String</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">s</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> vSynset.</span><span style="color: #D2A8FF">getSentenceFrames</span><span style="color: #C9D1D9">())</span></span>
+<span class="line"><span style="color: #C9D1D9">   frames.</span><span style="color: #D2A8FF">add</span><span style="color: #C9D1D9">(s);</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> frames;</span></span>
+<span class="line"><span style="color: #C9D1D9"> }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E"> /**</span></span>
+<span class="line"><span style="color: #8B949E">  *</span></span>
+<span class="line"><span style="color: #8B949E">  * </span><span style="color: #FF7B72">@param</span><span style="color: #8B949E"> </span><span style="color: #FFA657">lemma</span><span style="color: #8B949E"> Base form of the word you want to look up</span></span>
+<span class="line"><span style="color: #8B949E">  * </span><span style="color: #FF7B72">@return</span><span style="color: #8B949E"> Array of frames for the lemma; only returns those</span></span>
+<span class="line"><span style="color: #8B949E">  * that are specific to a particular word form within each synset.</span></span>
+<span class="line"><span style="color: #8B949E">  * frames</span></span>
+<span class="line"><span style="color: #8B949E">  */</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">static</span><span style="color: #C9D1D9"> List&lt;</span><span style="color: #FF7B72">string</span><span style="color: #C9D1D9">&gt; </span><span style="color: #D2A8FF">getWordFramesSpecific</span><span style="color: #C9D1D9">(String </span><span style="color: #FFA657">lemma</span><span style="color: #C9D1D9">){</span></span>
+<span class="line"><span style="color: #C9D1D9">  List</span><span style="color: #FFA657">&lt;</span><span style="color: #FF7B72">string</span><span style="color: #FFA657">&gt; </span><span style="color: #C9D1D9">frames</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> ArrayList&lt;</span><span style="color: #FF7B72">string</span><span style="color: #C9D1D9">&gt;();</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">Synset</span><span style="color: #FFA657">[] </span><span style="color: #C9D1D9">synsets</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> database.</span><span style="color: #D2A8FF">getSynsets</span><span style="color: #C9D1D9">(lemma,SynsetType.VERB);</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">for</span><span style="color: #C9D1D9">(Synset</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">synset</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> synsets){</span></span>
+<span class="line"><span style="color: #C9D1D9">   </span><span style="color: #FF7B72">for</span><span style="color: #C9D1D9">(String</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">s</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> ((VerbSynset) synset).</span><span style="color: #D2A8FF">getSentenceFrames</span><span style="color: #C9D1D9">(lemma))</span></span>
+<span class="line"><span style="color: #C9D1D9">    frames.</span><span style="color: #D2A8FF">add</span><span style="color: #C9D1D9">(s);</span></span>
+<span class="line"><span style="color: #C9D1D9">  }</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> frames;</span></span>
+<span class="line"><span style="color: #C9D1D9"> }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E"> /**</span></span>
+<span class="line"><span style="color: #8B949E">  * This one is more difficult to understand...</span></span>
+<span class="line"><span style="color: #8B949E">  * </span><span style="color: #FF7B72">@param</span><span style="color: #8B949E"> </span><span style="color: #FFA657">lemma</span><span style="color: #8B949E"> Base form of the word you want to look up</span></span>
+<span class="line"><span style="color: #8B949E">  * </span><span style="color: #FF7B72">@return</span><span style="color: #8B949E"> Array of frames for the lemma; only returns those</span></span>
+<span class="line"><span style="color: #8B949E">  * that match every word in each of the synsets that contain this word.</span></span>
+<span class="line"><span style="color: #8B949E">  */</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">static</span><span style="color: #C9D1D9"> List&lt;</span><span style="color: #FF7B72">string</span><span style="color: #C9D1D9">&gt; </span><span style="color: #D2A8FF">getWordFramesGeneral</span><span style="color: #C9D1D9">(String </span><span style="color: #FFA657">lemma</span><span style="color: #C9D1D9">){</span></span>
+<span class="line"><span style="color: #C9D1D9">  List</span><span style="color: #FFA657">&lt;</span><span style="color: #FF7B72">string</span><span style="color: #FFA657">&gt; </span><span style="color: #C9D1D9">frames</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> ArrayList&lt;</span><span style="color: #FF7B72">string</span><span style="color: #C9D1D9">&gt;();</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">Synset</span><span style="color: #FFA657">[] </span><span style="color: #C9D1D9">synsets</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> database.</span><span style="color: #D2A8FF">getSynsets</span><span style="color: #C9D1D9">(lemma,SynsetType.VERB);</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">for</span><span style="color: #C9D1D9">(Synset</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">synset</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> synsets){</span></span>
+<span class="line"><span style="color: #C9D1D9">   </span><span style="color: #FF7B72">for</span><span style="color: #C9D1D9">(String</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">s</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> ((VerbSynset) synset).</span><span style="color: #D2A8FF">getSentenceFrames</span><span style="color: #C9D1D9">())</span></span>
+<span class="line"><span style="color: #C9D1D9">    frames.</span><span style="color: #D2A8FF">add</span><span style="color: #C9D1D9">(s);</span></span>
+<span class="line"><span style="color: #C9D1D9">  }</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> frames;</span></span>
+<span class="line"><span style="color: #C9D1D9"> }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E"> /**</span></span>
+<span class="line"><span style="color: #8B949E">  * This method is the best. It returns all possible frames</span></span>
+<span class="line"><span style="color: #8B949E">  * given a synset number and the accompanying word.</span></span>
+<span class="line"><span style="color: #8B949E">  * </span><span style="color: #FF7B72">@param</span><span style="color: #8B949E"> </span><span style="color: #FFA657">lemma</span><span style="color: #8B949E"> Base form of the word you want to look up</span></span>
+<span class="line"><span style="color: #8B949E">  * </span><span style="color: #FF7B72">@param</span><span style="color: #8B949E"> </span><span style="color: #FFA657">synsetOffset</span><span style="color: #8B949E"> Synset number to look up frames for</span></span>
+<span class="line"><span style="color: #8B949E">  * </span><span style="color: #FF7B72">@return</span><span style="color: #8B949E"> Array of frames for the synset; returns all frames</span></span>
+<span class="line"><span style="color: #8B949E">  * for this word within this synset.</span></span>
+<span class="line"><span style="color: #8B949E">  * frames</span></span>
+<span class="line"><span style="color: #8B949E">  */</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">static</span><span style="color: #C9D1D9"> List&lt;</span><span style="color: #FF7B72">string</span><span style="color: #C9D1D9">&gt; </span><span style="color: #D2A8FF">getWordFramesComplete</span><span style="color: #C9D1D9">(String </span><span style="color: #FFA657">lemma</span><span style="color: #C9D1D9">, </span><span style="color: #FF7B72">int</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">synsetOffset</span><span style="color: #C9D1D9">){</span></span>
+<span class="line"><span style="color: #C9D1D9">  SynsetPointer</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">sp</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">SynsetPointer</span><span style="color: #C9D1D9">(SynsetType.VERB, synsetOffset);</span></span>
+<span class="line"><span style="color: #C9D1D9">  VerbSynset</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">vSynset</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> (VerbSynset) synsetFactory.</span><span style="color: #D2A8FF">getSynset</span><span style="color: #C9D1D9">(sp);</span></span>
+<span class="line"><span style="color: #C9D1D9">  List</span><span style="color: #FFA657">&lt;</span><span style="color: #FF7B72">string</span><span style="color: #FFA657">&gt; </span><span style="color: #C9D1D9">frames</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> ArrayList&lt;</span><span style="color: #FF7B72">string</span><span style="color: #C9D1D9">&gt;();</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">for</span><span style="color: #C9D1D9">(String</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">s</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> vSynset.</span><span style="color: #D2A8FF">getSentenceFrames</span><span style="color: #C9D1D9">(lemma))</span></span>
+<span class="line"><span style="color: #C9D1D9">   frames.</span><span style="color: #D2A8FF">add</span><span style="color: #C9D1D9">(s);</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">for</span><span style="color: #C9D1D9">(String</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">s</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> vSynset.</span><span style="color: #D2A8FF">getSentenceFrames</span><span style="color: #C9D1D9">())</span></span>
+<span class="line"><span style="color: #C9D1D9">   frames.</span><span style="color: #D2A8FF">add</span><span style="color: #C9D1D9">(s);</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> frames;</span></span>
+<span class="line"><span style="color: #C9D1D9"> }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E"> /**</span></span>
+<span class="line"><span style="color: #8B949E">  * Prints out several different queries for the frames of &quot;fax&quot;</span></span>
+<span class="line"><span style="color: #8B949E">  */</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">static</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">void</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">main</span><span style="color: #C9D1D9">(</span><span style="color: #FF7B72">String</span><span style="color: #C9D1D9">[] </span><span style="color: #FFA657">args</span><span style="color: #C9D1D9">) {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">int</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">offset</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">104147</span><span style="color: #C9D1D9">;</span><span style="color: #8B949E">//the synset meaning &quot;expose one&#39;s body to the sun&quot;</span></span>
+<span class="line"><span style="color: #C9D1D9">  System.out.</span><span style="color: #D2A8FF">println</span><span style="color: #C9D1D9">(</span><span style="color: #D2A8FF">getGeneralSynsetFrames</span><span style="color: #C9D1D9">(offset));</span><span style="color: #8B949E">//returns 2 frames</span></span>
+<span class="line"><span style="color: #C9D1D9">  System.out.</span><span style="color: #D2A8FF">println</span><span style="color: #C9D1D9">(</span><span style="color: #D2A8FF">getWordFramesSpecific</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">&quot;sun&quot;</span><span style="color: #C9D1D9">));</span><span style="color: #8B949E">//returns 1 frame</span></span>
+<span class="line"><span style="color: #C9D1D9">  System.out.</span><span style="color: #D2A8FF">println</span><span style="color: #C9D1D9">(</span><span style="color: #D2A8FF">getWordFramesGeneral</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">&quot;sun&quot;</span><span style="color: #C9D1D9">));</span><span style="color: #8B949E">//returns 3 frames</span></span>
+<span class="line"><span style="color: #C9D1D9">  System.out.</span><span style="color: #D2A8FF">println</span><span style="color: #C9D1D9">(</span><span style="color: #D2A8FF">getWordFramesComplete</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">&quot;sunbathe&quot;</span><span style="color: #C9D1D9">,offset));</span><span style="color: #8B949E">//returns 2 frames</span></span>
+<span class="line"><span style="color: #C9D1D9">  System.out.</span><span style="color: #D2A8FF">println</span><span style="color: #C9D1D9">(</span><span style="color: #D2A8FF">getWordFramesComplete</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">&quot;sun&quot;</span><span style="color: #C9D1D9">,offset));</span><span style="color: #8B949E">//returns 3 frames (different from before)</span></span>
+<span class="line"><span style="color: #C9D1D9"> }</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span></code></pre><p><code>getWordFramesComplete</code> calls both of the available methods in JAWS, retrieving both frames that apply to all words in a synset and the frames that are specific to a single word in the synset.</p>
+            </main>
+        </article>
+        <footer class="astro-I46STNBI"><a href="/blog/rss.xml" class="astro-I46STNBI"><img src="/rss/rss-icon.svg" class="astro-I46STNBI"> RSS</a>・<a href="/license" class="astro-I46STNBI">License</a></footer>
+
+
+    
+</body></html>

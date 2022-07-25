@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html class="astro-37DZVIS6">
+    <head>
+        <!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+<!-- Primary Meta Tags -->
+<title>Itadaki GoSen and IPADIC 2.7</title>
+<meta name="title" content="Itadaki GoSen and IPADIC 2.7">
+<meta name="description" content="Intro to Japanese morphological analysis">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://garfieldnate.github.io/blog/posts/2011-11-06-itadaki-gosen-and-ipadic-27/">
+<meta property="og:title" content="Itadaki GoSen and IPADIC 2.7">
+<meta property="og:description" content="Intro to Japanese morphological analysis">
+<meta property="og:image" content="https://astro.build/social.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://garfieldnate.github.io/blog/posts/2011-11-06-itadaki-gosen-and-ipadic-27/">
+<meta property="twitter:title" content="Itadaki GoSen and IPADIC 2.7">
+<meta property="twitter:description" content="Intro to Japanese morphological analysis">
+<meta property="twitter:image" content="https://astro.build/social.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap">
+
+    <link rel="stylesheet" href="/assets/fd12c972.a3045897.css" />
+<link rel="stylesheet" href="/assets/df0ad7d9.a89f85d4.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
+</script></head>
+
+    <body class="astro-37DZVIS6">
+        <header class="wrapper astro-VQADTZVM">
+    <nav class="astro-VQADTZVM">
+        <a href="/" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Home</span>
+        </a>
+        <a href="/#portfolio" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Portfolio</span>
+        </a>
+        <a href="/resume/resume-en.html" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Resume</span>
+        </a>
+        <a href="/blog" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Blog</span>
+        </a>
+        <a href="https://www.linkedin.com/in/nathanglenn" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">LinkedIn</span>
+        </a>
+        <a href="https://github.com/garfieldnate/" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">GitHub</span>
+        </a>
+    </nav>
+</header>
+
+
+        <article class="wrapper content astro-37DZVIS6">
+            <header class="astro-37DZVIS6">
+                
+                <h1 class="title astro-37DZVIS6">Itadaki GoSen and IPADIC 2.7</h1>
+                <!-- Machine readable datetime attribute, human-readable text --><time datetime="2011-11-06">6 Nov 2011</time>
+            </header>
+            <main class="astro-37DZVIS6">
+                <p><strong>Update3: I’ve forked the Itadaki project on <a href="https://github.com/garfieldnate/Itadaki">GitHub</a> to keep track of it better.</strong></p><p><strong>Update2: I made an executable JAR for GoSen that runs the ReadingProcessorDemo. It requires Java 6; just unzip the contents of <a href="https://sites.google.com/site/complingfiles/files/gosen.7z?attredirects=0&d=1">this zip file</a> to your computer and click on the jar file.</strong></p><p><strong>Update1: The IPADIC dictionary is no longer available from its original location. It has been replaced by the <a href="http://sourceforge.jp/projects/naist-jdic/">NAIST</a> dictionary. I have edited the following post to reflect the needed changes.</strong></p><p>Itadaki is a software suite for processing Japanese in OpenOffice. GoSen, part of the Itadaki project, is a pure Java morphological analysis tool for Japanese, and I have found it extremely useful in my research. Unfortunately, the page for this project went down recently, making the tools harder to find. Itadaki is still available through Google code <a href="http://code.google.com/p/itadaki/">here</a>, but I can’t find a separate installment of GoSen. The old GoSen website can still be accessed through the way-back-machine<a href="http://web.archive.org/web/20080108030419/http://itadaki.org/wiki/index.php/Itadaki"> here</a>. The other problem is that GoSen hasn’t been updated since 2007, and in it’s current release cannot handle the latest release of IPADIC. I’ll describe how to fix it in this post.</p><p>Why does it matter that we can’t use the latest version of IPADIC? Well, here’s an example. I am using GoSen in my thesis work right now, and I put in a sentence which included a negative, past tense verb, such as 行かなかった. It analyzed it as な being used for negation, and かった being the past tense of the verb かう. That is indeed a problem! Using the newer IPADIC fixed it for me, though. To do that, download <a href="http://neu101.up.seesaa.net/etc/gosen-t001.zip">this</a> modified version of GoSen. The explanation for the fix is <a href="http://neu101.seesaa.net/article/182625342.html">here</a>. Basically, a change in the new IPADIC versions to work better with MeCab adds a bunch of commas that break GoSen.</p><p><strong>Edit: Once you’ve downloaded and unzipped GoSen, run ant in the top directory to build an executable JAR file. Note that if you want javadoc, you’ll have to change build.xml so that the javadoc command has ‘encoding=“utf-8”‘. Next, you must download the IPADIC dictionary from its legacy repository, <a href="http://sourceforge.jp/projects/ipadic/downloads/24435/ipadic-2.7.0.tar.gz/">here</a>. Unpack the contents into testdata/dictionary. Change testdata/dictionary/build.xml so that the value of “ipadic.version” is “2.7.0” (the version that you downloaded). Now run ant in this directory to build the dictionary. [If you had errors, you may have forgotten to run ant in the top level directory first.]</strong></p><p>Then, to run a demo and see what amazing things GoSen can do, copy the dictionary.xml file from the testdata/dictionary directory to the dictionary/dictionary directory, go back to the root directory of GoSen, and then run <code>java -cp bin examples.ReadingProcessorDemo testData/dictionary/dictionary.xml</code>. The GoSen site says to run using the testdata folder, but that means you’ll have to download the dictionary twice, which is dumb. When you run the above command, you’ll get this GUI:</p><figure class="center">
+    <style >
+    
+
+    .astro-imagetools-picture-0861EE19 {
+      --opacity: 1;
+      --z-index: 0;
+    }
+
+    
+            .astro-imagetools-picture-0861EE19 img {
+              z-index: 1;
+              position: relative;
+            }
+          
+
+    .astro-imagetools-picture-0861EE19::after {
+      inset: 0;
+      content: "";
+      left: 0;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      transition: opacity 1s;
+      opacity: var(--opacity);
+      z-index: var(--z-index);
+    }
+  
+        .astro-imagetools-picture-0861EE19 img {
+          object-fit: cover;
+          object-position: 50% 50%;
+        }
+
+        .astro-imagetools-picture-0861EE19::after {
+          background-size: cover;
+          background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAfCAIAAABoLHqZAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFGUlEQVQ4jZVUW2/cRBidBqSorVSgLaA+8Qd55gUheqE0oVJpJV6qCl7goRWESkWijUiabnPPJrvZeDebXdvjy9rr24zHXl/Wa894kDdLChIIODr65ptvdDQz9pkPiJKkKkpLkrqyAjV95bBf7+ttqB+JSrsvaubQRsjF2MW+7xMb27qLRQOrrg89Ak5EqSfJbSg3W+2TE2lb6O+2e80TqS0pzXZX0tRJnlPGCsZyxvw8NJNMRONhktsZBTJUDhqNQ6Hjj6IgIGEUBlEYjCqSKES+jwnxfOwi5HieiwnCGPsoCEgQEABVbWhZwtGRDKHjuoZp2LZtTem4jk+IqmmDgeEhz/U8wzQty/IQkmRZkmUgK2oYjjY3Nw8aB5ggwzY9gvShLmuyYRiEkPr+fqvVsh3Htm0IYV8UbdvZ2tra3NwEiqpqmiZBCKFmS64juY7oRsM0JxRj4iLkBwEOCMK+h32fBMgnHsYkDEk4qsRQgcfC8U5n7758f7G/eFf86iF+tJQtubGXxmkUR1H8BlEcx0k1RlEEFF2nnHHOO7xzPj8POJibzAEfXE7f07jKOWfT1RnKNynnHCiaRkuaBVlz3HgnencumpuP5s+5567F19RCLZIip/lMWFbSghanSSWGmsY4IzYRYuHi9gWwBt7qzoF1cHXvCkyU3c09F3lpmgZBkGWZYzu6rkejiBCSpulsZ874cXF84eUF8AuY250DT8GV51fFTDTgwHIs13WH1pAQEoYhQshxHMM0giCoxJNiwgsu0PaHvYsX+uCS8vZ8F3zUfB+OJE55ksSnh2SnoGx27HJ254IzLjDhUnYeTMB8PgcK8EF+eUA1zjhltJiCFnSGghZ5NQGKqnmehxzct8W77r0F7+4N7Ytbw9v3nAeyDR3LxRjFcTQajUbRqPo/s1hVAFTVwcDoieJxp2d2rWHX0oWB1XUc0ZNE2OuL5tDCvo8Q9hD2MPYQQggjjBHCQIZQEIR6vdE4PGy0mxt7Gxv1LaHfdUOECfGDylKVvfyKaBo97KMpAVTUyvOO0z1uD02Dc1YyyqtPUpaMlqzgFSkvaVkWvKRnLFkBJKjUthsr6/s7LXF9v3PUHzS7Wl2QDjrwSDQ70Dll++8iEKHy8Pul735arnXspZcHj59vPV7e+eHZ2o+/7S7X5fWuW+tYr9tWrWPXTmPF08QCogz3duuUUsscqopqW5Zt2Yz91cT/ACDKsPaqlk8mECp7O3utw5YsyoxVTjjz8OmLOJ2clUrOgQShhxDnPBtnURSlaZpl2Z9l/7JzlmVnj+Z/AYgyHI/fiFlZ0v8MoKiqomqSDBVNFyXJNIfI912EXISrdj11lTs11rQ4o4eQhzHQdA3KsN3p9Hr9RuNgYJhJmo6iKEmnzeaP7jM1dBxN20+cJHGSVG1IN01dH3T7cpLRgvI0K8Y5tWyv2xODUTKe0HScpxklwUiCGlS0vqgIwrEI9SQrgCjLkWeWKeE04SzhLOUsjYmbRZjTmJdpyRLOJ56tNXbWT1r19dUXvdYuL9MiC8FWs3OvFl9/Obm5Or5RMftsOf52O3wi0Ftr+Y3V8fXV9MZa/vkz4+sX2vVnxqdPuh8/Htyu0ZvLPtgW4Dfro9trk8XaZKE2WazlX65lD1aGj7aCT55ad15lC7XJwmu68MK5/fPJ4oq/8Ktxd4PdeZUvrIageSLnocUL8oY59odw5OqJC1nmVZUy9IZi+2ADDXpKv8mLgNMgj+zfAcXOXCUR208ZAAAAAElFTkSuQmCC");
+          background-position: 50% 50%;
+        }
+      </style><picture
+    
+    class="astro-imagetools-picture astro-imagetools-picture-0861EE19"
+    style="position: relative; display: inline-block; ; max-width: 100%; height: auto;"
+    ><source
+            srcset="/assets/gosen@304w.8049ef70.avif"
+            sizes="(min-width: 304px) 304px, 100vw"
+            width="304"
+            height="465"
+            type="image/avif"
+            
+          />
+<source
+            srcset="/assets/gosen@304w.00d37ea3.webp"
+            sizes="(min-width: 304px) 304px, 100vw"
+            width="304"
+            height="465"
+            type="image/webp"
+            
+          />
+<img
+    
+    src="/assets/gosen@304w.0520dad"
+    alt="Screenshot of the 'reading processor demo' tool that comes with GoSen. The window shows '情報スーパーハイウェイ' analyzed into consitituent words and assigned part of speech. The conrols for editing the processor's output are also open."
+    srcset="/assets/gosen@304w.0520dad8.png"
+    sizes="(min-width: 304px) 304px, 100vw"
+    width="304"
+    height="465"
+    loading="lazy"
+    decoding="async"
+    class="astro-imagetools-img"
+    style="display: inline-block; overflow: hidden; vertical-align: middle; ; max-width: 100%; height: auto;"
+    onload="parentElement.style.setProperty('--z-index', 1);parentElement.style.setProperty('--opacity', 0);"
+  />
+  </picture>
+
+    
+</figure><p>Notice that it tokenizes the sentence, gives readings, and allows you to choose among alternatives analyses. It also gives information on part of speech and inflection.</p><p>To use GoSen in an Eclipse project, add gosen-1.0beta.jar to the project build path. You also need to have the dictionary directory somewhere, along with the dictionary.xml file. This code will get you started:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">package</span><span style="color: #C9D1D9"> edu.byu.xnlsoar.jp.lexacc;</span></span>
+<span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> java.io.IOException;</span></span>
+<span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> java.util.List;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> edu.byu.xnlsoar.utils.Constants;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> net.java.sen.SenFactory;</span></span>
+<span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> net.java.sen.StringTagger;</span></span>
+<span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> net.java.sen.dictionary.Morpheme;</span></span>
+<span class="line"><span style="color: #FF7B72">import</span><span style="color: #C9D1D9"> net.java.sen.dictionary.Token;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">class</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">GoSenInterface</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> List&lt;</span><span style="color: #FF7B72">token</span><span style="color: #C9D1D9">&gt; </span><span style="color: #D2A8FF">tokenize</span><span style="color: #C9D1D9">(String </span><span style="color: #FFA657">sentence</span><span style="color: #C9D1D9">){</span></span>
+<span class="line"><span style="color: #C9D1D9">  StringTagger</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">tagger</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> SenFactory.</span><span style="color: #D2A8FF">getStringTagger</span><span style="color: #C9D1D9">(Constants.</span><span style="color: #D2A8FF">getProperty</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">&quot;GOSEN_DICT_CONFIG&quot;</span><span style="color: #C9D1D9">));</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">try</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9">   </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> tagger.</span><span style="color: #D2A8FF">analyze</span><span style="color: #C9D1D9">(sentence);</span></span>
+<span class="line"><span style="color: #C9D1D9">  } </span><span style="color: #FF7B72">catch</span><span style="color: #C9D1D9"> (IOException </span><span style="color: #FFA657">e</span><span style="color: #C9D1D9">) {</span></span>
+<span class="line"><span style="color: #C9D1D9">   e.</span><span style="color: #D2A8FF">printStackTrace</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">   System.</span><span style="color: #D2A8FF">exit</span><span style="color: #C9D1D9">(</span><span style="color: #FF7B72">-</span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">);</span></span>
+<span class="line"><span style="color: #C9D1D9">  }</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">null</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"><span style="color: #C9D1D9"> }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">static</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">void</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">main</span><span style="color: #C9D1D9">(</span><span style="color: #FF7B72">String</span><span style="color: #C9D1D9">[] </span><span style="color: #FFA657">args</span><span style="color: #C9D1D9">){</span></span>
+<span class="line"><span style="color: #C9D1D9">  String</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">sentence</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;やっぱり日本語情報処理って簡単に出来ちゃうんだもんな。&quot;</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"><span style="color: #C9D1D9">  GoSenInterface</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">dict</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">GoSenInterface</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">  System.out.</span><span style="color: #D2A8FF">println</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">&quot;tokenizing &quot;</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> sentence);</span></span>
+<span class="line"><span style="color: #C9D1D9">  List</span><span style="color: #FFA657">&lt;</span><span style="color: #FF7B72">token</span><span style="color: #FFA657">&gt; </span><span style="color: #C9D1D9">tokens</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> dict.</span><span style="color: #D2A8FF">tokenize</span><span style="color: #C9D1D9">(sentence);</span></span>
+<span class="line"><span style="color: #C9D1D9">  System.out.</span><span style="color: #D2A8FF">println</span><span style="color: #C9D1D9">(tokens);</span></span>
+<span class="line"><span style="color: #C9D1D9">  Morpheme</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">m;</span></span>
+<span class="line"><span style="color: #C9D1D9">  System.out.</span><span style="color: #D2A8FF">println</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">&quot;surface, lemma, POS, conjugation&quot;</span><span style="color: #C9D1D9">);</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">for</span><span style="color: #C9D1D9">(Token</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">t</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> tokens){</span></span>
+<span class="line"><span style="color: #C9D1D9">   System.out.</span><span style="color: #D2A8FF">print</span><span style="color: #C9D1D9">(t </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;, &quot;</span><span style="color: #C9D1D9">);</span></span>
+<span class="line"><span style="color: #C9D1D9">   m </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> t.</span><span style="color: #D2A8FF">getMorpheme</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">   System.out.</span><span style="color: #D2A8FF">print</span><span style="color: #C9D1D9">(m.</span><span style="color: #D2A8FF">getBasicForm</span><span style="color: #C9D1D9">() </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;, &quot;</span><span style="color: #C9D1D9">);</span></span>
+<span class="line"><span style="color: #C9D1D9">   System.out.</span><span style="color: #D2A8FF">print</span><span style="color: #C9D1D9">(m.</span><span style="color: #D2A8FF">getPartOfSpeech</span><span style="color: #C9D1D9">() </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;, &quot;</span><span style="color: #C9D1D9">);</span></span>
+<span class="line"><span style="color: #C9D1D9">   System.out.</span><span style="color: #D2A8FF">println</span><span style="color: #C9D1D9">(m.</span><span style="color: #D2A8FF">getConjugationalType</span><span style="color: #C9D1D9">());</span></span>
+<span class="line"><span style="color: #C9D1D9">  }</span></span>
+<span class="line"><span style="color: #C9D1D9"> }</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span></code></pre><p>If you run that you will get:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">tokenizing やっぱり日本語情報処理って簡単に出来ちゃうんだもんな。</span></span>
+<span class="line"><span style="color: #c9d1d9">[やっぱり, 日本語, 情報処理, って, 簡単, に, 出来, ちゃう, ん, だ, もん, な, 。]</span></span>
+<span class="line"><span style="color: #c9d1d9">surface, lemma, POS, conjugation</span></span>
+<span class="line"><span style="color: #c9d1d9">やっぱり, やっぱり, 副詞-一般, *</span></span>
+<span class="line"><span style="color: #c9d1d9">日本語, 日本語, 名詞-一般, *</span></span>
+<span class="line"><span style="color: #c9d1d9">情報処理, 情報処理, 名詞-一般, *</span></span>
+<span class="line"><span style="color: #c9d1d9">って, って, 助詞-格助詞-連語, *</span></span>
+<span class="line"><span style="color: #c9d1d9">簡単, 簡単, 名詞-形容動詞語幹, *</span></span>
+<span class="line"><span style="color: #c9d1d9">に, に, 助詞-副詞化, *</span></span>
+<span class="line"><span style="color: #c9d1d9">出来, 出来る, 動詞-自立, 一段</span></span>
+<span class="line"><span style="color: #c9d1d9">ちゃう, ちゃう, 動詞-非自立, 五段・ワ行促音便</span></span>
+<span class="line"><span style="color: #c9d1d9">ん, ん, 名詞-非自立-一般, *</span></span>
+<span class="line"><span style="color: #c9d1d9">だ, だ, 助動詞, 特殊・ダ</span></span>
+<span class="line"><span style="color: #c9d1d9">もん, もん, 名詞-非自立-一般, *</span></span>
+<span class="line"><span style="color: #c9d1d9">な, だ, 助動詞, 特殊・ダ</span></span>
+<span class="line"><span style="color: #c9d1d9">。, 。, 記号-句点, *</span></span></code></pre><p>You have plenty of other options while processing, like grabbing alternate readings, etc. Notice that it got one wrong here: ちゃう is a contraction of てしまう, not a verb whose lemma is ちゃう. It doesn’t seem to work on contractions because every token needs a surface form. So this might not work well on informal registers such as tweets or blogs unless some pre-preprocessing is done.</p><p>Feel free to leave any questions or comments.</p>
+            </main>
+        </article>
+        <footer class="astro-I46STNBI"><a href="/blog/rss.xml" class="astro-I46STNBI"><img src="/rss/rss-icon.svg" class="astro-I46STNBI"> RSS</a>・<a href="/license" class="astro-I46STNBI">License</a></footer>
+
+
+    
+</body></html>

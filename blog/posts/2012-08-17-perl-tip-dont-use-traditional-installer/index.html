@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html class="astro-37DZVIS6">
+    <head>
+        <!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+<!-- Primary Meta Tags -->
+<title>Perl Tip: Don&#39;t Use a Makefile for Your Module</title>
+<meta name="title" content="Perl Tip: Don't Use a Makefile for Your Module">
+<meta name="description" content="Make isn't as universal as you think">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://garfieldnate.github.io/blog/posts/2012-08-17-perl-tip-dont-use-traditional-installer/">
+<meta property="og:title" content="Perl Tip: Don't Use a Makefile for Your Module">
+<meta property="og:description" content="Make isn't as universal as you think">
+<meta property="og:image" content="https://astro.build/social.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://garfieldnate.github.io/blog/posts/2012-08-17-perl-tip-dont-use-traditional-installer/">
+<meta property="twitter:title" content="Perl Tip: Don't Use a Makefile for Your Module">
+<meta property="twitter:description" content="Make isn't as universal as you think">
+<meta property="twitter:image" content="https://astro.build/social.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap">
+
+    <link rel="stylesheet" href="/assets/fd12c972.a3045897.css" />
+<link rel="stylesheet" href="/assets/df0ad7d9.a89f85d4.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
+</script></head>
+
+    <body class="astro-37DZVIS6">
+        <header class="wrapper astro-VQADTZVM">
+    <nav class="astro-VQADTZVM">
+        <a href="/" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Home</span>
+        </a>
+        <a href="/#portfolio" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Portfolio</span>
+        </a>
+        <a href="/resume/resume-en.html" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Resume</span>
+        </a>
+        <a href="/blog" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Blog</span>
+        </a>
+        <a href="https://www.linkedin.com/in/nathanglenn" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">LinkedIn</span>
+        </a>
+        <a href="https://github.com/garfieldnate/" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">GitHub</span>
+        </a>
+    </nav>
+</header>
+
+
+        <article class="wrapper content astro-37DZVIS6">
+            <header class="astro-37DZVIS6">
+                
+                <h1 class="title astro-37DZVIS6">Perl Tip: Don&#39;t Use a Makefile for Your Module</h1>
+                <!-- Machine readable datetime attribute, human-readable text --><time datetime="2012-08-17">17 Aug 2012</time>
+            </header>
+            <main class="astro-37DZVIS6">
+                <p>During my internship at <a href="http://www.soartech.com/">SoarTech</a>, I got a chance to learn a lot more about creating Perl modules. I put together a package of scripts for converting old file formats for speech recognition grammars, and I thought it worked beautifully. Of course, to start my module I used the classic tool h2xs:</p><p>h2xs -X -n Foo::Bar</p><p>My final code was well tested, and quick to install. I asked my co-worker to install it on his machine, and it was just as easy to use.</p><p>I was confident when I presented it to the company, until someone asked, “so, these Perl scripts, they work on Windows, Mac, Linux, etc., right?” I told them they <em>should</em>, since Perl is cross-platform. I became (a good kind of) paranoid, and asked my boss to test my code on his Mac (I was using Windows). The thing exploded when fed my script! I couldn’t believe it! What could I have done so wrong?</p><p>So, the next day I stayed home a bit to borrow my wife’s Mac and do more testing. But there was a big problem: my module used <a href="http://search.cpan.org/~mschwern/ExtUtils-MakeMaker-6.62/lib/ExtUtils/MakeMaker.pm">ExtUtils::MakeMaker</a> to install itself. This has been the standard for years, and the majority of CPAN modules use this for installation. The cpan utility recognizes it, and runs installation automatically. However, <a href="http://schwern.dreamhosters.com/talks/MakeMaker_Is_DOOMED/">MakeMaker is DOOMED!</a> It requires an external tool, make, which you can find on every *nix platform, but everywhere else it has to be installed by the user. Strawberry Perl and ActiveState Perl for Windows come with a version (dmake or nmake). But on Mac, you have to install <a href="https://developer.apple.com/xcode/">XCode</a>, a whopping 4 gigabyte distribution for Mac developers.</p><p>…</p><p>Dangit…</p><p>My solution was to follow <a href="http://search.cpan.org/~mschwern/">Michael Schwern</a>’s advice and convert to using <a href="http://search.cpan.org/~leont/Module-Build-0.4002/lib/Module/Build.pm">Module::Build</a>, which does not have external dependencies. There happens to be a <a href="http://search.cpan.org/~schubiger/Module-Build-Convert-0.49/lib/Module/Build/Convert.pm">converter</a> to help you switch. When I ran it on my code, it didn’t give a completely valid output, but the edits I did were minimal. From a user standpoint, the module will still be installed using the <code>cpan</code> utility, so nothing has changed.</p><p>When I put new distribution, with a shiny new Build.PL file, on a Mac, I still had some failed tests, but there weren’t intermingled with the giant BOOM that happens when the <code>cpan</code> utility can’t find <code>make</code>. After fixing a bug or two, my module works on Windows and Mac and my boss is a happy camper.</p>
+            </main>
+        </article>
+        <footer class="astro-I46STNBI"><a href="/blog/rss.xml" class="astro-I46STNBI"><img src="/rss/rss-icon.svg" class="astro-I46STNBI"> RSS</a>・<a href="/license" class="astro-I46STNBI">License</a></footer>
+
+
+    
+</body></html>

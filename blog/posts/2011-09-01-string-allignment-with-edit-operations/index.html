@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html class="astro-37DZVIS6">
+    <head>
+        <!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+<!-- Primary Meta Tags -->
+<title>String Allignment with Edit Operations</title>
+<meta name="title" content="String Allignment with Edit Operations">
+<meta name="description" content="Finding the shortest transformation path between two strings">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://garfieldnate.github.io/blog/posts/2011-09-01-string-allignment-with-edit-operations/">
+<meta property="og:title" content="String Allignment with Edit Operations">
+<meta property="og:description" content="Finding the shortest transformation path between two strings">
+<meta property="og:image" content="https://astro.build/social.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://garfieldnate.github.io/blog/posts/2011-09-01-string-allignment-with-edit-operations/">
+<meta property="twitter:title" content="String Allignment with Edit Operations">
+<meta property="twitter:description" content="Finding the shortest transformation path between two strings">
+<meta property="twitter:image" content="https://astro.build/social.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap">
+
+    <link rel="stylesheet" href="/assets/fd12c972.a3045897.css" />
+<link rel="stylesheet" href="/assets/df0ad7d9.a89f85d4.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
+</script></head>
+
+    <body class="astro-37DZVIS6">
+        <header class="wrapper astro-VQADTZVM">
+    <nav class="astro-VQADTZVM">
+        <a href="/" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Home</span>
+        </a>
+        <a href="/#portfolio" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Portfolio</span>
+        </a>
+        <a href="/resume/resume-en.html" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Resume</span>
+        </a>
+        <a href="/blog" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Blog</span>
+        </a>
+        <a href="https://www.linkedin.com/in/nathanglenn" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">LinkedIn</span>
+        </a>
+        <a href="https://github.com/garfieldnate/" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">GitHub</span>
+        </a>
+    </nav>
+</header>
+
+
+        <article class="wrapper content astro-37DZVIS6">
+            <header class="astro-37DZVIS6">
+                
+                <h1 class="title astro-37DZVIS6">String Allignment with Edit Operations</h1>
+                <!-- Machine readable datetime attribute, human-readable text --><time datetime="2011-09-01">1 Sep 2011</time>
+            </header>
+            <main class="astro-37DZVIS6">
+                <p>A common way to measure the distance between two strings is using Levenshtein distance. Levenshtein distance is the minimum number of deletions, insertions, and substitutions needed to transform one string into another. Finding the distance between two strings is useful in certain applications such as spell checking (a word processor will suggest dictionary words that are close to your misspelled word). See <a href="http://en.wikipedia.org/wiki/Levenshtein_distance">wikipedia</a> for more details and an example of Levenshtein distance calculation.</p><p>Another related and also important operation is to find the minimum edit alignment; that is, once the minimum edit distance between the two strings is found, output the sequence of operations that can be used to change the one string into the other. For example, if we let C mean “correct”, S mean “substitution”, D mean “deletion” and I mean “insertion”, then the edit alignment between the characters in “construction” and “distortions” would be ISSCCISSCCCCD. Here is an explanation of the alignment:</p><ul>
+<li>I: Insert a “c” ->cdistortions</li>
+<li>S: Substitute “d” for “o” ->coistortions</li>
+<li>S: Substitute “i” for “n” -> constortions</li>
+<li>CC: Leave the “st” alone</li>
+<li>I: Insert “r” -> constrortion</li>
+<li>S: Substitute “u” for “o” -> contrurtion</li>
+<li>S: Substitute “c” for “r” -> constructions</li>
+<li>CCCC: Leave “tion” alone</li>
+<li>D: delete “s” -> construction</li>
+</ul><p>This sort of an allignment operation is commonly used in grading the output of machine translation and speech recognition systems, though the operations are done at the word level instead of the character level. When I needed a quick piece of code to do the alignment in my own application, though, there was none to be found on the internet! So I made my own and am posting it here. The logic for determining the proper string of edit operations is taken from a StackOverflow answer <a href="http://stackoverflow.com/questions/5849139/levenshtein-distance-inferring-the-edit-operations-from-the-matrix/5861206#5861206">here</a>. And now the code:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #8B949E">/**</span></span>
+<span class="line"><span style="color: #8B949E"> * </span><span style="color: #FF7B72">@return</span><span style="color: #8B949E"> List of Operations representing allignment between list1 and</span></span>
+<span class="line"><span style="color: #8B949E"> * list2. The allignment represents operations to change list2 into list1.</span></span>
+<span class="line"><span style="color: #8B949E"> */</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">static</span><span style="color: #C9D1D9"> List </span><span style="color: #D2A8FF">levenshteinAllignment</span><span style="color: #C9D1D9">(</span><span style="color: #FF7B72">Object</span><span style="color: #C9D1D9">[] list1, </span><span style="color: #FF7B72">Object</span><span style="color: #C9D1D9">[] list2) {</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">int</span><span style="color: #FFA657">[][] </span><span style="color: #C9D1D9">distanceMatrix</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">getDistanceMatrix</span><span style="color: #C9D1D9">(list1, list2);</span></span>
+<span class="line"><span style="color: #C9D1D9">    List</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">ops</span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">ArrayList</span><span style="color: #C9D1D9">(</span></span>
+<span class="line"><span style="color: #C9D1D9">            list1.length </span><span style="color: #FF7B72">&gt;</span><span style="color: #C9D1D9"> list2.length </span><span style="color: #FF7B72">?</span><span style="color: #C9D1D9"> list1.length </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> list2.length);</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">//think of distance chart as going from bottom left to top right;</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">//current position coordinates; start at top right.</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">int</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">row</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> list1.length;</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">int</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">col</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> list2.length;</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">//could have moved to current position from three others; store their scores here.</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">int</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">diag;</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">int</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">left;</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">int</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">below;</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">int</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">current;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">while</span><span style="color: #C9D1D9"> (row </span><span style="color: #FF7B72">!=</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">0</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">||</span><span style="color: #C9D1D9"> col </span><span style="color: #FF7B72">!=</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">0</span><span style="color: #C9D1D9">) {</span></span>
+<span class="line"><span style="color: #C9D1D9">        diag </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">getVal</span><span style="color: #C9D1D9">(row</span><span style="color: #FF7B72">-</span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">,col</span><span style="color: #FF7B72">-</span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">,distanceMatrix);</span></span>
+<span class="line"><span style="color: #C9D1D9">        left </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">getVal</span><span style="color: #C9D1D9">(row,col</span><span style="color: #FF7B72">-</span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">,distanceMatrix);</span></span>
+<span class="line"><span style="color: #C9D1D9">        below </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">getVal</span><span style="color: #C9D1D9">(row</span><span style="color: #FF7B72">-</span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">,col,distanceMatrix);</span></span>
+<span class="line"><span style="color: #C9D1D9">        current </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> distanceMatrix[row][col];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E">//      if the value in the diagonal cell (going up+left) is smaller or equal to the</span></span>
+<span class="line"><span style="color: #8B949E">//      values found in the other two cells</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E">//      AND</span></span>
+<span class="line"><span style="color: #8B949E">//      if this is same or 1 minus the value of the current cell</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9">(diag </span><span style="color: #FF7B72">&lt;=</span><span style="color: #C9D1D9"> left </span><span style="color: #FF7B72">&amp;&amp;</span><span style="color: #C9D1D9"> diag </span><span style="color: #FF7B72">&lt;=</span><span style="color: #C9D1D9"> below </span><span style="color: #FF7B72">&amp;&amp;</span><span style="color: #C9D1D9"> (diag </span><span style="color: #FF7B72">==</span><span style="color: #C9D1D9"> current </span><span style="color: #FF7B72">||</span><span style="color: #C9D1D9"> diag </span><span style="color: #FF7B72">==</span><span style="color: #C9D1D9"> current </span><span style="color: #FF7B72">-</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">)){</span></span>
+<span class="line"><span style="color: #8B949E">//      then  &quot;take the diagonal cell&quot;</span></span>
+<span class="line"><span style="color: #8B949E">//      if the value of the diagonal cell is one less than the current cell:</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9">(diag </span><span style="color: #FF7B72">==</span><span style="color: #C9D1D9"> current </span><span style="color: #FF7B72">-</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">)</span></span>
+<span class="line"><span style="color: #8B949E">//          Add a SUBSTITUTION operation (from the letters corresponding to</span></span>
+<span class="line"><span style="color: #8B949E">//          the _current_ cell)</span></span>
+<span class="line"><span style="color: #C9D1D9">                ops.</span><span style="color: #D2A8FF">add</span><span style="color: #C9D1D9">(</span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Operation</span><span style="color: #C9D1D9">(Operation.Type.SUBSTITUTION,list1[row</span><span style="color: #FF7B72">-</span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">],list2[col</span><span style="color: #FF7B72">-</span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">]));</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #FF7B72">else</span></span>
+<span class="line"><span style="color: #8B949E">//              otherwise: do not add an operation this was a no-operation.</span></span>
+<span class="line"><span style="color: #C9D1D9">                ops.</span><span style="color: #D2A8FF">add</span><span style="color: #C9D1D9">(</span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Operation</span><span style="color: #C9D1D9">(Operation.Type.CORRECT,list1[row</span><span style="color: #FF7B72">-</span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">]));</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #8B949E">//move diagonally</span></span>
+<span class="line"><span style="color: #C9D1D9">            row</span><span style="color: #FF7B72">--</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"><span style="color: #C9D1D9">            col</span><span style="color: #FF7B72">--</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"><span style="color: #C9D1D9">        }</span></span>
+<span class="line"><span style="color: #8B949E">//      elseif the value in the cell to the left is smaller or equal to the value of the cell below current cell</span></span>
+<span class="line"><span style="color: #8B949E">//      AND</span></span>
+<span class="line"><span style="color: #8B949E">//      if this value is same or 1 minus the value of the current cell</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">else</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9">(left </span><span style="color: #FF7B72">&lt;</span><span style="color: #C9D1D9"> below </span><span style="color: #FF7B72">&amp;&amp;</span><span style="color: #C9D1D9"> (left </span><span style="color: #FF7B72">==</span><span style="color: #C9D1D9"> current </span><span style="color: #FF7B72">||</span><span style="color: #C9D1D9"> left </span><span style="color: #FF7B72">==</span><span style="color: #C9D1D9"> current </span><span style="color: #FF7B72">-</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">)){</span></span>
+<span class="line"><span style="color: #8B949E">//          add an INSERTION of the cell to the left</span></span>
+<span class="line"><span style="color: #C9D1D9">            ops.</span><span style="color: #D2A8FF">add</span><span style="color: #C9D1D9">(</span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Operation</span><span style="color: #C9D1D9">(Operation.Type.INSERTION,list2[col</span><span style="color: #FF7B72">-</span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">]));</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #8B949E">//move left</span></span>
+<span class="line"><span style="color: #C9D1D9">            col</span><span style="color: #FF7B72">--</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"><span style="color: #C9D1D9">        }</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">else</span><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #8B949E">//          take the cell below, add</span></span>
+<span class="line"><span style="color: #8B949E">//          Add a DELETION operation</span></span>
+<span class="line"><span style="color: #C9D1D9">            ops.</span><span style="color: #D2A8FF">add</span><span style="color: #C9D1D9">(</span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Operation</span><span style="color: #C9D1D9">(Operation.Type.DELETION,list1[row</span><span style="color: #FF7B72">-</span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">]));</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #8B949E">//move down</span></span>
+<span class="line"><span style="color: #C9D1D9">            row</span><span style="color: #FF7B72">--</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"><span style="color: #C9D1D9">        }</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"><span style="color: #C9D1D9">    Collections.</span><span style="color: #D2A8FF">reverse</span><span style="color: #C9D1D9">(ops);</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> ops;</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span>
+<span class="line"><span style="color: #FF7B72">private</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">static</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">int</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">getVal</span><span style="color: #C9D1D9">(</span><span style="color: #FF7B72">int</span><span style="color: #C9D1D9"> row, </span><span style="color: #FF7B72">int</span><span style="color: #C9D1D9"> col, </span><span style="color: #FF7B72">int</span><span style="color: #C9D1D9">[][] distanceMatrix){</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9">(row </span><span style="color: #FF7B72">&lt;</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">0</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">||</span><span style="color: #C9D1D9"> row </span><span style="color: #FF7B72">&gt;</span><span style="color: #C9D1D9"> distanceMatrix.length)</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> Integer.MAX_VALUE;</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9">(col </span><span style="color: #FF7B72">&lt;</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">0</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">||</span><span style="color: #C9D1D9"> col </span><span style="color: #FF7B72">&gt;</span><span style="color: #C9D1D9"> distanceMatrix.length)</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> Integer.MAX_VALUE;</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">else</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> distanceMatrix[row][col];</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span>
+<span class="line"><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">static</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">class</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Operation</span><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">private</span><span style="color: #C9D1D9"> Type</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">type;</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">private</span><span style="color: #C9D1D9"> Object</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">object1;</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">private</span><span style="color: #C9D1D9"> Object</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">object2;</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">enum</span><span style="color: #C9D1D9"> </span><span style="color: #FFA657">Type</span><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #79C0FF">CORRECT</span><span style="color: #C9D1D9">,</span><span style="color: #79C0FF">SUBSTITUTION</span><span style="color: #C9D1D9">,</span><span style="color: #79C0FF">DELETION</span><span style="color: #C9D1D9">,</span><span style="color: #79C0FF">INSERTION</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Operation</span><span style="color: #C9D1D9">(Type </span><span style="color: #FFA657">t</span><span style="color: #C9D1D9">, Object </span><span style="color: #FFA657">o1</span><span style="color: #C9D1D9">){</span></span>
+<span class="line"><span style="color: #C9D1D9">        type </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> t;</span></span>
+<span class="line"><span style="color: #C9D1D9">        object1 </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> o1;</span></span>
+<span class="line"><span style="color: #C9D1D9">        object2 </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">null</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">Operation</span><span style="color: #C9D1D9">(Type </span><span style="color: #FFA657">t</span><span style="color: #C9D1D9">, Object </span><span style="color: #FFA657">o1</span><span style="color: #C9D1D9">, Object </span><span style="color: #FFA657">o2</span><span style="color: #C9D1D9">){</span></span>
+<span class="line"><span style="color: #C9D1D9">        type </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> t;</span></span>
+<span class="line"><span style="color: #C9D1D9">        object1 </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> o1;</span></span>
+<span class="line"><span style="color: #C9D1D9">        object2 </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> o2;</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"><span style="color: #C9D1D9">    @</span><span style="color: #FF7B72">Override</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> String </span><span style="color: #D2A8FF">toString</span><span style="color: #C9D1D9">(){</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9">(type </span><span style="color: #FF7B72">==</span><span style="color: #C9D1D9"> Type.SUBSTITUTION)</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;Substitution: &quot;</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> object1.</span><span style="color: #D2A8FF">toString</span><span style="color: #C9D1D9">() </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot; -&gt; &quot;</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> object2.</span><span style="color: #D2A8FF">toString</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9">(type </span><span style="color: #FF7B72">==</span><span style="color: #C9D1D9"> Type.CORRECT)</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;Correct:      &quot;</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> object1.</span><span style="color: #D2A8FF">toString</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9">(type </span><span style="color: #FF7B72">==</span><span style="color: #C9D1D9"> Type.DELETION)</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;Deletion:     &quot;</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> object1.</span><span style="color: #D2A8FF">toString</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9">(type </span><span style="color: #FF7B72">==</span><span style="color: #C9D1D9"> Type.INSERTION)</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;Insertion:    &quot;</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> object1.</span><span style="color: #D2A8FF">toString</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">null</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E">/**</span></span>
+<span class="line"><span style="color: #8B949E"> *</span></span>
+<span class="line"><span style="color: #8B949E"> * </span><span style="color: #FF7B72">@param</span><span style="color: #8B949E"> </span><span style="color: #FFA657">array</span><span style="color: #8B949E"> of objects to compare</span></span>
+<span class="line"><span style="color: #8B949E"> * </span><span style="color: #FF7B72">@param</span><span style="color: #8B949E"> </span><span style="color: #FFA657">array</span><span style="color: #8B949E"> of objects to compare</span></span>
+<span class="line"><span style="color: #8B949E"> * </span><span style="color: #FF7B72">@return</span><span style="color: #8B949E"> Levenshtein distance between arrays.</span></span>
+<span class="line"><span style="color: #8B949E"> * This method uses the equals(Object o) method to compare the</span></span>
+<span class="line"><span style="color: #8B949E"> * objects in the two arrays, returning the Levenshtein distance between them.</span></span>
+<span class="line"><span style="color: #8B949E"> */</span></span>
+<span class="line"><span style="color: #FF7B72">public</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">static</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">int</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">levenshteinDistance</span><span style="color: #C9D1D9">(</span><span style="color: #FF7B72">Object</span><span style="color: #C9D1D9">[] list1, </span><span style="color: #FF7B72">Object</span><span style="color: #C9D1D9">[] list2) {</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">int</span><span style="color: #FFA657">[][] </span><span style="color: #C9D1D9">distance</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">getDistanceMatrix</span><span style="color: #C9D1D9">(list1, list2);</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> distance[list1.length][list2.length];</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E">/**</span></span>
+<span class="line"><span style="color: #8B949E"> *</span></span>
+<span class="line"><span style="color: #8B949E"> * </span><span style="color: #FF7B72">@param</span><span style="color: #8B949E"> </span><span style="color: #FFA657">list1</span></span>
+<span class="line"><span style="color: #8B949E"> * </span><span style="color: #FF7B72">@param</span><span style="color: #8B949E"> </span><span style="color: #FFA657">list2</span></span>
+<span class="line"><span style="color: #8B949E"> * </span><span style="color: #FF7B72">@return</span><span style="color: #8B949E"> A completely filled distance matrix; movement from [i-1][j]</span></span>
+<span class="line"><span style="color: #8B949E"> *         represents insertion, from [i][j-1] represents deletion, and from</span></span>
+<span class="line"><span style="color: #8B949E"> *         [i-1][j-1] represents substitution or no operation.</span></span>
+<span class="line"><span style="color: #8B949E"> */</span></span>
+<span class="line"><span style="color: #FF7B72">private</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">static</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">int</span><span style="color: #C9D1D9">[][] </span><span style="color: #D2A8FF">getDistanceMatrix</span><span style="color: #C9D1D9">(</span><span style="color: #FF7B72">Object</span><span style="color: #C9D1D9">[] list1, </span><span style="color: #FF7B72">Object</span><span style="color: #C9D1D9">[] list2) {</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">int</span><span style="color: #FFA657">[][] </span><span style="color: #C9D1D9">distanceMatrix</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">int</span><span style="color: #C9D1D9">[list1.length </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">][list2.length </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">for</span><span style="color: #C9D1D9"> (</span><span style="color: #FF7B72">int</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">i</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">0</span><span style="color: #C9D1D9">; i </span><span style="color: #FF7B72">&lt;=</span><span style="color: #C9D1D9"> list1.length; i</span><span style="color: #FF7B72">++</span><span style="color: #C9D1D9">)</span></span>
+<span class="line"><span style="color: #C9D1D9">        distanceMatrix[i][</span><span style="color: #79C0FF">0</span><span style="color: #C9D1D9">] </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> i;</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">for</span><span style="color: #C9D1D9"> (</span><span style="color: #FF7B72">int</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">j</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">0</span><span style="color: #C9D1D9">; j </span><span style="color: #FF7B72">&lt;=</span><span style="color: #C9D1D9"> list2.length; j</span><span style="color: #FF7B72">++</span><span style="color: #C9D1D9">)</span></span>
+<span class="line"><span style="color: #C9D1D9">        distanceMatrix[</span><span style="color: #79C0FF">0</span><span style="color: #C9D1D9">][j] </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> j;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">for</span><span style="color: #C9D1D9"> (</span><span style="color: #FF7B72">int</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">i</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">; i </span><span style="color: #FF7B72">&lt;=</span><span style="color: #C9D1D9"> list1.length; i</span><span style="color: #FF7B72">++</span><span style="color: #C9D1D9">)</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">for</span><span style="color: #C9D1D9"> (</span><span style="color: #FF7B72">int</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">j</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">; j </span><span style="color: #FF7B72">&lt;=</span><span style="color: #C9D1D9"> list2.length; j</span><span style="color: #FF7B72">++</span><span style="color: #C9D1D9">)</span></span>
+<span class="line"><span style="color: #C9D1D9">            distanceMatrix[i][j] </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">minimum</span><span style="color: #C9D1D9">(distanceMatrix[i </span><span style="color: #FF7B72">-</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">][j] </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">,</span><span style="color: #8B949E">// insertion</span></span>
+<span class="line"><span style="color: #C9D1D9">                    distanceMatrix[i][j </span><span style="color: #FF7B72">-</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">] </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">,</span><span style="color: #8B949E">// deletion</span></span>
+<span class="line"><span style="color: #C9D1D9">                    distanceMatrix[i </span><span style="color: #FF7B72">-</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">][j </span><span style="color: #FF7B72">-</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">]</span><span style="color: #8B949E">// substitution or correct</span></span>
+<span class="line"><span style="color: #C9D1D9">                            </span><span style="color: #FF7B72">+</span><span style="color: #C9D1D9"> ((list1[i </span><span style="color: #FF7B72">-</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">].</span><span style="color: #D2A8FF">equals</span><span style="color: #C9D1D9">(list2[j </span><span style="color: #FF7B72">-</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">])) </span><span style="color: #FF7B72">?</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">0</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">));</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> distanceMatrix;</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E">/**</span></span>
+<span class="line"><span style="color: #8B949E"> * Same as Math.min, but returns the minimum of three arguments instead of</span></span>
+<span class="line"><span style="color: #8B949E"> * two.</span></span>
+<span class="line"><span style="color: #8B949E"> */</span></span>
+<span class="line"><span style="color: #FF7B72">private</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">static</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">int</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">minimum</span><span style="color: #C9D1D9">(</span><span style="color: #FF7B72">int</span><span style="color: #C9D1D9"> a, </span><span style="color: #FF7B72">int</span><span style="color: #C9D1D9"> b, </span><span style="color: #FF7B72">int</span><span style="color: #C9D1D9"> c) {</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> Math.</span><span style="color: #D2A8FF">min</span><span style="color: #C9D1D9">(Math.</span><span style="color: #D2A8FF">min</span><span style="color: #C9D1D9">(a, b), c);</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span></code></pre><p>For word level alignment, you can call it on Strings using the split function like so:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">for</span><span style="color: #C9D1D9">(Operation</span><span style="color: #FFA657"> </span><span style="color: #C9D1D9">o</span><span style="color: #FFA657"> </span><span style="color: #FF7B72">:</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">levenshteinAllignment</span><span style="color: #C9D1D9">(</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #A5D6FF">&quot;What My house gleams with the light of the moon and your face&quot;</span></span>
+<span class="line"><span style="color: #C9D1D9">                    .</span><span style="color: #D2A8FF">split</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">&quot; &quot;</span><span style="color: #C9D1D9">),</span></span>
+<span class="line"><span style="color: #C9D1D9">            </span><span style="color: #A5D6FF">&quot;Your house with the light of the the moon and my face&quot;</span></span>
+<span class="line"><span style="color: #C9D1D9">                    .</span><span style="color: #D2A8FF">split</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">&quot; &quot;</span><span style="color: #C9D1D9">))</span></span>
+<span class="line"><span style="color: #C9D1D9">        )</span></span>
+<span class="line"><span style="color: #C9D1D9">            System.out.</span><span style="color: #D2A8FF">println</span><span style="color: #C9D1D9">(o);</span></span>
+<span class="line"></span></code></pre><p>And the output would be:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">    Deletion:     What</span></span>
+<span class="line"><span style="color: #c9d1d9">    Substitution: My -&gt; Your</span></span>
+<span class="line"><span style="color: #c9d1d9">    Correct:      house</span></span>
+<span class="line"><span style="color: #c9d1d9">    Deletion:     gleams</span></span>
+<span class="line"><span style="color: #c9d1d9">    Correct:      with</span></span>
+<span class="line"><span style="color: #c9d1d9">    Correct:      the</span></span>
+<span class="line"><span style="color: #c9d1d9">    Correct:      light</span></span>
+<span class="line"><span style="color: #c9d1d9">    Correct:      of</span></span>
+<span class="line"><span style="color: #c9d1d9">    Correct:      the</span></span>
+<span class="line"><span style="color: #c9d1d9">    Insertion:    the</span></span>
+<span class="line"><span style="color: #c9d1d9">    Correct:      moon</span></span>
+<span class="line"><span style="color: #c9d1d9">    Correct:      and</span></span>
+<span class="line"><span style="color: #c9d1d9">    Substitution: your -&gt; my</span></span>
+<span class="line"><span style="color: #c9d1d9">    Correct:      face</span></span></code></pre><p>Feel free to use and edit this as you like. Many applications disregard the strings that are correct and only output the edit operations, and that should be an easy edit.</p>
+            </main>
+        </article>
+        <footer class="astro-I46STNBI"><a href="/blog/rss.xml" class="astro-I46STNBI"><img src="/rss/rss-icon.svg" class="astro-I46STNBI"> RSS</a>・<a href="/license" class="astro-I46STNBI">License</a></footer>
+
+
+    
+</body></html>

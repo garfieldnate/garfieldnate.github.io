@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html class="astro-37DZVIS6">
+    <head>
+        <!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+<!-- Primary Meta Tags -->
+<title>Refactoring the Soar Lexer</title>
+<meta name="title" content="Refactoring the Soar Lexer">
+<meta name="description">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://garfieldnate.github.io/blog/posts/2014-07-27-refactoring-the-soar-lexer/">
+<meta property="og:title" content="Refactoring the Soar Lexer">
+<meta property="og:description">
+<meta property="og:image" content="https://astro.build/social.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://garfieldnate.github.io/blog/posts/2014-07-27-refactoring-the-soar-lexer/">
+<meta property="twitter:title" content="Refactoring the Soar Lexer">
+<meta property="twitter:description">
+<meta property="twitter:image" content="https://astro.build/social.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap">
+
+    <link rel="stylesheet" href="/assets/fd12c972.a3045897.css" />
+<link rel="stylesheet" href="/assets/df0ad7d9.a89f85d4.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
+</script></head>
+
+    <body class="astro-37DZVIS6">
+        <header class="wrapper astro-VQADTZVM">
+    <nav class="astro-VQADTZVM">
+        <a href="/" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Home</span>
+        </a>
+        <a href="/#portfolio" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Portfolio</span>
+        </a>
+        <a href="/resume/resume-en.html" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Resume</span>
+        </a>
+        <a href="/blog" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Blog</span>
+        </a>
+        <a href="https://www.linkedin.com/in/nathanglenn" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">LinkedIn</span>
+        </a>
+        <a href="https://github.com/garfieldnate/" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">GitHub</span>
+        </a>
+    </nav>
+</header>
+
+
+        <article class="wrapper content astro-37DZVIS6">
+            <header class="astro-37DZVIS6">
+                
+                <h1 class="title astro-37DZVIS6">Refactoring the Soar Lexer</h1>
+                <!-- Machine readable datetime attribute, human-readable text --><time datetime="2014-07-27">27 Jul 2014</time>
+            </header>
+            <main class="astro-37DZVIS6">
+                <p>After my <a href="blog/2014/7/13/code-reading-the-soar-parser">last writeup</a> on how <a href="https://github.com/SoarGroup/Soar">Soar</a> parses Soar code, I decided to dive in and try and refactor it, starting with the lexer (and here’s the resulting <a href="https://github.com/SoarGroup/Soar/pull/178">PR</a>). I haven’t worked with C/C++ in a while, and a good part of the code I changed was close to my age, so it was an interesting learning experience for me.</p><p>The lexer used global state stored via an agent to keep track of the current input character and lexeme as well as to remember line and column numbers. The goal of the refactoring was of course to change that, but 30 commits later I have not yet completely separated the agent from the Lexer because all printing logic (warnings, etc.) requires an agent. The result of this is that after every change I make I have to do <code>build Tests</code> and watch the entire project be rebuilt because of the various interdependencies. Also, the lexer has none if its own tests, and so the full test suite must be run to find possible problems. The result here is that every time I make a change and need to see if it works, I start a long compile/test process running and watch more of <a href="http://www.imdb.com/title/tt1637727/">some show</a> while waiting for it to finish (you’ve probably seen <a href="http://xkcd.com/303/">this comic</a> before). So the global state is not only difficult to work with, but it also slows development to a crawl.</p><p>The lexer had a lot of dead code which told me the story of how it used to work. Originally it would read Soar code straight from a file; later it was retrofitted to take production strings directly as an “alternate”. There must have been something off about the string input, however, because besides setting <code>alternate_input_string</code>, <code>alternate_input_suffix</code> was also required, and always needed to be set to <code>") "</code>. Once the production string was finished, the lexer would read the suffix. The original reason for this was long gone, but the parser still expected productions to end with an <code>R_PAREN</code> lexeme, as did other lexer clients. Later developers copied the incantation to lex a string, not knowing why it was needed, and the refactored jSoar parser implementation has the check for the parenthesis commented and marked <a href="https://github.com/soartech/jsoar/blob/master/jsoar-core/src/main/java/org/jsoar/kernel/parser/original/OriginalParserImpl.java#L2005">“this makes no sense to me”</a>. So the current functionality started out as an alternative for testing or something and then became the only use case, leaving dead code everywhere.</p><p>Some of the updating work I did was already done in the [9.5] branch, but it was still interesting. There were workarounds for the old Think C and Symantech C++ compilers, between <code>THINK_C</code> and <code>__SC__</code> <code>#ifdef</code>s. I had no idea what they were and found an excellent compiler macros list project on <a href="http://sourceforge.net/p/predef/wiki/Home/">SourceForge</a>. Apparently C had no boolean variable types, either, so programmers used <code>typedef char Bool</code> and defined <code>TRUE</code> and <code>FALSE</code> manually, and part of updating to C++ code is changing those to real <code>bool</code> types.</p><p>The value of making small, working commits was reinforced when my initial pull request broke the automated build when <code>--no-scu</code> was set. This setting causes each <code>.cpp</code> file to be compiled separately, ensuring that the build fails if a <code>#include</code> directive was forgotten somewhere. I was able to bisect the Git history and discover the problem pretty quickly.</p><h2 id="nuggets">Nuggets:</h2><ul>
+<li>Alex set up <a href="http://jenkins-ci.org/">Jenkins</a> <a href="https://github.com/SoarGroup/Soar/issues/169">to test pull requests</a>, so I was able to push several times and get live feedback during another build each time.</li>
+<li>The legacy spaghetti code wasn’t too difficult to untangle and I’m confident I can do a lot more</li>
+</ul><h2 id="new-todos">New TODO’s:</h2><ul>
+<li>A printer or printer manager class to decouple the <code>agent</code> code from everything else in Soar (jSoar is <a href="https://github.com/soartech/jsoar/blob/master/jsoar-core/src/main/java/org/jsoar/kernel/tracing/Printer.java">way ahead</a> on that one).</li>
+<li>Unit tests for the lexer, preferably data-driven to reduce the amount of required recompilation</li>
+</ul>
+            </main>
+        </article>
+        <footer class="astro-I46STNBI"><a href="/blog/rss.xml" class="astro-I46STNBI"><img src="/rss/rss-icon.svg" class="astro-I46STNBI"> RSS</a>・<a href="/license" class="astro-I46STNBI">License</a></footer>
+
+
+    
+</body></html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html class="astro-37DZVIS6">
+    <head>
+        <!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+<!-- Primary Meta Tags -->
+<title>Testing Perl Distributions with Test Subdirectories</title>
+<meta name="title" content="Testing Perl Distributions with Test Subdirectories">
+<meta name="description">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://garfieldnate.github.io/blog/posts/2013-01-20-testing-perl-distributions-with-test/">
+<meta property="og:title" content="Testing Perl Distributions with Test Subdirectories">
+<meta property="og:description">
+<meta property="og:image" content="https://astro.build/social.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://garfieldnate.github.io/blog/posts/2013-01-20-testing-perl-distributions-with-test/">
+<meta property="twitter:title" content="Testing Perl Distributions with Test Subdirectories">
+<meta property="twitter:description">
+<meta property="twitter:image" content="https://astro.build/social.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap">
+
+    <link rel="stylesheet" href="/assets/fd12c972.a3045897.css" />
+<link rel="stylesheet" href="/assets/df0ad7d9.a89f85d4.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
+</script></head>
+
+    <body class="astro-37DZVIS6">
+        <header class="wrapper astro-VQADTZVM">
+    <nav class="astro-VQADTZVM">
+        <a href="/" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Home</span>
+        </a>
+        <a href="/#portfolio" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Portfolio</span>
+        </a>
+        <a href="/resume/resume-en.html" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Resume</span>
+        </a>
+        <a href="/blog" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Blog</span>
+        </a>
+        <a href="https://www.linkedin.com/in/nathanglenn" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">LinkedIn</span>
+        </a>
+        <a href="https://github.com/garfieldnate/" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">GitHub</span>
+        </a>
+    </nav>
+</header>
+
+
+        <article class="wrapper content astro-37DZVIS6">
+            <header class="astro-37DZVIS6">
+                
+                <h1 class="title astro-37DZVIS6">Testing Perl Distributions with Test Subdirectories</h1>
+                <!-- Machine readable datetime attribute, human-readable text --><time datetime="2013-01-20">20 Jan 2013</time>
+            </header>
+            <main class="astro-37DZVIS6">
+                <p>Normally I run my test suites with the prove utility:</p><p><code>prove -vl --merge</code></p><p>The <code>v</code> option turns on verbose processing, and the l option adds <code>lib/</code> to the include path. <code>prove </code>then runs all of the tests in the <code>t/</code> folder.</p><p>Today, I had a new problem. I merged multiple distributions into one (<a href="http://jasonkarns.com/blog/merge-two-git-repositories-into-one/">without losing any Git history!</a>), and each had a test suite that I wanted to keep separate. Naturally, I moved the tests from each distribution into its own subdirectory under <code>t/</code>. However, this time when I ran <code>prove -vl</code>, I got this message:</p><p>Files=0, Tests=0,  0 wallclock secs ( 0.00 usr +  0.00 sys =  0.00 CPU)
+Result: NOTESTS</p><p>Dubious… Well, I needed to know how to test with subdirectories in the <code>t/</code> folder, so I looked at the <a href="https://metacpan.org/module/prove">prove</a> documentation and found the <code>-r</code> option. The <code>r</code> stands for “recurse”, meaning that the test files would be found by recursing into the directories of the distribution (starting at the top in the root of the distribution). That turned out to be exactly what I needed!</p><p>prove -vlr
+t/parser/01-testParser.t
+…
+All tests successful.
+Files=28, Tests=1815, 211 wallclock secs ( 0.92 usr + 0.28 sys = 1.20 CPU)
+Result: PASS</p><p>Woohoo!</p><p>Also, both <code>MakeMaker </code>and <code>Module::Build</code> recurse in the same way during module testing. If you use <code>Dist::Zilla</code>, then you’ll probably have the plugins <code>[MakeMaker]</code> and <code>[ModuleBuild]</code>. Using these, <code>dzil test</code> will recurse in the same way.</p>
+            </main>
+        </article>
+        <footer class="astro-I46STNBI"><a href="/blog/rss.xml" class="astro-I46STNBI"><img src="/rss/rss-icon.svg" class="astro-I46STNBI"> RSS</a>・<a href="/license" class="astro-I46STNBI">License</a></footer>
+
+
+    
+</body></html>

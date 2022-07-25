@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html class="astro-37DZVIS6">
+    <head>
+        <!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+<!-- Primary Meta Tags -->
+<title>Running Perl with Sublime Text 2</title>
+<meta name="title" content="Running Perl with Sublime Text 2">
+<meta name="description" content="Project setup code">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://garfieldnate.github.io/blog/posts/2013-04-07-running-perl-with-sublime-text-2/">
+<meta property="og:title" content="Running Perl with Sublime Text 2">
+<meta property="og:description" content="Project setup code">
+<meta property="og:image" content="https://astro.build/social.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://garfieldnate.github.io/blog/posts/2013-04-07-running-perl-with-sublime-text-2/">
+<meta property="twitter:title" content="Running Perl with Sublime Text 2">
+<meta property="twitter:description" content="Project setup code">
+<meta property="twitter:image" content="https://astro.build/social.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap">
+
+    <link rel="stylesheet" href="/assets/fd12c972.a3045897.css" />
+<link rel="stylesheet" href="/assets/df0ad7d9.a89f85d4.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
+</script></head>
+
+    <body class="astro-37DZVIS6">
+        <header class="wrapper astro-VQADTZVM">
+    <nav class="astro-VQADTZVM">
+        <a href="/" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Home</span>
+        </a>
+        <a href="/#portfolio" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Portfolio</span>
+        </a>
+        <a href="/resume/resume-en.html" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Resume</span>
+        </a>
+        <a href="/blog" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Blog</span>
+        </a>
+        <a href="https://www.linkedin.com/in/nathanglenn" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">LinkedIn</span>
+        </a>
+        <a href="https://github.com/garfieldnate/" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">GitHub</span>
+        </a>
+    </nav>
+</header>
+
+
+        <article class="wrapper content astro-37DZVIS6">
+            <header class="astro-37DZVIS6">
+                
+                <h1 class="title astro-37DZVIS6">Running Perl with Sublime Text 2</h1>
+                <!-- Machine readable datetime attribute, human-readable text --><time datetime="2013-04-07">7 Apr 2013</time>
+            </header>
+            <main class="astro-37DZVIS6">
+                <p>I’ve been having fun trying out <a href="http://www.sublimetext.com/">Sublime Text</a>. It’s pretty, fast, and extremely extensible.</p><p>The first thing that I wanted was to be able to work well with Perl. I installed <a href="http://wbond.net/sublime_packages/package_control">Package Control</a>, followed by <a href="https://github.com/SublimeLinter/SublimeLinter">SublimeLinter</a>, which has the <a href="http://perlcritic.com/">perlcritic</a> command built in. Making this useful requires a little finagling; perlcritic is by no means a quick program (being a really thorough linter for a language which is complex to parse), and the defaults for SublimeLinter cause it run over and over again as you type. To fix this, I edited <code>Packages/SublimeLinter/SublimeLinter.sublime-settings</code> and changed the “sublimelinter” setting to false. Now, in order to lint the current file, I have to press <kbd>ctrl+alt+l</kbd>. (<strong>Update:</strong> I don’t recommend this for Sublime Text 2 because of speed problems. See <a href="https://github.com/SublimeLinter/SublimeLinter/issues/408">this issue on Github</a>. ST3 should be fine, though.)</p><p>Next, I wanted to be able to run my Perl scripts. Sublime has the <kbd>ctrl+b</kbd> shortcut for running a build for the current file. What the build actually does is specified in either a build file or the project file. To create a new build file for perl, go to Tools->Build System -> New Build System. The build file I’ve seen on different sites for Perl looks like this:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #79C0FF">&quot;cmd&quot;</span><span style="color: #C9D1D9">: [</span><span style="color: #A5D6FF">&quot;perl&quot;</span><span style="color: #C9D1D9">, </span><span style="color: #A5D6FF">&quot;$file&quot;</span><span style="color: #C9D1D9">],</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #79C0FF">&quot;file_regex&quot;</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">&quot;.* at (.*) line ([0-9]*)&quot;</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #79C0FF">&quot;selector&quot;</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">&quot;source.perl&quot;</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span></code></pre><p>Save this as perl.sublime-build. With this, whenever you are working on a Perl file and hit <kbd>ctrl+b</kbd>, the command “perl -w your_file.pl” will be run. This, however, was not good enough for me. Most of the time I am working on tests for a Perl module, so I have to run <code>perl -Ilib t/my_test_file.t</code>. I also want to be able to run individual tests as well as <a href="https://metacpan.org/module/OVID/Test-Harness-3.26/bin/prove"><code>prove</code></a> using shortcuts.</p><p>To do this, we need to turn the module directory into a Sublime Text project. This is pretty simple. First, open the module directory in Sublime Text. Select Project->Save Project As, then choose the name of the project and save it in the top directory of the module. Paste the following simple contents into the project file:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">&quot;folders&quot;</span><span style="color: #C9D1D9">:</span></span>
+<span class="line"><span style="color: #C9D1D9"> [</span></span>
+<span class="line"><span style="color: #C9D1D9">  {</span></span>
+<span class="line"><span style="color: #C9D1D9">   </span><span style="color: #79C0FF">&quot;path&quot;</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">&quot;.&quot;</span></span>
+<span class="line"><span style="color: #C9D1D9">  }</span></span>
+<span class="line"><span style="color: #C9D1D9"> ]</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span></code></pre><p>All this does is add the entire directory to the project. Next, we edit the Perl build file to reference the root of the project so we can add the top-level lib directory to our include path:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;cmd&quot;</span><span style="color: #C9D1D9">: [</span><span style="color: #A5D6FF">&quot;perl&quot;</span><span style="color: #C9D1D9">, </span><span style="color: #A5D6FF">&quot;-Ilib&quot;</span><span style="color: #C9D1D9">, </span><span style="color: #A5D6FF">&quot;</span><span style="color: #C9D1D9">$file</span><span style="color: #A5D6FF">&quot;</span><span style="color: #C9D1D9">],</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;working_dir&quot;</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">&quot;</span><span style="color: #C9D1D9">$project_path</span><span style="color: #A5D6FF">&quot;</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;file_regex&quot;</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">&quot;.* at (.) line ([0-9])&quot;</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;selector&quot;</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">&quot;source.perl&quot;</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span></code></pre><p>Great! Now we can run Perl on tests contained in module directories. This still works fine for standalone scripts, too.</p><p>Now I’d like to run my whole test suite using prove. By default, <kbd>ctrl+shift+b</kbd> runs a build variant with the name “Run”, so we’ll just make a <code>prove</code> variant with that name. I’d much rather give it a more descriptive name, but the Sublime shortcut requires this name. You can change the shortcut, but then you wouldn’t be able to use the shortcut for other builds (other languages). It’s all up to you. Here is the final build file:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #C9D1D9">{</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">&quot;cmd&quot;</span><span style="color: #C9D1D9">: [</span><span style="color: #A5D6FF">&quot;perl&quot;</span><span style="color: #C9D1D9">, </span><span style="color: #A5D6FF">&quot;-Ilib&quot;</span><span style="color: #C9D1D9">, </span><span style="color: #A5D6FF">&quot;$file&quot;</span><span style="color: #C9D1D9">],</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">&quot;working_dir&quot;</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">&quot;$project_path&quot;</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">&quot;file_regex&quot;</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">&quot;.* at (.) line ([0-9])&quot;</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">&quot;selector&quot;</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">&quot;source.perl&quot;</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">&quot;variants&quot;</span><span style="color: #C9D1D9">: [</span></span>
+<span class="line"><span style="color: #C9D1D9">        {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #79C0FF">&quot;cmd&quot;</span><span style="color: #C9D1D9">: [</span><span style="color: #A5D6FF">&quot;prove&quot;</span><span style="color: #C9D1D9">, </span><span style="color: #A5D6FF">&quot;-vlr&quot;</span><span style="color: #C9D1D9">, </span><span style="color: #A5D6FF">&quot;--merge&quot;</span><span style="color: #C9D1D9">],</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #79C0FF">&quot;working_dir&quot;</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">&quot;$project_path&quot;</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">         </span><span style="color: #79C0FF">&quot;name&quot;</span><span style="color: #C9D1D9">: </span><span style="color: #A5D6FF">&quot;Run&quot;</span><span style="color: #C9D1D9">,</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #79C0FF">&quot;windows&quot;</span><span style="color: #C9D1D9">: {</span></span>
+<span class="line"><span style="color: #C9D1D9">                 </span><span style="color: #79C0FF">&quot;cmd&quot;</span><span style="color: #C9D1D9">: [</span><span style="color: #A5D6FF">&quot;prove.bat&quot;</span><span style="color: #C9D1D9">, </span><span style="color: #A5D6FF">&quot;-vlr&quot;</span><span style="color: #C9D1D9">, </span><span style="color: #A5D6FF">&quot;--merge&quot;</span><span style="color: #C9D1D9">]</span></span>
+<span class="line"><span style="color: #C9D1D9">             }</span></span>
+<span class="line"><span style="color: #C9D1D9">        }</span></span>
+<span class="line"><span style="color: #C9D1D9">    ]</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span></code></pre><p>Note that I needed a Windows variant for <code>prove</code> since the Sublime editor doesn’t work the same as cmd. You could, alternatively, add ‘“shell”:true’ to use the system’s command shell so you don’t need a separate command for Windows.</p><p>With this build file in place, I can now press ctrl+b to run any Perl script, with it’s project lib directory in @INC, and <kbd>ctrl+shift+b</kbd> to run prove. Voila!</p><p>Here are the final files:</p><ul>
+<li><a href="https://sites.google.com/site/complingfiles/files/perl-module.sublime-project?attredirects=0&d=1">project file</a> (put a copy in your project root folders)</li>
+<li><a href="https://sites.google.com/site/complingfiles/files/perl.sublime-build?attredirects=0&d=1">Perl build file</a> (only one is needed per ST installation)</li>
+</ul>
+            </main>
+        </article>
+        <footer class="astro-I46STNBI"><a href="/blog/rss.xml" class="astro-I46STNBI"><img src="/rss/rss-icon.svg" class="astro-I46STNBI"> RSS</a>・<a href="/license" class="astro-I46STNBI">License</a></footer>
+
+
+    
+</body></html>

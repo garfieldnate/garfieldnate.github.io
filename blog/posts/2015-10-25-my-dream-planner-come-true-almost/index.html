@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html class="astro-37DZVIS6">
+    <head>
+        <!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+<!-- Primary Meta Tags -->
+<title>My Dream Planner, Come True! (Almost)</title>
+<meta name="title" content="My Dream Planner, Come True! (Almost)">
+<meta name="description" content="Generating a personal calendar in Perl">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://garfieldnate.github.io/blog/posts/2015-10-25-my-dream-planner-come-true-almost/">
+<meta property="og:title" content="My Dream Planner, Come True! (Almost)">
+<meta property="og:description" content="Generating a personal calendar in Perl">
+<meta property="og:image" content="https://astro.build/social.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://garfieldnate.github.io/blog/posts/2015-10-25-my-dream-planner-come-true-almost/">
+<meta property="twitter:title" content="My Dream Planner, Come True! (Almost)">
+<meta property="twitter:description" content="Generating a personal calendar in Perl">
+<meta property="twitter:image" content="https://astro.build/social.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap">
+
+    <link rel="stylesheet" href="/assets/fd12c972.a3045897.css" />
+<link rel="stylesheet" href="/assets/df0ad7d9.a89f85d4.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
+</script></head>
+
+    <body class="astro-37DZVIS6">
+        <header class="wrapper astro-VQADTZVM">
+    <nav class="astro-VQADTZVM">
+        <a href="/" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Home</span>
+        </a>
+        <a href="/#portfolio" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Portfolio</span>
+        </a>
+        <a href="/resume/resume-en.html" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Resume</span>
+        </a>
+        <a href="/blog" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Blog</span>
+        </a>
+        <a href="https://www.linkedin.com/in/nathanglenn" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">LinkedIn</span>
+        </a>
+        <a href="https://github.com/garfieldnate/" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">GitHub</span>
+        </a>
+    </nav>
+</header>
+
+
+        <article class="wrapper content astro-37DZVIS6">
+            <header class="astro-37DZVIS6">
+                
+                <h1 class="title astro-37DZVIS6">My Dream Planner, Come True! (Almost)</h1>
+                <!-- Machine readable datetime attribute, human-readable text --><time datetime="2015-10-25">25 Oct 2015</time>
+            </header>
+            <main class="astro-37DZVIS6">
+                <p>I say almost because I haven’t printed it yet. But I have a <a href="https://github.com/garfieldnate/Personal-Planner/releases">PDF</a>!</p><p>When I was in college I had a favorite planner. It was the perfect size for my hand, and just had lines for each day, with one week visible in a two-page spread. It had a space in the front for schedules, and some blank pages in the back for notes and adresses. Nice and simple. I looked forward to buying it every year, and the last one I bought I also laminated and rebound so it would last longer.</p><p>Now that I’m not at BYU, though, I can’t get that planner. I can’t even buy it on the bookstore website, gosh darn it. So I took the opportunity to try a different technology out and make my own, hopefully this time my <em>dream</em> planner.</p><p>What makes it my <em>dream</em> planner? Well, let me tell you! It has <em>graph</em> paper note pages. That would have been nice when I was thinking about lattices all the time for <a href="https://github.com/garfieldnate/Weka_AnalogicalModeling">analogical modeling</a>. Best of all, it comes with both Japanese and American holidays, so I can know what’s going on in both of my home countries. It’s even got birthdays and my wedding aniversary, so I have no excuse to forget! I also gave the covers a personal touch: a mario star on the front, and a <a href="http://smile.amazon.com/Outrageous-Origin-Garfields-Force-Book/dp/0816772061">Garfield</a> on the back!</p><p>What’s this “different” technology I tried out, you ask? It’s HTML/CSS. I know, it’s not that different, but it was new to me, and it turned out to be pretty difficult to make a nice, printable document with CSS that worked in any one browser. This was an unfortunate finding, because after my honor’s thesis I’m burned out on LaTeX.</p><p>The entries of the planner, though, are generated using Perl and a bunch of CPAN. This was mostly fine. I used the very simple <code>XML::Writer</code> for HTML generation, but for date handling I had to use a combination of <code>Date::Simple</code>, <code>Date::Calendar</code>, <code>Calendar::Japanese::Holiday</code>, and <code>Calendar</code>. <code>Date::Simple</code> gave me a quick way to cycle through all of the days in a year. <code>$date++</code> is the next day. Pretty simple, as the name implies. To handle holiday lookup, I needed <code>Date::Calendar</code>. This gives me the date of Easter, as well as letting me specify holidays with changing dates, like Mother’s Day. <code>Calendar::Japanese::Holiday</code> gave me Japanese holidays, which I didn’t feel like specifying in <code>Date::Calendar</code> and keeping track of myself, especially since they might change (“Mountain Day” is a new holiday starting next year, for example).</p><p>The last one, <code>Calendar</code>, I used because it came with a Chinese calendar and I wanted to know when to mark 十五夜 (juugoya, fifteenth night), or 月見 (tsukimi, moon viewing) on the calendar. That’s one that you can’t really do <a href="http://en.wikipedia.org/wiki/Japanese_calendar#Gregorian_months_and_the_.22One-Month_Delay.22">tsuki-okure</a> with. The conversion wasn’t straight-forward, but I came up with this for giving me the best Gregorian calendar day for looking at the moon and eating rice cakes:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">my</span><span style="color: #C9D1D9"> $year = 2015;</span></span>
+<span class="line"><span style="color: #8B949E"># start with any date near the middle of the year just to initialize</span></span>
+<span class="line"><span style="color: #8B949E"># the Chinese cycle/year correctly</span></span>
+<span class="line"><span style="color: #FF7B72">my</span><span style="color: #C9D1D9"> $temp_date = Calendar</span><span style="color: #FF7B72">-&gt;</span><span style="color: #C9D1D9">new_from_Gregorian(7, 1, $year);</span></span>
+<span class="line"><span style="color: #C9D1D9">$temp_date</span><span style="color: #FF7B72">-&gt;</span><span style="color: #C9D1D9">convert_to_China();</span></span>
+<span class="line"><span style="color: #8B949E"># get tsukimi date from cycle and year found above, and date 8/15</span></span>
+<span class="line"><span style="color: #FF7B72">my</span><span style="color: #C9D1D9"> $tsukimi = Calendar</span><span style="color: #FF7B72">-&gt;</span><span style="color: #C9D1D9">new_from_China(-</span><span style="color: #79C0FF">cycle</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=&gt;</span><span style="color: #C9D1D9"> $temp_date</span><span style="color: #FF7B72">-&gt;</span><span style="color: #C9D1D9">cycle, -</span><span style="color: #79C0FF">year</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=&gt;</span><span style="color: #C9D1D9"> $temp_date</span><span style="color: #FF7B72">-&gt;</span><span style="color: #C9D1D9">year, -</span><span style="color: #79C0FF">month</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=&gt;</span><span style="color: #C9D1D9"> 8, -</span><span style="color: #79C0FF">day</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=&gt;</span><span style="color: #C9D1D9"> 15);</span></span>
+<span class="line"><span style="color: #C9D1D9">$tsukimi</span><span style="color: #FF7B72">-&gt;</span><span style="color: #C9D1D9">convert_to_Gregorian();</span></span>
+<span class="line"><span style="color: #79C0FF">print</span><span style="color: #C9D1D9"> </span><span style="color: #A5D6FF">&quot;Schedule moon-viewing party for </span><span style="color: #C9D1D9">$year</span><span style="color: #A5D6FF">/&quot;</span><span style="color: #C9D1D9"> . $tsukimi</span><span style="color: #FF7B72">-&gt;</span><span style="color: #C9D1D9">month . </span><span style="color: #A5D6FF">&#39;/&#39;</span><span style="color: #C9D1D9"> . $tsukimi</span><span style="color: #FF7B72">-&gt;</span><span style="color: #C9D1D9">day;</span></span></code></pre><p>And of course I marked this in my planner with the emoji for moon viewing ceremony: 🎑.</p><p>Modules added to my wish list (or find list, if they already exist):</p><ul>
+<li>an emoji converter that would take :bear:, :corn:, etc. and give back either the unicode character or code point.</li>
+<li>Calendar module that allows specifying holidays in different calendars. For example, specifying that tsukimi is on 8/15 in the Chinese calendar, and being able to check whether a day matches regardless of what calendar the day was created with. My trick above worked for tsukimi, but further gymnastics would be required for the new year, since there might be more than one in a Gregorian year.</li>
+</ul><p>I’ll cover my CSS woes another time.</p>
+            </main>
+        </article>
+        <footer class="astro-I46STNBI"><a href="/blog/rss.xml" class="astro-I46STNBI"><img src="/rss/rss-icon.svg" class="astro-I46STNBI"> RSS</a>・<a href="/license" class="astro-I46STNBI">License</a></footer>
+
+
+    
+</body></html>

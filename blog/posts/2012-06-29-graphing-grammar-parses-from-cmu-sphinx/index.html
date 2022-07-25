@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html class="astro-37DZVIS6">
+    <head>
+        <!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+<!-- Primary Meta Tags -->
+<title>Graphing grammar parses from CMU Sphinx 4</title>
+<meta name="title" content="Graphing grammar parses from CMU Sphinx 4">
+<meta name="description" content="View your JSGF parses using GraphViz">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://garfieldnate.github.io/blog/posts/2012-06-29-graphing-grammar-parses-from-cmu-sphinx/">
+<meta property="og:title" content="Graphing grammar parses from CMU Sphinx 4">
+<meta property="og:description" content="View your JSGF parses using GraphViz">
+<meta property="og:image" content="https://astro.build/social.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://garfieldnate.github.io/blog/posts/2012-06-29-graphing-grammar-parses-from-cmu-sphinx/">
+<meta property="twitter:title" content="Graphing grammar parses from CMU Sphinx 4">
+<meta property="twitter:description" content="View your JSGF parses using GraphViz">
+<meta property="twitter:image" content="https://astro.build/social.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap">
+
+    <link rel="stylesheet" href="/assets/fd12c972.a3045897.css" />
+<link rel="stylesheet" href="/assets/df0ad7d9.a89f85d4.css" /><script type="module">const{classList:e}=document.documentElement,A=e.add.bind(e);A("jpeg");A("png");const g=(B,d)=>{const a=new Image;a.src=`data:image/${B};base64,${d}`,a.onload=A(B)};g("webp","UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");g("avif","AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=");
+</script></head>
+
+    <body class="astro-37DZVIS6">
+        <header class="wrapper astro-VQADTZVM">
+    <nav class="astro-VQADTZVM">
+        <a href="/" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Home</span>
+        </a>
+        <a href="/#portfolio" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Portfolio</span>
+        </a>
+        <a href="/resume/resume-en.html" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Resume</span>
+        </a>
+        <a href="/blog" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">Blog</span>
+        </a>
+        <a href="https://www.linkedin.com/in/nathanglenn" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">LinkedIn</span>
+        </a>
+        <a href="https://github.com/garfieldnate/" class="astro-VQADTZVM">
+            <span class="astro-VQADTZVM">GitHub</span>
+        </a>
+    </nav>
+</header>
+
+
+        <article class="wrapper content astro-37DZVIS6">
+            <header class="astro-37DZVIS6">
+                
+                <h1 class="title astro-37DZVIS6">Graphing grammar parses from CMU Sphinx 4</h1>
+                <!-- Machine readable datetime attribute, human-readable text --><time datetime="2012-06-29">29 Jun 2012</time>
+            </header>
+            <main class="astro-37DZVIS6">
+                <p>CMU Sphinx comes with some neat grammar parsing stuff that I never knew about. It uses JSGF (as detailed <a href="http://cmusphinx.sourceforge.net/sphinx4/javadoc/edu/cmu/sphinx/jsgf/JSGFGrammar.html">here</a>) and comes with several demos, showing how to use a basic grammar, arc weights, tags, and even getting a <a href="http://cmusphinx.sourceforge.net/sphinx4/src/apps/edu/cmu/sphinx/demo/jsapi/tags/README.html">javascript representation</a> of the final parse! At work I’ve been needing to do some custom processing of the grammar output, but it was more conceptually difficult than I’d planned. So after figuring out how to traverse a parse tree, I decided to write a little application to print out the parse of a given sentence. The eclipse project for it can be found <a href="https://sites.google.com/site/complingfiles/files/ParsePrinter.zip?attredirects=0&d=1">here</a>.</p><p>Given this small gramamar:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">#JSGF V1.0;</span></span>
+<span class="line"><span style="color: #c9d1d9">grammar sidTests ;</span></span>
+<span class="line"><span style="color: #c9d1d9"></span></span>
+<span class="line"><span style="color: #c9d1d9">public &lt;greet&gt; = &lt;greeting&gt; [&lt;person&gt;] [i am &lt;person&gt;];</span></span>
+<span class="line"><span style="color: #c9d1d9"></span></span>
+<span class="line"><span style="color: #c9d1d9">&lt;greeting&gt; = konnichiwa {language:japanese} | hello {language:english} | guten tag {language:german};</span></span>
+<span class="line"><span style="color: #c9d1d9"></span></span>
+<span class="line"><span style="color: #c9d1d9">&lt;person&gt; = john {gender:man} | martha {gender:female} | kelly;</span></span></code></pre><p>If we parse the sentence “konnichiwa kelly i am john”, the program outputs the following:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">digraph {</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;greet-2147483647&quot; [label=&quot;greet&quot; color=magenta];</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;greet-2147483647&quot; -&gt; &quot;(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )-2147483646&quot;;</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )-2147483646&quot; [label=&quot;(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )&quot; color=green];</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )-2147483646&quot; -&gt; &quot;greeting-2147483645&quot;;</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;greeting-2147483645&quot; [label=&quot;greeting&quot; color=magenta];</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;greeting-2147483645&quot; -&gt; &quot;konnichiwa {language:japanese}-2147483644&quot;;</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;konnichiwa {language:japanese}-2147483644&quot; [label=&quot;konnichiwa {language:japanese}&quot; color=green];</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;konnichiwa {language:japanese}-2147483644&quot; -&gt; &quot;language:japanese-2147483643&quot;;</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;language:japanese-2147483643&quot; [label=&quot;{language:japanese}&quot; color=red];</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;language:japanese-2147483643&quot; -&gt; &quot;konnichiwa-2147483642&quot;;</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;konnichiwa-2147483642&quot; [label=&quot;konnichiwa&quot; color=cadetblue shape=box];</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )-2147483646&quot; -&gt; &quot;(&lt;sidTests.person&gt; = kelly)-2147483641&quot;;</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;(&lt;sidTests.person&gt; = kelly)-2147483641&quot; [label=&quot;(&lt;sidTests.person&gt; = kelly)&quot; color=green];</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;(&lt;sidTests.person&gt; = kelly)-2147483641&quot; -&gt; &quot;person-2147483640&quot;;</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;person-2147483640&quot; [label=&quot;person&quot; color=magenta];</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;person-2147483640&quot; -&gt; &quot;kelly-2147483639&quot;;</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;kelly-2147483639&quot; [label=&quot;kelly&quot; color=green];</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;kelly-2147483639&quot; -&gt; &quot;kelly-2147483638&quot;;</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;kelly-2147483638&quot; [label=&quot;kelly&quot; color=cadetblue shape=box];</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;(&lt;sidTests.greeting&gt; = konnichiwa {language:japanese}) ( (&lt;sidTests.person&gt; = kelly) ) ( i am (&lt;sidTests.person&gt; = john {gender:man}) )-2147483646&quot; -&gt; &quot;i am (&lt;sidTests.person&gt; = john {gender:man})-2147483637&quot;;</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;i am (&lt;sidTests.person&gt; = john {gender:man})-2147483637&quot; [label=&quot;i am (&lt;sidTests.person&gt; = john {gender:man})&quot; color=green];</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;i am (&lt;sidTests.person&gt; = john {gender:man})-2147483637&quot; -&gt; &quot;i-2147483636&quot;;</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;i-2147483636&quot; [label=&quot;i&quot; color=cadetblue shape=box];</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;i am (&lt;sidTests.person&gt; = john {gender:man})-2147483637&quot; -&gt; &quot;am-2147483635&quot;;</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;am-2147483635&quot; [label=&quot;am&quot; color=cadetblue shape=box];</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;i am (&lt;sidTests.person&gt; = john {gender:man})-2147483637&quot; -&gt; &quot;person-2147483634&quot;;</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;person-2147483634&quot; [label=&quot;person&quot; color=magenta];</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;person-2147483634&quot; -&gt; &quot;john {gender:man}-2147483633&quot;;</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;john {gender:man}-2147483633&quot; [label=&quot;john {gender:man}&quot; color=green];</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;john {gender:man}-2147483633&quot; -&gt; &quot;gender:man-2147483632&quot;;</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;gender:man-2147483632&quot; [label=&quot;{gender:man}&quot; color=red];</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;gender:man-2147483632&quot; -&gt; &quot;john-2147483631&quot;;</span></span>
+<span class="line"><span style="color: #c9d1d9"> &quot;john-2147483631&quot; [label=&quot;john&quot; color=cadetblue shape=box];</span></span>
+<span class="line"><span style="color: #c9d1d9">}</span></span></code></pre><p>which is all a big mess until we run it through GraphViz and see this:</p><figure class="center">
+    <style >
+    
+
+    .astro-imagetools-picture-A4AE6C34 {
+      --opacity: 1;
+      --z-index: 0;
+    }
+
+    
+            .astro-imagetools-picture-A4AE6C34 img {
+              z-index: 1;
+              position: relative;
+            }
+          
+
+    .astro-imagetools-picture-A4AE6C34::after {
+      inset: 0;
+      content: "";
+      left: 0;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      transition: opacity 1s;
+      opacity: var(--opacity);
+      z-index: var(--z-index);
+    }
+  
+        .astro-imagetools-picture-A4AE6C34 img {
+          object-fit: cover;
+          object-position: 50% 50%;
+        }
+
+        .astro-imagetools-picture-A4AE6C34::after {
+          background-size: cover;
+          background-image: url("data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAJABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAIDBAj/xAAfEAEAAgEEAwEAAAAAAAAAAAABAAIRAwQSITJRcrH/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/EABURAQEAAAAAAAAAAAAAAAAAAAAR/9oADAMBAAIRAxEAPwDUe5zWnKvLOQ6WLTSsl8XsPL3LEISItuttPtVFIRtHxfp/YRCP/9k=");
+          background-position: 50% 50%;
+        }
+      </style><picture
+    
+    class="astro-imagetools-picture astro-imagetools-picture-A4AE6C34"
+    style="position: relative; display: inline-block; ; max-width: 100%; height: auto;"
+    ><source
+            srcset="/assets/jsgf_parse@320w.c8302887.avif 320w, /assets/jsgf_parse@673w.9b023ae2.avif 673w, /assets/jsgf_parse@956w.e4b5b144.avif 956w, /assets/jsgf_parse@1168w.901aa4d9.avif 1168w, /assets/jsgf_parse@1309w.0a29c69a.avif 1309w, /assets/jsgf_parse@1380w.f296e785.avif 1380w"
+            sizes="(min-width: 1380px) 1380px, 100vw"
+            width="1380"
+            height="635"
+            type="image/avif"
+            
+          />
+<source
+            srcset="/assets/jsgf_parse@320w.1730b50a.webp 320w, /assets/jsgf_parse@673w.10fbc565.webp 673w, /assets/jsgf_parse@956w.5d5abdf6.webp 956w, /assets/jsgf_parse@1168w.f18b6bcb.webp 1168w, /assets/jsgf_parse@1309w.d1c11bab.webp 1309w, /assets/jsgf_parse@1380w.8393e651.webp 1380w"
+            sizes="(min-width: 1380px) 1380px, 100vw"
+            width="1380"
+            height="635"
+            type="image/webp"
+            
+          />
+<img
+    
+    src="/assets/jsgf_parse@1380w.01c14742.jpeg"
+    alt="The sentence parse tree has a root node called 'greet' and three subtrees showing the three rules that were applied: there is a 'greeting' subtree containing 'konnichiwa', a 'person' subtree containing 'Kelly', and a third subtree containing 'I', 'am', and a further 'person' subtree containing 'John'. Unfortunately, if you require this alt text to know what is in the picture, I don't think dot graphs are going to help you at all. As I'm writing this alt text years later, I'm kicking myself for not generating the SVG instead so that blind users could inspect it themselves. Actually, I have no idea whether Graphviz is such a great tool at all from an accessibility standpoint."
+    srcset="/assets/jsgf_parse@320w.5594cfca.jpeg 320w, /assets/jsgf_parse@673w.dcd1ef5d.jpeg 673w, /assets/jsgf_parse@956w.6e761fb3.jpeg 956w, /assets/jsgf_parse@1168w.cde1f735.jpeg 1168w, /assets/jsgf_parse@1309w.d71ab7d9.jpeg 1309w, /assets/jsgf_parse@1380w.01c14742.jpeg 1380w"
+    sizes="(min-width: 1380px) 1380px, 100vw"
+    width="1380"
+    height="635"
+    loading="lazy"
+    decoding="async"
+    class="astro-imagetools-img"
+    style="display: inline-block; overflow: hidden; vertical-align: middle; ; max-width: 100%; height: auto;"
+    onload="parentElement.style.setProperty('--z-index', 1);parentElement.style.setProperty('--opacity', 0);"
+  />
+  </picture>
+
+    <figcaption>
+            <h4>A graph of the JSGF sentence parse</h4>
+    </figcaption>
+</figure><p>A graph explaining how our sentence was parsed! I color code the parse: green is a RuleSequence, magenta is a RuleParse, light blue is a Token, red is a Tag, yellow, which there strangely aren’t any of, would be a RuleName.</p><p>I notice two very strange things here. First, RuleParses don’t have anything as a direct child except for RuleSequences (RuleName is also possible but not shown). So RuleSequences will always be present and may only have one child. Second, text is treated as a sub-component of a tag instead of the other way around. So the text is tagging the tag? I don’t know why they designed it that way, but at least now that I have a graph of the parse so I can figure out how to properly process it.</p>
+            </main>
+        </article>
+        <footer class="astro-I46STNBI"><a href="/blog/rss.xml" class="astro-I46STNBI"><img src="/rss/rss-icon.svg" class="astro-I46STNBI"> RSS</a>・<a href="/license" class="astro-I46STNBI">License</a></footer>
+
+
+    
+</body></html>
