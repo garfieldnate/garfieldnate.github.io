@@ -2,12 +2,11 @@
 
 This is the source for my personal portfolio and blog website: nateglenn.com. It's generated using Astro. The domain name is registered with CloudFlare. The [page quality scores from Lighthouse](https://web.dev/measure/?url=https%3A%2F%2Fnateglenn.com) are 92 for performance, 100 for best practices and SEO, and 89 for accessibility. Fixing the accessibility issue would require some redesign to improve text color contrast.
 
-New blog posts go under `src/pages/blog/posts`. The name should be `YYYY-MM-DD-[slug].md`, and the frontmatter should contain the title, description, hero image src and alt text, the draft status, and the intended publication date.
+To create a new blog post, use `yarn run newpost <title>`. To publish the post, remove `draft: true` from the frontmatter.
 
 `public/resume/resume-en.html` and `resume-ja.html` must be generated via a separate project and copied over manually: https://github.com/garfieldnate/resume.
 
 Overall I'm really enjoying working with Astro, but it's beta software and there have been a lot of sharp corners. I've gathered issues I encountered under [GOTCHA.md](GOTCHA.md).
-
 
 Original Astro template project readme below:
 
