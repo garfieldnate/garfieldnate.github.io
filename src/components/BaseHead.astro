@@ -24,14 +24,15 @@ const { title, description } = Astro.props;
 <meta property="og:url" content={Astro.canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content="https://astro.build/social.png" />
-
+<meta property="og:image" content={Astro.site + "assets/portfolio/ja_segmenting.jpg"} />
+<meta property="og:image:alt" content="Japanese text with words highlighted for studying" />
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.canonicalURL} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content="https://astro.build/social.png" />
+<meta property="twitter:image" content={Astro.site + "assets/portfolio/ja_segmenting_2x1.jpg"} />
+<meta property="twitter:image:alt" content="Japanese text with words highlighted for studying" />
 
 <!-- Fonts -->
 <!-- Load google fonts in as performant a way as possible -->
