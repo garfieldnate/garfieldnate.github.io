@@ -31,11 +31,11 @@ Astro glues together several other systems, and errors meant for users of subsys
 
 ## Mixed Markdown Support
 
-There's pretty nice syntax highlighting and navigation in .astro files in FS code. However, markdown files have no syntax highlighting for the code in the `setup` section and no navigation anywhere (click on inline components will not take you to the definition).
+There's pretty nice syntax highlighting and navigation in .astro files in TS code. However, markdown files have no syntax highlighting for the code in the `setup` section and no navigation anywhere (clicking on inline components will not take you to the definition).
 
 Additionally there are no compiler warnings when passing non-existent properties to an astro component in a markdown file. This is a real shame, given all of the effort to make typesafe components.
 
-Putting an incorrect path into a markdown for the `layout` property results in the dev server exiting with another cryptic error.
+Putting an incorrect path into the `layout` property results in the dev server exiting with another cryptic error.
 
 ## Imports
 
@@ -97,13 +97,13 @@ This comes from astro-imagetools, which couldn't find a specified image file som
 [astro-imagetools]  yy  is not a valid Picture Config Option
 ```
 
-URL parameters and anchors in external image links cause issues for astro-imagetools. The warnings above are cause by parameters, which are stripped and then assumed to be component configuration options somehow. Anchors, on the other hand, are *not* stripped and will be considered part of the image extension, which will lead to a separate issue because the image file type cannot be recognized.
+URL parameters and anchors in external image links cause issues for astro-imagetools. The warnings above are caused by parameters, which are stripped and then assumed to be component configuration options somehow. Anchors, on the other hand, are *not* stripped and will be considered part of the image extension, which will lead to a separate issue because the image file type cannot be recognized.
 
 ## Relative Image Links
 
 astro-imagetools is only able to handle relative image links in markdown if you use the markdown syntax for including an image or the plain HTML `img` tag. There's no way to do this with a `Picture` component.
 
-## Imagetools Component Paramter Types
+## Imagetools Component Parameter Types
 
 These are not exported, so it's not possible to extend them to use in another component that wraps a `Picture` component, for example.
 
@@ -168,7 +168,7 @@ The line number is completely nonsensical and the JSON file with an issue is not
 
 ## JSX
 
-Using the comment shortcut (cmd-/) in VS code doesn't comment JSX in astro components! Put's in `//`, which doesn't work.
+Using the comment shortcut (cmd-/) in VS code doesn't comment JSX in astro components! Puts in `//`, which doesn't work.
 
 ## CSS
 
