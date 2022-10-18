@@ -45,7 +45,7 @@
     },
     {
         "name": "Sublime Soar Tools",
-        "description": "A <a href=\"https://www.sublimetext.com/\">Sublime Text</a> package for developing <a href=\"https://soar.eecs.umich.edu/\">Soar</a> code. Includes support for syntax highlighting, snippets, an unit testing with SoarUnit.",
+        "description": "A <a href=\"https://www.sublimetext.com/\">Sublime Text</a> package for developing <a href=\"https://soar.eecs.umich.edu/\">Soar</a> code. Includes support for syntax highlighting, snippets, and unit testing with SoarUnit.",
         "repo": "https://github.com/garfieldnate/Sublime-Soar-Tools",
         "img_src": "/assets/portfolio/sublime_soar_rosie.jpg",
         "img_alt": "Slanted photo of Soar code with syntax highlighting in Sublime Text"
