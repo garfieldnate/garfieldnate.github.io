@@ -9,7 +9,7 @@ setup: |
   import currentProjects from "./portfolio/projects/current.json";
 ---
 
-Greetings! I'm Nathan. I'm a freelance software engineer with over 10 years of experience specializing in natural language processing. I'm familiar with a wide range of computer technologies as wells as human languages. If you'd like a free consultation on NLP or general engineering work, send me an email at <a href="nathan.g.glenn@gmail.com?subject=NLP consultation&body=Hi Nathan, I'd like to consult with you on a project.">nathan.g.glenn@gmail.com</a>.
+Greetings! I'm Nathan. I'm a freelance software engineer with over 10 years of experience specializing in natural language processing. I'm familiar with a wide range of computer technologies as well as human languages. If you'd like a free consultation on NLP or general engineering work, send me an email at <a href="nathan.g.glenn@gmail.com?subject=NLP consultation&body=Hi Nathan, I'd like to consult with you on a project.">nathan.g.glenn@gmail.com</a>.
 
 You can also find me on [GitHub](https://github.com/garfieldnate) or [LinkedIn](https://www.linkedin.com/in/nathanglenn/).
 
