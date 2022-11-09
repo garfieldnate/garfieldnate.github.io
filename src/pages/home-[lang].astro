@@ -1,0 +1,122 @@
+---
+// home page in multiple languages
+///////////////////////////////////////
+import Base from "../layouts/Base.astro";
+import Portfolio from "../components/Portfolio.astro";
+import { SupportedLang } from "../lang";
+import TwoColumnText from "../components/TwoColumnText.astro";
+import { title, description } from "../config.json";
+import currentProjects from "./portfolio/projects/current.json";
+import fossProjects from "./portfolio/projects/open_source.json";
+import workProjects from "./portfolio/projects/professional.json";
+
+// Docs on this mechanism: https://docs.astro.build/en/core-concepts/routing/#static-ssg-mode
+export function getStaticPaths() {
+    return [
+        { params: { lang: "en" } },
+        { params: { lang: "ja" } },
+        { params: { lang: "de" } },
+    ];
+}
+
+const lang = Astro.params.lang as SupportedLang;
+---
+
+<Base content={{ title, description }} lang={lang}>
+    <p>
+        Greetings! I'm Nathan. I'm a freelance software engineer with over 10
+        years of experience specializing in natural language processing. I'm
+        familiar with a wide range of computer technologies as well as human
+        languages. If you'd like a free consultation on NLP or general
+        engineering work, send me an email at <a
+            href="nathan.g.glenn@gmail.com?subject=NLP consultation&body=Hi Nathan, I'd like to consult with you on a project."
+            >nathan.g.glenn@gmail.com</a
+        >.
+    </p>
+
+    <p>
+        You can also find me on <a href="https://github.com/garfieldnate"
+            >GitHub</a
+        > or <a href="https://www.linkedin.com/in/nathanglenn/">LinkedIn</a>.
+    </p>
+
+    <h2 id="familiar-technologies">Familiar Technologies</h2>
+
+    <TwoColumnText>
+        <div slot="left">
+            <ul>
+                <li>Java, Spring Boot</li>
+                <li>Python, Flask</li>
+                <li>JavaScript/TypeScript</li>
+                <li>C++</li>
+                <li>MySQL</li>
+                <li>Perl</li>
+                <li>Apache Kafka</li>
+            </ul>
+        </div>
+        <div slot="right">
+            <ul>
+                <li>React/React Native</li>
+                <li>Rust</li>
+                <li>Docker</li>
+                <li>Kubernetes</li>
+                <li>Google Cloud</li>
+                <li>Machine Learning</li>
+                <li>Language/Speech Processing</li>
+            </ul>
+        </div>
+    </TwoColumnText>
+
+    <p>
+        These are only some of the technologies I've used in the past. If you
+        don't see a technology you need me for, feel free to ask anyway! I'm
+        always looking to learn more and add more to my toolkit.
+    </p>
+
+    <h2 id="familiar-human-languages">Familiar Human Languages</h2>
+
+    <TwoColumnText>
+        <div slot="left">
+            <ul>
+                <li>English (native)</li>
+                <li>Japanese (fluent)</li>
+                <li>German (B2)</li>
+                <li>Korean</li>
+                <li>Vietnamese</li>
+                <li>Mandarin</li>
+            </ul>
+        </div>
+        <div slot="right">
+            <ul>
+                <li>Thai</li>
+                <li>Cambodian</li>
+                <li>Turkish</li>
+                <li>Latin</li>
+                <li>Japanese Sign Language</li>
+                <li>Ancient Egyptian</li>
+            </ul>
+        </div>
+    </TwoColumnText>
+
+    <h2 id="porfolio">Portfolio</h2>
+
+    <h3 id="professional-projects">Professional Projects</h3>
+
+    <Portfolio projects={workProjects} />
+
+    <br />
+
+    <h3 id="open-source">Open Source</h3>
+
+    <br />
+
+    <Portfolio projects={fossProjects} />
+
+    <br />
+
+    <h3 id="current-projects">🚧 Current Projects 👷‍♂️</h3>
+
+    <br />
+
+    <Portfolio projects={currentProjects} />
+</Base>
