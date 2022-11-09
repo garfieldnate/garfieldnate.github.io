@@ -5,10 +5,8 @@ import Base from "../layouts/Base.astro";
 import Portfolio from "../components/Portfolio.astro";
 import { SupportedLang } from "../lang";
 import TwoColumnText from "../components/TwoColumnText.astro";
-import { title, description } from "../config.json";
-import currentProjects from "./portfolio/projects/current.json";
-import fossProjects from "./portfolio/projects/open_source.json";
-import workProjects from "./portfolio/projects/professional.json";
+import { title, description } from "../config";
+import { currentProjects, openSourceProjects, professionalProjects } from "./portfolio/projects";
 
 // Docs on this mechanism: https://docs.astro.build/en/core-concepts/routing/#static-ssg-mode
 export function getStaticPaths() {
@@ -102,7 +100,7 @@ const lang = Astro.params.lang as SupportedLang;
 
     <h3 id="professional-projects">Professional Projects</h3>
 
-    <Portfolio projects={workProjects} />
+    <Portfolio projects={professionalProjects} lang={lang}/>
 
     <br />
 
@@ -110,7 +108,7 @@ const lang = Astro.params.lang as SupportedLang;
 
     <br />
 
-    <Portfolio projects={fossProjects} />
+    <Portfolio projects={openSourceProjects} lang={lang} />
 
     <br />
 
@@ -118,5 +116,5 @@ const lang = Astro.params.lang as SupportedLang;
 
     <br />
 
-    <Portfolio projects={currentProjects} />
+    <Portfolio projects={currentProjects} lang={lang} />
 </Base>

@@ -3,24 +3,17 @@
 // For small screens, we collapse both columns into a single column
 // Standard image size is 400 x 300 px, but it's okay to deviate a bit on the height
 import { Picture } from "astro-imagetools/components";
+import { SupportedLang } from "../lang";
+import { Project } from "../pages/portfolio/projects";
 
 export interface Props {
     projects: Project[]
-};
-
-interface Project {
-    // The image should have dimensions about 3:2
-    img_src: string;
-    img_alt: string;
-    name: string;
-    description: string;
-    repo?: string;
-    license?: string;
-    copyright?: string;
+    lang: SupportedLang
 };
 
 const {
-    projects
+    projects,
+    lang
 } = Astro.props as Props;
 ---
 
