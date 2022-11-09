@@ -4,7 +4,7 @@ These are the issues I ran into, and am likely to run into again, while working 
 
 ## Lazy Errors
 
-When running your site in dev mode, pages are generated lazily. If you have a syntax issue in one of your pages, you won't find out about it until you navigate to that page. You must generate the entire site to find all errors.
+When running your site in dev mode, pages are generated lazily. If you have a syntax issue in one of your pages, you won't find out about it until you navigate to that page. You must generate the entire site via `yarn run build` to find all errors.
 
 ## Including `.DS_Store`
 
@@ -49,20 +49,7 @@ The error below was caused by forgetting the `.astro`:
     at instantiateModule (/Users/nathanglenn/workspaces/personal_workspace/personal_site_astro/node_modules/vite/dist/node/chunks/dep-c9998dc6.js:50231:15)
 ```
 
-## Escaping in Markdown
-
-Astro is not fully MDX compliant, and does not understand the usage of a `\` to escape a character. To include a `{`, for instance, you would have to use `{'\u007B'}`. There is an [open issue](https://github.com/withastro/astro/issues/3916) for this.
-
-The current error message for this is quite cryptic:
-```
-myfile.md:57:11: ERROR: Expected "}" but found "sometext"
-```
-
-Note that the line number in this case could not be found by subtracting the number of lines in the front matter. 🤷
-
-
 ## Plaintext Code blocks
-
 
 ```
 The language "plaintext" doesn't exist, falling back to plaintext.
@@ -199,3 +186,25 @@ The "Astro" global is injected into the scope only inside of .astro component fi
 ```
 
 For example, I wanted a utility function for sorting blog posts, and I wanted the function to accept the result of Astro.glob, which I would type as `ReturnType<Astro.glob>`. However, the `Astro` type is not available in the utility type, so I instead needed to type the parameter as `MD`, which is the same thing and is available in the `client-base.d.ts` file. If astro ever changes the return type of `Astro.glob`, I'll have to change the type of the parameter in my utility function.
+
+## MDX/MD incompatibilities
+
+All HTML tags must be closed, including those that are not normally closed in HTML. For example, If you have an `<img>` element in an MDX file, unlike in regular HTML you have to add a close `</img>` tag. This is [documented](https://kabartolo.github.io/chicago-docs-demo/docs/mdx-guide/errors/#unclosed-tags). Missing end tags result in an error message like this:
+
+    Unexpected closing tag `</a>`, expected corresponding closing tag for `<img>` (2:146-2:233)
+
+Note that the printed document location is not correct.
+
+Comments cannot be placed in HTML comment tags (`<!-- ... -->`). The syntax instead is `{/* ... */}`. Using the HTML comment syntax will result in the following helpful error message:
+
+    Unexpected character `!` (U+0021) before name, expected a character that can start a name, such as a letter, `$`, or `_` (note: to create a comment in MDX, use `{/* text */}`)
+
+No document location is printed in this error, for some reason.
+
+## VSCode MDX Plugin from unified
+
+The filetype association to use in VSCode for .mdx files is "Markdown React".
+
+The plugin can comment lines correctly for you with cmd-/, but if you try to comment out a selection of text within a line, the result will still be the entire line being commented.
+
+Also, the plugin doesn't colorize MDX comments in dark green, while it does still colorize HTML comments in dark green, even though those are actually a syntax error in MDX.

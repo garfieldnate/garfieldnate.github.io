@@ -8,9 +8,9 @@ categories:
 publishDate: 2011-11-06T00:00:00Z
 title: Itadaki GoSen and IPADIC 2.7
 description: Intro to Japanese morphological analysis
-setup: |
-  import ResponsiveFigure from "../../../components/ResponsiveFigure.astro"
 ---
+
+import ResponsiveFigure from "../../../components/ResponsiveFigure.astro"
 
 **Update3: I've forked the Itadaki project on [GitHub](https://github.com/garfieldnate/Itadaki) to keep track of it better.**
 
@@ -26,7 +26,7 @@ Why does it matter that we can't use the latest version of IPADIC? Well, here's 
 
 Then, to run a demo and see what amazing things GoSen can do, copy the dictionary.xml file from the testdata/dictionary directory to the dictionary/dictionary directory, go back to the root directory of GoSen, and then run <code>java -cp bin examples.ReadingProcessorDemo testData/dictionary/dictionary.xml</code>. The GoSen site says to run using the testdata folder, but that means you'll have to download the dictionary twice, which is dumb. When you run the above command, you'll get this GUI:
 
-<!-- TODO: should have height 320 and width 209 -->
+{/* TODO: should have height 320 and width 209 */}
 <ResponsiveFigure
     class_="center"
     src="/assets/blog/gosen.png"

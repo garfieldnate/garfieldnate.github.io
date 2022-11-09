@@ -2,7 +2,7 @@ import rss from '@astrojs/rss';
 
 import { organizePosts } from './util';
 
-const postImportResult = import.meta.globEager('./**/*.md');
+const postImportResult = import.meta.globEager('./**/*.mdx');
 const unsortedPosts = Object.values(postImportResult);
 
 const posts = organizePosts(unsortedPosts).map((post) => ({

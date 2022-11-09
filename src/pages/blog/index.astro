@@ -10,7 +10,7 @@ import { organizePosts } from "./util";
 let {title, description} = config;
 
 // Use Astro.glob to fetch all posts with associated frontmatter
-const unsortedPosts = await Astro.glob("./{posts,links}/**/*.md");
+const unsortedPosts = await Astro.glob("./{posts,links}/**/*.mdx");
 const posts = organizePosts(unsortedPosts);
 ---
 
