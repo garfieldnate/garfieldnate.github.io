@@ -188,3 +188,14 @@ HTML files aren't rendered if placed in the pages directory, but that will chang
 
 Sometimes you need to force imagetools to reprocess an image (the image you see on your page is stale). Restarting the dev server will still use the stale images. Only way to fix this is to delete the imagetools cache: `rm -rf node_modules/.cache/astro-imagetools/`.
 
+## Astro types
+
+The "Astro" global is injected into the scope only inside of .astro component files. The declaration in astro's env.d.ts file contains this note:
+
+```
+// Caution! The types here are only available inside Astro files (injected automatically by our language server)
+// As such, if the typings you're trying to add should be available inside ex: React components, they should instead
+// be inside `client-base.d.ts`
+```
+
+For example, I wanted a utility function for sorting blog posts, and I wanted the function to accept the result of Astro.glob, which I would type as `ReturnType<Astro.glob>`. However, the `Astro` type is not available in the utility type, so I instead needed to type the parameter as `MD`, which is the same thing and is available in the `client-base.d.ts` file. If astro ever changes the return type of `Astro.glob`, I'll have to change the type of the parameter in my utility function.

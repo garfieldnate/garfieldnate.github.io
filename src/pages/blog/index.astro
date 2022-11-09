@@ -5,18 +5,13 @@ import Header from "../../components/Header.astro";
 import BlogPostPreview from "../../components/BlogPostPreview.astro";
 
 import config from "../../config.json";
+import { organizePosts } from "./util";
 
 let {title, description} = config;
 
 // Use Astro.glob to fetch all posts with associated frontmatter
 const unsortedPosts = await Astro.glob("./{posts,links}/**/*.md");
-// Filter out drafts and sort newest to oldest
-// TODO: environment variable or argument for rendering drafts
-const posts = unsortedPosts.filter(doc => !doc.frontmatter.draft).sort(function (a, b) {
-    return (
-        new Date(b.frontmatter.publishDate).valueOf() - new Date(a.frontmatter.publishDate).valueOf()
-    );
-});
+const posts = organizePosts(unsortedPosts);
 ---
 
 <html lang="en">
