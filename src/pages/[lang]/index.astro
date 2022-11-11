@@ -3,10 +3,11 @@
 ///////////////////////////////////////
 import Base from "../../layouts/Base.astro";
 import Portfolio from "../../components/Portfolio.astro";
-import { SUPPORTED_LANGUAGE_CODES, SupportedLang } from "../../languages";
+import { SUPPORTED_LANGUAGE_CODES, SupportedLang, getTranslation } from "../../languages";
 import TwoColumnText from "../../components/TwoColumnText.astro";
-import { title, descriptions } from "../../config";
+import { title, description } from "../../config";
 import { currentProjects, openSourceProjects, professionalProjects } from "../portfolio/projects";
+import { ask_me_anyway, familiar_languages, familiar_tech, header_current_projects, header_familiar_languages, header_familiar_tech, header_open_source, header_portfolio, header_professional_projects, social_blurb, welcome_blurb } from "./strings";
 
 // Docs on this mechanism: https://docs.astro.build/en/core-concepts/routing/#static-ssg-mode
 export function getStaticPaths() {
@@ -15,105 +16,68 @@ export function getStaticPaths() {
     }));
 }
 
-const lang = Astro.params.lang as SupportedLang;
-const description = descriptions[lang];
+const lang_code = Astro.params.lang as SupportedLang;
+
+const tech_list = familiar_tech.map((tech) => getTranslation(tech, lang_code));
+if (tech_list.length % 2 !== 0) {
+    throw new Error("Familiar tech list must have an even number of items");
+}
+
+const lang_list = familiar_languages.map((lang_name) => getTranslation(lang_name, lang_code));
+if (lang_list.length % 2 !== 0) {
+    throw new Error("Language list must have an even number of items");
+}
 ---
 
-<Base content={{ title, description }} lang={lang} multilingual>
-    <p>
-        Greetings! I'm Nathan. I'm a freelance software engineer with over 10
-        years of experience specializing in natural language processing. I'm
-        familiar with a wide range of computer technologies as well as human
-        languages. If you'd like a free consultation on NLP or general
-        engineering work, send me an email at <a
-            href="nathan.g.glenn@gmail.com?subject=NLP consultation&body=Hi Nathan, I'd like to consult with you on a project."
-            >nathan.g.glenn@gmail.com</a
-        >.
-    </p>
+<Base content={{ title, description: description[lang_code] }} lang={lang_code} multilingual>
+    <p set:html={welcome_blurb[lang_code]}></p>
 
-    <p>
-        You can also find me on <a href="https://github.com/garfieldnate"
-            >GitHub</a
-        > or <a href="https://www.linkedin.com/in/nathanglenn/">LinkedIn</a>.
-    </p>
+    <p set:html={social_blurb[lang_code]}></p>
 
-    <h2 id="familiar-technologies">Familiar Technologies</h2>
+    <h2 id="familiar-technologies">{header_familiar_tech[lang_code]}</h2>
 
+    <!-- see https://github.com/withastro/astro/issues/5372 about the weird 0/1 and 1000/2 I have here -->
     <TwoColumnText>
         <div slot="left">
-            <ul>
-                <li>Java, Spring Boot</li>
-                <li>Python, Flask</li>
-                <li>JavaScript/TypeScript</li>
-                <li>C++</li>
-                <li>MySQL</li>
-                <li>Perl</li>
-                <li>Apache Kafka</li>
-            </ul>
+            <ul>{tech_list.slice(0/1, tech_list.length / 2).map(tech => <li>{tech.toString()}</li>)}</ul>
         </div>
         <div slot="right">
-            <ul>
-                <li>React/React Native</li>
-                <li>Rust</li>
-                <li>Docker</li>
-                <li>Kubernetes</li>
-                <li>Google Cloud</li>
-                <li>Machine Learning</li>
-                <li>Language/Speech Processing</li>
-            </ul>
+            <ul>{tech_list.slice(tech_list.length / 2, 1000/2).map((tech) => <li>{tech}</li>)}</ul>
         </div>
     </TwoColumnText>
 
-    <p>
-        These are only some of the technologies I've used in the past. If you
-        don't see a technology you need me for, feel free to ask anyway! I'm
-        always looking to learn more and add more to my toolkit.
-    </p>
+    <p set:html={ask_me_anyway[lang_code]}></p>
 
-    <h2 id="familiar-human-languages">Familiar Human Languages</h2>
-
+    <h2 id="familiar-human-languages">{header_familiar_languages[lang_code]}</h2>
+    <!-- see https://github.com/withastro/astro/issues/5372 about the weird 0/1 and 1000/2 I have here -->
     <TwoColumnText>
         <div slot="left">
-            <ul>
-                <li>English (native)</li>
-                <li>Japanese (fluent)</li>
-                <li>German (B2)</li>
-                <li>Korean</li>
-                <li>Vietnamese</li>
-                <li>Mandarin</li>
-            </ul>
+            <ul>{lang_list.slice(0/1, lang_list.length / 2).map(tech => <li>{tech.toString()}</li>)}</ul>
         </div>
         <div slot="right">
-            <ul>
-                <li>Thai</li>
-                <li>Cambodian</li>
-                <li>Turkish</li>
-                <li>Latin</li>
-                <li>Japanese Sign Language</li>
-                <li>Ancient Egyptian</li>
-            </ul>
+            <ul>{lang_list.slice(lang_list.length / 2, 1000/2).map((tech) => <li>{tech}</li>)}</ul>
         </div>
     </TwoColumnText>
 
-    <h2 id="porfolio">Portfolio</h2>
+    <h2 id="porfolio">{header_portfolio[lang_code]}</h2>
 
-    <h3 id="professional-projects">Professional Projects</h3>
+    <h3 id="professional-projects">{header_professional_projects[lang_code]}</h3>
 
-    <Portfolio projects={professionalProjects} lang={lang}/>
-
-    <br />
-
-    <h3 id="open-source">Open Source</h3>
+    <Portfolio projects={professionalProjects} lang={lang_code}/>
 
     <br />
 
-    <Portfolio projects={openSourceProjects} lang={lang} />
+    <h3 id="open-source">{header_open_source[lang_code]}</h3>
 
     <br />
 
-    <h3 id="current-projects">🚧 Current Projects 👷‍♂️</h3>
+    <Portfolio projects={openSourceProjects} lang={lang_code} />
 
     <br />
 
-    <Portfolio projects={currentProjects} lang={lang} />
+    <h3 id="current-projects">🚧 {header_current_projects[lang_code]} 👷‍♂️</h3>
+
+    <br />
+
+    <Portfolio projects={currentProjects} lang={lang_code} />
 </Base>

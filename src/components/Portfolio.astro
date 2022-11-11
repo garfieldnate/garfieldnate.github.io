@@ -3,7 +3,7 @@
 // For small screens, we collapse both columns into a single column
 // Standard image size is 400 x 300 px, but it's okay to deviate a bit on the height
 import { Picture } from "astro-imagetools/components";
-import { SupportedLang } from "../languages";
+import { getTranslation, SupportedLang } from "../languages";
 import { Project } from "../pages/portfolio/projects";
 
 export interface Props {
@@ -29,13 +29,13 @@ const {
     <h4 class="small-only">{name}</h4>
     <div class="column">
         <figure>
-            <Picture src={img_src} alt={img_alt} width={400} />
+            <Picture src={img_src} alt={getTranslation(img_alt, lang)} width={400} />
             {!!license && (<footer>©️{copyright}, <span set:html={license}/></footer>)}
         </figure>
     </div>
     <div class="column">
         <h4 class="big-only">{name}</h4>
-        <p class="desc" set:html={description}></p>
+        <p class="desc" set:html={getTranslation(description, lang)}></p>
         {!!repo && (<a href={repo} class="repo">View Source</a>)}
     </div>
     ))}
