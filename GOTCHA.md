@@ -208,3 +208,27 @@ The filetype association to use in VSCode for .mdx files is "Markdown React".
 The plugin can comment lines correctly for you with cmd-/, but if you try to comment out a selection of text within a line, the result will still be the entire line being commented.
 
 Also, the plugin doesn't colorize MDX comments in dark green, while it does still colorize HTML comments in dark green, even though those are actually a syntax error in MDX.
+
+## Astro component default properties
+
+If you create a `.astro` file and don't bother specifying the shape of Astro.props, you might expect some errors to be thrown when you pass in props via JSX syntax. However, instead ANY PROPERTIES are accepted (and they are never used, so they do nothing).
+
+## `Astro.url.searchParams` empty in static contexts
+
+Astro's static site generation works based off of URL path components, not include query parameters. The type system will tell you that you can get `searchParams` from `Astro.url`, but this object will always be empty. See the docs on [routing](https://docs.astro.build/en/core-concepts/routing/#static-ssg-mode) for more info. The query parameters are available in `<script>` contexts that run on the client, of course, though I'm not certain if it's possible to use `Astro.url` in that context (you'd use `window.location` instead).
+
+## Division in a function call in a JSX code block
+
+Breaks something unless you do it twice! Trully strange. Issue here: https://github.com/withastro/astro/issues/5372. Workaround is to add another division.
+
+For example, instead of
+
+```jsx
+<ul>{array.slice(0, length / 2).map((item) => <li>{item.text}</li>)</ul>
+```
+
+you have to do
+
+```jsx
+<ul>{array.slice(0/1, length / 2).map((item) => <li>{item.text}</li>)</ul>
+```

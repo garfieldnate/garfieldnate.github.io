@@ -6,7 +6,7 @@ To create a new blog post, use `yarn run newpost <title>`. To publish the post, 
 
 `public/resume/resume-en.html` and `resume-ja.html` must be generated via a separate project and copied over manually: https://github.com/garfieldnate/resume.
 
-Overall I'm really enjoying working with Astro, but it's beta software and there have been a lot of sharp corners. I've gathered issues I encountered under [GOTCHA.md](GOTCHA.md).
+Overall I'm really enjoying working with Astro, but it's young software and there are still sharp corners. I've gathered issues I encountered under [GOTCHA.md](GOTCHA.md).
 
 Original Astro template project readme below:
 
