@@ -1,26 +1,25 @@
 ---
 // home page in multiple languages
 ///////////////////////////////////////
-import Base from "../layouts/Base.astro";
-import Portfolio from "../components/Portfolio.astro";
-import { SupportedLang } from "../lang";
-import TwoColumnText from "../components/TwoColumnText.astro";
-import { title, description } from "../config";
-import { currentProjects, openSourceProjects, professionalProjects } from "./portfolio/projects";
+import Base from "../../layouts/Base.astro";
+import Portfolio from "../../components/Portfolio.astro";
+import { SUPPORTED_LANGUAGE_CODES, SupportedLang } from "../../languages";
+import TwoColumnText from "../../components/TwoColumnText.astro";
+import { title, descriptions } from "../../config";
+import { currentProjects, openSourceProjects, professionalProjects } from "../portfolio/projects";
 
 // Docs on this mechanism: https://docs.astro.build/en/core-concepts/routing/#static-ssg-mode
 export function getStaticPaths() {
-    return [
-        { params: { lang: "en" } },
-        { params: { lang: "ja" } },
-        { params: { lang: "de" } },
-    ];
+    return SUPPORTED_LANGUAGE_CODES.map((lang) => ({
+        params: { lang },
+    }));
 }
 
 const lang = Astro.params.lang as SupportedLang;
+const description = descriptions[lang];
 ---
 
-<Base content={{ title, description }} lang={lang}>
+<Base content={{ title, description }} lang={lang} multilingual>
     <p>
         Greetings! I'm Nathan. I'm a freelance software engineer with over 10
         years of experience specializing in natural language processing. I'm

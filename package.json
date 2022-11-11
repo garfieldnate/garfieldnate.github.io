@@ -15,9 +15,14 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^0.11.5",
+    "@astrojs/react": "^1.2.2",
     "@astrojs/rss": "^1.0.3",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
     "astro-imagetools": "^0.6.11",
     "dayjs": "^1.11.6",
-    "preact": "^10.11.2"
+    "preact": "^10.11.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   }
 }

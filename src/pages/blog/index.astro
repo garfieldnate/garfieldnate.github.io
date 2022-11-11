@@ -1,15 +1,16 @@
 ---
 import BaseHead from "../../components/BaseHead.astro";
 import Footer from "../../components/Footer.astro";
-import Header from "../../components/Header.astro";
+import Header from "../../components/Header/Header.astro";
 import BlogPostPreview from "../../components/BlogPostPreview.astro";
 
-import {title, description} from "../../config";
+import {title, descriptions, DEFAULT_LANGUAGE} from "../../config";
 import { organizePosts } from "./util";
 
 // Use Astro.glob to fetch all posts with associated frontmatter
 const unsortedPosts = await Astro.glob("./{posts,links}/**/*.mdx");
 const posts = organizePosts(unsortedPosts);
+const description = descriptions[DEFAULT_LANGUAGE];
 ---
 
 <html lang="en">
@@ -18,7 +19,7 @@ const posts = organizePosts(unsortedPosts);
     </head>
 
     <body>
-        <Header />
+        <Header lang={DEFAULT_LANGUAGE} multilingual={false}/>
         <div class="wrapper">
             <main class="content">
                 <section class="intro">

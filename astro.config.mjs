@@ -6,7 +6,10 @@ import preact from '@astrojs/preact';
 import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
+import react from "@astrojs/react";
+
+// https://astro.build/config
 export default defineConfig({
-  integrations: [preact(), astroImageTools, mdx()],
-  site: "https://www.nateglenn.com",
+  integrations: [preact(), astroImageTools, mdx(), react()],
+  site: "https://www.nateglenn.com"
 });

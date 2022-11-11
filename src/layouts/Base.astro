@@ -1,8 +1,8 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-import { SupportedLang } from "../lang";
+import Header from "../components/Header/Header.astro";
+import { SupportedLang } from "../languages";
 
 export interface Props {
     content: {
@@ -10,9 +10,10 @@ export interface Props {
         description: string | null;
     };
     lang: SupportedLang;
+    multilingual: boolean;
 }
 
-const { content: { title, description }, lang } = Astro.props as Props;
+const { content: { title, description }, lang, multilingual } = Astro.props as Props;
 ---
 
 <html lang={lang}>
@@ -22,7 +23,7 @@ const { content: { title, description }, lang } = Astro.props as Props;
 </head>
 
 <body>
-    <Header />
+    <Header lang={lang} multilingual/>
     <div class="wrapper">
         <main class="content">
             <section class="intro">

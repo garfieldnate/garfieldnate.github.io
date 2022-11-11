@@ -1,5 +1,18 @@
+---
+import { SupportedLang } from '../../languages';
+import LanguageSelect from './LanguageSelect';
+
+export interface Props {
+    lang: SupportedLang;
+    multilingual: boolean;
+}
+
+const { lang, multilingual } = Astro.props as Props;
+---
+
 <header class="wrapper">
     <nav>
+        {multilingual && <span id="lang-selector"><LanguageSelect lang={lang} client:idle /></span>}
         <a href="/">
             <span>Home</span>
         </a>
@@ -32,9 +45,12 @@
         justify-content: right;
         flex-flow: wrap;
     }
-    a {
-        text-decoration: none;
+    a, #lang-selector{
         display: inline-flex;
         margin-left: 1em;
+    }
+    /* stick selector to the left, everything else to the right */
+    #lang-selector {
+        margin-right: auto;
     }
 </style>
