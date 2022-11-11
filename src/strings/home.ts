@@ -75,25 +75,25 @@ export const familiar_languages = [
 ]
 
 export const header_portfolio = {
-    "en": "Portfolio",
-    "de": "Portfolio",
-    "ja": "ポートフォリオ"
+    en: 'Portfolio',
+    de: 'Portfolio',
+    ja: 'ポートフォリオ'
 }
 
 export const header_professional_projects = {
-    "en": "Professional Projects",
-    "de": "Professionelle Projekte",
-    "ja": "本職のプロジェクト"
+    en: 'Professional Projects',
+    de: 'Professionelle Projekte',
+    ja: '本職のプロジェクト'
 }
 
 export const header_open_source = {
-    "en": "Open Source",
-    "de": "Open Source",
-    "ja": "オープンソース"
+    en: 'Open Source',
+    de: 'Open Source',
+    ja: 'オープンソース'
 }
 
 export const header_current_projects = {
-    "en": "Current Projects",
-    "de": "Aktuelle Projekte",
-    "ja": "現在のプロジェクト"
+    en: 'Current Projects',
+    de: 'Aktuelle Projekte',
+    ja: '現在のプロジェクト'
 }

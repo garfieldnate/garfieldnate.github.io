@@ -3,11 +3,31 @@
 ///////////////////////////////////////
 import Base from "../../layouts/Base.astro";
 import Portfolio from "../../components/Portfolio.astro";
-import { SUPPORTED_LANGUAGE_CODES, SupportedLang, getTranslation } from "../../languages";
+import {
+    SUPPORTED_LANGUAGE_CODES,
+    SupportedLang,
+    getTranslation,
+} from "../../languages";
 import TwoColumnText from "../../components/TwoColumnText.astro";
 import { title, description } from "../../config";
-import { currentProjects, openSourceProjects, professionalProjects } from "../portfolio/projects";
-import { ask_me_anyway, familiar_languages, familiar_tech, header_current_projects, header_familiar_languages, header_familiar_tech, header_open_source, header_portfolio, header_professional_projects, social_blurb, welcome_blurb } from "./strings";
+import {
+    currentProjects,
+    openSourceProjects,
+    professionalProjects,
+} from "../portfolio/projects";
+import {
+    ask_me_anyway,
+    familiar_languages,
+    familiar_tech,
+    header_current_projects,
+    header_familiar_languages,
+    header_familiar_tech,
+    header_open_source,
+    header_portfolio,
+    header_professional_projects,
+    social_blurb,
+    welcome_blurb,
+} from "../../strings/home";
 
 // Docs on this mechanism: https://docs.astro.build/en/core-concepts/routing/#static-ssg-mode
 export function getStaticPaths() {
@@ -23,13 +43,19 @@ if (tech_list.length % 2 !== 0) {
     throw new Error("Familiar tech list must have an even number of items");
 }
 
-const lang_list = familiar_languages.map((lang_name) => getTranslation(lang_name, lang_code));
+const lang_list = familiar_languages.map((lang_name) =>
+    getTranslation(lang_name, lang_code)
+);
 if (lang_list.length % 2 !== 0) {
     throw new Error("Language list must have an even number of items");
 }
 ---
 
-<Base content={{ title, description: description[lang_code] }} lang={lang_code} multilingual>
+<Base
+    content={{ title, description: description[lang_code] }}
+    lang={lang_code}
+    multilingual
+>
     <p set:html={welcome_blurb[lang_code]}></p>
 
     <p set:html={social_blurb[lang_code]}></p>
@@ -39,31 +65,59 @@ if (lang_list.length % 2 !== 0) {
     <!-- see https://github.com/withastro/astro/issues/5372 about the weird 0/1 and 1000/2 I have here -->
     <TwoColumnText>
         <div slot="left">
-            <ul>{tech_list.slice(0/1, tech_list.length / 2).map(tech => <li>{tech.toString()}</li>)}</ul>
+            <ul>
+                {
+                    tech_list
+                        .slice(0 / 1, tech_list.length / 2)
+                        .map((tech) => <li>{tech.toString()}</li>)
+                }
+            </ul>
         </div>
         <div slot="right">
-            <ul>{tech_list.slice(tech_list.length / 2, 1000/2).map((tech) => <li>{tech}</li>)}</ul>
+            <ul>
+                {
+                    tech_list
+                        .slice(tech_list.length / 2, 1000 / 2)
+                        .map((tech) => <li>{tech}</li>)
+                }
+            </ul>
         </div>
     </TwoColumnText>
 
     <p set:html={ask_me_anyway[lang_code]}></p>
 
-    <h2 id="familiar-human-languages">{header_familiar_languages[lang_code]}</h2>
+    <h2 id="familiar-human-languages">
+        {header_familiar_languages[lang_code]}
+    </h2>
     <!-- see https://github.com/withastro/astro/issues/5372 about the weird 0/1 and 1000/2 I have here -->
     <TwoColumnText>
         <div slot="left">
-            <ul>{lang_list.slice(0/1, lang_list.length / 2).map(tech => <li>{tech.toString()}</li>)}</ul>
+            <ul>
+                {
+                    lang_list
+                        .slice(0 / 1, lang_list.length / 2)
+                        .map((tech) => <li>{tech.toString()}</li>)
+                }
+            </ul>
         </div>
         <div slot="right">
-            <ul>{lang_list.slice(lang_list.length / 2, 1000/2).map((tech) => <li>{tech}</li>)}</ul>
+            <ul>
+                {
+                    lang_list
+                        .slice(lang_list.length / 2, 1000 / 2)
+                        .map((tech) => <li>{tech}</li>)
+                }
+            </ul>
         </div>
     </TwoColumnText>
 
     <h2 id="porfolio">{header_portfolio[lang_code]}</h2>
 
-    <h3 id="professional-projects">{header_professional_projects[lang_code]}</h3>
+    <h3 id="professional-projects">
+        {header_professional_projects[lang_code]}
+    </h3>
 
-    <Portfolio projects={professionalProjects} lang={lang_code}/>
+    <Portfolio projects={professionalProjects} lang={lang_code} />
 
     <br />
 
