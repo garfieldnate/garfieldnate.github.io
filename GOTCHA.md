@@ -6,6 +6,8 @@ These are the issues I ran into, and am likely to run into again, while working 
 
 When running your site in dev mode, pages are generated lazily. If you have a syntax issue in one of your pages, you won't find out about it until you navigate to that page. You must generate the entire site via `yarn run build` to find all errors.
 
+Also, missing a `getStaticPages` export in a page is not reported unless you do a full build; the page is instead silently skipped by the dev server.
+
 ## Including `.DS_Store`
 
 `DS_Store` is the folder where Mac puts files you've deleted (until you empty your trash). Astro doesn't ignore the folder, and will process and serve files inside, so if you deploy from your own computer you may accidentally release to the public files you meant to be deleted! Better to deploy from a GitHub Action or other CI service.
@@ -27,6 +29,7 @@ Astro glues together several other systems, and errors meant for users of subsys
   line: 12,
   column: 3,
 ```
+
 `acorn` is the markdown parser. Which markdown file has an issue is not mentioned. And finally the line numbers are never correct for various reasons; in the case of markdown, you must subtract the number of lines in the front matter to get the correct line number within the document body.
 
 ## Mixed Markdown Support
@@ -84,7 +87,7 @@ This comes from astro-imagetools, which couldn't find a specified image file som
 [astro-imagetools]  yy  is not a valid Picture Config Option
 ```
 
-URL parameters and anchors in external image links cause issues for astro-imagetools. The warnings above are caused by parameters, which are stripped and then assumed to be component configuration options somehow. Anchors, on the other hand, are *not* stripped and will be considered part of the image extension, which will lead to a separate issue because the image file type cannot be recognized.
+URL parameters and anchors in external image links cause issues for astro-imagetools. The warnings above are caused by parameters, which are stripped and then assumed to be component configuration options somehow. Anchors, on the other hand, are _not_ stripped and will be considered part of the image extension, which will lead to a separate issue because the image file type cannot be recognized.
 
 ## Relative Image Links
 
@@ -152,7 +155,6 @@ Failed to parse JSON file, invalid JSON syntax found at line 1823
 
 The line number is completely nonsensical and the JSON file with an issue is not listed.
 
-
 ## JSX
 
 Using the comment shortcut (cmd-/) in VS code doesn't comment JSX in astro components! Puts in `//`, which doesn't work.
@@ -163,7 +165,7 @@ If you have an issue in a CSS in a `<style>` tag in an astro component, you'll g
 
 ```
  error   /Users/nathanglenn/workspaces/personal_workspace/personal_site_astro/src/components/Portfolio.astro?astro&type=style&lang.css:15:12: Unknown word
- ```
+```
 
 You'll have to figure out the correct line number by subtracting the length of the frontmatter code.
 
