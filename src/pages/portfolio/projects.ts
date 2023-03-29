@@ -137,11 +137,11 @@ export const openSourceProjects: Project[] = [
         }
     },
     {
-        name: 'Soar Tokenizer',
+        name: 'Soar Cognitive Architecture',
         description: {
             en:
-                '<a href="https://soar.eecs.umich.edu/">Soar</a> is a general cognitive architecture for intelligent behavior. As an open source collaborator I updated the tokenizing component with a simpler API, as well as contributing bug fixes.',
-            de: '<a href="https://soar.eecs.umich.edu/">Soar</a> ist eine allgemeine kognitive Architektur für intelligentes Verhalten. Als Open-Source-Kollaborator habe ich das Tokenisierungsmodul mit einer einfachen API aktualisiert und Fehlerkorrekturen beigesteuert.',
+                '<a href="https://soar.eecs.umich.edu/">Soar</a> is a general cognitive architecture for intelligent behavior. As a consultant for the Center for Integrated Cognition, I performed extensive maintenance, bug-fixing and modernization tasks to release version 9.6.1.',
+            de: '<a href="https://soar.eecs.umich.edu/">Soar</a> ist eine allgemeine kognitive Architektur für intelligentes Verhalten. Als Berater für das Center for Integrated Cognition habe ich umfangreiche Wartungs-, Fehlerbehebungs- und Modernisierungsaufgaben durchgeführt, um die Version 9.6.1 zu veröffentlichen.',
         },
         repo: 'https://github.com/SoarGroup/Soar',
         img_src: '/assets/portfolio/Soar_logo.png',
